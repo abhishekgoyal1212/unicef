@@ -3,22 +3,7 @@
  @section('content')
  <div class="col-sm-9">
   <div role="tabpanel" class="tab-pane right-tab">
-    <div class="row">
-      <div class="col-md-5 px-0">
-        <h3 class="tab-head">Orientations of Stakeholders</h3>
-        <select name="" id="" class="w-100 bg-transparent mt-3 py-3 px-2 category">
-          <option value=""> Orientation</option>
-          <option value="">Planning Platforms</option>
-          <option value="">Social Mobilization</option>
-          <option value="">Orientation-Stakeholders</option>
-          <option value="">Pvt. Bodies</option>
-          <option value="">Coordination meeting Line Dept</option>
-        </select>
-      </div>
-      <div class="col-md-7 text-right">
-        <h3 class="location">Welcome to banswara</h3>
-      </div>
-    </div>
+   
     <div class="row  bg-white shadow-sm ground-section">
       <div class="col-md-3 px-2">
         <ul class="nav nav-tabs sub-tabs d-flex w-100" role="tablist">
