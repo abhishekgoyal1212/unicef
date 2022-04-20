@@ -108,15 +108,16 @@ $first_segments_sidebar = Request::route()->action['as'];
               <div class="col-md-5 px-0">
                 <h3 class="tab-head">Select Category</h3>
                 <select name="" id="safsd" class="w-100 bg-transparent mt-3 py-3 px-2 category" onchange="location = this.value;">
-                  <option value="{{url('admin/Planing_Platform')}}">Planning Platforms</option>
-                  <option value="{{url('admin/Social_Mobilization')}}">Social Mobilization</option>
-                  <option value="{{url('admin/Orientation')}}">Orientation</option>
-                  <option value="{{url('admin/Pvt_Bodies')}}">Pvt Bodies</option>
-                  <option value="{{url('admin/Coordination')}}">Coordination Meeting Line</option>
-                  <option value="{{url('admin/Mass')}}">Mass Media Mid Media</option>
-                  <option value="{{url('admin/Orientation_Health')}}">Orientation_Health</option>
-                  <option value="{{url('admin/Iec')}}">ICE</option>
-                  <option value="{{url('admin/Groups_Tracking')}}">Groups Tracking</option>
+                  <option value="{{route('admin.planingPlatform')}}" 
+                  {{$first_segments_sidebar == 'admin.planingPlatform' ? 'selected' : '' }}>Planning Platforms</option>
+                  <option value="{{route('admin.socialMobilization')}}" {{$first_segments_sidebar == 'admin.socialMobilization' ? 'selected' : '' }}>Social Mobilization</option>
+                  <option value="{{route('admin.Orientation')}}" {{$first_segments_sidebar == 'admin.Orientation' ? 'selected' : '' }}>Orientation</option>
+                  <option value="{{route('admin.pvtBodies')}}" {{$first_segments_sidebar == 'admin.pvtBodies' ? 'selected' : '' }}>Pvt Bodies</option>
+                  <option value="{{route('admin.coordinationMeetingLine')}}" {{$first_segments_sidebar == 'admin.coordinationMeetingLine' ? 'selected' : '' }}>Coordination Meeting Line</option>
+                  <option value="{{route('admin.massMediaMidMedia')}}" {{$first_segments_sidebar == 'admin.massMediaMidMedia' ? 'selected' : '' }}>Mass Media Mid Media</option>
+                  <option value="{{route('admin.orientationHealth')}}" {{$first_segments_sidebar == 'admin.orientationHealth' ? 'selected' : '' }}>Orientation_Health</option>
+                  <option value="{{route('admin.Iec')}}" {{$first_segments_sidebar == 'admin.Iec' ? 'selected' : '' }}>ICE</option>
+                  <option value="{{route('admin.GroupsTracking')}}" {{$first_segments_sidebar == 'admin.GroupsTracking' ? 'selected' : '' }}>Groups Tracking</option>
                 </select>
               </div>              
               <div class="col-md-7 text-right">

@@ -1,8 +1,6 @@
  @extends('admin.index')
  @section('title','Dashboard')
  @section('content')
- <div class="col-sm-9">
-  <div role="tabpanel" class="tab-pane right-tab">
    
     <div class="row  bg-white shadow-sm ground-section">
       <div class="col-md-3 px-2">
@@ -240,9 +238,6 @@
         </div>
       </div>
 
-
-    </div>
-  </div>
 </div>
 
 @stop
