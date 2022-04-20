@@ -32,7 +32,7 @@ class PvtBodiesController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Education department added successfully');
+			return back()->with('flash-success', 'Meeting with IMA/IAP added successfully');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 
@@ -57,7 +57,7 @@ class PvtBodiesController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Panchayati raj rural development added successfully');
+			return back()->with('flash-success', 'Meeting with private practitioners added successfully');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 
@@ -83,7 +83,7 @@ class PvtBodiesController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Minority deparment added successfully');
+			return back()->with('flash-success', 'Pharmacists associations added successfully');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 
@@ -109,7 +109,7 @@ class PvtBodiesController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'ULB deparment added successfully');
+			return back()->with('flash-success', 'Merchant association added successfully');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 
@@ -135,7 +135,7 @@ class PvtBodiesController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'CSR deparment added successfully');
+			return back()->with('flash-success', 'Others added successfully');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 

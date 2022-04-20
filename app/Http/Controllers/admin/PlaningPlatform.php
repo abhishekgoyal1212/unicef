@@ -62,7 +62,7 @@ class PlaningPlatform extends Controller
 		$sector_meeting = new SectorMeeting;
 		$sector_meeting->total_district = $inputs['total_district']; 
 		$sector_meeting->cate_name = 'Planing Platform';
-		$dhs_meeting->user_id = $user_id;
+		$sector_meeting->user_id = $user_id;
 
 		$sector_meeting->number_meetings = $inputs['number_meetings']; 
 		$sector_meeting->meetings_participated = $inputs['meetings_participated']; 
@@ -92,7 +92,7 @@ class PlaningPlatform extends Controller
 
 		$nigrani_samiti_meeting = new NigraniSamitiMeeting;
 		$nigrani_samiti_meeting->cate_name = 'Planing Platform';
-		$dhs_meeting->user_id = $user_id;
+		$nigrani_samiti_meeting->user_id = $user_id;
 
 		$nigrani_samiti_meeting->wheather_meeting = $inputs['wheather_meeting']; 
 		$nigrani_samiti_meeting->wheather_consultant_participated = $inputs['wheather_consultant_participated'];  
@@ -119,7 +119,7 @@ class PlaningPlatform extends Controller
 		}
 		$nigrani_samiti_meeting = new DistrictCommunication;
 		$nigrani_samiti_meeting->cate_name = 'Planing Platform';
-		$dhs_meeting->user_id = $user_id;
+		$nigrani_samiti_meeting->user_id = $user_id;
 
 		$nigrani_samiti_meeting->wheather_developed = $inputs['wheather_developed'];  
 		$nigrani_samiti_meeting->If_yes_month = $inputs['If_yes_month']; 
@@ -146,7 +146,7 @@ class PlaningPlatform extends Controller
 		}
 		$fortnighly_report = new FortnightlyReport;
 		$fortnighly_report->cate_name = 'Planing Platform';
-		$dhs_meeting->user_id = $user_id;
+		$fortnighly_report->user_id = $user_id;
 		$fortnighly_report->first_fortnighly_report = $inputs['first_fortnighly_report'];  
 		$fortnighly_report->second_fortnighly_report = $inputs['second_fortnighly_report'];
 		if ($fortnighly_report->save()) {
