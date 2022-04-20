@@ -96,15 +96,15 @@
               <div class="col-md-5 px-0">
                 <h3 class="tab-head">Select Category</h3>
                 <select name="" id="safsd" class="w-100 bg-transparent mt-3 py-3 px-2 category" onchange="location = this.value;">
-                  <option value="{{url('admin/Planing_Platform')}}">Planning Platforms</option>
-                  <option value="{{url('admin/Social_Mobilization')}}">Social Mobilization</option>
-                  <option value="{{url('admin/Orientation')}}">Orientation</option>
-                  <option value="{{url('admin/Pvt_Bodies')}}">Pvt Bodies</option>
-                  <option value="{{url('admin/Coordination')}}">Coordination Meeting Line</option>
-                  <option value="{{url('admin/Mass')}}">Mass Media Mid Media</option>
-                  <option value="{{url('admin/Orientation_Health')}}">Orientation_Health</option>
-                  <option value="{{url('admin/Iec')}}">ICE</option>
-                  <option value="{{url('admin/Groups_Tracking')}}">Groups Tracking</option>
+                  <option value="{{url('admin/Planing_Platform')}}" {{Request::segment(2) == 'Planing_Platform' ? 'selected' : ''}}>Planning Platforms</option>
+                  <option value="{{url('admin/Social_Mobilization')}}" {{Request::segment(2) == 'Social_Mobilization' ? 'selected' : ''}}>Social Mobilization</option>
+                  <option value="{{url('admin/Orientation')}}" {{Request::segment(2) == 'Orientation' ? 'selected' : ''}}>Orientation</option>
+                  <option value="{{url('admin/Pvt_Bodies')}}" {{Request::segment(2) == 'Pvt_Bodies' ? 'selected' : ''}}>Pvt Bodies</option>
+                  <option value="{{url('admin/Coordination')}}" {{Request::segment(2) == 'Coordination' ? 'selected' : ''}}>Coordination Meeting Line</option>
+                  <option value="{{url('admin/Mass')}}" {{Request::segment(2) == 'Mass' ? 'selected' : ''}}>Mass Media Mid Media</option>
+                  <option value="{{url('admin/Orientation_Health')}}" {{Request::segment(2) == 'Orientation_Health' ? 'selected' : ''}}>Orientation_Health</option>
+                  <option value="{{url('admin/Iec')}}" {{Request::segment(2) == 'Iec' ? 'selected' : ''}}>ICE</option>
+                  <option value="{{url('admin/Groups_Tracking')}}" {{Request::segment(2) == 'Groups_Tracking' ? 'selected' : ''}}>Groups Tracking</option>
                 </select>
               </div>              
               <div class="col-md-7 text-right">
