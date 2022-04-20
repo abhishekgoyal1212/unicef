@@ -1,3 +1,10 @@
+
+<?php 
+$first_segments_sidebar = Request::route()->action['as'];
+// $segments = request()->segments();
+// $first_segments_sidebar = $segments[1];
+// $function_name = explode('@', Route::getCurrentRoute()->getActionName())[1];
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,71 +47,77 @@
       <div class="col-sm-3">
         <div class="sidebar">
           <div class="userimg">
-            <img src="{{asset('public/admin/img/userimg.png')}} " alt=""></div>
-            <ul class="nav nav-tabs tabs-left d-flex flex-column" role="tablist">
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo1.png')}} " alt="">
-                <a href="#Dashboard" aria-controls="Dashboard">Dashboard</a>
-              </li>
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo2.png')}}" alt="">
-                <a href="Planing_Platform" aria-controls="Platform">Planing Platform</a>
-              </li>
-
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo3.png')}} " alt="">
-                <a href="Social_Mobilization">Social Mobilization</a>
-              </li>
-
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo4.png')}}" alt="">
-                <a href="Orientation" aria-controls="orientation">orientation</a>
-              </li>
+          <img src="{{asset('public/admin/img/userimg.png')}} " alt=""></div>
+          <ul class="nav nav-tabs tabs-left d-flex flex-column" role="tablist">
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/admin/img/logo1.png')}} " alt="">
+              <a href="#Dashboard" aria-controls="Dashboard">Dashboard</a>
+            </li>
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/admin/img/logo2.png')}} " alt="">
+              <a href="Planing_Platform" aria-controls="Platform" class="
+              {{$first_segments_sidebar == 'admin.planingPlatform' ? 'active' : '' }}">Planing Platform</a>
+            </li>
 
 
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo5.png')}} " alt="">
-                <a href="Pvt_Bodies" aria-controls="pvt">pvt bodies</a>
-              </li>
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo6.png')}} " alt="">
-                <a href="Coordination" aria-controls="Coordination2">coordination meeting line</a>
-              </li>
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo7.png')}} " alt="">
-                <a href="Mass" aria-controls="mass">mass media mid media</a>
-              </li>
-              <li class="d-block" role="presentation" class="active">
-                <img src="{{asset('public/admin/img/logo8.png')}} " alt="">
-                <a href="Orientation_Health" aria-controls="health">orientation health</a>
-              </li>
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo9.png')}} " alt="">
-                <a href="Iec" aria-controls="iec">iec</a>
-              </li>
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo10.png')}} " alt="">
-                <a href="Groups_Tracking" aria-controls="Groups">Groups tracking</a>
-              </li>
-            </ul>
-          </div>
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/admin/img/logo3.png')}} " alt="">
+              <a href="Social_Mobilization" class="
+              {{$first_segments_sidebar == 'admin.socialMobilization' ? 'active' : '' }}">Social Mobilization</a>
+            </li>
+
+
+
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/admin/img/logo4.png')}}" alt="">
+              <a href="Orientation" aria-controls="orientation"
+               class="{{$first_segments_sidebar == 'admin.Orientation' ? 'active' : '' }}">orientation</a>
+            </li>
+
+
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/admin/img/logo5.png')}} " alt="">
+              <a href="Pvt_Bodies" aria-controls="pvt" class="{{$first_segments_sidebar == 'admin.pvtBodies' ? 'active' : '' }}">pvt bodies</a>
+            </li>
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/admin/img/logo6.png')}} " alt="">
+              <a href="Coordination" aria-controls="Coordination2" class="{{$first_segments_sidebar == 'admin.coordinationMeetingLine' ? 'active' : '' }}">coordination meeting line</a>
+            </li>
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/admin/img/logo7.png')}} " alt="">
+              <a href="Mass" aria-controls="mass" class="{{$first_segments_sidebar == 'admin.massMediaMidMedia' ? 'active' : '' }}">mass media mid media</a>
+            </li>
+            <li class="d-block" role="presentation" class="active">
+              <img src="{{asset('public/admin/img/logo8.png')}} " alt="">
+              <a href="Orientation_Health" aria-controls="health" class="{{$first_segments_sidebar == 'admin.orientationHealth' ? 'active' : '' }}">orientation health</a>
+            </li>
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/admin/img/logo9.png')}} " alt="">
+              <a href="Iec" aria-controls="iec" class="{{$first_segments_sidebar == 'admin.Iec' ? 'active' : '' }}">iec</a>
+            </li>
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/admin/img/logo10.png')}} " alt="">
+              <a href="Groups_Tracking" aria-controls="Groups" class="{{$first_segments_sidebar == 'admin.GroupsTracking' ? 'active' : '' }}">Groups tracking</a>
+            </li>
+          </ul>
         </div>
-
+        </div>
         <div class="col-sm-9">
           <div role="tabpanel" class="tab-pane right-tab" id="Platform">
             <div class="row">
               <div class="col-md-5 px-0">
                 <h3 class="tab-head">Select Category</h3>
-                <select name="" id="" class="w-100 bg-transparent mt-3 py-3 px-2 category" onchange="location = this.value;">
-                  <option value="{{url('admin/Planing_Platform')}}" {{Request::segment(2) == 'Planing_Platform' ? 'selected' : ''}}>Planning Platforms</option>
-                  <option value="{{url('admin/Social_Mobilization')}}" {{Request::segment(2) == 'Social_Mobilization' ? 'selected' : ''}}>Social Mobilization</option>
-                  <option value="{{url('admin/Orientation')}}" {{Request::segment(2) == 'Orientation' ? 'selected' : ''}}>Orientation</option>
-                  <option value="{{url('admin/Pvt_Bodies')}}" {{Request::segment(2) == 'Pvt_Bodies' ? 'selected' : ''}}>Pvt Bodies</option>
-                  <option value="{{url('admin/Coordination')}}" {{Request::segment(2) == 'Coordination' ? 'selected' : ''}}>Coordination Meeting Line</option>
-                  <option value="{{url('admin/Mass')}}" {{Request::segment(2) == 'Mass' ? 'selected' : ''}}>Mass Media Mid Media</option>
-                  <option value="{{url('admin/Orientation_Health')}}" {{Request::segment(2) == 'Orientation_Health' ? 'selected' : ''}}>Orientation_Health</option>
-                  <option value="{{url('admin/Iec')}}" {{Request::segment(2) == 'Iec' ? 'selected' : ''}}>ICE</option>
-                  <option value="{{url('admin/Groups_Tracking')}}" {{Request::segment(2) == 'Groups_Tracking' ? 'selected' : ''}}>Groups Tracking</option>
+                <select name="" id="safsd" class="w-100 bg-transparent mt-3 py-3 px-2 category" onchange="location = this.value;">
+                  <option value="{{route('admin.planingPlatform')}}" 
+                  {{$first_segments_sidebar == 'admin.planingPlatform' ? 'selected' : '' }}>Planning Platforms</option>
+                  <option value="{{route('admin.socialMobilization')}}" {{$first_segments_sidebar == 'admin.socialMobilization' ? 'selected' : '' }}>Social Mobilization</option>
+                  <option value="{{route('admin.Orientation')}}" {{$first_segments_sidebar == 'admin.Orientation' ? 'selected' : '' }}>Orientation</option>
+                  <option value="{{route('admin.pvtBodies')}}" {{$first_segments_sidebar == 'admin.pvtBodies' ? 'selected' : '' }}>Pvt Bodies</option>
+                  <option value="{{route('admin.coordinationMeetingLine')}}" {{$first_segments_sidebar == 'admin.coordinationMeetingLine' ? 'selected' : '' }}>Coordination Meeting Line</option>
+                  <option value="{{route('admin.massMediaMidMedia')}}" {{$first_segments_sidebar == 'admin.massMediaMidMedia' ? 'selected' : '' }}>Mass Media Mid Media</option>
+                  <option value="{{route('admin.orientationHealth')}}" {{$first_segments_sidebar == 'admin.orientationHealth' ? 'selected' : '' }}>Orientation_Health</option>
+                  <option value="{{route('admin.Iec')}}" {{$first_segments_sidebar == 'admin.Iec' ? 'selected' : '' }}>ICE</option>
+                  <option value="{{route('admin.GroupsTracking')}}" {{$first_segments_sidebar == 'admin.GroupsTracking' ? 'selected' : '' }}>Groups Tracking</option>
                 </select>
               </div>              
               <div class="col-md-7 text-right">
