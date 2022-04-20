@@ -95,7 +95,7 @@
             <div class="row">
               <div class="col-md-5 px-0">
                 <h3 class="tab-head">Select Category</h3>
-                <select name="" id="safsd" class="w-100 bg-transparent mt-3 py-3 px-2 category" onchange="location = this.value;">
+                <select name="" id="" class="w-100 bg-transparent mt-3 py-3 px-2 category" onchange="location = this.value;">
                   <option value="{{url('admin/Planing_Platform')}}" {{Request::segment(2) == 'Planing_Platform' ? 'selected' : ''}}>Planning Platforms</option>
                   <option value="{{url('admin/Social_Mobilization')}}" {{Request::segment(2) == 'Social_Mobilization' ? 'selected' : ''}}>Social Mobilization</option>
                   <option value="{{url('admin/Orientation')}}" {{Request::segment(2) == 'Orientation' ? 'selected' : ''}}>Orientation</option>
