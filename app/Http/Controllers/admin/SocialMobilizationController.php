@@ -55,9 +55,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Record Added Successfully');
+            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Faith Based Institutions /Religious Leaders Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Some Error Occurred In Adding Meeting with Influencers Record');
+            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -100,9 +100,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Record Added Successfully');
+            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Some Error Occurred In Adding Meeting with Influencers Record');
+            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -133,9 +133,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Record Added Successfully');
+            return redirect('admin/Social_Mobilization')->with('flash-success', 'Number of Meeting Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Some Error Occurred In Adding Meeting with Influencers Record');
+            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
         }
 
     }
@@ -168,9 +168,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Record Added Successfully');
+            return redirect('admin/Social_Mobilization')->with('flash-success', 'IPC Meeting Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Some Error Occurred In Adding Meeting with Influencers Record');
+            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -202,9 +202,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Record Added Successfully');
+            return redirect('admin/Social_Mobilization')->with('flash-success', 'Mother Meetings Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Some Error Occurred In Adding Meeting with Influencers Record');
+            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -235,9 +235,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Record Added Successfully');
+            return redirect('admin/Social_Mobilization')->with('flash-success', 'Community Meetings Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Some Error Occurred In Adding Meeting with Influencers Record');
+            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
         }
     }
     public function sm_shg_meeting(Request $request){
@@ -267,9 +267,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Record Added Successfully');
+            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with SHG Members Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Some Error Occurred In Adding Meeting with Influencers Record');
+            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -301,9 +301,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Record Added Successfully');
+            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Vulrenable Groups Sites Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Some Error Occurred In Adding Meeting with Influencers Record');
+            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -335,9 +335,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Record Added Successfully');
+            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with excluded groups(PWD,Transgender) Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Some Error Occurred In Adding Meeting with Influencers Record');
+            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -375,9 +375,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Record Added Successfully');
+            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with the volunteer organization Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Some Error Occurred In Adding Meeting with Influencers Record');
+            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
         }
     }
 }

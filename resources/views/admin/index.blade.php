@@ -8,9 +8,20 @@
     <link rel="stylesheet" href="{{asset('public/admin/css/style.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+
+
+    <!-- toastr css-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+   
+    <!-- toastr JS-->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
   </head>
   <style>
   *{
@@ -18,6 +29,12 @@
   }
    </style>
   <body style="background: url(background.jpg); background-repeat: no-repeat; background-size: cover;background-position: center;">
+      @if(session('flash-error'))
+       <script> toastr["error"] ("{{session()->get('flash-error')}}") </script>
+      @endif
+      @if ( session('flash-success'))
+      <script> toastr["success"]("{{session()->get('flash-success')}}") </script>
+      @endif
        <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3">
@@ -31,46 +48,46 @@
             </li>
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo2.png')}} " alt="">
-              <a href="Planing_Platform" aria-controls="Platform" >Planing Platform</a>
+              <a href="Planing_Platform" aria-controls="Platform">Planing Platform</a>
             </li>
 
 
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo3.png')}} " alt="">
-              <a href="Social_Mobilization" >Social Mobilization</a>
+              <a href="Social_Mobilization">Social Mobilization</a>
             </li>
 
 
 
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo4.png')}}" alt="">
-              <a href="Orientation" aria-controls="orientation" >orientation</a>
+              <a href="Orientation" aria-controls="orientation">orientation</a>
             </li>
 
 
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo5.png')}} " alt="">
-              <a href="Pvt_Bodies" aria-controls="pvt" >pvt bodies</a>
+              <a href="Pvt_Bodies" aria-controls="pvt">pvt bodies</a>
             </li>
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo6.png')}} " alt="">
-              <a href="Coordination" aria-controls="Coordination2" >coordination meeting line</a>
+              <a href="Coordination" aria-controls="Coordination2">coordination meeting line</a>
             </li>
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo7.png')}} " alt="">
-              <a href="Mass" aria-controls="mass" >mass media mid media</a>
+              <a href="Mass" aria-controls="mass">mass media mid media</a>
             </li>
-            <li class="d-block" role="presentation" >
+            <li class="d-block" role="presentation" class="active">
               <img src="{{asset('public/admin/img/logo8.png')}} " alt="">
-              <a href="Orientation_Health" aria-controls="health" >orientation health</a>
+              <a href="Orientation_Health" aria-controls="health">orientation health</a>
             </li>
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo9.png')}} " alt="">
-              <a href="Iec" aria-controls="iec" >iec</a>
+              <a href="Iec" aria-controls="iec">iec</a>
             </li>
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo10.png')}} " alt="">
-              <a href="Groups_Tracking" aria-controls="Groups" >Groups tracking</a>
+              <a href="Groups_Tracking" aria-controls="Groups">Groups tracking</a>
             </li>
           </ul>
         </div>
