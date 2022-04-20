@@ -29,7 +29,7 @@ Route::prefix('admin')->group(function () {
 		Route::post('login_check','login_check')->name('admin.login_check');
 	});
 	Route::middleware('auth')->group(function(){
-		Route::controller(DashboardController::class)->group(function(){
+		 Route::controller(DashboardController::class)->group(function(){
 			Route::get('dashboard','index')->name('Dashboard');
 			Route::view('Planing_Platform','admin/Planing_Platform')->name('admin.planingPlatform');
 			Route::view('Social_Mobilization','admin/Social_Mobilization')->name('admin.socialMobilization');
@@ -74,9 +74,7 @@ Route::prefix('admin')->group(function () {
    			Route::post('sm-excluded-groups','sm_excluded_groups')->name('admin.SmExcludedGroups');
    			Route::post('sm-volunteer-meeting','sm_volunteer_meeting')->name('admin.SmVolunteerMeeting');
 		});
-
 	});
-
 });
 
 
