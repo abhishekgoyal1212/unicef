@@ -1,3 +1,10 @@
+
+<?php 
+$first_segments_sidebar = Request::route()->action['as'];
+// $segments = request()->segments();
+// $first_segments_sidebar = $segments[1];
+// $function_name = explode('@', Route::getCurrentRoute()->getActionName())[1];
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -48,46 +55,49 @@
             </li>
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo2.png')}} " alt="">
-              <a href="Planing_Platform" aria-controls="Platform">Planing Platform</a>
+              <a href="Planing_Platform" aria-controls="Platform" class="
+              {{$first_segments_sidebar == 'admin.planingPlatform' ? 'active' : '' }}">Planing Platform</a>
             </li>
 
 
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo3.png')}} " alt="">
-              <a href="Social_Mobilization">Social Mobilization</a>
+              <a href="Social_Mobilization" class="
+              {{$first_segments_sidebar == 'admin.socialMobilization' ? 'active' : '' }}">Social Mobilization</a>
             </li>
 
 
 
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo4.png')}}" alt="">
-              <a href="Orientation" aria-controls="orientation">orientation</a>
+              <a href="Orientation" aria-controls="orientation"
+               class="{{$first_segments_sidebar == 'admin.Orientation' ? 'active' : '' }}">orientation</a>
             </li>
 
 
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo5.png')}} " alt="">
-              <a href="Pvt_Bodies" aria-controls="pvt">pvt bodies</a>
+              <a href="Pvt_Bodies" aria-controls="pvt" class="{{$first_segments_sidebar == 'admin.pvtBodies' ? 'active' : '' }}">pvt bodies</a>
             </li>
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo6.png')}} " alt="">
-              <a href="Coordination" aria-controls="Coordination2">coordination meeting line</a>
+              <a href="Coordination" aria-controls="Coordination2" class="{{$first_segments_sidebar == 'admin.coordinationMeetingLine' ? 'active' : '' }}">coordination meeting line</a>
             </li>
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo7.png')}} " alt="">
-              <a href="Mass" aria-controls="mass">mass media mid media</a>
+              <a href="Mass" aria-controls="mass" class="{{$first_segments_sidebar == 'admin.massMediaMidMedia' ? 'active' : '' }}">mass media mid media</a>
             </li>
             <li class="d-block" role="presentation" class="active">
               <img src="{{asset('public/admin/img/logo8.png')}} " alt="">
-              <a href="Orientation_Health" aria-controls="health">orientation health</a>
+              <a href="Orientation_Health" aria-controls="health" class="{{$first_segments_sidebar == 'admin.orientationHealth' ? 'active' : '' }}">orientation health</a>
             </li>
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo9.png')}} " alt="">
-              <a href="Iec" aria-controls="iec">iec</a>
+              <a href="Iec" aria-controls="iec" class="{{$first_segments_sidebar == 'admin.Iec' ? 'active' : '' }}">iec</a>
             </li>
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo10.png')}} " alt="">
-              <a href="Groups_Tracking" aria-controls="Groups">Groups tracking</a>
+              <a href="Groups_Tracking" aria-controls="Groups" class="{{$first_segments_sidebar == 'admin.GroupsTracking' ? 'active' : '' }}">Groups tracking</a>
             </li>
           </ul>
         </div>
