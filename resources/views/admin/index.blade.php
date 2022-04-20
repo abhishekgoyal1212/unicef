@@ -47,7 +47,6 @@ $first_segments_sidebar = Request::route()->action['as'];
       <div class="col-sm-3">
         <div class="sidebar">
           <div class="userimg">
-<<<<<<< HEAD
           <img src="{{asset('public/admin/img/userimg.png')}} " alt=""></div>
           <ul class="nav nav-tabs tabs-left d-flex flex-column" role="tablist">
             <li class="d-block" role="presentation">
@@ -103,61 +102,6 @@ $first_segments_sidebar = Request::route()->action['as'];
           </ul>
         </div>
         </div>
-
-
-    @yield('content')
-=======
-            <img src="{{asset('public/admin/img/userimg.png')}} " alt=""></div>
-            <ul class="nav nav-tabs tabs-left d-flex flex-column" role="tablist">
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo1.png')}} " alt="">
-                <a href="#Dashboard" aria-controls="Dashboard">Dashboard</a>
-              </li>
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo2.png')}}" alt="">
-                <a href="Planing_Platform" aria-controls="Platform">Planing Platform</a>
-              </li>
-
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo3.png')}} " alt="">
-                <a href="Social_Mobilization">Social Mobilization</a>
-              </li>
-
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo4.png')}}" alt="">
-                <a href="Orientation" aria-controls="orientation">orientation</a>
-              </li>
->>>>>>> fb5ca2970f2a7f2c3dd0c5379d4369573f4463df
-
-
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo5.png')}} " alt="">
-                <a href="Pvt_Bodies" aria-controls="pvt">pvt bodies</a>
-              </li>
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo6.png')}} " alt="">
-                <a href="Coordination" aria-controls="Coordination2">coordination meeting line</a>
-              </li>
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo7.png')}} " alt="">
-                <a href="Mass" aria-controls="mass">mass media mid media</a>
-              </li>
-              <li class="d-block" role="presentation" class="active">
-                <img src="{{asset('public/admin/img/logo8.png')}} " alt="">
-                <a href="Orientation_Health" aria-controls="health">orientation health</a>
-              </li>
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo9.png')}} " alt="">
-                <a href="Iec" aria-controls="iec">iec</a>
-              </li>
-              <li class="d-block" role="presentation">
-                <img src="{{asset('public/admin/img/logo10.png')}} " alt="">
-                <a href="Groups_Tracking" aria-controls="Groups">Groups tracking</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
         <div class="col-sm-9">
           <div role="tabpanel" class="tab-pane right-tab" id="Platform">
             <div class="row">
