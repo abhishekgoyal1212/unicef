@@ -47,7 +47,7 @@ $first_segments_sidebar = Request::route()->action['as'];
       <div class="col-sm-3">
         <div class="sidebar">
           <div class="userimg">
-          <img src="{{asset('public/admin/img/userimg.png')}} " alt=""></div>
+          <img src="{{asset('public/admin/img/userimg.png')}}" alt=""></div>
           <ul class="nav nav-tabs tabs-left d-flex flex-column" role="tablist">
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo1.png')}} " alt="">
@@ -121,7 +121,7 @@ $first_segments_sidebar = Request::route()->action['as'];
                 </select>
               </div>              
               <div class="col-md-7 text-right">
-                <h3 class="location">Welcome to banswara</h3>
+                <h3 class="location">Welcome to {{auth()->user()->districts}}</h3>
               </div>
             </div>
 
