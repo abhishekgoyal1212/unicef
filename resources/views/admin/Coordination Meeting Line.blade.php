@@ -18,7 +18,8 @@
                       </div>
 
 
-          <form>
+                  <form action ="{{route('admin.coordination')}}" method="post">
+                    @csrf
                       <div class="sub-content p-4">
                         <div class="row align-items-center mt-4">
                           <div class="col-md-5">
@@ -27,13 +28,16 @@
                           <div class="col-md-7">
                             <ul class="list-unstyled mb-0">
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleChecka" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleChecka">Yes</label>
+                                <input type="radio" class="form-check-input" id="exampleChecka1" name="panchayti_rural_development" value="1" {{old('panchayti_rural_development') == '1' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleChecka1">Yes</label>
                               </div></li>
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleChecks" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleChecks">No</label>
+                                <input type="radio" class="form-check-input" id="exampleChecks2" name="panchayti_rural_development" value="0" {{old('panchayti_rural_development') == '0' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleChecks2">No</label>
                               </div></li>
+                              @error('panchayti_rural_development')
+                              <div class="form-valid-error text-danger">{{$message}}</div>
+                              @enderror
                             </ul>
                           </div>
                         </div>
@@ -44,13 +48,16 @@
                           <div class="col-md-7">
                             <ul class="list-unstyled mb-0">
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleCheckb" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleCheckb">Yes</label>
+                                <input type="radio" class="form-check-input" id="exampleCheckb1" name="icds" value="1" {{old('icds') == '1' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleCheckb1">Yes</label>
                               </div></li>
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleCheckd" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleCheckd">No</label>
+                                <input type="radio" class="form-check-input" id="exampleCheckd2" name="icds" value="0" {{old('icds') == '0' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleCheckd2">No</label>
                               </div></li>
+                              @error('icds')
+                              <div class="form-valid-error text-danger">{{$message}}</div>
+                              @enderror
                             </ul>
                           </div>
                         </div>
@@ -61,13 +68,16 @@
                           <div class="col-md-7">
                             <ul class="list-unstyled mb-0">
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleCheckm" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleCheckm">Yes</label>
+                                <input type="radio" class="form-check-input" id="exampleCheckm1" name="education" value="1" {{old('education') == '1' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleCheckm1">Yes</label>
                               </div></li>
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleCheckn" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleCheckn">No</label>
+                                <input type="radio" class="form-check-input" id="exampleCheckn2" name="education" value="0" {{old('education') == '0' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleCheckn2">No</label>
                               </div></li>
+                              @error('education')
+                              <div class="form-valid-error text-danger">{{$message}}</div>
+                              @enderror
                             </ul>
                           </div>
                         </div>
@@ -78,13 +88,16 @@
                           <div class="col-md-7">
                             <ul class="list-unstyled mb-0">
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleCheckh" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleCheckh">Yes</label>
+                                <input type="radio" class="form-check-input" id="exampleCheckh1" name="srlm" value="1" {{old('srlm') == '1' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleCheckh1">Yes</label>
                               </div></li>
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleCheckv" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleCheckv">No</label>
+                                <input type="radio" class="form-check-input" id="exampleCheckv2" name="srlm" value="0" {{old('srlm') == '0' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleCheckv2">No</label>
                               </div></li>
+                              @error('srlm')
+                              <div class="form-valid-error text-danger">{{$message}}</div>
+                              @enderror
                             </ul>
                           </div>
                         </div>
@@ -95,13 +108,16 @@
                           <div class="col-md-7">
                             <ul class="list-unstyled mb-0">
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleCheckc" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleCheckc">Yes</label>
+                                <input type="radio" class="form-check-input" id="exampleCheckc1" name="tribal_area" value="1" {{old('tribal_area') == '1' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleCheckc1">Yes</label>
                               </div></li>
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleCheckx" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleCheckx">No</label>
+                                <input type="radio" class="form-check-input" id="exampleCheckx2" name="tribal_area" value="0" {{old('tribal_area') == '0' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleCheckx2">No</label>
                               </div></li>
+                              @error('tribal_area')
+                              <div class="form-valid-error text-danger">{{$message}}</div>
+                              @enderror
                             </ul>
                           </div>
                         </div>
@@ -112,13 +128,16 @@
                           <div class="col-md-7">
                             <ul class="list-unstyled mb-0">
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleCheckz" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleCheckz">Yes</label>
+                                <input type="radio" class="form-check-input" id="exampleCheckz1" name="dmwo" value="1" {{old('dmwo') == '1' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleCheckz1">Yes</label>
                               </div></li>
                               <li class="d-inline mr-4"><div class="form-check d-inline">
-                                <input type="checkbox" class="form-check-input" id="exampleCheckl" name="check2" onclick="onlyOnes(this)">
-                                <label class="form-check-label" for="exampleCheckl">No</label>
+                                <input type="radio" class="form-check-input" id="exampleCheck2" name="dmwo" value="0" {{old('dmwo') == '0' ? 'checked' : ''}}>
+                                <label class="form-check-label" for="exampleCheck2">No</label>
                               </div></li>
+                              @error('dmwo')
+                              <div class="form-valid-error text-danger">{{$message}}</div>
+                              @enderror
                             </ul>
                           </div>
                         </div>
@@ -127,8 +146,7 @@
                            <button type="submit" class="login-btn">SUBMIT</button>
                           </div> 
                 </div>
-
-      </form>
+          </form>
                       </div>
                     </div>
                   </div>

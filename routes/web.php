@@ -7,6 +7,10 @@ use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\OrientationController;
 use App\Http\Controllers\admin\PvtBodiesController;
 use App\Http\Controllers\admin\SocialMobilizationController;
+use App\Http\Controllers\admin\CoordinationController;
+use App\Http\Controllers\admin\MassMediaController;
+use App\Http\Controllers\admin\OrientationHealthController;
+use App\Http\Controllers\admin\GroupsTrackingController;
 
 
 /*
@@ -75,6 +79,18 @@ Route::prefix('admin')->group(function () {
    			Route::post('sm-vulrenable-meeting','sm_vulrenable_meeting')->name('admin.SmVulrenableMeeting');
    			Route::post('sm-excluded-groups','sm_excluded_groups')->name('admin.SmExcludedGroups');
    			Route::post('sm-volunteer-meeting','sm_volunteer_meeting')->name('admin.SmVolunteerMeeting');
+		});
+		Route::controller(CoordinationController::class)->group(function(){
+   			Route::post('insert-coordination','insert_coordination')->name('admin.coordination');
+		});
+		Route::controller(MassMediaController::class)->group(function(){
+   			Route::post('mass-media','insert_mass_media')->name('admin.MassMedia');
+		});
+		Route::controller(OrientationHealthController::class)->group(function(){
+   			Route::post('orientation-health','orientation_health')->name('admin.OrientationHealth');
+		});
+		Route::controller(GroupsTrackingController::class)->group(function(){
+   			Route::post('groups-tracking','groups_tracking')->name('admin.GroupsTracking');
 		});
 	});
 });

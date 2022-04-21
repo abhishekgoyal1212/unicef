@@ -16,9 +16,8 @@
                       <div class="sub-tab-heading">
                         Ground Level Health Functionaries
                       </div>
-
-
-                      <form>
+                      <form action="{{route('admin.OrientationHealth')}}" method="post">
+                        @csrf
                       <div class="sub-content p-4">
                         <div class="row align-items-center">
                           <div class="col-md-4">
@@ -26,7 +25,10 @@
                           </div>
                           <div class="col-md-8 col-lg-4">
                             <div class="form-group mb-0">
-                              <input type="number">
+                              <input type="number" name="number_orientation" value="{{old('number_orientation')}}">
+                              @error('number_orientation')
+                              <div class="form-valid-error text-danger">{{ $message }}</div>
+                              @enderror
                             </div>
                           </div>
                         </div>
@@ -36,7 +38,10 @@
                           </div>
                           <div class="col-md-8 col-lg-4">
                             <div class="form-group mb-0">
-                              <input type="text">
+                              <input type="text" name="anm" value="{{old('anm')}}">
+                              @error('anm')
+                              <div class="form-valid-error text-danger">{{ $message }}</div>
+                              @enderror
                             </div>
                           </div>
                         </div>
@@ -46,7 +51,10 @@
                           </div>
                           <div class="col-md-8 col-lg-4">
                             <div class="form-group mb-0">
-                              <input type="text">
+                              <input type="text" name="asha" value="{{old('asha')}}">
+                              @error('asha')
+                              <div class="form-valid-error text-danger">{{ $message }}</div>
+                              @enderror
                             </div>
                           </div>
                         </div>
@@ -56,7 +64,10 @@
                           </div>
                           <div class="col-md-8 col-lg-4">
                             <div class="form-group mb-0">
-                              <input type="text">
+                              <input type="text" name="anganwadi" value="{{old('anganwadi')}}">
+                              @error('anganwadi')
+                              <div class="form-valid-error text-danger">{{ $message }}</div>
+                              @enderror
                             </div>
                           </div>
                         </div>
@@ -66,7 +77,10 @@
                           </div>
                           <div class="col-md-8 col-lg-4">
                             <div class="form-group mb-0">
-                              <input type="text">
+                              <input type="text" name="cha" value="{{old('cha')}}">
+                              @error('cha')
+                              <div class="form-valid-error text-danger">{{ $message }}</div>
+                              @enderror
                             </div>
                           </div>
                         </div>
@@ -75,7 +89,7 @@
                            <button type="submit" class="login-btn">SUBMIT</button>
                           </div>
                       </div>
-  </form>
+                  </form>
                     </div>
                   </div>
                 </div>

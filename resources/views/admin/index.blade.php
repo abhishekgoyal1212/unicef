@@ -18,7 +18,8 @@ $first_segments_sidebar = Request::route()->action['as'];
 
 
   <!-- toastr css-->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+  <link href="{{asset('public/admin/css/toastr.css')}}" rel="stylesheet"/>
+
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -26,9 +27,9 @@ $first_segments_sidebar = Request::route()->action['as'];
 
 
   <!-- toastr JS-->
-  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
-
+  <script src="{{asset('public/admin/js/jquery-1.9.1.min.js')}}"></script>
+  <script src="{{asset('public/admin/js/toastr.js')}}"></script>
+  
 </head>
 <style>
   *{
