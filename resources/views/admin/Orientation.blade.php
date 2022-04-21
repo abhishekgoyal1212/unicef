@@ -1,4 +1,4 @@
- @extends('admin.index')
+ @extends('admin.sidebar')
  @section('title','Dashboard')
  @section('content')
    

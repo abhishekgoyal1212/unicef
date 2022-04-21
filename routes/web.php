@@ -29,7 +29,7 @@ Route::prefix('admin')->group(function () {
 		Route::post('login_check','login_check')->name('admin.login_check');
 	});
 	Route::middleware('auth')->group(function(){
-		 Route::controller(DashboardController::class)->group(function(){
+		Route::controller(DashboardController::class)->group(function(){
 			Route::get('dashboard','index')->name('Dashboard');
 			Route::get('logout','logout')->name('admin.logout');
 			Route::view('dashboard','admin/dashboard/dashboard')->name('admin.dashboard');
@@ -65,17 +65,22 @@ Route::prefix('admin')->group(function () {
 			Route::post('Others','Others')->name('admin.Others');
 		});
 		Route::controller(SocialMobilizationController::class)->group(function(){
-   			Route::post('insert-sm-meeting-faith-based','insert_sm_meeting_faith_based')->name('admin.SmMeetingFaithBased');
-   			Route::post('insert-sm-meeting-influencers','insert_sm_meeting_influencers')->name('admin.SmMeetingInfluencers');
-   			Route::post('insert-sm-meeting-numbers','insert_sm_meeting_numbers')->name('admin.SmMeetingNumbers');
-   			Route::post('insert-sm-meeting-ipc','insert_sm_meeting_ipc')->name('admin.SmMeetingIpc');
-   			Route::post('insert-sm-meeting-mother-meeting','insert_sm_mother_meeting')->name('admin.SmMeetingMotherMeeting');
-   			Route::post('sm-community-meeting','sm_community')->name('admin.SmCommunityMeeting');
-   			Route::post('sm-shg-meeting','sm_shg_meeting')->name('admin.SmShgMeeting');
-   			Route::post('sm-vulrenable-meeting','sm_vulrenable_meeting')->name('admin.SmVulrenableMeeting');
-   			Route::post('sm-excluded-groups','sm_excluded_groups')->name('admin.SmExcludedGroups');
-   			Route::post('sm-volunteer-meeting','sm_volunteer_meeting')->name('admin.SmVolunteerMeeting');
+			Route::post('insert-sm-meeting-faith-based','insert_sm_meeting_faith_based')->name('admin.SmMeetingFaithBased');
+			Route::post('insert-sm-meeting-influencers','insert_sm_meeting_influencers')->name('admin.SmMeetingInfluencers');
+			Route::post('insert-sm-meeting-numbers','insert_sm_meeting_numbers')->name('admin.SmMeetingNumbers');
+			Route::post('insert-sm-meeting-ipc','insert_sm_meeting_ipc')->name('admin.SmMeetingIpc');
+			Route::post('insert-sm-meeting-mother-meeting','insert_sm_mother_meeting')->name('admin.SmMeetingMotherMeeting');
+			Route::post('sm-community-meeting','sm_community')->name('admin.SmCommunityMeeting');
+			Route::post('sm-shg-meeting','sm_shg_meeting')->name('admin.SmShgMeeting');
+			Route::post('sm-vulrenable-meeting','sm_vulrenable_meeting')->name('admin.SmVulrenableMeeting');
+			Route::post('sm-excluded-groups','sm_excluded_groups')->name('admin.SmExcludedGroups');
+			Route::post('sm-volunteer-meeting','sm_volunteer_meeting')->name('admin.SmVolunteerMeeting');
 		});
+		// Route::controller(IecController::class)->group(function(){
+		// 	Route::post('iec_material','iec_material')->name('admin.iecMaterial');
+		// 	Route::post('local_iec_material','local_iec_material')->name('admin.localIecMaterial');
+		// 	Route::post('Special_iec_material','Special_iec_material')->name('admin.specialIecMaterial');
+		// }); 
 	});
 });
 
