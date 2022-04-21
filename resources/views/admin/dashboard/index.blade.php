@@ -35,7 +35,7 @@ $first_segments_sidebar = Request::route()->action['as'];
     font-family: 'Poppins', sans-serif;
   }
 </style>
-<body style="background: url(background.jpg); background-repeat: no-repeat; background-size: cover;background-position: center;">
+<body style="background-image: url({{asset('public/admin/img/background.jpg')}}); background-repeat: no-repeat; background-size: cover;background-position: center;">
   @if(session('flash-error'))
   <script> toastr["error"] ("{{session()->get('flash-error')}}") </script>
   @endif

@@ -16,14 +16,35 @@ class UserSeeder extends Seeder
     public function run()
     {
     	$inputs =[
-            
-    			'name'     => 'Neeraj Mishra',
-    			'mobile_no'=>  9557779947,
-    			'districts'=> 'Churu',
-    			'email'    => 'neeraj.j18@iihmr.in',
-    			'password' => Hash::make('admin1234'),
-
-    	];
-        User::create($inputs);
+            [
+                'name'     => 'Neeraj Mishra',
+                'mobile_no'=>  9557779947,
+                'districts'=> 'Churu',
+                'email'    => 'neeraj.j18@iihmr.in',
+                'password' => Hash::make('admin1234'),
+            ],
+            [
+                'name'     => 'Gaurav Kumar Gupta',
+                'mobile_no'=>  9568574380,
+                'districts'=> 'karauli',
+                'email'    => 'gauravguptaunicef@gmail.com',
+                'password' => Hash::make('admin1234'),
+            ],            [
+                'name'     => 'Parvez Akhtar',
+                'mobile_no'=>  8595119797,
+                'districts'=> 'Tonk',
+                'email'    => 'ayadparvez2021@gmail.com',
+                'password' => Hash::make('admin1234'),
+            ],            [
+                'name'     => 'Vishal Babu',
+                'mobile_no'=>  8868991104,
+                'districts'=> 'Jalor',
+                'email'    => 'vishuskb@gmail.com',
+                'password' => Hash::make('admin1234'),
+            ]
+        ];
+         foreach ($inputs as $key => $value) {
+             User::create($value);
+         }
     }
 }

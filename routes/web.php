@@ -24,17 +24,16 @@ use App\Http\Controllers\admin\GroupsTrackingController;
 |
 */
 
-// Route::get('/', function () {
-// 	return view('welcome');
-// });
-Route::prefix('admin')->group(function () {
+Route::get('/', function () {
+	return view('redirecttologin');
+});
 	Route::controller(AuthController::class)->middleware('guest')->group(function(){
 		Route::get('login','login')->name('login');
 		Route::post('login_check','login_check')->name('admin.login_check');
 	});
 	Route::middleware('auth')->group(function(){
 		Route::controller(DashboardController::class)->group(function(){
-			Route::get('dashboard','index')->name('Dashboard');
+			Route::get('dashboard','index')->name('dashboard');
 			Route::get('logout','logout')->name('admin.logout');
 			Route::view('dashboard','admin/dashboard/dashboard')->name('admin.dashboard');
 			Route::view('Planing_Platform','admin/Planing_Platform')->name('admin.planingPlatform');
@@ -98,7 +97,6 @@ Route::prefix('admin')->group(function () {
    			Route::post('groups-tracking','groups_tracking')->name('admin.GroupsTracking');
 		});
 	});
-});
 
 
 

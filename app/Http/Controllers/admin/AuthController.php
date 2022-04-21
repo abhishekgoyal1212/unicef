@@ -21,7 +21,7 @@ class AuthController extends Controller
 		]);
 		$inputs = $request->input();
 		if(Auth::attempt($cred)){
-			return redirect('admin/dashboard');
+			return redirect()->route('admin.dashboard');
 		}else{
 			$request->session()->flash('flash-error', 'Username and password not found');
 			return back();
