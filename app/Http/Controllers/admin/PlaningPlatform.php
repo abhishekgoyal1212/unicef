@@ -107,22 +107,28 @@ class PlaningPlatform extends Controller
 	public function district_communication(Request $request)
 	{
 		$user_id = Auth::id();
+		
 		$inputs = $request->all();
+
 		$validator = Validator::make($request->all(), [
-			'wheather_developed'        => 'required',
-			'If_yes_month' => 'required',
+			'wheather_developed'  => 'required',
+			'If_yes_month' => 'required_if:wheather_developed, 1|prohibited_if:wheather_developed, 0',
 		],[
-			'If_yes_month.required' => 'The month field is required',
+			'If_yes_month.required_if' => 'The month field is required when you choose Yes',
+			'If_yes_month.prohibited_if' => 'You cannot select month beacause you choose No',
 		]);
 		if ($validator->fails()) {
 			return redirect()->back()->withErrors($validator,'district_communication')->withinput();
 		}
+		
 		$nigrani_samiti_meeting = new DistrictCommunication;
 		$nigrani_samiti_meeting->cate_name = 'Planing Platform';
 		$nigrani_samiti_meeting->user_id = $user_id;
-
-		$nigrani_samiti_meeting->wheather_developed = $inputs['wheather_developed'];  
-		$nigrani_samiti_meeting->If_yes_month = $inputs['If_yes_month']; 
+		$nigrani_samiti_meeting->wheather_developed = $inputs['wheather_developed']; 
+		if($inputs['wheather_developed'] == 1){
+			$nigrani_samiti_meeting->If_yes_month = $inputs['If_yes_month']; 	
+		}
+		
 		// dd($nigrani_samiti_meeting);
 		if ($nigrani_samiti_meeting->save()) {
 			return back()->with('flash-success', 'District communication plan availability added successfully');

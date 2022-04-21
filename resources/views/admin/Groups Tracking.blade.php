@@ -19,7 +19,8 @@
 
 
 
-<form>
+         <form action="{{route('admin.GroupsTracking')}}" method="post">
+          @csrf
             <div class="sub-content p-4">
               <div class="row align-items-center my-2">
                 <div class="col-md-3">
@@ -27,7 +28,10 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number">
+                    <input type="number" name="no_nomadic_locations" value="{{old('no_nomadic_locations')}}">
+                    @error('no_nomadic_locations')
+                    <div class="form-valid-error text-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
               </div>
@@ -37,7 +41,10 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number">
+                    <input type="number" name="no_construction_labour_sites" value="{{old('no_construction_labour_sites')}}">
+                    @error('no_construction_labour_sites')
+                    <div class="form-valid-error text-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
               </div>
@@ -47,7 +54,10 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number">
+                    <input type="number" name="no_bricklin_labour_sites" value="{{old('no_bricklin_labour_sites')}}">
+                    @error('no_bricklin_labour_sites')
+                    <div class="form-valid-error text-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
               </div>
@@ -57,7 +67,10 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number">
+                    <input type="number" name="no_mine_labour_sites" value="{{old('no_mine_labour_sites')}}">
+                    @error('no_mine_labour_sites')
+                    <div class="form-valid-error text-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
               </div>
@@ -67,7 +80,10 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number">
+                    <input type="number" name="no_excluded_groups_sites" value="{{old('no_excluded_groups_sites')}}">
+                    @error('no_excluded_groups_sites')
+                    <div class="form-valid-error text-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
               </div>
@@ -77,7 +93,10 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number">
+                    <input type="number" name="no_pastrol_community" value="{{old('no_pastrol_community')}}">
+                    @error('no_pastrol_community')
+                    <div class="form-valid-error text-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
               </div>
@@ -87,7 +106,10 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number">
+                    <input type="number" name="no_slum_dwellers" value="{{old('no_slum_dwellers')}}">
+                    @error('no_slum_dwellers')
+                    <div class="form-valid-error text-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
               </div>
@@ -97,7 +119,10 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number">
+                    <input type="number" name="no_sex_workers" value="{{old('no_sex_workers')}}">
+                    @error('no_sex_workers')
+                    <div class="form-valid-error text-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
               </div>

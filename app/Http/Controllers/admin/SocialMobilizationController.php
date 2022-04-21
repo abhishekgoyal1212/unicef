@@ -15,7 +15,6 @@ use App\Models\SocialMobilization\SmMeetingShg;
 use App\Models\SocialMobilization\SmMeetingVulrenable;
 use App\Models\SocialMobilization\SmExcludedGroups;
 use App\Models\SocialMobilization\SmVolunteerMeeting;
-
 use Auth;
 
 class SocialMobilizationController extends Controller

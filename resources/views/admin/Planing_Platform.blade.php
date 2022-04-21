@@ -45,10 +45,10 @@
                         <ul class="list-unstyled mb-0">
                           <li class="d-inline mr-4">
                             <div class="form-check d-inline">
-                              <input type="radio" name="wheather_meeting" value="1" class="form-check-input" id="exampleCheck1">
+                              <input type="radio" name="wheather_meeting" value="1" class="form-check-input" id="exampleCheck1" {{old('wheather_meeting') == '1' ? 'checked' : ''}}>
                               <label class="form-check-label mr-5" for="exampleCheck1">Yes</label>
-                              <input type="radio" value="0" name="wheather_meeting" class="form-check-input" id="exampleCheck1">
-                              <label class="form-check-label" for="exampleCheck1">No</label>
+                              <input type="radio" value="0" name="wheather_meeting" class="form-check-input" id="exampleCheck2" {{old('wheather_meeting') == '0' ? 'checked' : ''}}>
+                              <label class="form-check-label" for="exampleCheck2">No</label>
                               <div>
                                 @error('wheather_meeting')
                                 <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -84,13 +84,13 @@
                         <ul class="list-unstyled mb-0">
                           <li class="d-inline mr-4">
                             <div class="form-check d-inline">
-                              <input type="radio" value="1" class="form-check-input" id="participated" name="wheather_consultant">
-                              <label class="form-check-label mr-5"  for="participated">Yes</label>
+                              <input type="radio" value="1" class="form-check-input" id="participated1" name="wheather_consultant" {{old('wheather_consultant') == '1' ? 'checked' : ''}}>
+                              <label class="form-check-label mr-5"  for="participated1">Yes</label>
 
 
-                              <input type="radio" value="0" class="form-check-input" id="participated" name="wheather_consultant">
+                              <input type="radio" value="0" class="form-check-input" id="participated2" name="wheather_consultant" {{old('wheather_consultant') == '0' ? 'checked' : ''}}>
 
-                              <label class="form-check-label"  for="participated">No</label>
+                              <label class="form-check-label"  for="participated2">No</label>
                             </div>
                             @error('wheather_consultant')
                             <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -107,12 +107,10 @@
                       <div class="col-md-7">
                         <ul class="list-unstyled mb-0">
                           <li class="d-inline mr-4"><div class="form-check d-inline">
-                            <input type="radio" value="1" class="form-check-input" id="participates" 
-                            name="suggestions_consultant">
-                            <label class="form-check-label mr-5" for="participates">Yes</label>
-                            <input type="radio" value="0" class="form-check-input"  id="participates" 
-                            name="suggestions_consultant">
-                            <label class="form-check-label" for="participates">No</label>
+                            <input type="radio" value="1" class="form-check-input" id="participates1" name="suggestions_consultant" {{old('suggestions_consultant') == '1' ? 'checked' : ''}}>
+                            <label class="form-check-label mr-5" for="participates1">Yes</label>
+                            <input type="radio" value="0" class="form-check-input"  id="participates2" name="suggestions_consultant" {{old('suggestions_consultant') == '0' ? 'checked' : ''}}>
+                            <label class="form-check-label" for="participates2">No</label>
                           </div>
                           @error('suggestions_consultant')
                           <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -211,7 +209,7 @@
 
          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('samiti_meeting') ? 'show active' : '' }} " id="references">
           <div class="sub-tab-heading">
-            Nigrani  Samiti meeting
+            Nigrani Samiti meeting
           </div>
           <form method="post" action="{{route('admin.nigraniSamitiMeeting')}}">
             @csrf
@@ -224,10 +222,10 @@
                   <ul class="list-unstyled mb-0">
                     <li class="d-inline mr-4">
                       <div class="form-check d-inline">
-                        <input type="radio" class="form-check-input" id="exampleCheck1" value="1" name="wheather_meeting">
-                        <label class="form-check-label mr-5" for="exampleCheck1">Yes</label>
-                        <input type="radio" class="form-check-input" id="exampleCheck1" value="0" name="wheather_meeting">
-                        <label class="form-check-label" for="exampleCheck1">No</label>
+                        <input type="radio" class="form-check-input" id="exampleCheckn1" value="1" name="wheather_meeting" {{old('wheather_meeting') == '1' ? 'checked' : ''}}>
+                        <label class="form-check-label mr-5" for="exampleCheckn1">Yes</label>
+                        <input type="radio" class="form-check-input" id="exampleCheckn2" value="0" name="wheather_meeting" {{old('wheather_meeting') == '0' ? 'checked' : ''}}>
+                        <label class="form-check-label" for="exampleCheckn2">No</label>
                       </div>
                       @error('wheather_meeting','samiti_meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -245,10 +243,10 @@
                   <ul class="list-unstyled mb-0">
                     <li class="d-inline mr-4">
                       <div class="form-check d-inline">
-                        <input type="radio" class="form-check-input" id="participated" name="wheather_consultant_participated" value="1">
-                        <label class="form-check-label mr-5" for="participated">Yes</label>
-                        <input type="radio" class="form-check-input" id="participated" name="wheather_consultant_participated" value="0">
-                        <label class="form-check-label" for="participated">No</label>
+                        <input type="radio" class="form-check-input" id="sbccparticipated1" name="wheather_consultant_participated" value="1" {{old('wheather_consultant_participated') == '1' ? 'checked' : ''}}>
+                        <label class="form-check-label mr-5" for="sbccparticipated1">Yes</label>
+                        <input type="radio" class="form-check-input" id="sbccparticipated2" name="wheather_consultant_participated" value="0" {{old('wheather_consultant_participated') == '0' ? 'checked' : ''}}>
+                        <label class="form-check-label" for="sbccparticipated2">No</label>
                       </div>
                       @error('wheather_consultant_participated','samiti_meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -286,10 +284,10 @@
                   <li class="d-inline mr-4">
 
                     <div class="form-check d-inline">
-                      <input type="radio" class="form-check-input" id="exampleCheck1" name="wheather_developed" value="1" >
-                      <label class="form-check-label mr-5" for="exampleCheck1">Yes</label>
-                      <input type="radio" class="form-check-input" id="exampleCheck1" name="wheather_developed" value="0" >
-                      <label class="form-check-label" for="exampleCheck1">No</label>
+                      <input type="radio" class="form-check-input" id="exampleCheckDcp1" name="wheather_developed" value="1" {{old('wheather_developed') == '1' ? 'checked' : ''}} >
+                      <label class="form-check-label mr-5" for="exampleCheckDcp1">Yes</label>
+                      <input type="radio" class="form-check-input" id="exampleCheckDcp2" name="wheather_developed" value="0" >
+                      <label class="form-check-label" for="exampleCheckDcp2">No</label>
                     </div>
                     @error('wheather_developed','district_communication')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -348,10 +346,10 @@
               <ul class="list-unstyled mb-0">
                 <li class="d-inline mr-4">
                   <div class="form-check d-inline">
-                    <input type="radio" class="form-check-input" id="exampleCheck1" name="first_fortnighly_report" value="1" >
-                    <label class="form-check-label mr-5" for="exampleCheck1">Yes</label>
-                    <input type="radio" class="form-check-input" id="exampleCheck1" name="first_fortnighly_report" value="0" >
-                    <label class="form-check-label" for="exampleCheck1">No</label>
+                    <input type="radio" class="form-check-input" id="fortnightly1" name="first_fortnighly_report" value="1" {{old('first_fortnighly_report') == '1' ? 'checked' : ''}}>
+                    <label class="form-check-label mr-5" for="fortnightly1">Yes</label>
+                    <input type="radio" class="form-check-input" id="fortnightly2" name="first_fortnighly_report" value="0" {{old('first_fortnighly_report') == '0' ? 'checked' : ''}}>
+                    <label class="form-check-label" for="fortnightly2">No</label>
                   </div>
                 </li>
               </ul>
@@ -368,10 +366,10 @@
               <ul class="list-unstyled mb-0">
                 <li class="d-inline mr-4">
                   <div class="form-check d-inline">
-                    <input type="radio" class="form-check-input" id="exampleCheck4" name="second_fortnighly_report" value="1">
-                    <label class="form-check-label mr-5"  name="" for="exampleCheck4">Yes</label>
-                    <input type="radio" class="form-check-input" id="exampleCheck4" name="second_fortnighly_report" value="0">
-                    <label class="form-check-label" for="exampleCheck4">No</label>
+                    <input type="radio" class="form-check-input" id="FortnighlyCheck1" name="second_fortnighly_report" value="1" {{old('second_fortnighly_report') == '1' ? 'checked' : ''}}>
+                    <label class="form-check-label mr-5"  name="" for="FortnighlyCheck1">Yes</label>
+                    <input type="radio" class="form-check-input" id="FortnighlyCheck2" name="second_fortnighly_report" value="0" {{old('second_fortnighly_report') == '0' ? 'checked' : ''}}>
+                    <label class="form-check-label" for="FortnighlyCheck2">No</label>
                   </div>
                 </li>
               </ul>
