@@ -33,9 +33,9 @@ Route::get('/', function () {
 	});
 	Route::middleware('auth')->group(function(){
 		Route::controller(DashboardController::class)->group(function(){
-			Route::get('dashboard','index')->name('dashboard');
-			Route::get('logout','logout')->name('admin.logout');
+			// Route::get('dashboard','index')->name('dashboard');
 			Route::view('dashboard','admin/dashboard/dashboard')->name('admin.dashboard');
+			Route::get('logout','logout')->name('admin.logout');
 			Route::view('Planing_Platform','admin/Planing_Platform')->name('admin.planingPlatform');
 			Route::view('Social_Mobilization','admin/Social_Mobilization')->name('admin.socialMobilization');
 			Route::view('Orientation','admin/Orientation')->name('admin.Orientation');

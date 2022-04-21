@@ -51,7 +51,7 @@ $first_segments_sidebar = Request::route()->action['as'];
 
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo1.png')}} " alt="">
-              <a href="{{route('admin.dashboard')}}" aria-controls="Dashboard">Dashboard</a>
+              <a href="{{route('admin.dashboard')}}" aria-controls="Dashboard" class="{{$first_segments_sidebar == 'admin.dashboard' ? 'active' : ''}}">Dashboard</a>
             </li>
 
             <li class="d-block" role="presentation">
