@@ -20,9 +20,9 @@ use App\Http\Controllers\admin\SocialMobilizationController;
 |
 */
 
-Route::get('/', function () {
-	return view('welcome');
-});
+// Route::get('/', function () {
+// 	return view('welcome');
+// });
 Route::prefix('admin')->group(function () {
 	Route::controller(AuthController::class)->middleware('guest')->group(function(){
 		Route::get('login','login')->name('login');
@@ -31,6 +31,8 @@ Route::prefix('admin')->group(function () {
 	Route::middleware('auth')->group(function(){
 		 Route::controller(DashboardController::class)->group(function(){
 			Route::get('dashboard','index')->name('Dashboard');
+			Route::get('logout','logout')->name('admin.logout');
+			Route::view('dashboard','admin/dashboard/dashboard')->name('admin.dashboard');
 			Route::view('Planing_Platform','admin/Planing_Platform')->name('admin.planingPlatform');
 			Route::view('Social_Mobilization','admin/Social_Mobilization')->name('admin.socialMobilization');
 			Route::view('Orientation','admin/Orientation')->name('admin.Orientation');
@@ -76,6 +78,8 @@ Route::prefix('admin')->group(function () {
 		});
 	});
 });
+
+
 
 
 

@@ -49,31 +49,28 @@ $first_segments_sidebar = Request::route()->action['as'];
           <div class="userimg">
           <img src="{{asset('public/admin/img/userimg.png')}}" alt=""></div>
           <ul class="nav nav-tabs tabs-left d-flex flex-column" role="tablist">
+
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo1.png')}} " alt="">
-              <a href="#Dashboard" aria-controls="Dashboard">Dashboard</a>
+              <a href="{{route('admin.dashboard')}}" aria-controls="Dashboard">Dashboard</a>
             </li>
+
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo2.png')}} " alt="">
               <a href="Planing_Platform" aria-controls="Platform" class="
               {{$first_segments_sidebar == 'admin.planingPlatform' ? 'active' : '' }}">Planing Platform</a>
             </li>
 
-
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo3.png')}} " alt="">
               <a href="Social_Mobilization" class="
               {{$first_segments_sidebar == 'admin.socialMobilization' ? 'active' : '' }}">Social Mobilization</a>
             </li>
-
-
-
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo4.png')}}" alt="">
               <a href="Orientation" aria-controls="orientation"
                class="{{$first_segments_sidebar == 'admin.Orientation' ? 'active' : '' }}">orientation</a>
             </li>
-
 
             <li class="d-block" role="presentation">
               <img src="{{asset('public/admin/img/logo5.png')}} " alt="">
@@ -108,6 +105,7 @@ $first_segments_sidebar = Request::route()->action['as'];
               <div class="col-md-5 px-0">
                 <h3 class="tab-head">Select Category</h3>
                 <select name="" id="safsd" class="w-100 bg-transparent mt-3 py-3 px-2 category" onchange="location = this.value;">
+                  <option value="" hidden>  Select Category</option>
                   <option value="{{route('admin.planingPlatform')}}" 
                   {{$first_segments_sidebar == 'admin.planingPlatform' ? 'selected' : '' }}>Planning Platforms</option>
                   <option value="{{route('admin.socialMobilization')}}" {{$first_segments_sidebar == 'admin.socialMobilization' ? 'selected' : '' }}>Social Mobilization</option>
@@ -115,7 +113,7 @@ $first_segments_sidebar = Request::route()->action['as'];
                   <option value="{{route('admin.pvtBodies')}}" {{$first_segments_sidebar == 'admin.pvtBodies' ? 'selected' : '' }}>Pvt Bodies</option>
                   <option value="{{route('admin.coordinationMeetingLine')}}" {{$first_segments_sidebar == 'admin.coordinationMeetingLine' ? 'selected' : '' }}>Coordination Meeting Line</option>
                   <option value="{{route('admin.massMediaMidMedia')}}" {{$first_segments_sidebar == 'admin.massMediaMidMedia' ? 'selected' : '' }}>Mass Media Mid Media</option>
-                  <option value="{{route('admin.orientationHealth')}}" {{$first_segments_sidebar == 'admin.orientationHealth' ? 'selected' : '' }}>Orientation_Health</option>
+                  <option value="{{route('admin.orientationHealth')}}" {{$first_segments_sidebar == 'admin.orientationHealth' ? 'selected' : '' }}>Orientation Health</option>
                   <option value="{{route('admin.Iec')}}" {{$first_segments_sidebar == 'admin.Iec' ? 'selected' : '' }}>ICE</option>
                   <option value="{{route('admin.GroupsTracking')}}" {{$first_segments_sidebar == 'admin.GroupsTracking' ? 'selected' : '' }}>Groups Tracking</option>
                 </select>
@@ -124,7 +122,6 @@ $first_segments_sidebar = Request::route()->action['as'];
                 <h3 class="location">Welcome to {{auth()->user()->districts}}</h3>
               </div>
             </div>
-
         @yield('content')
           </div>
         </div>
