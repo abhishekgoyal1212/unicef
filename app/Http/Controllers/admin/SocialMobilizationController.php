@@ -54,9 +54,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Faith Based Institutions /Religious Leaders Added Successfully');
+            return redirect()->back()->with('flash-success', 'Meeting with Faith Based Institutions /Religious Leaders Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
+            return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -83,7 +83,7 @@ class SocialMobilizationController extends Controller
         // }    
 
         if ($validator->fails()) {
-         return redirect('admin/Social_Mobilization')->withErrors($validator, 'Meeting_Influencers')
+         return redirect()->back()->withErrors($validator, 'Meeting_Influencers')
                         ->withInput();
         }
 
@@ -99,9 +99,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Influencers Added Successfully');
+            return redirect()->back()->with('flash-success', 'Meeting with Influencers Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
+            return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -118,7 +118,7 @@ class SocialMobilizationController extends Controller
         ]);
 
         if ($validator->fails()) {
-         return redirect('admin/Social_Mobilization')->withErrors($validator, 'Meeting_Numbers')->withInput();
+         return redirect()->back()->withErrors($validator, 'Meeting_Numbers')->withInput();
         }
 
         $inputs = $request->input();
@@ -132,9 +132,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Number of Meeting Added Successfully');
+            return redirect()->back()->with('flash-success', 'Number of Meeting Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
+            return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
 
     }
@@ -153,7 +153,7 @@ class SocialMobilizationController extends Controller
             'number_participants_female.numeric' => 'Value must be numeric',
         ]);
         if ($validator->fails()) {
-         return redirect('admin/Social_Mobilization')->withErrors($validator, 'Meeting_IPC')->withInput();
+         return redirect()->back()->withErrors($validator, 'Meeting_IPC')->withInput();
         }
 
         $inputs = $request->input();
@@ -167,9 +167,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'IPC Meeting Added Successfully');
+            return redirect()->back()->with('flash-success', 'IPC Meeting Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
+            return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -187,7 +187,7 @@ class SocialMobilizationController extends Controller
             'number_participants_female.numeric' => 'Value must be numeric',
         ]);
         if ($validator->fails()) {
-         return redirect('admin/Social_Mobilization')->withErrors($validator, 'Mother_Meeting')->withInput();
+         return redirect()->back()->withErrors($validator, 'Mother_Meeting')->withInput();
         }
 
         $inputs = $request->input();
@@ -201,9 +201,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Mother Meetings Added Successfully');
+            return redirect()->back()->with('flash-success', 'Mother Meetings Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
+            return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -221,7 +221,7 @@ class SocialMobilizationController extends Controller
             'number_participants_female.numeric' => 'Value must be numeric',
         ]);
         if ($validator->fails()) {
-         return redirect('admin/Social_Mobilization')->withErrors($validator, 'Community_Meeting')->withInput();
+         return redirect()->back()->withErrors($validator, 'Community_Meeting')->withInput();
         }
         $user_id = Auth::id();
         $inputs = $request->input();
@@ -234,9 +234,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Community Meetings Added Successfully');
+            return redirect()->back()->with('flash-success', 'Community Meetings Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
+            return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
     }
     public function sm_shg_meeting(Request $request){
@@ -253,7 +253,7 @@ class SocialMobilizationController extends Controller
             'number_participants_female.numeric' => 'Value must be numeric',
         ]);
         if($validator->fails()){
-            return redirect('admin/Social_Mobilization')->withErrors($validator, 'SHG_Meeting')->withInput();
+            return redirect()->back()->withErrors($validator, 'SHG_Meeting')->withInput();
         }
         $user_id = Auth::id();
         $inputs = $request->input();
@@ -266,9 +266,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with SHG Members Added Successfully');
+            return redirect()->back()->with('flash-success', 'Meeting with SHG Members Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
+            return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -286,7 +286,7 @@ class SocialMobilizationController extends Controller
             'number_participants_female.numeric' => 'Value must be numeric',
         ]);
         if($validator->fails()){
-            return redirect('admin/Social_Mobilization')->withErrors($validator, 'Vulrenable_Meeting')->withInput();
+            return redirect()->back()->withErrors($validator, 'Vulrenable_Meeting')->withInput();
         }
 
         $user_id = Auth::id();
@@ -300,9 +300,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with Vulrenable Groups Sites Added Successfully');
+            return redirect()->back()->with('flash-success', 'Meeting with Vulrenable Groups Sites Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
+            return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -320,7 +320,7 @@ class SocialMobilizationController extends Controller
             'number_participants_female.numeric' => 'Value must be numeric',
         ]);
         if($validator->fails()){
-            return redirect('admin/Social_Mobilization')->withErrors($validator, 'Excluded_Meeting')->withInput();
+            return redirect()->back()->withErrors($validator, 'Excluded_Meeting')->withInput();
         }
         
         $user_id = Auth::id();
@@ -334,9 +334,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with excluded groups(PWD,Transgender) Added Successfully');
+            return redirect()->back()->with('flash-success', 'Meeting with excluded groups(PWD,Transgender) Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
+            return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
     }
 
@@ -354,7 +354,7 @@ class SocialMobilizationController extends Controller
             'bsg_participants_female' => 'required|numeric',
         ]);
         if($validator->fails()){
-            return redirect('admin/Social_Mobilization')->withErrors($validator, 'Volunteer_Meeting')->withInput();
+            return redirect()->back()->withErrors($validator, 'Volunteer_Meeting')->withInput();
         }
         
         $user_id = Auth::id();
@@ -374,9 +374,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect('admin/Social_Mobilization')->with('flash-success', 'Meeting with the volunteer organization Added Successfully');
+            return redirect()->back()->with('flash-success', 'Meeting with the volunteer organization Added Successfully');
         }else{
-            return redirect('admin/Social_Mobilization')->with('flash-error', 'Error occured in adding data');
+            return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
     }
 }
