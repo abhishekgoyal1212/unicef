@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('mobile_no');
             $table->string('districts');
             $table->string('email')->unique();
+            $table->integer('role')->comment('admin = 1, user = 2');
             $table->string('password');
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent();

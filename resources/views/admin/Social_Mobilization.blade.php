@@ -10,8 +10,7 @@
           <li class="nav-item d-flex w-100">
             <a class="nav-link border 
             {{($errors->hasBag('Meeting_Influencers')) || ($errors->hasBag('Meeting_Numbers')) || ($errors->hasBag('Meeting_IPC'))  || ($errors->hasBag('Mother_Meeting')) || ($errors->hasBag('Community_Meeting')) || ($errors->hasBag('SHG_Meeting')) || ($errors->hasBag('Vulrenable_Meeting')) || ($errors->hasBag('Excluded_Meeting')) || ($errors->hasBag('Volunteer_Meeting')) 
-            || (session()->has('meeting-influencers')) || (session()->has('number-meeting'))  || (session()->has('meeting-ipc')) || (session()->has('mother-meeting')) || (session()->has('community-meeting')) || (session()->has('shg-meeting')) || 
-          (session()->has('vulrenable-group-meeting')) || (session()->has('excluded-group-meeting')) || (session()->has('volunteer-meeting')) ? '' : 'active'}}" 
+            || (session()->has('meeting-influencers')) || (session()->has('number-meeting'))  || (session()->has('meeting-ipc')) || (session()->has('mother-meeting')) || (session()->has('community-meeting')) || (session()->has('shg-meeting')) || (session()->has('vulrenable-group-meeting')) || (session()->has('excluded-group-meeting')) || (session()->has('volunteer-meeting')) ? '' : 'active'}}" 
             href="#Religious" role="tab" data-toggle="tab"> Meeting with Faith Based Institutions /Religious Leaders</a>
           </li>
           <li class="nav-item d-flex w-100">
@@ -48,8 +47,7 @@
       <div class="col-md-9 px-2">
         <div class="tab-content border">
           <div role="tabpanel" class="tab-pane fade  {{($errors->hasBag('Meeting_Influencers')) || ($errors->hasBag('Meeting_Numbers')) || ($errors->hasBag('Meeting_IPC')) || ($errors->hasBag('Meeting_IPC')) || ($errors->hasBag('Mother_Meeting'))  || ($errors->hasBag('Community_Meeting')) || ($errors->hasBag('SHG_Meeting')) || ($errors->hasBag('Vulrenable_Meeting')) || ($errors->hasBag('Excluded_Meeting')) || ($errors->hasBag('Volunteer_Meeting')) 
-           || (session()->has('meeting-influencers')) || (session()->has('number-meeting'))  || (session()->has('meeting-ipc')) || (session()->has('mother-meeting')) || (session()->has('community-meeting')) || (session()->has('shg-meeting')) || 
-          (session()->has('vulrenable-group-meeting')) || (session()->has('excluded-group-meeting')) || (session()->has('volunteer-meeting'))  ? '' : 'show active'}}" id="Religious">
+           || (session()->has('meeting-influencers')) || (session()->has('number-meeting'))  || (session()->has('meeting-ipc')) || (session()->has('mother-meeting')) || (session()->has('community-meeting')) || (session()->has('shg-meeting')) || (session()->has('vulrenable-group-meeting')) || (session()->has('excluded-group-meeting')) || (session()->has('volunteer-meeting'))  ? '' : 'show active'}}" id="Religious">
             <div class="sub-tab-heading">
               Meeting with Faith Based Institutions /Religious Leaders
             </div>

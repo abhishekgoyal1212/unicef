@@ -20,9 +20,12 @@ class AuthController extends Controller
 			'password' => 'required',
 		]);
 		$inputs = $request->input();
-		if(Auth::attempt($cred)){
+		if (Auth::attempt(['email' => $inputs['email'], 'password' => $inputs['password'], 'role' => 2])){
 			return redirect()->route('admin.dashboard');
-		}else{
+		}elseif (Auth::attempt(['email' => $inputs['email'], 'password' => $inputs['password'], 'role' => 1])){
+			return redirect()->route('admin.admin_dashboard');
+		}
+		else{
 			$request->session()->flash('flash-error', 'Username and password not found');
 			return back();
 		}
