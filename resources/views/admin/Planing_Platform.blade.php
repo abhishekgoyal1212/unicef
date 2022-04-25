@@ -9,19 +9,19 @@
               <li class="nav-item d-flex w-100">
                 <a class="nav-link  border {{($errors->hasBag('sector_meeting') 
                   || $errors->hasBag('samiti_meeting') || $errors->hasBag('district_communication') 
-                  || $errors->hasBag('fortnightly_implementation')    ? '' : 'active')}}  " href="#profile" role="tab" data-toggle="tab">DTF/DHS Meeting</a>
+                  || $errors->hasBag('fortnightly_implementation') || session()->has('sector-meeting') || session()->has('nagni-samiti') || session()->has('district-communication') || session()->has('fortnightly-implementation') ? '' : 'active')}}  " href="#profile" role="tab" data-toggle="tab">DTF/DHS Meeting</a>
               </li>
               <li class="nav-item d-flex w-100">
-                <a class="nav-link border {{$errors->hasBag('sector_meeting') ? 'active' : '' }}" href="#buzz" role="tab" data-toggle="tab">Sector Meeting</a>
+                <a class="nav-link border {{$errors->hasBag('sector_meeting') || session()->has('sector-meeting') ? 'active' : '' }}" href="#buzz" role="tab" data-toggle="tab">Sector Meeting</a>
               </li>
               <li class="nav-item d-flex w-100">
-                <a class="nav-link border {{$errors->hasBag('samiti_meeting') ? 'active' : '' }}" href="#references" role="tab" data-toggle="tab">Nigrani Samiti Meeting</a>
+                <a class="nav-link border {{$errors->hasBag('samiti_meeting') || session()->has('nagni-samiti')  ? 'active' : '' }}" href="#references" role="tab" data-toggle="tab">Nigrani Samiti Meeting</a>
               </li>
               <li class="nav-item d-flex w-100">
-                <a class="nav-link border {{$errors->hasBag('district_communication') ? 'active' : '' }}" href="#District" role="tab" data-toggle="tab">District Comminucation Plan Availability</a>
+                <a class="nav-link border {{$errors->hasBag('district_communication') || session()->has('district-communication') ? 'active' : '' }}" href="#District" role="tab" data-toggle="tab">District Comminucation Plan Availability</a>
               </li>
               <li class="nav-item d-flex w-100">
-                <a class="nav-link border {{$errors->hasBag('fortnightly_implementation') ? 'active' : '' }}" href="#Fortnightly" role="tab" data-toggle="tab">Fortnightly Implementation Report of DCP </a>
+                <a class="nav-link border {{$errors->hasBag('fortnightly_implementation') || session()->has('fortnightly-implementation') ? 'active' : '' }}" href="#Fortnightly" role="tab" data-toggle="tab">Fortnightly Implementation Report of DCP </a>
               </li>
             </ul>
           </div>
@@ -30,7 +30,9 @@
               <div role="tabpanel" class="tab-pane fade {{
                 ($errors->hasBag('sector_meeting') 
                   || $errors->hasBag('samiti_meeting') || $errors->hasBag('district_communication') 
-                  || $errors->hasBag('fortnightly_implementation') ? '' : 'show active')}}" id="profile">
+                  || $errors->hasBag('fortnightly_implementation') 
+                  || session()->has('sector-meeting') || session()->has('nagni-samiti') || session()->has('district-communication') || session()->has('fortnightly-implementation') 
+                  ? '' : 'show active')}}" id="profile">
                 <div class="sub-tab-heading">
                   DTF/DHS Meeting
                 </div>
@@ -139,7 +141,7 @@
            </div>
            
 
-           <div role="tabpanel" class="tab-pane fade  {{$errors->hasBag('sector_meeting') ? 'show active' : '' }}  " id="buzz">
+           <div role="tabpanel" class="tab-pane fade  {{$errors->hasBag('sector_meeting')  || session()->has('sector-meeting') ? 'show active' : '' }}  " id="buzz">
             <div class="sub-tab-heading">
               Sector Meeting
             </div>
@@ -207,7 +209,7 @@
 
 
 
-         <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('samiti_meeting') ? 'show active' : '' }} " id="references">
+         <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('samiti_meeting') || session()->has('nagni-samiti') ? 'show active' : '' }} " id="references">
           <div class="sub-tab-heading">
             Nigrani Samiti meeting
           </div>
@@ -268,7 +270,7 @@
 
 
 
-       <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('district_communication') ? 'show active' : '' }}" id="District">
+       <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('district_communication') || session()->has('district-communication') ? 'show active' : '' }}" id="District">
         <div class="sub-tab-heading">
           District Communication plan availability
         </div>
@@ -331,7 +333,7 @@
        </form>
      </div>
 
-     <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('fortnightly_implementation') ? 'show active' : '' }}" id="Fortnightly">
+     <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('fortnightly_implementation') || session()->has('fortnightly-implementation') ? 'show active' : '' }}" id="Fortnightly">
       <div class="sub-tab-heading">
         Fortnightly Implementation Report of DCP
       </div>

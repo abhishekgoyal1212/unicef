@@ -48,7 +48,7 @@ class SocialMobilizationController extends Controller
         $res->number_meetings = $inputs['number_meetings'];
         $res->number_participants_male  = $inputs['number_participants_male'];
         $res->number_participants_female  = $inputs['number_participants_female'];
-        $res->reach_through_faitrh  = $inputs['reach_faitrh'];
+        $res->reach_faitrh  = $inputs['reach_faitrh'];
         $result = $res->save();
 
         if($result){
@@ -97,7 +97,7 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect()->back()->with('flash-success', 'Meeting with Influencers Added Successfully');
+            return redirect()->back()->with('flash-success', 'Meeting with Influencers Added Successfully')->with('meeting-influencers', 'meeting-influencer');
         }else{
             return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
@@ -130,7 +130,7 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect()->back()->with('flash-success', 'Number of Meeting Added Successfully');
+            return redirect()->back()->with('flash-success', 'Number of Meeting Added Successfully')->with('number-meeting', 'number-meeting');
         }else{
             return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
@@ -165,7 +165,7 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect()->back()->with('flash-success', 'IPC Meeting Added Successfully');
+            return redirect()->back()->with('flash-success', 'IPC Meeting Added Successfully')->with('meeting-ipc', 'meeting-ipc');
         }else{
             return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
@@ -199,7 +199,7 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect()->back()->with('flash-success', 'Mother Meetings Added Successfully');
+            return redirect()->back()->with('flash-success', 'Mother Meetings Added Successfully')->with('mother-meeting', 'mother-meeting');
         }else{
             return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
@@ -232,7 +232,7 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect()->back()->with('flash-success', 'Community Meetings Added Successfully');
+            return redirect()->back()->with('flash-success', 'Community Meetings Added Successfully')->with('community-meeting', 'community-meeting');
         }else{
             return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
@@ -264,7 +264,7 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect()->back()->with('flash-success', 'Meeting with SHG Members Added Successfully');
+            return redirect()->back()->with('flash-success', 'Meeting with SHG Members Added Successfully')->with('shg-meeting', 'shg-meeting');
         }else{
             return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
@@ -298,7 +298,7 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect()->back()->with('flash-success', 'Meeting with Vulrenable Groups Sites Added Successfully');
+            return redirect()->back()->with('flash-success', 'Meeting with Vulrenable Groups Sites Added Successfully')->with('vulrenable-group-meeting', 'vulrenable-group-meeting');
         }else{
             return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
@@ -332,7 +332,7 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect()->back()->with('flash-success', 'Meeting with excluded groups(PWD,Transgender) Added Successfully');
+            return redirect()->back()->with('flash-success', 'Meeting with excluded groups(PWD,Transgender) Added Successfully')->with('excluded-group-meeting', 'excluded-group-meeting');
         }else{
             return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
@@ -372,9 +372,9 @@ class SocialMobilizationController extends Controller
         $result = $res->save();
 
         if($result){
-            return redirect()->back()->with('flash-success', 'Meeting with the volunteer organization Added Successfully');
+            return redirect()->back()->with('flash-success', 'Meeting with the volunteer organization Added Successfully')->with('volunteer-meeting', 'volunteer-meeting');
         }else{
-            return redirect()->back()->with('flash-error', 'Error occured in adding data');
+            return redirect()->back()->with('flash-error', 'Error occured in adding data')->with('volunteer-meeting', 'volunteer-meeting');
         }
     }
 }

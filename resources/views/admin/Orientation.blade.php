@@ -6,21 +6,21 @@
       <div class="col-md-3 px-2">
         <ul class="nav nav-tabs sub-tabs d-flex w-100" role="tablist">
           <li class="nav-item d-flex w-100">
-            <a class="nav-link  border {{($errors->hasBag('panchayati_raj') 
+            <a class="nav-link  border {{$errors->hasBag('panchayati_raj') 
                   || $errors->hasBag('minority_deparment') || $errors->hasBag('ulb_deparment') 
-                  || $errors->hasBag('csr_deparment')    ? '' : 'active')}} " href="#Education" role="tab" data-toggle="tab">Education Department</a>
+                  || $errors->hasBag('csr_deparment') || session()->has('panchayati-raj') || session()->has('mnority-deparment')  || session()->has('panchayati-raj') || session()->has('ulb-deparment') || session()->has('csr-deparment') ? '' : 'active'}} " href="#Education" role="tab" data-toggle="tab">Education Department</a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('panchayati_raj') ? 'active' : '' }}" href="#Panchayati" role="tab" data-toggle="tab">Panchayati Raj/Rural Development</a>
+            <a class="nav-link border {{$errors->hasBag('panchayati_raj') || session()->has('panchayati-raj')  ? 'active' : '' }}" href="#Panchayati" role="tab" data-toggle="tab">Panchayati Raj/Rural Development</a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('minority_deparment') ? 'active' : '' }}" href="#Minority" role="tab" data-toggle="tab">Minority Deparment/ DMWO/ Para teachers</a>
+            <a class="nav-link border {{$errors->hasBag('minority_deparment') || session()->has('mnority-deparment') ? 'active' : '' }}" href="#Minority" role="tab" data-toggle="tab">Minority Deparment/ DMWO/ Para teachers</a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('ulb_deparment') ? 'active' : '' }}" href="#ULB" role="tab" data-toggle="tab"> ULB </a>
+            <a class="nav-link border {{$errors->hasBag('ulb_deparment') || session()->has('ulb-deparment') ? 'active' : '' }}" href="#ULB" role="tab" data-toggle="tab"> ULB </a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('csr_deparment') ? 'active' : '' }}" href="#CSR" role="tab" data-toggle="tab"> CSR</a>
+            <a class="nav-link border {{$errors->hasBag('csr_deparment') || session()->has('csr-deparment') ? 'active' : '' }}" href="#CSR" role="tab" data-toggle="tab"> CSR</a>
           </li>
         </ul>
       </div>
@@ -29,7 +29,7 @@
 
           <div role="tabpanel" class="tab-pane fade {{($errors->hasBag('panchayati_raj') 
                   || $errors->hasBag('minority_deparment') || $errors->hasBag('ulb_deparment') 
-                  || $errors->hasBag('csr_deparment')    ? '' : 'show active')}}" id="Education">
+                  || $errors->hasBag('csr_deparment') || session()->has('panchayati-raj')  || session()->has('mnority-deparment')  || session()->has('ulb-deparment') || session()->has('csr-deparment')  ? '' : 'show active')}}" id="Education">
 
             <div class="sub-tab-heading">
               Education Department
@@ -72,7 +72,7 @@
 
           </div>
 
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('panchayati_raj') ? 'show active' : '' }} {{$errors->hasBag('sector_meeting') ? 'show active' : '' }}" id="Panchayati">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('panchayati_raj') ? 'show active' : '' }} {{$errors->hasBag('sector_meeting') || session()->has('panchayati-raj') ? 'show active' : '' }}" id="Panchayati">
             <div class="sub-tab-heading">
               Panchayati Raj/Rural Development
             </div>
@@ -110,9 +110,9 @@
                   <button type="submit" class="login-btn">SUBMIT</button>
                 </div>
               </div>
-            </form>
+            </form> 
           </div>
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('minority_deparment') ? 'show active' : '' }}" id="Minority">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('minority_deparment') || session()->has('mnority-deparment') ? 'show active' : '' }}" id="Minority">
             <div class="sub-tab-heading">
               Minority Deparment
             </div>
@@ -155,7 +155,7 @@
             </form>
 
           </div>
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('ulb_deparment') ? 'show active' : '' }}" id="ULB">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('ulb_deparment') || session()->has('ulb-deparment') ? 'show active' : '' }}" id="ULB">
             <div class="sub-tab-heading">
               ULB
             </div>
@@ -195,7 +195,7 @@
               </div>
             </form>
           </div>
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('csr_deparment') ? 'show active' : '' }}" id="CSR">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('csr_deparment') || session()->has('csr-deparment') ? 'show active' : '' }}" id="CSR">
             <div class="sub-tab-heading">
               CSR
             </div>

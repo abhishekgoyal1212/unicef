@@ -68,7 +68,7 @@ class PlaningPlatform extends Controller
 		$sector_meeting->meetings_participated = $inputs['meetings_participated']; 
 		$sector_meeting->suggestions_consultan_description = $inputs['suggestions_consultan_description']; 
 		if ($sector_meeting->save()) {
-			return back()->with('flash-success', 'Sector  added successfully');
+			return back()->with('flash-success', 'Sector  added successfully')->with('sector-meeting', 'sector-meeting');
 
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
@@ -97,7 +97,7 @@ class PlaningPlatform extends Controller
 		$nigrani_samiti_meeting->wheather_meeting = $inputs['wheather_meeting']; 
 		$nigrani_samiti_meeting->wheather_consultant_participated = $inputs['wheather_consultant_participated'];  
 		if ($nigrani_samiti_meeting->save()) {
-			return back()->with('flash-success', 'Nigrani samiti meeting platform added successfully');
+			return back()->with('flash-success', 'Nigrani samiti meeting platform added successfully')->with('nagni-samiti', 'nagni-samiti');
 
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
@@ -131,7 +131,7 @@ class PlaningPlatform extends Controller
 		
 		// dd($nigrani_samiti_meeting);
 		if ($nigrani_samiti_meeting->save()) {
-			return back()->with('flash-success', 'District communication plan availability added successfully');
+			return back()->with('flash-success', 'District communication plan availability added successfully')->with('district-communication', 'district-communication');
 
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
@@ -156,7 +156,7 @@ class PlaningPlatform extends Controller
 		$fortnighly_report->first_fortnighly_report = $inputs['first_fortnighly_report'];  
 		$fortnighly_report->second_fortnighly_report = $inputs['second_fortnighly_report'];
 		if ($fortnighly_report->save()) {
-			return back()->with('flash-success', 'fortnightly implementation report  added successfully');
+			return back()->with('flash-success', 'fortnightly implementation report  added successfully')->with('fortnightly-implementation', 'fortnightly-implementation');
 
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');

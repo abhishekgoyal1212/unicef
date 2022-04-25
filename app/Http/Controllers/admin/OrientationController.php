@@ -57,7 +57,7 @@ class OrientationController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Panchayati raj rural development added successfully');
+			return back()->with('flash-success', 'Panchayati raj rural development added successfully')->with('panchayati-raj', 'panchayati-raj');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 
@@ -83,7 +83,7 @@ class OrientationController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Minority deparment added successfully');
+			return back()->with('flash-success', 'Minority deparment added successfully')->with('mnority-deparment', 'mnority-deparment');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 
@@ -109,7 +109,7 @@ class OrientationController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'ULB deparment added successfully');
+			return back()->with('flash-success', 'ULB deparment added successfully')->with('ulb-deparment', 'ulb-deparment');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 
@@ -135,7 +135,7 @@ class OrientationController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'CSR deparment added successfully');
+			return back()->with('flash-success', 'CSR deparment added successfully')->with('csr-deparment', 'csr-deparment');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 

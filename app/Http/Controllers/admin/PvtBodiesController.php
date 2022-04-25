@@ -57,7 +57,7 @@ class PvtBodiesController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Meeting with private practitioners added successfully');
+			return back()->with('flash-success', 'Meeting with private practitioners added successfully')->with('meeting-practitioners', 'meeting-practitioners');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 
@@ -83,7 +83,7 @@ class PvtBodiesController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Pharmacists associations added successfully');
+			return back()->with('flash-success', 'Pharmacists associations added successfully')->with('pharmacists-associations', 'pharmacists-associations');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 
@@ -109,7 +109,7 @@ class PvtBodiesController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Merchant association added successfully');
+			return back()->with('flash-success', 'Merchant association added successfully')->with('merchant-association', 'merchant-association');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 
@@ -135,7 +135,7 @@ class PvtBodiesController extends Controller
 		$dhs_meeting->number_participants = $inputs['number_participants'];
 
 		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Others added successfully');
+			return back()->with('flash-success', 'Others added successfully')->with('others', 'others');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		} 
