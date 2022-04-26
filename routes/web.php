@@ -30,11 +30,13 @@ Route::get('/', function () {
 	Route::controller(AuthController::class)->middleware('guest')->group(function(){
 		Route::get('login','login')->name('login');
 		Route::post('login_check','login_check')->name('admin.login_check');
+		Route::get('admin-login','login')->name('admin_login_check');
 	});
 	Route::middleware('auth')->group(function(){
 		Route::controller(DashboardController::class)->group(function(){
 			// Route::get('dashboard','index')->name('dashboard');
 			Route::view('dashboard','admin/dashboard/dashboard')->name('admin.dashboard');
+			Route::view('admin-dashboard','admin/admin-dashboard/admin_dashboard')->name('admin.admin_dashboard');
 			Route::get('logout','logout')->name('admin.logout');
 			Route::view('Planing_Platform','admin/Planing_Platform')->name('admin.planingPlatform');
 			Route::view('Social_Mobilization','admin/Social_Mobilization')->name('admin.socialMobilization');

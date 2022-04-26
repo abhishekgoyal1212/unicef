@@ -1,49 +1,53 @@
 @extends('admin.sidebar')
 @section('title','Dashboard')
 @section('content')
-  
+
+
     <div class="row  bg-white shadow-sm ground-section">
       <div class="col-md-3 px-2">
+
         <ul class="nav nav-tabs sub-tabs d-flex w-100" role="tablist">
           <li class="nav-item d-flex w-100">
             <a class="nav-link border 
-            {{($errors->hasBag('Meeting_Influencers')) || ($errors->hasBag('Meeting_Numbers')) || ($errors->hasBag('Meeting_IPC'))  || ($errors->hasBag('Mother_Meeting')) || ($errors->hasBag('Community_Meeting')) || ($errors->hasBag('SHG_Meeting')) || ($errors->hasBag('Vulrenable_Meeting')) || ($errors->hasBag('Excluded_Meeting')) || ($errors->hasBag('Volunteer_Meeting')) ? '' : 'active'}}" 
+            {{($errors->hasBag('Meeting_Influencers')) || ($errors->hasBag('Meeting_Numbers')) || ($errors->hasBag('Meeting_IPC'))  || ($errors->hasBag('Mother_Meeting')) || ($errors->hasBag('Community_Meeting')) || ($errors->hasBag('SHG_Meeting')) || ($errors->hasBag('Vulrenable_Meeting')) || ($errors->hasBag('Excluded_Meeting')) || ($errors->hasBag('Volunteer_Meeting')) 
+            || (session()->has('meeting-influencers')) || (session()->has('number-meeting'))  || (session()->has('meeting-ipc')) || (session()->has('mother-meeting')) || (session()->has('community-meeting')) || (session()->has('shg-meeting')) || (session()->has('vulrenable-group-meeting')) || (session()->has('excluded-group-meeting')) || (session()->has('volunteer-meeting')) ? '' : 'active'}}" 
             href="#Religious" role="tab" data-toggle="tab"> Meeting with Faith Based Institutions /Religious Leaders</a>
           </li>
           <li class="nav-item d-flex w-100">
             <a class="nav-link border 
-            {{$errors->hasBag('Meeting_Influencers') ? 'active' : ''}}" href="#Influencers" role="tab" data-toggle="tab"> 
+            {{$errors->hasBag('Meeting_Influencers') || session()->has('meeting-influencers') ? 'active' : ''}}" href="#Influencers" role="tab" data-toggle="tab"> 
             Meeting with Influencers </a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('Meeting_Numbers') ? ' active' : ''}}" href="#Number" role="tab" data-toggle="tab">Number of Meeting with</a>
+            <a class="nav-link border {{$errors->hasBag('Meeting_Numbers') || session()->has('number-meeting') ? ' active' : ''}}" href="#Number" role="tab" data-toggle="tab">Number of Meeting with</a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('Meeting_IPC') ? 'active' : ''}}" href="#IPC" role="tab" data-toggle="tab">IPC</a>
+            <a class="nav-link border {{$errors->hasBag('Meeting_IPC') || session()->has('meeting-ipc')  ? 'active' : ''}}" href="#IPC" role="tab" data-toggle="tab">IPC</a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('Mother_Meeting') ? 'active' : ''}}" href="#Mother" role="tab" data-toggle="tab">Mother Meetings </a>
+            <a class="nav-link border {{$errors->hasBag('Mother_Meeting') || session()->has('mother-meeting') ? 'active' : ''}}" href="#Mother" role="tab" data-toggle="tab">Mother Meetings </a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('Community_Meeting') ? 'active' : ''}}" href="#Community" role="tab" data-toggle="tab">Community Meetings</a>
+            <a class="nav-link border {{$errors->hasBag('Community_Meeting') || session()->has('community-meeting') ? 'active' : ''}}" href="#Community" role="tab" data-toggle="tab">Community Meetings</a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('SHG_Meeting') ? 'active' : ''}}" href="#SHG" role="tab" data-toggle="tab">Meeting with SHG Members</a>
+            <a class="nav-link border {{$errors->hasBag('SHG_Meeting') || session()->has('shg-meeting') ? 'active' : ''}}" href="#SHG" role="tab" data-toggle="tab">Meeting with SHG Members</a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('Vulrenable_Meeting') ? 'active' : ''}}" href="#Vulrenable" role="tab" data-toggle="tab">Meeting with Vulrenable Groups Sites</a>
+            <a class="nav-link border {{$errors->hasBag('Vulrenable_Meeting') || session()->has('vulrenable-group-meeting') ? 'active' : ''}}" href="#Vulrenable" role="tab" data-toggle="tab">Meeting with Vulrenable Groups Sites</a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('Excluded_Meeting') ? 'active' : ''}}" href="#PWD" role="tab" data-toggle="tab">Meeting with excluded groups (PWD, Transgender)</a>
+            <a class="nav-link border {{$errors->hasBag('Excluded_Meeting') || session()->has('excluded-group-meeting') ? 'active' : ''}}" href="#PWD" role="tab" data-toggle="tab">Meeting with excluded groups (PWD, Transgender)</a>
           </li>
           <li class="nav-item d-flex w-100">
-            <a class="nav-link border {{$errors->hasBag('Volunteer_Meeting') ? 'active' : ''}}" href="#organization" role="tab" data-toggle="tab">Meeting with the volunteer Organization</a>
+            <a class="nav-link border {{$errors->hasBag('Volunteer_Meeting') || session()->has('volunteer-meeting') ? 'active' : ''}}" href="#organization" role="tab" data-toggle="tab">Meeting with the volunteer Organization</a>
           </li>
         </ul>
       </div>
       <div class="col-md-9 px-2">
         <div class="tab-content border">
-          <div role="tabpanel" class="tab-pane fade  {{($errors->hasBag('Meeting_Influencers')) || ($errors->hasBag('Meeting_Numbers')) || ($errors->hasBag('Meeting_IPC')) || ($errors->hasBag('Meeting_IPC')) || ($errors->hasBag('Mother_Meeting'))  || ($errors->hasBag('Community_Meeting')) || ($errors->hasBag('SHG_Meeting')) || ($errors->hasBag('Vulrenable_Meeting')) || ($errors->hasBag('Excluded_Meeting')) || ($errors->hasBag('Volunteer_Meeting')) ? '' : 'show active'}}" id="Religious">
+          <div role="tabpanel" class="tab-pane fade  {{($errors->hasBag('Meeting_Influencers')) || ($errors->hasBag('Meeting_Numbers')) || ($errors->hasBag('Meeting_IPC')) || ($errors->hasBag('Meeting_IPC')) || ($errors->hasBag('Mother_Meeting'))  || ($errors->hasBag('Community_Meeting')) || ($errors->hasBag('SHG_Meeting')) || ($errors->hasBag('Vulrenable_Meeting')) || ($errors->hasBag('Excluded_Meeting')) || ($errors->hasBag('Volunteer_Meeting')) 
+           || (session()->has('meeting-influencers')) || (session()->has('number-meeting'))  || (session()->has('meeting-ipc')) || (session()->has('mother-meeting')) || (session()->has('community-meeting')) || (session()->has('shg-meeting')) || (session()->has('vulrenable-group-meeting')) || (session()->has('excluded-group-meeting')) || (session()->has('volunteer-meeting'))  ? '' : 'show active'}}" id="Religious">
             <div class="sub-tab-heading">
               Meeting with Faith Based Institutions /Religious Leaders
             </div>
@@ -110,11 +114,10 @@
           </div>
           
           
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Meeting_Influencers') ? 'show active' : ''}}" id="Influencers">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Meeting_Influencers') || session()->has('meeting-influencers') ? 'show active' : ''}}" id="Influencers">
             <div class="sub-tab-heading">
               Meeting with Influencers
             </div>
-            
             
             <form action="{{route('admin.SmMeetingInfluencers')}}" method="post">
                @csrf
@@ -177,7 +180,7 @@
           
           
           
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Meeting_Numbers') ? 'show active' : ''}}" id="Number">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Meeting_Numbers') || session()->has('number-meeting') ? 'show active' : ''}}" id="Number">
             <div class="sub-tab-heading">
               Number of Meeting
             </div>
@@ -234,7 +237,7 @@
           </div>
           
           
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Meeting_IPC') ? 'show active' : ''}}" id="IPC">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Meeting_IPC') || session()->has('meeting-ipc') ? 'show active' : ''}}" id="IPC">
             <div class="sub-tab-heading">
               IPC
             </div>
@@ -287,10 +290,7 @@
           </div>
           
           
-          
-          
-          
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Mother_Meeting') ? 'show active' : ''}}" id="Mother">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Mother_Meeting') || (session()->has('mother-meeting')) ? 'show active' : ''}}" id="Mother">
             <div class="sub-tab-heading">
               Mother Meetings
             </div>
@@ -344,7 +344,7 @@
           </div>
           
           
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Community_Meeting') ? 'show active' : ''}}" id="Community">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Community_Meeting') || session()->has('community-meeting') ? 'show active' : ''}}" id="Community">
             <div class="sub-tab-heading">
               Community Meetings
             </div>
@@ -399,7 +399,7 @@
           </div>
           
           
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('SHG_Meeting') ? 'show active' : ''}}" id="SHG">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('SHG_Meeting') || session()->has('shg-meeting') ? 'show active' : ''}}" id="SHG">
             <div class="sub-tab-heading">
               Meeting with SHG Members
             </div>
@@ -450,7 +450,8 @@
           </div>
           
           
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Vulrenable_Meeting') ? 'show active' : ''}}" id="Vulrenable">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Vulrenable_Meeting') || 
+          session()->has('vulrenable-group-meeting') ? 'show active' : ''}}" id="Vulrenable">
             <div class="sub-tab-heading">
               Meeting with Vulrenable Groups Sites
             </div>
@@ -501,7 +502,7 @@
           </div>
           
           
-          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Excluded_Meeting') ? 'show active' : ''}}" id="PWD">
+          <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Excluded_Meeting') || session()->has('excluded-group-meeting') ? 'show active' : ''}}" id="PWD">
             <div class="sub-tab-heading">
               Meeting with excluded groups(PWD,Transgender)
             </div>
@@ -553,7 +554,7 @@
             
           </form>
         </div>
-        <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Volunteer_Meeting') ? 'show active' : ''}}" id="organization">
+        <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Volunteer_Meeting') || session()->has('volunteer-meeting') ? 'show active' : ''}}" id="organization">
           <div class="sub-tab-heading">
             Meeting with the volunteer organization
           </div>
