@@ -74,7 +74,8 @@
               </div>
             </div>
             <div class="col-md-4 pl-5">
-              <div class="calender bg-white p-2">
+              <span class="logout">Logout</span>
+              <div class="calender logout-calender bg-white p-2">
                 <div class="logo text-center mb-3">
 
                   <img src="{{ asset('public/dashboard/img/unicefnewlogo.png') }}" class="mt-2" alt="">

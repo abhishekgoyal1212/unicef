@@ -7,12 +7,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
   <link rel="stylesheet" href="{{asset('public/admin/css/style.css')}}">
+  <!-- toastr css-->
+  <link href="{{asset('public/admin/css/toastr.css')}}" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+
+
+  <!-- toastr css-->
+  <link href="{{asset('public/admin/css/toastr.css')}}" rel="stylesheet"/>
+
+  <!-- toastr JS-->
+  <script src="{{asset('public/admin/js/jquery-1.9.1.min.js')}}"></script>
+  <script src="{{asset('public/admin/js/toastr.js')}}"></script>
+
+
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body style="background: url(background.jpg); background-repeat: no-repeat; background-size: cover; padding: 100px;">
+<body class="page-section" style="background: url({{asset('public/admin/img/background.jpg')}}); background-repeat: no-repeat; background-size: cover; padding: 100px; ">
+  @if(session('flash-error'))
+  <script> toastr["error"] ("{{session()->get('flash-error')}}") </script>
+  @endif
+<!--   @if ( session('flash-success'))
+  <script> toastr["success"]("{{session()->get('flash-success')}}") </script>
+  @endif -->
   <section class="login">
     <div class="container">
       <div class="row justify-content-between align-items-center">
@@ -23,16 +42,16 @@
             @csrf
             <div class="form-group col-md-12">
               <label for="Email">Email address</label>
-              <input type="email" class="form-control bg-transparent" id="Email" name="email" placeholder="demo@gmail.com">
-              @error('email')
-                <div class="form-valid-error">{{ $message }}</div>
-              @enderror
+              <input type="email" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover" class="form-control bg-transparent for-error" id="Email" name="email" placeholder="Email address">
+<!--               @error('email')
+              <div class="form-valid-error">{{ $message }}</div>
+              @enderror -->
             </div>
             <div class="form-group my-3 col-md-12">
               <label for="Password">Password</label>
-              <input type="password" class="form-control bg-transparent" id="Password" name="password" placeholder="Password">
+              <input type="password" class="form-control bg-transparent for-error" id="Password" name="password" placeholder="Password">
               @error('password')
-                <div class="form-valid-error">{{ $message }}</div>
+              <div class="form-valid-error">{{ $message }}</div>
               @enderror
             </div>
             <div class="form-check mt-2 ml-3 col-md-6">
@@ -58,9 +77,15 @@
         </div>
         <div class="col-md-6">
           <img src="{{asset('public/admin/img/login.png')}}" class="img-fluid" alt="">
+
         </div>
       </div>
     </div>
   </section>
 </body>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".for-error").attr("data-content", "this is new")
+  })
+</script>
 </html>

@@ -14,7 +14,6 @@ $first_segments_sidebar = Request::route()->action['as'];
   <title>@yield('title')</title>
   <link rel="stylesheet" href="{{asset('public/admin/css/style.css')}}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
 
 
   <!-- toastr css-->
@@ -40,7 +39,7 @@ $first_segments_sidebar = Request::route()->action['as'];
   @if(session('flash-error'))
   <script> toastr["error"] ("{{session()->get('flash-error')}}") </script>
   @endif
-  @if ( session('flash-success'))
+  @if (session('flash-success'))
   <script> toastr["success"]("{{session()->get('flash-success')}}") </script>
   @endif
   <div class="container-fluid">

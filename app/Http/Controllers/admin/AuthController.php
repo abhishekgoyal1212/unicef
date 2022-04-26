@@ -23,7 +23,7 @@ class AuthController extends Controller
 		if(Auth::attempt($cred)){
 			return redirect()->route('admin.dashboard');
 		}else{
-			$request->session()->flash('flash-error', 'Username and password not found');
+			$request->session()->flash('flash-error','Invalid login credentials, please try again.');
 			return back();
 		}
 	}

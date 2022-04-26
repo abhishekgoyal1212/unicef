@@ -3,8 +3,8 @@
 
 *{
   /*  font-family: 'Poppins', sans-serif;*/
-    font-family: 'Roboto', sans-serif;
-  }
+  font-family: 'Roboto', sans-serif;
+}
 
 
 input::-webkit-outer-spin-button,
@@ -77,11 +77,11 @@ input[type=number] {
 }
 
 .sub-tab-heading{
-       background: #f9f2ec;
-    padding: 15px 25px;
-    font-size: 22px;
-    font-weight: 400;
-    color: #000;
+ background: #f9f2ec;
+ padding: 15px 25px;
+ font-size: 22px;
+ font-weight: 400;
+ color: #000;
 }
 
 .sub-content p {
@@ -114,7 +114,7 @@ input[type=number] {
 .login a{
     text-decoration: none;
     color: #9635c6;
-        font-weight: 600;
+    font-weight: 600;
 }
 .login a:hover{
   opacity: .5;
@@ -132,7 +132,7 @@ input[type=number] {
     margin: 20px auto;
 }
 
- .lg-google {
+.lg-google {
     width: 87%;
     border: none;
     padding: 13px;
@@ -176,18 +176,18 @@ p.mb-0.text-center {
 }
 
 .tab-pane input[type=number], .tab-pane input[type=text] {
- border: 1px solid #cecece;
- height: 40px;
- outline: none;
- width: 100%;
- padding: 10px;
+   border: 1px solid #cecece;
+   height: 40px;
+   outline: none;
+   width: 100%;
+   padding: 10px;
 }
 h4.my-5 {
     font-weight: 700;
 }
 ul.nav.nav-tabs.tabs-left.d-flex.flex-column {
     border-bottom: none !important;
-       
+
 }
 
 ul.nav-tabs.tabs-left li {
@@ -281,52 +281,52 @@ input#openSidebarMenu {
 
 @media screen and (min-width:320px) and (max-width: 767px) { 
 
-body{
-    padding: 15px!important;
-}
+    body{
+        padding: 15px!important;
+    }
 
-.login-btn, .lg-google{
-    width: 100%;
-}
-.sidebar{
-    padding: 0px;
-    border: none;
-}
-.userimg img{
-    margin-bottom: 30px;
-}
-input#openSidebarMenu {
-    display: block;
-}
-#sidebarMenu {
-    height: 100%;
-   left: 0;
-    top: 20;
-    width: 100%;
-    margin-top: 30px;
-    transform: translateX(-450px);
-    transition: transform 250ms ease-in-out;
-    background: #f6f0f0;
-    z-index: 99;
-    position: absolute;
-}
-#sidebarMenu ul{
-    background: #fff;
-    z-index: 3;
-    padding: 15px;
+    .login-btn, .lg-google{
+        width: 100%;
+    }
+    .sidebar{
+        padding: 0px;
+        border: none;
+    }
+    .userimg img{
+        margin-bottom: 30px;
+    }
+    input#openSidebarMenu {
+        display: block;
+    }
+    #sidebarMenu {
+        height: 100%;
+        left: 0;
+        top: 20;
+        width: 100%;
+        margin-top: 30px;
+        transform: translateX(-450px);
+        transition: transform 250ms ease-in-out;
+        background: #f6f0f0;
+        z-index: 99;
+        position: absolute;
+    }
+    #sidebarMenu ul{
+        background: #fff;
+        z-index: 3;
+        padding: 15px;
         box-shadow: 0 0 5px 4px rgb(0 0 0 / 10%);
-    border-radius: 20px;
+        border-radius: 20px;
 
-}
-.tab-content {
-    z-index: -1!important;
-}
-.menu{
-  list-style: none; 
- 
-    padding:0;
-}
-.menu li{
+    }
+    .tab-content {
+        z-index: -1!important;
+    }
+    .menu{
+      list-style: none; 
+
+      padding:0;
+  }
+  .menu li{
     border-bottom: 1px solid rgba(255, 255, 255, 0.10);
 }
 
@@ -411,7 +411,7 @@ input#openSidebarMenu{
 }
 .ground-section{
     margin-right: 0px;
-        padding: 10px 0px;
+    padding: 10px 0px;
 }
 
 .right-tab {
@@ -425,7 +425,7 @@ input#openSidebarMenu{
     background-position-y: 6px;
 }
 .sub-tab-heading{
-        padding: 15px 15px;
+    padding: 15px 15px;
     font-size: 18px;
     line-height: 22px;
 }
@@ -448,53 +448,53 @@ input#openSidebarMenu{
         width: 100%;
     }
     .sidebar {
-    border-right: 1px solid #fff;
-    margin-right: -5px;
-    padding: 10px 0px 20px 0px;
-}
-ul.tabs-left li img{
-margin-right: 0px;
-}
-.userimg img{
-    margin-bottom: 0px;
-}
-.tabs-left li a{
-    font-size: 10px;
-}
-.tab-head{
-    font-size: 18px;
-}
-.right-tab {
-    padding: 20px 0px 0px 0px;
-}
-.location {
-    font-size: 16px;
-}
-.category {
+        border-right: 1px solid #fff;
+        margin-right: -5px;
+        padding: 10px 0px 20px 0px;
+    }
+    ul.tabs-left li img{
+        margin-right: 0px;
+    }
+    .userimg img{
+        margin-bottom: 0px;
+    }
+    .tabs-left li a{
+        font-size: 10px;
+    }
+    .tab-head{
+        font-size: 18px;
+    }
+    .right-tab {
+        padding: 20px 0px 0px 0px;
+    }
+    .location {
+        font-size: 16px;
+    }
+    .category {
         background-position-y: 7px;
         font-size: 12px;
-}
-.form-check-label{
-    font-size: 12px;
-}
-.form-group label {
-    font-weight: 500;
-    font-size: 16px;
-}
-.ground-section {
-    margin-top: 30px;
-    padding: 20px 10px;
-    margin-right: 15px;
-}
-.sub-tabs li a{
-    font-size: 10px;
-}
-.sub-tab-heading {
-     padding: 15px 11px;
-    font-size: 18px;
-    
-}
-.sub-content p{
+    }
+    .form-check-label{
+        font-size: 12px;
+    }
+    .form-group label {
+        font-weight: 500;
+        font-size: 16px;
+    }
+    .ground-section {
+        margin-top: 30px;
+        padding: 20px 10px;
+        margin-right: 15px;
+    }
+    .sub-tabs li a{
+        font-size: 10px;
+    }
+    .sub-tab-heading {
+       padding: 15px 11px;
+       font-size: 18px;
+
+   }
+   .sub-content p{
     font-size: 10px;
 }
 .tab-pane input[type=number], .tab-pane input[type=text]{
@@ -505,45 +505,45 @@ margin-right: 0px;
 
 @media screen and (min-width:992px) and (max-width: 1023px) {
     .sidebar {
-    border-right: 1px solid #fff;
-    margin-right: -5px;
-    padding: 10px 0px 20px 0px;
-}
-ul.tabs-left li img{
-margin-right: 0px;
-}
-.userimg img{
-    margin-bottom: 0px;
-}
-.tabs-left li a{
-    font-size: 14px;
-}
-.tab-head{
-    font-size: 18px;
-}
-.right-tab {
-    padding: 20px 0px 0px 0px;
-}
-.location {
-    font-size: 16px;
-}
-.category {
+        border-right: 1px solid #fff;
+        margin-right: -5px;
+        padding: 10px 0px 20px 0px;
+    }
+    ul.tabs-left li img{
+        margin-right: 0px;
+    }
+    .userimg img{
+        margin-bottom: 0px;
+    }
+    .tabs-left li a{
+        font-size: 14px;
+    }
+    .tab-head{
+        font-size: 18px;
+    }
+    .right-tab {
+        padding: 20px 0px 0px 0px;
+    }
+    .location {
+        font-size: 16px;
+    }
+    .category {
         background-position-y: 15px;
-}
-.ground-section {
-    margin-top: 30px;
-    padding: 20px 10px;
-    margin-right: 15px;
-}
-.sub-tabs li a{
-    font-size: 14px;
-}
-.sub-tab-heading {
-     padding: 15px 11px;
-    font-size: 18px;
-    
-}
-.sub-content p{
+    }
+    .ground-section {
+        margin-top: 30px;
+        padding: 20px 10px;
+        margin-right: 15px;
+    }
+    .sub-tabs li a{
+        font-size: 14px;
+    }
+    .sub-tab-heading {
+       padding: 15px 11px;
+       font-size: 18px;
+
+   }
+   .sub-content p{
     font-size: 14px;
 }
 .tab-pane input[type=number], .tab-pane input[type=text]{
@@ -560,7 +560,7 @@ margin-right: 0px;
 
 @media screen and (min-width:1024px) and (max-width: 1280px) { 
     .sidebar{
-            padding: 20px 0px 20px 0px;
+        padding: 20px 0px 20px 0px;
     }
     .tabs-left li a{
         font-size: 13px;
@@ -569,7 +569,7 @@ margin-right: 0px;
         margin-bottom: 0px;
     }
     .right-tab {
-    padding: 20px 0px 0px 0px;
+        padding: 20px 0px 0px 0px;
     }
     .tab-head{
         font-size: 20px;
@@ -582,8 +582,8 @@ margin-right: 0px;
         padding-left: 10px !important;
     }
     .ground-section {
-    margin-top: 30px;
-    padding: 20px;
+        margin-top: 30px;
+        padding: 20px;
     }
     .sub-tabs li a{
         font-size: 14px;
@@ -595,3 +595,24 @@ margin-right: 0px;
         font-size: 14px;
     }
 }
+
+
+/*@media screen  (min-width: 1024px) and (max-width: 1365px)
+{
+
+}
+@media screen  (min-width: 1366px) and (max-width: 1440px)
+{
+    body.page-section{
+        padding: 65px!important; 
+    }
+    .login h1{
+        font-size: 40px;
+    }
+    .login h4.my-5 {
+        font-size: 30px;
+    }
+    .form-group label {
+        font-size: 15px!important;
+    }
+}*/

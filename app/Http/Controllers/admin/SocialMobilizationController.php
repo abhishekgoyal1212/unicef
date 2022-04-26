@@ -37,7 +37,7 @@ class SocialMobilizationController extends Controller
         ]);
 
          if ($validator->fails()) {
-         return redirect('/admin/Social_Mobilization')
+         return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
         }
