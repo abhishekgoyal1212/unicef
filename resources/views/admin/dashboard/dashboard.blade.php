@@ -13,7 +13,7 @@
 </head>
 <body>
   <div class="col-sm-9">
-    <div class=''>
+    <div class='row'>
       <div class="tab-content">
         <div id="Covid" class="tab-pane fade show active">
           <div class="row mb-5">
@@ -74,7 +74,7 @@
               </div>
             </div>
             <div class="col-md-4 pl-5">
-              <span class="logout">Logout</span>
+              <a href="{{route('admin.logout')}}" class="logout"><span>Sign Out</span></a>
               <div class="calender logout-calender bg-white p-2">
                 <div class="logo text-center mb-3">
 
@@ -218,13 +218,51 @@
           <h4>Communication Act..</h4>
         </div>
       </div>
+
     </div>
+
   </div>
+
 
 </div>
 
 </div>
 </section>
+<div class="row bar-graph">
+  <div class="col-lg-3"></div>
+<div class="col-lg-9 px-0">
+  <section class="col-lg-12 connectedSortable ui-sortable">
+
+    <div class="row deshoard-gaap">
+          <!-- Custom tabs (Charts with tabs)-->
+          <div class="card mt-5">
+            <div class="card-header ui-sortable-handle" style="cursor: move; background: transparent;">
+              <!-- <h3 class="card-title">
+                <i class="far fa-chart-bar"></i>
+                Line Chart
+              </h3> -->
+              <ul class="pl-0 mb-0 graph-head list-unstyled d-flex align-items-center flex-row flex-wrap">
+                <li class="d-inline-block mx-4">review</li>
+                <li class="d-inline-block mx-4">social</li>
+                <li class="d-inline-block mx-4">private</li>
+                <li class="d-inline-block mx-4">mass </li>
+                <li class="d-inline-block mx-4">FLWs </li>
+                <li class="d-inline-block mx-4">DCP </li>
+                <li class="d-inline-block mx-4">vaccination</li>
+              </ul>
+            </div>
+            <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+              <!-- <div id="chartdiv"></div> -->
+              <canvas id="myChart" width="1006" height="503" style="display: block; width: 1006px; height: 503px;" class="chartjs-render-monitor"></canvas>
+            </div>
+        </div>
+        </div>
+      </section>
+</div>
+
+
+</div>
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>

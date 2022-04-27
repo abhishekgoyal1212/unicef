@@ -1,4 +1,4 @@
-<?php
+\<?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\DashboardController;
@@ -30,7 +30,7 @@ Route::get('/', function () {
 	Route::controller(AuthController::class)->middleware('guest')->group(function(){
 		Route::get('login','login')->name('login');
 		Route::post('login_check','login_check')->name('admin.login_check');
-		Route::get('admin-login','login')->name('admin_login_check');
+		Route::get('admin-login','login')->name('admin.login');
 	});
 	Route::middleware('auth')->group(function(){
 		Route::controller(DashboardController::class)->group(function(){

@@ -242,9 +242,9 @@ ul.tabs-left li img {
 .ground-level{
     border: 1px solid #cecece;
 }
-.left-side{
+/* .left-side{
 
-}
+} */
 .tabs-left li a.active {
     color: #f56cad !important
 }
@@ -336,6 +336,13 @@ input#openSidebarMenu {
 
 input#openSidebarMenu{
     display: none;
+}
+/*Chart*/
+.ui-sortable img{
+    max-width: 100%;
+}
+.ui-sortable img{
+    max-width: 100%;
 }
 .sidebarIconToggle {
     height: 22px;
@@ -616,3 +623,101 @@ input#openSidebarMenu{
         font-size: 15px!important;
     }
 }*/
+
+
+
+@media screen and (min-width:1280px) and (max-width: 1366px) { 
+    .login h1{
+        font-size: 38px
+    }
+    .login-box{
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .form-group label{
+        font-size: 15px
+    }
+    .login input{
+        height: 40px
+    }
+  
+    .login-btn{
+        width: 145px;
+        padding:10px;
+
+
+    }
+}
+
+
+
+.deshoard-gaap{
+    width: calc(100% - 30px);
+}
+
+
+
+.bar-graph .card {
+    border: 1px solid #e7e7e7;
+    box-shadow: 0 0 13px rgb(0 0 0 / 10%);
+    border-radius: 13px;
+}
+
+.bar-graph .card .card-header{
+    border-bottom: none!important;
+}
+
+.bar-graph .graph-head li{
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: #383560;
+}
+
+.bar-graph .graph-head li:first-child, 
+.bar-graph .graph-head li:nth-child(2), 
+.bar-graph .graph-head li:nth-child(3), 
+.bar-graph .graph-head li:nth-child(4), 
+.bar-graph .graph-head li:nth-child(5), 
+.bar-graph .graph-head li:nth-child(6), 
+.bar-graph .graph-head li:nth-child(7){
+    position: relative;
+}
+
+.bar-graph .graph-head li:first-child::before,
+.bar-graph .graph-head li:nth-child(2)::before, 
+.bar-graph .graph-head li:nth-child(3)::before,
+.bar-graph .graph-head li:nth-child(4)::before, 
+.bar-graph .graph-head li:nth-child(5)::before,
+.bar-graph .graph-head li:nth-child(6)::before,
+.bar-graph .graph-head li:nth-child(7)::before{
+    content: '';
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: -15px;
+    top: 6px;
+}
+
+.bar-graph .graph-head li:first-child::before{
+   background: #d8d0ff;
+}
+.bar-graph .graph-head li:nth-child(2)::before {
+    background:#ffd7d1;
+}
+.bar-graph .graph-head li:nth-child(3)::before {
+    background: #ffe6c9;
+}
+.bar-graph .graph-head li:nth-child(4)::before {
+    background: #cdf3ff;
+}
+.bar-graph .graph-head li:nth-child(5)::before {
+    background: #fff7d0;
+}
+.bar-graph .graph-head li:nth-child(6)::before {
+    background:#c9facd;
+}
+.bar-graph .graph-head li:nth-child(7)::before {
+    background: #ffe7db;
+}

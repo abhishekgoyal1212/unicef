@@ -23,6 +23,21 @@ $first_segments_sidebar = Request::route()->action['as'];
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
+   <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-circular-gauge.min.js"></script>
+
+
+    <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+    <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+
+    <!-- npm Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="{{ asset('public/admin-assets/js/chart.js/Chart.min.js') }}"></script>
+
 
   <!-- toastr JS-->
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -105,3 +120,57 @@ $first_segments_sidebar = Request::route()->action['as'];
     <script type="text/javascript" src="{{ asset('public\admin\js\custom.js') }}"></script>
   </body>
   </html>
+
+<script>
+
+
+
+    /*
+     * LINE CHART
+     * ----------
+     */
+    //LINE randomly generated data
+
+    var xValues = [0, '10 sep', '20 sep', '30 sep', '10 oct', '20 oct', '30 oct', '10 nov'];
+
+    new Chart("myChart", {
+        type: "line",
+        data: {
+            labels: xValues,
+            datasets: [{
+                data: [500, 1140, 1060, 1060, 1070, 1110, 1330, 1110],
+                borderColor: "#d8d0ff",
+                fill: false
+            }, {
+                data: [500, 1700, 1700, 1900, 2000, 2700, 1900, 2000],
+                borderColor: "#ffd7d1",
+                fill: false
+            }, {
+                data: [500, 1500, 2000, 5000, 6000, 4000, 1500, 2000],
+                borderColor: "#ffe6c9",
+                fill: false
+            }, {
+                data: [500, 700, 1060, 1070, 1110, 1600, 4000, 2200],
+                borderColor: "#cdf3ff",
+                fill: false
+            }, {
+                data: [500, 700, 2000, 5000, 6000, 4000, 1110, 1330],
+                borderColor: "#fff7d0",
+                fill: false
+            }, {
+                data: [500, 700, 2000, 5000, 1110, 1330, 4000, 2000],
+                borderColor: "#c9facd",
+                fill: false
+            }, {
+                data: [500, 1700, 2300, 5500, 6000, 4000, 700, 2000],
+                borderColor: "#ffe7db",
+                fill: false
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }
+        }
+    });
+</script>

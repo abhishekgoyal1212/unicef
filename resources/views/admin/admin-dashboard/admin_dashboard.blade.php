@@ -1,317 +1,417 @@
-@extends('admin.admin-dashboard.index')
-@section('title','Dashboard')
+@extends('admin/admin-dashboard/index')
+
+@section('title','DASHBOARD')
+
 @section('content')
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="{{ asset('public/dashboard/css/style.css') }}">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('public/dashboard/calander/css/style.css') }}">
-  <link rel="stylesheet" href="{{ asset('public/dashboard/css/bootstrap-multiselect.css') }}" type="text/css">
-</head>
-<body>
-  <div class="col-sm-9">
-    <div class=''>
-      <div class="tab-content">
-        <div id="Covid" class="tab-pane fade show active">
-          <div class="row mb-5">
-            <div class="col-md-8 pt-5 pr-5">
-              <div class="row">
-                <div class="col-md-9">
-                  <h3>{{auth()->user()->name}}</h3>
-                  <p>Welcome back !!</p>
-                </div>
-                <div class="col-md-3 d-flex flex-column">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    font-family: 'Poppins', sans-serif;
+  }
 
-                  <img src="{{ asset('public/dashboard/img/aravali.png') }}" class="img-fluid" alt="">
-                  <h2>ARAVALI</h2>
-                </div>
-              </div>
-              <div class="row report-post mt-lg-0 my-4">
-                <div class="col-md-12">
-                  <img src="{{ asset('public/dashboard/img/report-post.jpg') }}" class="img-fluid" alt="">
-                </div>
-              </div>
-              <div class="row report-data">
-                <div class="col-xl-3 col-lg-6 my-lg-2">
-                  <div class="report-box bg-white">
-                    <select name="" id="mySelect" class="" multiple="multiple">
-                      <option value="">January</option>
-                      <option value="">February</option>
-                      <option value="">March</option>
-                      <option value="">April</option>
-                      <option value="">May</option>
-                      <option value="">June</option>
-                      <option value="">July</option>
-                      <option value="">August</option>
-                      <option value="">September</option>
-                      <option value="">October</option>
-                      <option value="">November</option>
-                      <option value="">December</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 my-lg-2">
-                  <div class="report-box bg-white text-center">
-                    <p class="mb-0">Communication Activity</p>
-                    <h4 class="mb-0">3271</h4>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 my-lg-2">
-                  <div class="report-box bg-white text-center">
-                    <p class="mb-0">Mass Media Activity</p>
-                    <h4 class="mb-0">230</h4>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 my-lg-2">
-                  <div class="report-box bg-white text-center">
-                    <p class="mb-0">Training Activity</p>
-                    <h4 class="mb-0">298</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 pl-5">
-              <div class="calender bg-white p-2">
-                <div class="logo text-center mb-3">
-
-                  <img src="{{ asset('public/dashboard/img/unicefnewlogo.png') }}" class="mt-2" alt="">
-                </div>
-
-
-                <div class="cal text-center py-3 border-top">
-                 <div id="container" class="calendar-container"></div>
-
-                 {{--<img src="{{ asset('public/dashboard/img/cal.jpg') }}" class="img-fluid" alt="">--}}
-               </div>
-             </div>
-           </div>
-         </div>
-         <div class="row my-4">
-          <div class="col-md-6 pr-lg-4">
-            <h4 class="mb-4">Communication Activity Outreach</h4>
-            <div id="amchart"></div>
-            {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
-          </div>
-          <div class="col-md-6 pl-lg-4">
-            <h4 class="mb-4">Mass Media Outreach</h4>
-            <div id="amchart2"></div>
-            {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
-          </div>
+  #chartdiv {
+    width: 100%;
+    height: 500px;
+  }
+</style>
+<!-- <div class="content-wrapper"> -->
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Dashboard</h1>
         </div>
-        <div class="row my-4">
-          <div class="col-md-6 pr-lg-4 ">
-            <div class="bg-white p-4" style="height: 350px;">
-              <div class="row mt-4">
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle"><i class="fa fa-circle"></i></div>
-                </div>    
-                <div class="col-md-10">
-                  <div class="progressive_bars" >
-                    <div class="progress  ">    
-                      <div class="progress-bar progress_bg " style="width:87%">Sirohi</div>
-                      <div class="progress-bar bg-white progress_text"  style="width:13%">908</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle"><i class="fa fa-circle"></i></div>
-                </div>
-              </div>                   
-              <div class="row mt-4">
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle1"><i class="fa fa-circle"></i></div>
-                </div>    
-                <div class="col-md-10">
-                  <div class="progressive_bars" >
-                    <div class="progress  ">
-                      <div class="progress-bar progress_bg1" style="width:80%">Jaisalmer</div>
-                      <div class="progress-bar bg-white progress_text1" style="width:20%">533</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle1"><i class="fa fa-circle"></i></div>
-                </div>
-              </div>                    
-              <div class="row mt-4">
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle2"><i class="fa fa-circle"></i></div>
-                </div>    
-                <div class="col-md-10">
-                  <div class="progressive_bars" >
-                    <div class="progress  ">
-                      <div class="progress-bar progress_bg2" style="width:70%">Dungarpur</div>
-                      <div class="progress-bar bg-white progress_text2" style="width:30%">418</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle2"><i class="fa fa-circle"></i></div>
-                </div>
-              </div>                     
-              <div class="row mt-4" >
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle3" ><i class="fa fa-circle"></i></div>
-                </div>    
-                <div class="col-md-10">
-                  <div class="progressive_bars" >
-                    <div class="progress  ">
-                      <div class="progress-bar progress_bg3" style="width:60%">Karauli</div>
-                      <div class="progress-bar bg-white progress_text3" style="width:40%">293</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle3"><i class="fa fa-circle"></i></div>
-                </div>
-              </div>                     
-              <div class="row mt-4" >
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle4"><i class="fa fa-circle"></i></div>
-                </div>    
-                <div class="col-md-10">
-                  <div class="progressive_bars" >
-                    <div class="progress  ">
-                      <div class="progress-bar progress_bg4" style="width:50%">Baran</div>
-                      <div class="progress-bar bg-white progress_text4" style="width:50%">166</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle4"><i class="fa fa-circle"></i></div>
-                </div>
-              </div>
-
-              <div class="row mt-4" >
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle5"><i class="fa fa-circle"></i></div>
-                </div>    
-                <div class="col-md-10">
-                  <div class="progressive_bars" >
-                    <div class="progress  ">
-                      <div class="progress-bar progress_bg5   " style="width:40%">Dholpur</div>
-                      <div class="progress-bar bg-white progress_text5" style="width:60%">97</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-1">
-                  <div class="dot_round progress_cricle5"><i class="fa fa-circle"></i></div>
-                </div>
-              </div>
-            </div>
-
-            {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
-          </div>
-          <div class="col-md-6 pl-lg-4">
-            <div id="chartdiv"></div>
-            {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
-          </div>
-        </div>
-      </div>
-
-      <div id="Communication" class="tab-pane fade">
-        <div class="header">
-          <h4>Communication Act..</h4>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard v1</li>
+          </ol>
         </div>
       </div>
     </div>
   </div>
+  <!-- /.content-header -->
 
-</div>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xl-2 col-md-6 col-12 my-3">
+          <!-- small box -->
+          <div class="small-box one py-3">
+            <div class="inner">
+              <p class="mb-0"><i class="ion ion-bag mr-2"></i> <span>DCP & IEC Status</span></p>
+              <h3 class="my-2">47</h3>
+              <p class="mb-0"><i class="fa fa-caret-down mr-2"></i> <span>3% from last week</span></p>
+            </div>
 
-</div>
-</section>
-</body>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xl-2 col-md-6 col-12 my-3">
+          <!-- small box -->
+          <div class="small-box two py-3">
+            <div class="inner">
+              <p class="mb-0"><i class="ion ion-stats-bars  mr-2"></i><span>Review Meeting</span></p>
+              <h3 class="my-2">488</h3>
+              <p class="mb-0"><i class="fa fa-caret-down mr-2"></i> <span>3% from last week</span></p>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+            </div>
 
-
-<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-
-<script src="{{ asset('public/dashboard/js/amCharts.js') }}" ></script>
-
-
-
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"
-integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-crossorigin="anonymous"></script>
-<script src="{{url('public/dashboard/calander/jquery.simple-calendar.js')}}"></script>
-<script type="text/javascript" src="{{url('public/dashboard/js/bootstrap-multiselect.js')}}"></script>
-
-
-
-</html>
-
-
-
-
-
-<!-- Styles -->
-<style>
-
-
-  #chartdiv {
-    width: 100%;
-    height: 350px;
-    background-color: white;
-  }
-  #amchart {
-    width: 100%;
-    height: 350px;
-    background-color: white;
-  }
-  #amchart2 {
-    width: 100%;
-    height: 350px;
-    background-color: white;
-  }
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xl-2 col-md-6 col-12 my-3">
+          <!-- small box -->
+          <div class="small-box three py-3">
+            <div class="inner">
+              <p class="mb-0"><i class="ion ion-person-add  mr-2"></i><span>Social Mobilization</span></p>
+              <h3 class="my-2">864</h3>
+              <p class="mb-0"><i class="fa fa-caret-down mr-2"></i> <span>3% from last week</span></p>
 
 
-</style>
+            </div>
 
-<script>
-  var $calendar;
-  $(document).ready(function () {
-    let container = $("#container").simpleCalendar({
-          fixedStartDay: 0, // begin weeks by sunday
-          disableEmptyDetails: true,
-          events: [
-            // generate new event after tomorrow for one hour
-            {
-              startDate: new Date(new Date().setHours(new Date().getHours() + 24)).toDateString(),
-              endDate: new Date(new Date().setHours(new Date().getHours() + 25)).toISOString(),
-              summary: 'Visit of the Eiffel Tower'
-            },
-            // generate new event for yesterday at noon
-            {
-              startDate: new Date(new Date().setHours(new Date().getHours() - new Date().getHours() - 12, 0)).toISOString(),
-              endDate: new Date(new Date().setHours(new Date().getHours() - new Date().getHours() - 11)).getTime(),
-              summary: 'Restaurant'
-            },
-            // generate new event for the last two days
-            {
-              startDate: new Date(new Date().setHours(new Date().getHours() - 48)).toISOString(),
-              endDate: new Date(new Date().setHours(new Date().getHours() - 24)).getTime(),
-              summary: 'Visit of the Louvre'
-            }
-            ],
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xl-2 col-md-6 col-12 my-3">
+          <!-- small box -->
+          <div class="small-box four py-3">
+            <div class="inner">
+              <p class="mb-0"><i class="ion ion-pie-graph  mr-2"></i><span>Line Department</span></p>
+              <h3 class="my-2">244</h3>
+              <p class="mb-0"><i class="fa fa-caret-down mr-2"></i> <span>3% from last week</span></p>
 
-          });
-    $calendar = container.data('plugin_simpleCalendar')
-  });
-</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#mySelect').multiselect();
-  });
-</script>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ./col -->
+        <div class="col-lg-3 col-xl-2 col-md-6 col-12 my-3">
+          <!-- small box -->
+          <div class="small-box five py-3">
+            <div class="inner">
+              <p class="mb-0"><i class="ion ion-stats-bars  mr-2"></i><span>Mid Media</span></p>
+              <h3 class="my-2">47</h3>
+              <p class="mb-0"><i class="fa fa-caret-down mr-2"></i> <span>3% from last week</span></p>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xl-2 col-md-6 col-12 my-3">
+          <!-- small box -->
+          <div class="small-box six py-3">
+            <div class="inner">
+              <p class="mb-0"><i class="ion ion-person-add  mr-2"></i><span>Stakeholders</span></p>
+              <h3 class="my-2">3728</h3>
+              <p class="mb-0"><i class="fa fa-caret-down mr-2"></i> <span>3% from last week</span></p>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xl-2 col-md-6 col-12 my-3">
+          <!-- small box -->
+          <div class="small-box seven py-3">
+            <div class="inner">
+              <p class="mb-0"><i class="ion ion-pie-graph  mr-2"></i><span>Vaccination Status</span></p>
+              <h3 class="my-2">65</h3>
+              <p class="mb-0"><i class="fa fa-caret-down mr-2"></i> <span>3% from last week</span></p>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="col-lg-3 col-xl-2 col-md-6 col-12 my-3">
+          <!-- small box -->
+          <div class="small-box eight py-3">
+            <div class="inner">
+              <p class="mb-0"> <i class="ion ion-bag  mr-2"></i><span>Media Activity</span></p>
+              <h3 class="my-2">150</h3>
+              <p class="mb-0"><i class="fa fa-caret-down mr-2"></i> <span>3% from last week</span></p>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xl-2 col-md-6 col-12 my-3">
+          <!-- small box -->
+          <div class="small-box nine py-3">
+            <div class="inner">
+              <p class="mb-0"> <i class="ion ion-stats-bars  mr-2"></i><span>FLWs Trained</span></p>
+              <h3 class="my-2">53<sup style="font-size: 20px">%</sup></h3>
+              <p class="mb-0"><i class="fa fa-caret-down mr-2"></i> <span>3% from last week</span></p>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xl-2 col-md-6 col-12 my-3">
+          <!-- small box -->
+          <div class="small-box ten py-3">
+            <div class="inner">
+              <p class="mb-0"><i class="ion ion-person-add  mr-2"></i><span>IEC Material</span></p>
+              <h3 class="my-2">44</h3>
+              <p class="mb-0"><i class="fa fa-caret-down mr-2"></i> <span>3% from last week</span></p>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xl-2 col-md-6 col-12 my-3">
+          <!-- small box -->
+          <div class="small-box eleven py-3">
+            <div class="inner">
+              <p class="mb-0"><i class="ion ion-pie-graph  mr-2"></i><span>High Risk</span></p>
+              <h3 class="my-2">65</h3>
+              <p class="mb-0"><i class="fa fa-caret-down mr-2"></i> <span>3% from last week</span></p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="row bar-graph">
+        <!-- Left col -->
+        <section class="col-lg-12 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+          <div class="card mt-5">
+            <div class="card-header">
+              <!-- <h3 class="card-title">
+                <i class="far fa-chart-bar"></i>
+                Line Chart
+              </h3> -->
+
+              <ul class="pl-0 mb-0 graph-head list-unstyled d-flex align-items-center flex-row flex-wrap">
+                <li class="d-inline-block mx-4">review</li>
+                <li class="d-inline-block mx-4">social</li>
+                <li class="d-inline-block mx-4">private</li>
+                <li class="d-inline-block mx-4">mass </li>
+                <li class="d-inline-block mx-4">FLWs </li>
+                <li class="d-inline-block mx-4">DCP </li>
+                <li class="d-inline-block mx-4">vaccination</li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <!-- <div id="chartdiv"></div> -->
+              <canvas id="myChart"></canvas>
+            </div>
+        </section>
+
+        <div class="row card-chart">
+
+          <section class="col-lg-10 col-xl-6 mt-4 pr-xl-4">
+            <div class="card my-progress crd-chart">
+              <div class="card-header">
+                <h5 class="card-title plateform">Platform</h5>
+
+
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                  <!-- /.col -->
+                  <div class="col-md-12">
+                    <!-- <p class="text-center">
+                    <strong>Goal Completion</strong>
+                  </p> -->
+
+                    <div class="progress-group">
+                      <span class="progress-text">Review Meeting</span>
+                      <!-- <span class="float-right"><b>160</b>/200</span> -->
+                      <div class="progress progress-lg">
+                        <div class="progress-bar bg-success" style="width: 25%"></div>
+                      </div>
+                    </div>
+                    <!-- /.progress-group -->
+
+                    <div class="progress-group">
+                      <span class="progress-text">Social Mobilization</span>
+                      <!-- <span class="float-right"><b>310</b>/400</span> -->
+                      <div class="progress progress-lg">
+                        <div class="progress-bar bg-success" style="width: 15%"></div>
+                      </div>
+                    </div>
+
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                      <span class="progress-text">Private Body & Line Department Coordination</span>
+                      <!-- <span class="float-right"><b>480</b>/800</span> -->
+                      <div class="progress progress-lg">
+                        <div class="progress-bar bg-success" style="width:10%"></div>
+                      </div>
+                    </div>
+
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                      <span class="progress-text">Mass Media & Mild Media Activity</span>
+
+                      <!-- <span class="float-right"><b>250</b>/500</span> -->
+                      <div class="progress progress-lg">
+                        <div class="progress-bar bg-success" style="width: 15%"></div>
+                      </div>
+                    </div>
+                    <!-- /.progress-group -->
+
+
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                      <span class="progress-text">FLWs Stakeholders Trained</span>
+
+                      <!-- <span class="float-right"><b>250</b>/500</span> -->
+                      <div class="progress progress-lg">
+                        <div class="progress-bar bg-success" style="width: 5%"></div>
+                      </div>
+                    </div>
+                    <!-- /.progress-group -->
+
+
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                      <span class="progress-text">DCP & IEC Status</span>
+
+                      <!-- <span class="float-right"><b>250</b>/500</span> -->
+                      <div class="progress progress-lg">
+                        <div class="progress-bar bg-success" style="width: 15%"></div>
+                      </div>
+                    </div>
+                    <!-- /.progress-group -->
+
+
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                      <span class="progress-text">Vaccination Status</span>
+
+                      <!-- <span class="float-right"><b>250</b>/500</span> -->
+                      <div class="progress progress-lg">
+                        <div class="progress-bar bg-success" style="width: 15%"></div>
+                      </div>
+                    </div>
+                    <!-- /.progress-group -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- ./card-body -->
+              <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+          </section>
+
+          <section class="col-lg-10 col-xl-6 mt-4 pl-xl-4">
+            <div class="card pl-2 crd-chart">
+              <div class="card-header">
+                <h3 class="card-title plateform">Platform</h3>
+
+              </div>
+              <div class="card-body">
+                <div class="chartjs-size-monitor">
+                  <div class="chartjs-size-monitor-expand">
+                    <div class=""></div>
+                  </div>
+                  <div class="chartjs-size-monitor-shrink">
+                    <div class=""></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <p class="mb-5">Top 7</p>
+                    <canvas id="donutChart" style="min-height: 250px; height: 0px; max-height: 250px; 
+                    max-width: 100%; display: block; width: 0px;" width="0" height="0" class="chartjs-render-monitor"></canvas>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="mb-5">Activity</p>
+                    <ul class="pl-0 mb-0 list-unstyled chart-graph pr-5 pr-xl-2">
+                      <li class="d-flex my-4 pl-5 align-items-center justify-content-between"><span>Review</span><span>25%</span></li>
+                      <li class="d-flex my-4 pl-5 align-items-center justify-content-between"><span>Social</span> <span>15%</span></li>
+                      <li class="d-flex my-4 pl-5 align-items-center justify-content-between"><span>Private</span> <span>10%</span></li>
+                      <li class="d-flex my-4 pl-5 align-items-center justify-content-between"><span>Mass </span> <span>15%</span></li>
+                      <li class="d-flex my-4 pl-5 align-items-center justify-content-between"><span>FLWs </span> <span>5%</span></li>
+                      <li class="d-flex my-4 pl-5 align-items-center justify-content-between"><span>DCP </span> <span>15%</span></li>
+                      <li class="d-flex my-4 pl-5 align-items-center justify-content-between"><span>Vaccination</span> <span>15%</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </section>
+
+
+
+          <!-- <section class="col-md-10 col-xl-6 mt-4 pr-xl-4">
+          <div class="card card-widget crd-chart">
+            <div class="card-header">
+              <h5 class="d-inline-block py-3">Latest Review</h5>
+            </div>
+            <div class="card-body card-comments bg-transparent">
+              <div class="card-comment">
+                <img class="img-circle img-sm" src="{{asset('public/template/dist/img/user3-128x128.jpg')}}" alt="User Image">
+                <div class="comment-text">
+                  <span class="username">
+                    Maria Gonzales
+                    <span class="text-muted float-right">8:03 PM Today</span>
+                  </span>
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </div>
+              </div>
+              <div class="card-comment">
+                <img class="img-circle img-sm" src="{{asset('public/template/dist/img/user4-128x128.jpg')}}" alt="User Image">
+                <div class="comment-text">
+                  <span class="username">
+                    Luna Stark
+                    <span class="text-muted float-right">8:03 PM Today</span>
+                  </span>
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </div>
+              </div>
+              <div class="card-comment">
+                <img class="img-circle img-sm" src="{{asset('public/template/dist/img/user3-128x128.jpg')}}" alt="User Image">
+                <div class="comment-text">
+                  <span class="username">
+                    Maria Gonzales
+                    <span class="text-muted float-right">8:03 PM Today</span>
+                  </span>
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </div>
+              </div>
+              <div class="card-comment">
+                <img class="img-circle img-sm" src="{{asset('public/template/dist/img/user4-128x128.jpg')}}" alt="User Image">
+                <div class="comment-text">
+                  <span class="username">
+                    Luna Stark
+                    <span class="text-muted float-right">8:03 PM Today</span>
+                  </span>
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- </div> -->
+
+
 @stop
+
+<!-- jQuery -->
