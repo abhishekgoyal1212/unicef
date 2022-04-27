@@ -12,7 +12,7 @@ $first_segments_sidebar = Request::route()->action['as'];
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('title')</title>
    <link rel="icon"   type="image/x-icon" href="{{asset('public/images/favicon.ico')}}">
-  <link rel="stylesheet" href="{{asset('public/admin/css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('public/user-assets/css/style.css')}}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 
 
@@ -49,7 +49,7 @@ $first_segments_sidebar = Request::route()->action['as'];
     font-family: 'Poppins', sans-serif;
   }
 </style>
-<body style="background-image: url({{asset('public/admin/img/background.jpg')}}); background-repeat: no-repeat; background-size: cover;background-position: center;">
+<body style="background-image: url({{asset('public/user-assets/img/background.jpg')}}); background-repeat: no-repeat; background-size: cover;background-position: center;">
   @if(session('flash-error'))
   <script> toastr["error"] ("{{session()->get('flash-error')}}") </script>
   @endif
@@ -60,53 +60,53 @@ $first_segments_sidebar = Request::route()->action['as'];
       <div class="col-sm-3">
         <div class="sidebar">
           <div class="userimg">
-          <img src="{{asset('public/admin/img/userimg.png')}}" alt=""></div>
+          <img src="{{asset('public/user-assets/img/userimg.png')}}" alt=""></div>
           <ul class="nav nav-tabs tabs-left d-flex flex-column" role="tablist">
 
             <li class="d-block" role="presentation">
-              <img src="{{asset('public/admin/img/logo1.png')}} " alt="">
+              <img src="{{asset('public/user-assets/img/logo1.png')}} " alt="">
               <a href="{{route('admin.dashboard')}}" aria-controls="Dashboard" class="{{$first_segments_sidebar == 'admin.dashboard' ? 'active' : ''}}">Dashboard</a>
             </li>
 
             <li class="d-block" role="presentation">
-              <img src="{{asset('public/admin/img/logo2.png')}} " alt="">
+              <img src="{{asset('public/user-assets/img/logo2.png')}} " alt="">
               <a href="Planing_Platform" aria-controls="Platform" class="
               {{$first_segments_sidebar == 'admin.planingPlatform' ? 'active' : '' }}">Planing Platform</a>
             </li>
 
             <li class="d-block" role="presentation">
-              <img src="{{asset('public/admin/img/logo3.png')}} " alt="">
+              <img src="{{asset('public/user-assets/img/logo3.png')}} " alt="">
               <a href="Social_Mobilization" class="
               {{$first_segments_sidebar == 'admin.socialMobilization' ? 'active' : '' }}">Social Mobilization</a>
             </li>
             <li class="d-block" role="presentation">
-              <img src="{{asset('public/admin/img/logo4.png')}}" alt="">
+              <img src="{{asset('public/user-assets/img/logo4.png')}}" alt="">
               <a href="Orientation" aria-controls="orientation"
                class="{{$first_segments_sidebar == 'admin.Orientation' ? 'active' : '' }}">orientation</a>
             </li>
 
             <li class="d-block" role="presentation">
-              <img src="{{asset('public/admin/img/logo5.png')}} " alt="">
+              <img src="{{asset('public/user-assets/img/logo5.png')}} " alt="">
               <a href="Pvt_Bodies" aria-controls="pvt" class="{{$first_segments_sidebar == 'admin.pvtBodies' ? 'active' : '' }}">pvt bodies</a>
             </li>
             <li class="d-block" role="presentation">
-              <img src="{{asset('public/admin/img/logo6.png')}} " alt="">
+              <img src="{{asset('public/user-assets/img/logo6.png')}} " alt="">
               <a href="Coordination" aria-controls="Coordination2" class="{{$first_segments_sidebar == 'admin.coordinationMeetingLine' ? 'active' : '' }}">coordination meeting line</a>
             </li>
             <li class="d-block" role="presentation">
-              <img src="{{asset('public/admin/img/logo7.png')}} " alt="">
+              <img src="{{asset('public/user-assets/img/logo7.png')}} " alt="">
               <a href="Mass" aria-controls="mass" class="{{$first_segments_sidebar == 'admin.massMediaMidMedia' ? 'active' : '' }}">mass media mid media</a>
             </li>
             <li class="d-block" role="presentation" class="active">
-              <img src="{{asset('public/admin/img/logo8.png')}} " alt="">
+              <img src="{{asset('public/user-assets/img/logo8.png')}} " alt="">
               <a href="Orientation_Health" aria-controls="health" class="{{$first_segments_sidebar == 'admin.orientationHealth' ? 'active' : '' }}">orientation health</a>
             </li>
             <li class="d-block" role="presentation">
-              <img src="{{asset('public/admin/img/logo9.png')}} " alt="">
+              <img src="{{asset('public/user-assets/img/logo9.png')}} " alt="">
               <a href="Iec" aria-controls="iec" class="{{$first_segments_sidebar == 'admin.Iec' ? 'active' : '' }}">iec</a>
             </li>
             <li class="d-block" role="presentation">
-              <img src="{{asset('public/admin/img/logo10.png')}} " alt="">
+              <img src="{{asset('public/user-assets/img/logo10.png')}} " alt="">
               <a href="Groups_Tracking" aria-controls="Groups" class="{{$first_segments_sidebar == 'admin.GroupsTracking' ? 'active' : '' }}">Groups tracking</a>
             </li>
           </ul>
@@ -117,7 +117,7 @@ $first_segments_sidebar = Request::route()->action['as'];
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="{{ asset('public\admin\js\custom.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public\user-assets\js\custom.js') }}"></script>
   </body>
   </html>
 
