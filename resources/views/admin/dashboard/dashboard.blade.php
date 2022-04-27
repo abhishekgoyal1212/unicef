@@ -92,18 +92,19 @@
          </div>
          <div class="row my-4">
           <div class="col-md-6 pr-lg-4">
-            <h4 class="mb-4">Communication Activity Outreach</h4>
+            <h4 class="mb-4">Communication Activities</h4>
             <div id="amchart"></div>
-            {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
+            {{--<img src="{{asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
           </div>
           <div class="col-md-6 pl-lg-4">
-            <h4 class="mb-4">Mass Media Outreach</h4>
+            <h4 class="mb-4">Mass Media</h4>
             <div id="amchart2"></div>
             {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
           </div>
         </div>
         <div class="row my-4">
           <div class="col-md-6 pr-lg-4 ">
+             <h4 class="mb-4">Pvt Bodies</h4>
             <div class="bg-white p-4" style="height: 350px;">
               <div class="row mt-4">
                 <div class="col-md-1">
@@ -207,6 +208,7 @@
             {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
           </div>
           <div class="col-md-6 pl-lg-4">
+             <h4 class="mb-4">Orientation</h4>
             <div id="chartdiv"></div>
             {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
           </div>

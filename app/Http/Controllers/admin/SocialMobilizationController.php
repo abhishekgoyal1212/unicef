@@ -19,7 +19,6 @@ use Auth;
 
 class SocialMobilizationController extends Controller
 {
-    
     public function insert_sm_meeting_faith_based(Request $request){
         $validator = Validator::make($request->all(), [
             'number_meetings' => 'required|numeric',

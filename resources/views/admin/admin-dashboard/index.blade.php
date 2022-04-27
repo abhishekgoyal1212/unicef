@@ -12,7 +12,7 @@ $first_segments_sidebar = Request::route()->action['as'];
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('title')</title>
    <link rel="icon"   type="image/x-icon" href="{{asset('public/images/favicon.ico')}}">
-  <link rel="stylesheet" href="{{asset('public/admin/css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('public/user-assets/css/style.css')}}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 
 
@@ -34,7 +34,7 @@ $first_segments_sidebar = Request::route()->action['as'];
     font-family: 'Poppins', sans-serif;
   }
 </style>
-<body style="background-image: url({{asset('public/admin/img/background.jpg')}}); background-repeat: no-repeat; background-size: cover;background-position: center;">
+<body style="background-image: url({{asset('public/user-assets/img/background.jpg')}}); background-repeat: no-repeat; background-size: cover;background-position: center;">
   @if(session('flash-error'))
   <script> toastr["error"] ("{{session()->get('flash-error')}}") </script>
   @endif
@@ -45,12 +45,16 @@ $first_segments_sidebar = Request::route()->action['as'];
       <div class="col-sm-3">
         <div class="sidebar">
           <div class="userimg">
-          <img src="{{asset('public/admin/img/userimg.png')}}" alt=""></div>
+          <img src="{{asset('public/user-assets/img/userimg.png')}}" alt=""></div>
           <ul class="nav nav-tabs tabs-left d-flex flex-column" role="tablist">
 
             <li class="d-block" role="presentation">
-              <img src="{{asset('public/admin/img/logo1.png')}} " alt="">
-              <a href="{{route('admin.admin_dashboard')}}" aria-controls="Dashboard" class="{{$first_segments_sidebar == 'admin.admin_dashboard' ? 'active' : ''}}">Dashboard</a>
+              <img src="{{asset('public/user-assets/img/logo1.png')}} " alt="">
+              <a href="{{route('admin.dashboard')}}" aria-controls="Dashboard" class="{{$first_segments_sidebar == 'admin.dashboard' ? 'active' : ''}}">Dashboard</a>
+            </li>
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/user-assets/img/logout.png')}} " alt="">
+              <a href="{{route('admin.admin.logout')}}" aria-controls="Dashboard" class="{{$first_segments_sidebar == 'admin.dashboard' ? 'active' : ''}}">Logout</a>
             </li>
           </ul>
         </div>
@@ -60,6 +64,6 @@ $first_segments_sidebar = Request::route()->action['as'];
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="{{ asset('public\admin\js\custom.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public\user-assets\js\custom.js') }}"></script>
   </body>
   </html>
