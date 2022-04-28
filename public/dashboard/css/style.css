@@ -241,13 +241,79 @@ overflow-x:hidden;
   font-weight: 500;
   text-transform: capitalize;
   text-decoration: none !important;
-  text-align: center;
+  text-align: right;
   color: currentColor;
 }
 .logout-calender {
-    margin-top: 30px;
+    margin-top: 50px;
 }
+.admin-datails-section img {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    
+}
+.admin-datails {
+    
+    width: 260px;
+    height: 230px;
+    margin: auto;
+    position: absolute;
+    right: 40px;
+    z-index: 99;
+    background: linear-gradient(to right, #f069ae 0%, #6e1dd1 80%);
+    text-align: center;
+    padding-top: 40px;
+    margin-top: 10px;
+}
+.admin-datails-section h6 {
+    color: #ffff;
+    padding-top: 10px;
+}
+/*.admin-datails{
+  display: none;
+}
+.deshboard-user-img:hover .admin-datails{
+  display: block;
 
+}*/
+
+.popup-deshborad {
+    padding-top: 50px;
+}
+.deshboard-user-img span {
+    text-align: end;
+    display: block;
+    padding-right: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.profile-btn-section{
+  margin-top: 20px;
+}
+.profile-btn-section {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+.profile-btn-section a button {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    width: 90px;
+    height: 30px;
+}
+.deshboard-user-img {
+    width: 30%;
+    margin-left: auto;
+    text-align: center;
+}
+.deshboard-user-img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+}
 @media screen and (min-width:1280px) and (max-width:1440px) { 
 
 #Covid h3 {
@@ -370,9 +436,9 @@ h4{
 
 }
 
-
-
-
+.deshoard-gaap{
+  width: calc(100% - 30px);
+}
 
 .bar-graph .card {
     border: 1px solid #e7e7e7;
@@ -442,4 +508,61 @@ h4{
 
 #myChart {
     margin-top: 30px;
+}
+.deshboard-img-sec {
+    text-align: end;
+    padding-right: 20px;
+    padding-top: 50px;
+}
+.deshboard-img-sec img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    position: relative;
+
+}
+.deshboard-conteant-sec {
+    /* background: red; */
+    padding: 30px;
+    text-align: center;
+    position: absolute;
+    width: 80%;
+    z-index: 99;
+    margin-top: 15px;
+    background-image: linear-gradient(to right, #f76dab , #7724ce);
+    border-radius: 5px;
+}
+.deshboard-conteant-sec img {
+    display: block;
+    text-align: center;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+}
+
+.deshboard-conteant-sec span {
+    color: #fff;
+    padding: 10px 0px;
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+}
+.deshboard-conteant-btn a button {
+    border: 1px solid #fff;
+    background: transparent;
+    width: 80px;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px 0px;
+}
+.arrow {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 10px 15px 10px 0;
+    border-color: transparent #842bcb transparent transparent;
+    float: right;
+    margin-top: -40px;
+    transform: rotate(-13deg);
 }

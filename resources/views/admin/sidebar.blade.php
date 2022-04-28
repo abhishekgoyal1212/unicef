@@ -1,4 +1,3 @@
-
 <?php 
 $first_segments_sidebar = Request::route()->action['as'];
 // $segments = request()->segments();

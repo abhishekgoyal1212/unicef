@@ -10,22 +10,17 @@
   <!-- toastr css-->
   <link href="{{asset('public/user-assets/css/toastr.css')}}" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-
-
-
   <!-- toastr css-->
   <link href="{{asset('public/user-assets/css/toastr.css')}}" rel="stylesheet"/>
-
   <!-- toastr JS-->
   <script src="{{asset('public/user-assets/js/jquery-1.9.1.min.js')}}"></script>
   <script src="{{asset('public/user-assets/js/toastr.js')}}"></script>
-
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body class="page-section" style="background: url({{asset('public/user-assets/img/background.jpg')}}); background-repeat: no-repeat; background-size: cover; padding: 100px; ">
+<body class="page-section" style="background: url({{asset('public/user-assets/img/background.jpg')}}); background-repeat: no-repeat; background-size: cover; padding: 50px 0px 40px 0px; ">
   @if(session('flash-error'))
   <script> toastr["error"] ("{{session()->get('flash-error')}}") </script>
   @endif
