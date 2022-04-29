@@ -69,12 +69,7 @@ $first_segments_sidebar = Request::route()->action['as'];
               {{$first_segments_sidebar == 'admin.socialMobilization' ? 'active' : '' }}">Social Mobilization</a>
             </li>
 
-            <li class="d-block" role="presentation">
-              <img src="{{asset('public/user-assets/img/logo3.png')}} " alt="">
-              <a href="{{route('admin.SmNumberMeetingCharts')}}" class="
-              {{$first_segments_sidebar == ('admin.SmNumberMeetingCharts')  ? 'active' : '' }}">Social Mobilization Chat</a>
-            </li>
-
+           
             <li class="d-block" role="presentation">
               <img src="{{asset('public/user-assets/img/logo4.png')}}" alt="">
               <a href="Orientation" aria-controls="orientation"
@@ -128,7 +123,7 @@ $first_segments_sidebar = Request::route()->action['as'];
                 </select>
               </div>              
               <div class="col-md-7 text-right">
-                <h3 class="location">Welcome to {{auth()->user()->districts}}</h3>
+                <h3 class="location">Welcome to ARAVALI</h3>
               </div>
             </div>
         @yield('content')

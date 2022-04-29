@@ -28,9 +28,10 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-             <h3>{{auth()->user()->name}}</h3>
-            <h3>Profile</h3>
+          <div class="col-sm-12">
+            <br><br>
+            <center><h3>Edit Profile</h3></center>
+            <br>
           </div>
           <!-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -115,15 +116,7 @@
                               @enderror
                           </div>
                         </div>
-                        <div class="form-group row">
-                          <label for="inputEmail" class="col-sm-3 col-form-label">Profile</label>
-                          <div class="col-sm-9">
-                              <input type="file" class="form-control" id="profile" name="profile" >
-                              @error('profile')
-                                <div class="form-valid-error text-danger">{{ $message }}</div>
-                              @enderror
-                          </div>
-                        </div>
+                      
 
                           <div class="form-group row">
                             <div class="offset-sm-3 col-sm-9">
@@ -138,15 +131,14 @@
                      <!-- update_password  -->
                      <div class="tab-pane @if(request()->get('type') == 'update_password') active @endif" id="update_password">
                   <div  class="tab-pane" id="update_password">
-                    <form class="form-horizontal"  action="{{url('ngo-site-admin/admin_update_pass')}}
-                    " method="post" name="password_info" id="password_info">
+                    <form class="form-horizontal"  action="{{route('update_password')}}" method="post" name="password_info" id="password_info">
                         @csrf
                         <div class="form-group row">
                             <label for="inputName" class="col-sm-4 col-form-label">Current Password</label>
                             <div class="col-sm-8">
                               <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Current Password">
                               @error('current_password')
-                                <div class="form-valid-error">{{ $message }}</div>
+                                <div class="form-valid-error text-danger">{{ $message }}</div>
                               @enderror
                             </div>
                         </div>
@@ -156,7 +148,7 @@
                             <div class="col-sm-8">
                               <input type="password" class="form-control" id="password" name="password" placeholder="New Password">
                               @error('password')
-                                <div class="form-valid-error">{{ $message }}</div>
+                                <div class="form-valid-error text-danger">{{ $message }}</div>
                               @enderror
                             </div>
                         </div>
@@ -166,7 +158,7 @@
                             <div class="col-sm-8">
                               <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
                               @error('confirm_password')
-                                <div class="form-valid-error">{{ $message }}</div>
+                                <div class="form-valid-error text-danger">{{ $message }}</div>
                               @enderror
                             </div>
                           </div>

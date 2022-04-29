@@ -86,11 +86,6 @@ $first_segments_sidebar = Request::route()->action['as'];
               {{$first_segments_sidebar == 'admin.socialMobilization' ? 'active' : '' }}">Social Mobilization</a>
             </li>
 
-             <li class="d-block" role="presentation">
-              <img src="{{asset('public/user-assets/img/logo3.png')}} " alt="">
-              <a href="{{route('admin.SmNumberMeetingCharts')}}" class="
-              {{$first_segments_sidebar == ('admin.SmNumberMeetingCharts') ? 'active' : '' }}">Social Mobilization Chat</a>
-            </li>
 
             <li class="d-block" role="presentation">
               <img src="{{asset('public/user-assets/img/logo4.png')}}" alt="">

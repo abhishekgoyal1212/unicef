@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
 use Str;
+use Validator;
+use Hash;
 
 class DashboardController extends Controller
 {
@@ -50,11 +52,8 @@ class DashboardController extends Controller
 	public function update_profile_photo(Request $request){
 		
 		$user_id = Auth::id();
-
-		
 		$res = User::find($user_id);
 		$previous_image = $res->profile;
-
 		if($_FILES['avatar']['name'] != ''){
 			$img_name  = time() . '-' . Str::of(md5(time() . $request->file('avatar')->getClientOriginalName()))->substr(0, 50) . '.' . $request->file('avatar')->extension();
 			$path = $request->file('avatar')->move('public\user-assets\img\users-image', $img_name);
@@ -78,5 +77,38 @@ class DashboardController extends Controller
         } else {
             echo  '0' ;
         }
+	}
+
+	public function update_password(Request $request){
+		$inputs = $request->input();
+		$validator = Validator::make($request->all(),[
+			'current_password' => 'required',
+			'password' => 'required',
+			'confirm_password' => 'required|same:password',
+		]);
+		if($validator->fails()){
+			return redirect('profile?type=update_password')->withErrors($validator)->withInput();
+		}
+		$user_id = Auth::id();
+
+		$res = User::find($user_id);
+
+		$hashPassword = $res->password;
+		
+		if(Hash::check($inputs['current_password'], $hashPassword))
+		{
+			$res->password = Hash::make($inputs['password']);
+			$result = $res->save();
+			if($result){
+				return redirect()->back()->with('flash-success', 'Password Update Successfully');
+			}
+			else{
+				return redirect()->back()->with('flash-error', 'Error occured');
+			}
+
+		}else{
+			return redirect('profile?type=update_password')->with('flash-error', 'old password doesnt matched');
+		}
+		dd($inputs);
 	}
 }

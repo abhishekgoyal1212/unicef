@@ -61,6 +61,7 @@ Route::get('/', function () {
 			Route::get('profile', 'profile')->name('profile');
 			Route::post('update-profile', 'update_profile')->name('update_profile');
 			Route::post('update-profile-photo', 'update_profile_photo')->name('update_profile_photo');
+			Route::post('update-password', 'update_password')->name('update_password');
 
 		});
 
@@ -97,13 +98,6 @@ Route::get('/', function () {
 			Route::post('sm-excluded-groups','sm_excluded_groups')->name('admin.SmExcludedGroups');
 			Route::post('sm-volunteer-meeting','sm_volunteer_meeting')->name('admin.SmVolunteerMeeting');
 
-			Route::view('sm-faith-based-institutions-chart','admin/sm_charts/Faith_Based_Institutions_Chart')->name('admin.SmFaithBasedInstitutionsChart');
-			Route::view('sm-number-meeting-chart','admin/sm_charts/Number_Meeting_Chart')->name('admin.SmNumberMeetingCharts');
-			Route::view('sm-influencers-chart','admin/sm_charts/Meeting_Influencers_Chart')->name('admin.SmMeetingInfluencersCharts');
-			Route::view('sm-mother-meetings-chart','admin/sm_charts/Mother_Meeting_Chart')->name('admin.SmMotherMeetingChart');
-			Route::view('sm-community-meetings-chart','admin/sm_charts/Community_Meeting_Chart')->name('admin.SmCommunityMeetingChart');
-			Route::view('sm-shg-members-meetings-chart','admin/sm_charts/Shg_Meeting_Chart')->name('admin.SmShgMeetingChart');
-
 		});
 		// Route::controller(IecController::class)->group(function(){
 		// 	Route::post('iec_material','iec_material')->name('admin.iecMaterial');
@@ -120,7 +114,7 @@ Route::get('/', function () {
    			Route::post('orientation-health','orientation_health')->name('admin.OrientationHealth');
 		});
 		Route::controller(GroupsTrackingController::class)->group(function(){
-   			Route::post('groups-tracking','groups_tracking')->name('admin.GroupsTracking');
+   			Route::post('groups-tracking','groups_tracking')->name('admin.GroupsTrackingpost');;
 		});
 	});
 

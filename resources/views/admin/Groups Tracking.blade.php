@@ -16,7 +16,7 @@
         <div class="sub-tab-heading">
           Vulnerable Groups Tracking
         </div>
-        <form action="{{route('admin.GroupsTracking')}}" method="post">
+        <form action="{{route('admin.GroupsTrackingpost')}}" method="post">
           @csrf
           <div class="sub-content p-4">
             <div class="row align-items-center my-2">
