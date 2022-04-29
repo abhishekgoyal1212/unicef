@@ -74,7 +74,7 @@
 
 
                     <div class="deshboard-conteant-btn">
-                      <a href="#"><button class="mr-2">Profile</button></a>
+                      <a href="{{route('profile')}}"><button class="mr-2">Profile</button></a>
                       <a href="{{route('admin.logout')}}"><button class="ml-2">Sign out</button></a>
                     </div>
                 </div>
@@ -240,7 +240,6 @@
   <div class="col-lg-3"></div>
   <div class="col-lg-9 px-0">
     <section class="col-lg-12 connectedSortable ui-sortable">
-
       <div class="row deshoard-gaap">
         <!-- Custom tabs (Charts with tabs)-->
         <div class="card mt-5">

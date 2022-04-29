@@ -13,7 +13,8 @@ $first_segments_sidebar = Request::route()->action['as'];
   <title>@yield('title')</title>
   <link rel="stylesheet" href="{{asset('public/user-assets/css/style.css')}}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-
+ <link rel="stylesheet" href="{{ asset('public/template/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- Ionicons -->
 
   <!-- toastr css-->
   <link href="{{asset('public/user-assets/css/toastr.css')}}" rel="stylesheet"/>
@@ -42,6 +43,7 @@ $first_segments_sidebar = Request::route()->action['as'];
   <script> toastr["success"]("{{session()->get('flash-success')}}") </script>
   @endif
   <div class="container-fluid">
+
     <div class="row">
       <div class="col-sm-3">
         <div class="sidebar">
@@ -66,6 +68,13 @@ $first_segments_sidebar = Request::route()->action['as'];
               <a href="Social_Mobilization" class="
               {{$first_segments_sidebar == 'admin.socialMobilization' ? 'active' : '' }}">Social Mobilization</a>
             </li>
+
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/user-assets/img/logo3.png')}} " alt="">
+              <a href="{{route('admin.SmNumberMeetingCharts')}}" class="
+              {{$first_segments_sidebar == ('admin.SmNumberMeetingCharts')  ? 'active' : '' }}">Social Mobilization Chat</a>
+            </li>
+
             <li class="d-block" role="presentation">
               <img src="{{asset('public/user-assets/img/logo4.png')}}" alt="">
               <a href="Orientation" aria-controls="orientation"
@@ -127,6 +136,7 @@ $first_segments_sidebar = Request::route()->action['as'];
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="{{ asset('public\admin\js\custom.js') }}"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ asset('public\user-assets\js\custom.js') }}"></script>
   </body>
   </html>

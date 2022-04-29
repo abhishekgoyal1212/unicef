@@ -11,8 +11,7 @@ use App\Http\Controllers\admin\CoordinationController;
 use App\Http\Controllers\admin\MassMediaController;
 use App\Http\Controllers\admin\OrientationHealthController;
 use App\Http\Controllers\admin\GroupsTrackingController;
-
-
+use App\Http\Controllers\admin\AdminDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +36,7 @@ Route::get('/', function () {
 	});
 	Route::prefix('admin')->group(function(){
 	Route::middleware(['auth', 'admin'])->group(function(){
-	Route::controller(DashboardController::class)->group(function(){
+	Route::controller(AdminDashboardController::class)->group(function(){
 	Route::view('admin-dashboard','admin/admin-dashboard/dashboard')->name('admin.admin_dashboard');
 	Route::get('logout','logout')->name('admin.admin.logout');
 	});
@@ -58,6 +57,11 @@ Route::get('/', function () {
 			Route::view('Orientation_Health','admin/Orientation Health')->name('admin.orientationHealth');
 			Route::view('Iec','admin/Iec')->name('admin.Iec');
 			Route::view('Groups_Tracking','admin/Groups Tracking')->name('admin.GroupsTracking');
+
+			Route::get('profile', 'profile')->name('profile');
+			Route::post('update-profile', 'update_profile')->name('update_profile');
+			Route::post('update-profile-photo', 'update_profile_photo')->name('update_profile_photo');
+
 		});
 
 		Route::controller(PlaningPlatform::class)->group(function(){
@@ -92,6 +96,14 @@ Route::get('/', function () {
 			Route::post('sm-vulrenable-meeting','sm_vulrenable_meeting')->name('admin.SmVulrenableMeeting');
 			Route::post('sm-excluded-groups','sm_excluded_groups')->name('admin.SmExcludedGroups');
 			Route::post('sm-volunteer-meeting','sm_volunteer_meeting')->name('admin.SmVolunteerMeeting');
+
+			Route::view('sm-faith-based-institutions-chart','admin/sm_charts/Faith_Based_Institutions_Chart')->name('admin.SmFaithBasedInstitutionsChart');
+			Route::view('sm-number-meeting-chart','admin/sm_charts/Number_Meeting_Chart')->name('admin.SmNumberMeetingCharts');
+			Route::view('sm-influencers-chart','admin/sm_charts/Meeting_Influencers_Chart')->name('admin.SmMeetingInfluencersCharts');
+			Route::view('sm-mother-meetings-chart','admin/sm_charts/Mother_Meeting_Chart')->name('admin.SmMotherMeetingChart');
+			Route::view('sm-community-meetings-chart','admin/sm_charts/Community_Meeting_Chart')->name('admin.SmCommunityMeetingChart');
+			Route::view('sm-shg-members-meetings-chart','admin/sm_charts/Shg_Meeting_Chart')->name('admin.SmShgMeetingChart');
+
 		});
 		// Route::controller(IecController::class)->group(function(){
 		// 	Route::post('iec_material','iec_material')->name('admin.iecMaterial');

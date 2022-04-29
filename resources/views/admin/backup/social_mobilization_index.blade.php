@@ -51,8 +51,6 @@ $first_segments_sidebar = Request::route()->action['as'];
     font-family: 'Poppins', sans-serif;
   }
 </style>
-
-
 <body style="background-image: url({{asset('public/user-assets/img/background.jpg')}}); background-repeat: no-repeat; background-size: cover;background-position: center;">
   @if(session('flash-error'))
   <script> toastr["error"] ("{{session()->get('flash-error')}}") </script>
@@ -60,9 +58,7 @@ $first_segments_sidebar = Request::route()->action['as'];
   @if ( session('flash-success'))
   <script> toastr["success"]("{{session()->get('flash-success')}}") </script>
   @endif
-
  <div class="row">
-
       <div class="col-sm-3">
         <div class="sidebar">
           <div class="userimg">
@@ -85,13 +81,6 @@ $first_segments_sidebar = Request::route()->action['as'];
               <a href="Social_Mobilization" class="
               {{$first_segments_sidebar == 'admin.socialMobilization' ? 'active' : '' }}">Social Mobilization</a>
             </li>
-
-             <li class="d-block" role="presentation">
-              <img src="{{asset('public/user-assets/img/logo3.png')}} " alt="">
-              <a href="{{route('admin.SmNumberMeetingCharts')}}" class="
-              {{$first_segments_sidebar == ('admin.SmNumberMeetingCharts') ? 'active' : '' }}">Social Mobilization Chat</a>
-            </li>
-
             <li class="d-block" role="presentation">
               <img src="{{asset('public/user-assets/img/logo4.png')}}" alt="">
               <a href="Orientation" aria-controls="orientation"
@@ -175,85 +164,7 @@ crossorigin="anonymous"></script>
 
 
 </style>
-<script>
 
-
-
-    /*
-     * LINE CHART
-     * ----------
-     */
-    //LINE randomly generated data
-
-    var xValues = [0, 'Banswara', 'Chittaurgarh', 'Churu', 'Hanumangarh', 'Jalore', 'Jhalawar', 'Tonk'];
-    // var yValues = [0, 'Banswara', 'Chittaurgarh', 'Churu', 'Hanumangarh', 'Jalore', 'Jhalawar', 'Tonk'];
-    var yLabels = {
-    0 : 'Jan-1st', 2 : 'Jan-2nd',4 : 'Feb-1st', 6 : 'Feb-2nd', 8 : 'Mar-1st',
-    10 : 'Mar-2nd', 12 : 'Apr-1st', 14 : 'Apr-2nd', 16 : 'May-1st',
-    18 : 'May-2nd', 20 : 'Jun-1st'
-}
-
-    new Chart("myChart", {
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [{
-                // data: ['Banswara', 'Banswara', 'Banswara', 'Banswara', 'Banswara', 'Banswara', 'Banswara', 'Banswara'],
-                data: [0,1,14,8,6,10,0],
-                borderColor: "#ffe7db",
-                fill: false
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-             scales: {
-        yAxes: [{
-            ticks: {
-                callback: function(value, index, values) {
-                    // for a value (tick) equals to 8
-                    return yLabels[value];
-                    // 'junior-dev' will be returned instead and displayed on your chart
-                }
-            }
-        }]
-    }
-        }
-    });
-</script>
-
-<script>
-  var $calendar;
-  $(document).ready(function () {
-    let container = $("#container").simpleCalendar({
-          fixedStartDay: 0, // begin weeks by sunday
-          disableEmptyDetails: true,
-          events: [
-            // generate new event after tomorrow for one hour
-            {
-              startDate: new Date(new Date().setHours(new Date().getHours() + 24)).toDateString(),
-              endDate: new Date(new Date().setHours(new Date().getHours() + 25)).toISOString(),
-              summary: 'Visit of the Eiffel Tower'
-            },
-            // generate new event for yesterday at noon
-            {
-              startDate: new Date(new Date().setHours(new Date().getHours() - new Date().getHours() - 12, 0)).toISOString(),
-              endDate: new Date(new Date().setHours(new Date().getHours() - new Date().getHours() - 11)).getTime(),
-              summary: 'Restaurant'
-            },
-            // generate new event for the last two days
-            {
-              startDate: new Date(new Date().setHours(new Date().getHours() - 48)).toISOString(),
-              endDate: new Date(new Date().setHours(new Date().getHours() - 24)).getTime(),
-              summary: 'Visit of the Louvre'
-            }
-            ],
-
-          });
-    $calendar = container.data('plugin_simpleCalendar')
-  });
-</script>
 <script type="text/javascript">
   $(document).ready(function() {
     $('#mySelect').multiselect();
