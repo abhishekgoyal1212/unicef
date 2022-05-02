@@ -26,8 +26,10 @@ class PlaningPlatform extends Controller
 			'wheather_consultant'  => 'required',
 			'suggestions_consultant'  => 'required',
 			'provided_description'   => 'required',
-			'other_meeting[]' => 'required_if:line_departments_meeting[0],Other',
-		]);
+			'other_meeting[]' => 'required_unless:line_departments_meeting[0],Other',
+		],[
+			'other_meeting[].required_unless'=>'Other meeting field is required',
+		 ]);
 
 		// dd($inputs);
 		

@@ -85,7 +85,7 @@
                     </div>
                     
                     <div class="row align-items-center my-4" id="add_other_detail">
-
+                    
                     </div>
 
 
@@ -457,13 +457,15 @@ $('document').ready(function(){
 var select_value = $("#line_department_meeting").val();
 if(select_value == 'Other')
 {
-  $("#add_other_detail").append(
-          '<div class="col-md-5">' +
-          '</div>' +
-          '<div class="col-md-7" id="add_other_detail">' + 
-          '<div class="form-valid-error text-danger">You cannot choose anthoer option because you chose other so fill other meeting name or change option</div>' +
-           '<textarea name="other_meeting[]" class="sub-textarea" placeholder="Other Meeting">{{old("other_meeting") ? old("other_meeting")[0] : ''}}</textarea>' + 
-          '</div>'
+  // $("#add_other_detail").append(
+  //         '<div class="col-md-5">' +'</div>' +
+  //         '<div class="col-md-7" id="add_other_detail">' + 
+  //         // '<div class="form-valid-error text-danger">You cannot choose anthoer option because you chose other so fill other meeting name or change option</div>' +
+  //          '<textarea name="other_meeting[]" class="sub-textarea" placeholder="Other Meeting">{{old("other_meeting") ? old("other_meeting")[0] : ''}}</textarea>' + 
+  //         '</div>'
+  // );
+    $("#add_other_detail").append(
+          `<div class="col-md-5"></div><div class="col-md-7" id="add_other_detail"><textarea name="other_meeting[]" class="sub-textarea" placeholder="Other Meeting">{{old("other_meeting") ? old("other_meeting")[0] : ''}}</textarea>@error("other_meeting[]")<div class="form-valid-error text-danger">{{ $message }}</div>@enderror </div>` 
   );
 }
 });
@@ -478,12 +480,7 @@ $('#line_department_meeting').on('change', function(e){
      $("#line_department_meeting").val("Other");
       $("#add_other_detail").empty();
       $("#add_other_detail").append(
-          '<div class="col-md-5">' +
-          '</div>' +
-          '<div class="col-md-7" id="add_other_detail">' + 
-          '<div class="form-valid-error text-danger">You cannot choose anthoer option because you chose other so fill other meeting name</div>' +
-           '<textarea name="other_meeting[]" class="sub-textarea" placeholder="Other Meeting"></textarea>' + 
-          '</div>'
+          `<div class="col-md-5"></div><div class="col-md-7" id="add_other_detail"><textarea name="other_meeting[]" class="sub-textarea" placeholder="Other Meeting"></textarea></div> @error("other_meeting[]")<div class="form-valid-error text-danger">{{ $message }}</div>@enderror`
           );
    }
    else{

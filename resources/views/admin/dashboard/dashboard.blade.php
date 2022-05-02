@@ -98,7 +98,29 @@
        </div>
        <div class="row my-4">
         <div class="col-md-6 pr-lg-4">
-          <h4 class="mb-4">Communication Activities</h4>
+         <!--  <h4 class="mb-4">Social Mobilization</h4> -->
+
+
+          <div class="select-sec-box">
+         <select>
+           <option>Social Mobilization</option>
+           <option>Meeting with Faith Based Institutions /Religious Leaders</option>
+           <option> Meeting with Influencers </option>
+           <option>Number of Meeting with</option>
+           <option>IPC</option>
+           <option>Mother Meetings</option>
+           <option>Community Meetings</option>
+           <option>Meeting with SHG Members</option>
+           <option>Meeting with Vulrenable Groups Sites</option>
+           <option>Meeting with excluded groups(PWD,Transgender)</option>
+           <option>Meeting with the volunteer organization</option>
+         </select>
+</div>
+
+
+
+
+
           <div id="amchart"></div>
           {{--<img src="{{asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
         </div>

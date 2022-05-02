@@ -566,3 +566,19 @@ h4{
     margin-top: -40px;
     transform: rotate(-13deg);
 }
+.select-sec-box select {
+    padding: 7px 0px;
+    margin-bottom: 20px;
+}
+
+.select-sec-box select {
+    padding: 10px 0px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    width: 100%;
+    font-weight: 400;
+    color: #000;
+    outline: none;
+    background: #f7f2ef;
+    border: 1px solid #d3cccc;
+}

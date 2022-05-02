@@ -127,40 +127,39 @@ am5.ready(function() {
         );
         
         var data = [{
-          "year": "Dholpur",
-          "europe": 10960,
-          "namerica": 8839,
-          "asia": 19799,
+          "distric": "Dholpur",
+          "metting": 500,
+          "participants": 300,
+          // "asia": 19799,
           
         }, {
-          "year": "Baran",
-          "europe": 4455,
-          "namerica": 3308,
-          "asia": 7763,
+          "distric": "Baran",
+          "metting": 1020,
+          "participants": 800,
+          // "asia": 7763,
          
         }, {
-          "year": "Sirohi",
-          "europe": 4713,
-          "namerica": 8627,
-          "asia": 13340,
+          "distric": "Sirohi",
+          "metting": 1500,
+          "participants": 862,
+          // "asia": 13340,
          
         }, {
-          "year": "Jaisalmer",
-          "europe": 4496,
-          "namerica": 3435,
-          "asia": 7991,
+          "distric": "Jaisalmer",
+          "metting": 900,
+          "participants": 400,
+          // "asia": 7991,
          
         }, {
-          "year": "Karauli",
-          "europe": 2174,
-          "namerica": 1568,
-          "asia": 3742,
+          "distric": "Karauli",
+          "metting": 700,
+          "participants": 500,
+          // "asia": 3742,
         }, {
-          "year": "Dungarpur",
-          "europe":1678,
-          "namerica": 1834,
-          "asia": 3512,
-          
+          "distric": "Dungarpur",
+          "metting":1800,
+          "participants": 500,
+          // "asia": 3512,
         }];
         root.numberFormatter.setAll({
           numberFormat: "#a",
@@ -180,7 +179,7 @@ am5.ready(function() {
         // Create axes
         // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
         var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-          categoryField: "year",
+          categoryField: "distric",
           // xAxis:renderer.minGridDistance = 20,
           renderer: am5xy.AxisRendererX.new(root, {
             cellStartLocation: 0.1,
@@ -206,7 +205,7 @@ am5.ready(function() {
             xAxis: xAxis,
             yAxis: yAxis,
             valueYField: fieldName,
-            categoryXField: "year"
+            categoryXField: "distric"
             ,fill:color,
           }));
           
@@ -239,9 +238,9 @@ am5.ready(function() {
           legend.data.push(series);
         }
         
-        makeSeries("Men Participated", "europe",am5.color("#6d1ed1"));
-        makeSeries(" Women Participated", "namerica",am5.color("#f96fab"));
-        makeSeries("Total Participated", "asia",am5.color("#ac42c0"));
+        makeSeries("Number of Meetings", "metting",am5.color("#6d1ed1"));
+        makeSeries("Number of Participants", "participants",am5.color("#f96fab"));
+        // makeSeries("Reach through Faitrh", "asia",am5.color("#ac42c0"));
         // makeSeries("Latin America", "lamerica");
       
         
