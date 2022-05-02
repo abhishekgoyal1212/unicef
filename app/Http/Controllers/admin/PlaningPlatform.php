@@ -11,6 +11,7 @@ use App\Models\PlaningPlatform\DistrictCommunication;
 use App\Models\PlaningPlatform\FortnightlyReport;
 use Auth;
 use Validator;
+use Str;
 
 class PlaningPlatform extends Controller
 {
@@ -18,13 +19,20 @@ class PlaningPlatform extends Controller
 	{
 		$user_id = Auth::id();
 		$inputs = $request->all();
-		 $validator = Validator::make($request->all(),[
+		
+		$validator = Validator::make($request->all(),[
 			'wheather_meeting'        => 'required',
 			'line_departments_meeting' => 'required',
 			'wheather_consultant'  => 'required',
 			'suggestions_consultant'  => 'required',
-			'provided_description'       => 'required',
+			'provided_description'   => 'required',
+			'other_meeting[]' => 'required_if:line_departments_meeting[0],Other',
 		]);
+
+		// dd($inputs);
+		
+		// dd($validator->errors());
+		
 		 if ($validator->fails()) {
 		 	return redirect()->back()->withErrors($validator)->withinput();
 		 }
@@ -32,18 +40,34 @@ class PlaningPlatform extends Controller
 		$dhs_meeting->wheather_meeting = $inputs['wheather_meeting']; 
 		$dhs_meeting->cate_name = 'Planing Platform';
 		$dhs_meeting->user_id = $user_id;
-		$dhs_meeting->line_departments_meeting = $inputs['line_departments_meeting']; 
+
+
+		if($inputs['line_departments_meeting'][0] == 'Other'){
+			$json = array_merge($inputs['line_departments_meeting'],$inputs['other_meeting']);
+			$json_encode = json_encode($json);
+			$dhs_meeting->line_departments_meeting = $json_encode; 
+
+		}else{
+			$line_departments_meetings = implode(",", $inputs['line_departments_meeting']);
+			$dhs_meeting->line_departments_meeting = $line_departments_meetings; 
+		}
+
 		$dhs_meeting->wheather_consultant = $inputs['wheather_consultant']; 
 		$dhs_meeting->suggestions_consultant = $inputs['suggestions_consultant']; 
 		$dhs_meeting->provided_description = $inputs['provided_description']; 
 
+		if($_FILES['image_upload']['name'] != ''){
+			$img_name  = time() . '-' . Str::of(md5(time() . $request->file('image_upload')->hashName()))->substr(0, 50) . '.' . $request->file('image_upload')->extension();
+			$path = $request->file('image_upload')->move('public\user-assets\img\DTF_DHS_Meeting', $img_name);
+			$dhs_meeting->file = $img_name;
+   		}	
+		
 		if ($dhs_meeting->save()) {
 			return back()->with('flash-success', 'Planing platform added successfully');
 		}else{
 			return back()->with('flash-error', 'Error occured in adding data');
 		}
 	}
-	
 
 	public function sector_meeting(Request $request)
 	{

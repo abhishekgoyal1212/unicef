@@ -13,12 +13,12 @@ $first_segments_sidebar = Request::route()->action['as'];
   <title>@yield('title')</title>
   <link rel="stylesheet" href="{{asset('public/user-assets/css/style.css')}}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
- <link rel="stylesheet" href="{{ asset('public/template/plugins/fontawesome-free/css/all.min.css') }}">
-    <!-- Ionicons -->
-
+  <link rel="stylesheet" href="{{ asset('public/template/plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- select2 -->
+  <link rel="stylesheet" href="{{asset('public/template/plugins/select2/css/select2.min.css')}}">
+  
   <!-- toastr css-->
   <link href="{{asset('public/user-assets/css/toastr.css')}}" rel="stylesheet"/>
-
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -133,5 +133,7 @@ $first_segments_sidebar = Request::route()->action['as'];
     </div>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
     <script type="text/javascript" src="{{ asset('public\user-assets\js\custom.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{asset('public/template/plugins/select2/js/select2.full.min.js')}}"></script>
   </body>
   </html>

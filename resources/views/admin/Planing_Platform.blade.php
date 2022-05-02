@@ -36,7 +36,8 @@
                 <div class="sub-tab-heading">
                   DTF/DHS Meeting
                 </div>
-                <form method="post" action="{{route('admin.planingPlatformSave')}}">
+              
+                <form id="form_id" method="post" enctype="multipart/form-data" action="{{route('admin.planingPlatformSave')}}">
                   @csrf
                   <div class="sub-content p-4">
                     <div class="row align-items-center">
@@ -67,16 +68,26 @@
                         <p class="mb-0">Line Departments Participated in Meeting:</p>
                       </div>
                       <div class="col-md-7">
-                        <select name="line_departments_meeting" class="bg-transparent w-50 py-2 px-2 category">
-                          <option value="PRI">PRI</option>
-                          <option value="ICDS">ICDS</option>
-                          <option value="Education">Education</option>
-                          <option value="SRLM">SRLM</option>
-                          <option value="Minority-DMWO">Minority-DMWO</option>
-                          <option value="TAD">TAD</option>
+                        <select id="line_department_meeting" name="line_departments_meeting[]" class="bg-transparent w-50 py-2 px-2 category line_departments_meetings" multiple="multiple">
+                          <option value="PRI" @if(old('line_departments_meeting')){{(in_array('PRI',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>PRI</option>
+                          <option value="ICDS" @if(old('line_departments_meeting')){{(in_array('ICDS',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>ICDS</option>
+                          <option value="Education" @if(old('line_departments_meeting')){{(in_array('Education',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>Education</option>
+                          <option value="SRLM" @if(old('line_departments_meeting')){{(in_array('SRLM',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>SRLM</option>
+                          <option value="Minority-DMWO" @if(old('line_departments_meeting')){{(in_array('Minority-DMWO',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>Minority-DMWO</option>
+                          <option value="TAD" @if(old('line_departments_meeting')){{(in_array('TAD',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>TAD</option>
+                          <option value="Other" @if(old('line_departments_meeting')){{(in_array('Other',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>Others</option>
                         </select>
+
+                          @error('line_departments_meeting')
+                            <div class="form-valid-error text-danger">{{ $message }}</div>
+                          @enderror
                       </div>
                     </div>
+                    
+                    <div class="row align-items-center my-4" id="add_other_detail">
+
+                    </div>
+
 
                     <div class="row align-items-center ">
                       <div class="col-md-5">
@@ -126,15 +137,43 @@
                       <p class="mb-0">A cell provided for description:</p>
                     </div>
                     <div class="col-md-7">
-                      <textarea name="provided_description" id="" class="sub-textarea"></textarea>
+                      <textarea name="provided_description" id="" class="sub-textarea">{{old('provided_description')}}</textarea>
                       @error('provided_description')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
                     </div>
-
                   </div>
+                  <br>
+                 
+
+                  <div class="row">
+                    <div class="col-md-5">
+                      <p class="mb-0">Upload Image:</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <div class="custom-file">
+                              <input accept="image/*" type="file" name="image_upload" id="imgInp" class="custom-file-input custom-file-resize"> 
+                              <label class="custom-file-label" for="img">Choose File</label>
+                            </div>
+                        </div>
+                         @error('image_upload')
+                            <div class="form-valid-error text-danger">{{ $message }}</div>
+                         @enderror
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-5">
+
+                    </div>
+                    <div class="col-md-7">
+                      <img id="blah" src=""  width="200" heigh="200"/>
+                    </div>
+                  </div>
+
                   <div class="col-md-10 mt-4 text-center">
-                   <button type="submit" class="login-btn">SUBMIT</button>
+                   <button type="submit" id="form_submit1" class="login-btn">SUBMIT</button>
                  </div>
                </div>
              </form>
@@ -284,7 +323,6 @@
               <div class="col-md-7">
                 <ul class="list-unstyled mb-0">
                   <li class="d-inline mr-4">
-
                     <div class="form-check d-inline">
                       <input type="radio" class="form-check-input" id="exampleCheckDcp1" name="wheather_developed" value="1" {{old('wheather_developed') == '1' ? 'checked' : ''}} >
                       <label class="form-check-label mr-5" for="exampleCheckDcp1">Yes</label>
@@ -295,7 +333,6 @@
                     <div class="form-valid-error text-danger">{{ $message }}</div>
                     @enderror
                   </li>
-
                 </ul>
               </div>
             </div>
@@ -399,7 +436,62 @@
 
 
 </div>
+<script>
+  imgInp.onchange = evt => {
+  const [file] = imgInp.files
+  if (file) {
+    blah.src = URL.createObjectURL(file)
+  }
+}
+</script>
+<script>
+  
+$(function () {
+    //Initialize Select2 Elements
+    $('.line_departments_meetings').select2()
+  })
+
+</script>
+<script>
+$('document').ready(function(){
+var select_value = $("#line_department_meeting").val();
+if(select_value == 'Other')
+{
+  $("#add_other_detail").append(
+          '<div class="col-md-5">' +
+          '</div>' +
+          '<div class="col-md-7" id="add_other_detail">' + 
+          '<div class="form-valid-error text-danger">You cannot choose anthoer option because you chose other so fill other meeting name or change option</div>' +
+           '<textarea name="other_meeting[]" class="sub-textarea" placeholder="Other Meeting">{{old("other_meeting") ? old("other_meeting")[0] : ''}}</textarea>' + 
+          '</div>'
+  );
+}
+});
+
+$('#line_department_meeting').on('change', function(e){
+    var selected = $(e.target).val();
+   console.log(selected);
+    
+   if(selected && Object.values(selected).includes('Other')){
+    var counter = 0;
+     $("#line_department_meeting").val("");
+     $("#line_department_meeting").val("Other");
+      $("#add_other_detail").empty();
+      $("#add_other_detail").append(
+          '<div class="col-md-5">' +
+          '</div>' +
+          '<div class="col-md-7" id="add_other_detail">' + 
+          '<div class="form-valid-error text-danger">You cannot choose anthoer option because you chose other so fill other meeting name</div>' +
+           '<textarea name="other_meeting[]" class="sub-textarea" placeholder="Other Meeting"></textarea>' + 
+          '</div>'
+          );
+   }
+   else{
+    $("#add_other_detail").empty();
+   }
+});
 
 
+</script>
 
 @stop

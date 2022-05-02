@@ -30,5 +30,4 @@ class AuthController extends Controller
 			return back();
 		}
 	}
-
 }
