@@ -9,12 +9,20 @@ use Auth;
 use Str;
 use Validator;
 use Hash;
+use DB;
+
 
 class DashboardController extends Controller
 {
 	public function index()
-	{
-		return view('admin/dashboard/dashboard');	
+	{	
+		$data = DB::table('meeting_institutions_religious_leaders')
+		->join('users', 'users.id', '=', 'meeting_institutions_religious_leaders.user_id')
+		->select('users.districts', 'meeting_institutions_religious_leaders.number_meetings', 'meeting_institutions_religious_leaders.number_participants_male', 'meeting_institutions_religious_leaders.number_participants_female')->get();
+
+		
+		
+		return view('admin/dashboard/dashboard', ['data' => $data]);	
 	}
 
 	public function logout(Request $request)
