@@ -73,11 +73,11 @@
           <div class="col-md-4 pl-5">
              <!--  <a href="{{route('admin.logout')}}" class="logout"><span>Sign Out</span></a> -->
                 <div class="deshboard-img-sec" >
-                  <a href="#"><img src="{{asset('public/user-assets/img/userimg.png')}}" alt="" id="showmenu"></a>
+                  <a href="#"> <img class="rounded-circle" src="{{asset('public/user-assets/img/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100" id="showmenu"></a>
                 </div>
                 <div class="deshboard-conteant-sec"  style="display: none;">
                   <div class="arrow"></div>
-                  <img src="{{asset('public/user-assets/img/userimg.png')}}" alt="">
+                 <img class="rounded-circle" src="{{asset('public/user-assets/img/users-image/'. auth()->user()->profile)}}" alt="">
                     <span>Admin</span>
 
 
@@ -104,13 +104,15 @@
              </div>
            </div>
        </div>
+       
        <div class="row my-4">
-        <div class="col-md-6 pr-lg-4">
+        <div class="col-md-12 pr-lg-4">
          <!--  <h4 class="mb-4">Social Mobilization</h4> -->
 
 
           <div class="select-sec-box">
-         <select id="verma">
+
+         <select id="chart_id">
            <option >Social Mobilization</option>
              <option value="1">Meeting with Faith Based Institutions /Religious Leaders</option>
              <option value="2"> Meeting with Influencers </option>
@@ -297,13 +299,12 @@
   </div>
 </div>
 <script>
-   $('#verma').on('change', function(){
+   $('#chart_id').on('change', function(){
     var chart = this.value;
      $("#append_div").empty();
     if(chart == 1){
       $("#append_div").append('<div id="amchart"></div>');
-      
-      am5.ready(function() {
+        am5.ready(function() {
         var root = am5.Root.new("amchart");
         root.setThemes([
           am5themes_Animated.new(root)
@@ -328,7 +329,103 @@
 
         root.numberFormatter.setAll({
           numberFormat: "#a",
+          bigNumberPrefixes: [
+            { "number": 1e+3, "suffix": "K" },
+            { "number": 1e+6, "suffix": "M" },
+            { "number": 1e+9, "suffix": "B" }
+          ],
+        
+          smallNumberPrefixes: []
+        });
+       
+        var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+          categoryField: "districts",
+          // xAxis:renderer.minGridDistance = 20,
+          renderer: am5xy.AxisRendererX.new(root, {
+            cellStartLocation: 0.1,
+            cellEndLocation: 0.9,
+            minGridDistance :20,
+          }),
+          tooltip: am5.Tooltip.new(root, {})
+        }));
+        
+        xAxis.data.setAll(data);
+        
+        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
           
+          renderer: am5xy.AxisRendererY.new(root, {})
+        }));
+        
+        function makeSeries(name, fieldName, color) {
+          var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+            name: name,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: fieldName,
+            categoryXField: "districts"
+            ,fill:color,
+          }));
+          
+        
+          series.columns.template.setAll({
+            tooltipText: "{name}={valueY}",
+            width: am5.percent(90),
+            tooltipY: 0
+          });
+        
+          series.data.setAll(data);
+        
+          series.appear();
+        
+          series.bullets.push(function () {
+            return am5.Bullet.new(root, {
+              locationY: 0,
+              sprite: am5.Label.new(root, {
+                text: "{valueY}",
+                fill: root.interfaceColors.get("alternativeText"),
+                centerY: 0,
+                centerX: am5.p50,
+                populateText: true
+              })
+            });
+          });
+        
+          legend.data.push(series);
+        }
+        
+        makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+        makeSeries("Number of Male", "male",am5.color("#f96fab"));
+        makeSeries("Number of Female", "female",am5.color("#007bff"));
+        chart.appear(1000, 100);
+        }); 
+
+    }
+    if(chart == 2){
+           $("#append_div").append('<div id="amchart"></div>');
+        am5.ready(function() {
+        var root = am5.Root.new("amchart");
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+          panX: false,
+          panY: false,
+          wheelX: "panX",
+          wheelY: "zoomX",
+          layout: root.verticalLayout
+        }));
+        var legend = chart.children.push(
+          am5.Legend.new(root, {
+            width: am5.percent(100),
+            centerX: am5.percent(50),
+            x: am5.percent(50),
+            marginTop:10,
+          })
+        );
+        
+        var data = {!! json_encode($result) !!};
+        root.numberFormatter.setAll({
+          numberFormat: "#a",
           bigNumberPrefixes: [
             { "number": 1e+3, "suffix": "K" },
             { "number": 1e+6, "suffix": "M" },
@@ -393,15 +490,15 @@
           legend.data.push(series);
         }
         
-        makeSeries("Number of Meetings", "number_meetings",am5.color("#6d1ed1"));
-        makeSeries("Number of Male", "number_participants_male",am5.color("#f96fab"));
-        makeSeries("Number of Female", "number_participants_female",am5.color("#ffc107"));
+        makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+        makeSeries("Number of Male", "male",am5.color("#f96fab"));
+        makeSeries("Number of Female", "female",am5.color("#007bff"));
         chart.appear(1000, 100);
-        }); 
+        });  
     }
-    if(chart == 2){
-      $("#append_div").append('<div id="amchart"></div>');
-     am5.ready(function() {
+    if(chart == 3){
+        $("#append_div").append('<div id="amchart"></div>');
+        am5.ready(function() {
         var root = am5.Root.new("amchart");
         root.setThemes([
           am5themes_Animated.new(root)
@@ -422,34 +519,9 @@
           })
         );
         
-        var data = [{
-          "distric": "jaipur",
-          "metting": 500,
-          "participants": 300,
-        }, {
-          "distric": "Baran",
-          "metting": 1020,
-          "participants": 800,
-        }, {
-          "distric": "Sirohi",
-          "metting": 1500,
-          "participants": 862,
-        }, {
-          "distric": "Jaisalmer",
-          "metting": 900,
-          "participants": 400,
-        }, {
-          "distric": "Karauli",
-          "metting": 700,
-          "participants": 500,
-        }, {
-          "distric": "Dungarpur",
-          "metting":1800,
-          "participants": 500,
-        }];
+        var data = {!! json_encode($number_meeting) !!};
         root.numberFormatter.setAll({
           numberFormat: "#a",
-          
           bigNumberPrefixes: [
             { "number": 1e+3, "suffix": "K" },
             { "number": 1e+6, "suffix": "M" },
@@ -460,7 +532,7 @@
         });
        
         var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-          categoryField: "distric",
+          categoryField: "districts",
           // xAxis:renderer.minGridDistance = 20,
           renderer: am5xy.AxisRendererX.new(root, {
             cellStartLocation: 0.1,
@@ -483,7 +555,7 @@
             xAxis: xAxis,
             yAxis: yAxis,
             valueYField: fieldName,
-            categoryXField: "distric"
+            categoryXField: "districts"
             ,fill:color,
           }));
           
@@ -514,10 +586,697 @@
           legend.data.push(series);
         }
         
-        makeSeries("Number of Meetings", "metting",am5.color("#6d1ed1"));
-        makeSeries("Number of Participants", "participants",am5.color("#f96fab"));
+        makeSeries("Number of Meetings with Lions Club", "lions_club",am5.color("#6d1ed1"));
+        makeSeries("Number of Meetings with Rotary", "rotary_club",am5.color("#f96fab"));
+        makeSeries("Number of Meetings with local CSOs/Others", "locals",am5.color("#007bff"));
         chart.appear(1000, 100);
-        }); 
+        });  
+    }
+     if(chart == 4){
+        $("#append_div").append('<div id="amchart"></div>');
+        am5.ready(function() {
+        var root = am5.Root.new("amchart");
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+          panX: false,
+          panY: false,
+          wheelX: "panX",
+          wheelY: "zoomX",
+          layout: root.verticalLayout
+        }));
+        var legend = chart.children.push(
+          am5.Legend.new(root, {
+            width: am5.percent(100),
+            centerX: am5.percent(50),
+            x: am5.percent(50),
+            marginTop:10,
+          })
+        );
+        
+        var data = {!! json_encode($sm_ipc) !!};
+        root.numberFormatter.setAll({
+          numberFormat: "#a",
+          bigNumberPrefixes: [
+            { "number": 1e+3, "suffix": "K" },
+            { "number": 1e+6, "suffix": "M" },
+            { "number": 1e+9, "suffix": "B" }
+          ],
+        
+          smallNumberPrefixes: []
+        });
+       
+        var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+          categoryField: "districts",
+          // xAxis:renderer.minGridDistance = 20,
+          renderer: am5xy.AxisRendererX.new(root, {
+            cellStartLocation: 0.1,
+            cellEndLocation: 0.9,
+            minGridDistance :20,
+          }),
+          tooltip: am5.Tooltip.new(root, {})
+        }));
+        
+        xAxis.data.setAll(data);
+        
+        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+          
+          renderer: am5xy.AxisRendererY.new(root, {})
+        }));
+        
+        function makeSeries(name, fieldName, color) {
+          var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+            name: name,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: fieldName,
+            categoryXField: "districts"
+            ,fill:color,
+          }));
+          
+        
+          series.columns.template.setAll({
+            tooltipText: "{name}, {categoryX}:{valueY}",
+            width: am5.percent(90),
+            tooltipY: 0
+          });
+        
+          series.data.setAll(data);
+        
+          series.appear();
+        
+          series.bullets.push(function () {
+            return am5.Bullet.new(root, {
+              locationY: 0,
+              sprite: am5.Label.new(root, {
+                text: "{valueY}",
+                fill: root.interfaceColors.get("alternativeText"),
+                centerY: 0,
+                centerX: am5.p50,
+                populateText: true
+              })
+            });
+          });
+        
+          legend.data.push(series);
+        }
+        
+
+        makeSeries("Number of IPC", "meeting",am5.color("#6d1ed1"));
+        makeSeries("Number of family visited(male)", "male",am5.color("#f96fab"));
+        makeSeries("Number of family visited(Female)", "female",am5.color("#007bff"));
+        chart.appear(1000, 100);
+        });  
+    }
+    if(chart == 5){
+        $("#append_div").append('<div id="amchart"></div>');
+        am5.ready(function() {
+        var root = am5.Root.new("amchart");
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+          panX: false,
+          panY: false,
+          wheelX: "panX",
+          wheelY: "zoomX",
+          layout: root.verticalLayout
+        }));
+        var legend = chart.children.push(
+          am5.Legend.new(root, {
+            width: am5.percent(100),
+            centerX: am5.percent(50),
+            x: am5.percent(50),
+            marginTop:10,
+          })
+        );
+        
+        var data = {!! json_encode($mother_meeting) !!};
+        root.numberFormatter.setAll({
+          numberFormat: "#a",
+          bigNumberPrefixes: [
+            { "number": 1e+3, "suffix": "K" },
+            { "number": 1e+6, "suffix": "M" },
+            { "number": 1e+9, "suffix": "B" }
+          ],
+        
+          smallNumberPrefixes: []
+        });
+       
+        var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+          categoryField: "districts",
+          // xAxis:renderer.minGridDistance = 20,
+          renderer: am5xy.AxisRendererX.new(root, {
+            cellStartLocation: 0.1,
+            cellEndLocation: 0.9,
+            minGridDistance :20,
+          }),
+          tooltip: am5.Tooltip.new(root, {})
+        }));
+        
+        xAxis.data.setAll(data);
+        
+        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+          
+          renderer: am5xy.AxisRendererY.new(root, {})
+        }));
+        
+        function makeSeries(name, fieldName, color) {
+          var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+            name: name,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: fieldName,
+            categoryXField: "districts"
+            ,fill:color,
+          }));
+          
+        
+          series.columns.template.setAll({
+            tooltipText: "{name}, {categoryX}:{valueY}",
+            width: am5.percent(90),
+            tooltipY: 0
+          });
+        
+          series.data.setAll(data);
+        
+          series.appear();
+        
+          series.bullets.push(function () {
+            return am5.Bullet.new(root, {
+              locationY: 0,
+              sprite: am5.Label.new(root, {
+                text: "{valueY}",
+                fill: root.interfaceColors.get("alternativeText"),
+                centerY: 0,
+                centerX: am5.p50,
+                populateText: true
+              })
+            });
+          });
+        
+          legend.data.push(series);
+        }
+        
+
+        makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+        makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
+        makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
+        chart.appear(1000, 100);
+        });  
+    }
+     if(chart == 6){
+        $("#append_div").append('<div id="amchart"></div>');
+        am5.ready(function() {
+        var root = am5.Root.new("amchart");
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+          panX: false,
+          panY: false,
+          wheelX: "panX",
+          wheelY: "zoomX",
+          layout: root.verticalLayout
+        }));
+        var legend = chart.children.push(
+          am5.Legend.new(root, {
+            width: am5.percent(100),
+            centerX: am5.percent(50),
+            x: am5.percent(50),
+            marginTop:10,
+          })
+        );
+        
+        var data = {!! json_encode($community_meeting) !!};
+        root.numberFormatter.setAll({
+          numberFormat: "#a",
+          bigNumberPrefixes: [
+            { "number": 1e+3, "suffix": "K" },
+            { "number": 1e+6, "suffix": "M" },
+            { "number": 1e+9, "suffix": "B" }
+          ],
+        
+          smallNumberPrefixes: []
+        });
+       
+        var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+          categoryField: "districts",
+          // xAxis:renderer.minGridDistance = 20,
+          renderer: am5xy.AxisRendererX.new(root, {
+            cellStartLocation: 0.1,
+            cellEndLocation: 0.9,
+            minGridDistance :20,
+          }),
+          tooltip: am5.Tooltip.new(root, {})
+        }));
+        
+        xAxis.data.setAll(data);
+        
+        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+          
+          renderer: am5xy.AxisRendererY.new(root, {})
+        }));
+        
+        function makeSeries(name, fieldName, color) {
+          var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+            name: name,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: fieldName,
+            categoryXField: "districts"
+            ,fill:color,
+          }));
+          
+        
+          series.columns.template.setAll({
+            tooltipText: "{name}, {categoryX}:{valueY}",
+            width: am5.percent(90),
+            tooltipY: 0
+          });
+        
+          series.data.setAll(data);
+        
+          series.appear();
+        
+          series.bullets.push(function () {
+            return am5.Bullet.new(root, {
+              locationY: 0,
+              sprite: am5.Label.new(root, {
+                text: "{valueY}",
+                fill: root.interfaceColors.get("alternativeText"),
+                centerY: 0,
+                centerX: am5.p50,
+                populateText: true
+              })
+            });
+          });
+        
+          legend.data.push(series);
+        }
+        
+
+        makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+        makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
+        makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
+        chart.appear(1000, 100);
+        });  
+    }
+    if(chart == 7){
+        $("#append_div").append('<div id="amchart"></div>');
+        am5.ready(function() {
+        var root = am5.Root.new("amchart");
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+          panX: false,
+          panY: false,
+          wheelX: "panX",
+          wheelY: "zoomX",
+          layout: root.verticalLayout
+        }));
+        var legend = chart.children.push(
+          am5.Legend.new(root, {
+            width: am5.percent(100),
+            centerX: am5.percent(50),
+            x: am5.percent(50),
+            marginTop:10,
+          })
+        );
+        
+        var data = {!! json_encode($shg_meeting) !!};
+        root.numberFormatter.setAll({
+          numberFormat: "#a",
+          bigNumberPrefixes: [
+            { "number": 1e+3, "suffix": "K" },
+            { "number": 1e+6, "suffix": "M" },
+            { "number": 1e+9, "suffix": "B" }
+          ],
+        
+          smallNumberPrefixes: []
+        });
+       
+        var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+          categoryField: "districts",
+          // xAxis:renderer.minGridDistance = 20,
+          renderer: am5xy.AxisRendererX.new(root, {
+            cellStartLocation: 0.1,
+            cellEndLocation: 0.9,
+            minGridDistance :20,
+          }),
+          tooltip: am5.Tooltip.new(root, {})
+        }));
+        
+        xAxis.data.setAll(data);
+        
+        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+          
+          renderer: am5xy.AxisRendererY.new(root, {})
+        }));
+        
+        function makeSeries(name, fieldName, color) {
+          var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+            name: name,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: fieldName,
+            categoryXField: "districts"
+            ,fill:color,
+          }));
+          
+        
+          series.columns.template.setAll({
+            tooltipText: "{name}, {categoryX}:{valueY}",
+            width: am5.percent(90),
+            tooltipY: 0
+          });
+        
+          series.data.setAll(data);
+        
+          series.appear();
+        
+          series.bullets.push(function () {
+            return am5.Bullet.new(root, {
+              locationY: 0,
+              sprite: am5.Label.new(root, {
+                text: "{valueY}",
+                fill: root.interfaceColors.get("alternativeText"),
+                centerY: 0,
+                centerX: am5.p50,
+                populateText: true
+              })
+            });
+          });
+        
+          legend.data.push(series);
+        }
+        
+
+        makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+        makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
+        makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
+        chart.appear(1000, 100);
+        });  
+    }
+    if(chart == 8){
+        $("#append_div").append('<div id="amchart"></div>');
+        am5.ready(function() {
+        var root = am5.Root.new("amchart");
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+          panX: false,
+          panY: false,
+          wheelX: "panX",
+          wheelY: "zoomX",
+          layout: root.verticalLayout
+        }));
+        var legend = chart.children.push(
+          am5.Legend.new(root, {
+            width: am5.percent(100),
+            centerX: am5.percent(50),
+            x: am5.percent(50),
+            marginTop:10,
+          })
+        );
+        
+        var data = {!! json_encode($vulrenable_meeting) !!};
+        root.numberFormatter.setAll({
+          numberFormat: "#a",
+          bigNumberPrefixes: [
+            { "number": 1e+3, "suffix": "K" },
+            { "number": 1e+6, "suffix": "M" },
+            { "number": 1e+9, "suffix": "B" }
+          ],
+        
+          smallNumberPrefixes: []
+        });
+       
+        var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+          categoryField: "districts",
+          // xAxis:renderer.minGridDistance = 20,
+          renderer: am5xy.AxisRendererX.new(root, {
+            cellStartLocation: 0.1,
+            cellEndLocation: 0.9,
+            minGridDistance :20,
+          }),
+          tooltip: am5.Tooltip.new(root, {})
+        }));
+        
+        xAxis.data.setAll(data);
+        
+        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+          
+          renderer: am5xy.AxisRendererY.new(root, {})
+        }));
+        
+        function makeSeries(name, fieldName, color) {
+          var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+            name: name,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: fieldName,
+            categoryXField: "districts"
+            ,fill:color,
+          }));
+          
+        
+          series.columns.template.setAll({
+            tooltipText: "{name}, {categoryX}:{valueY}",
+            width: am5.percent(90),
+            tooltipY: 0
+          });
+        
+          series.data.setAll(data);
+        
+          series.appear();
+        
+          series.bullets.push(function () {
+            return am5.Bullet.new(root, {
+              locationY: 0,
+              sprite: am5.Label.new(root, {
+                text: "{valueY}",
+                fill: root.interfaceColors.get("alternativeText"),
+                centerY: 0,
+                centerX: am5.p50,
+                populateText: true
+              })
+            });
+          });
+        
+          legend.data.push(series);
+        }
+        
+
+        makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+        makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
+        makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
+        chart.appear(1000, 100);
+        });  
+    }
+     if(chart == 9){
+        $("#append_div").append('<div id="amchart"></div>');
+        am5.ready(function() {
+        var root = am5.Root.new("amchart");
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+          panX: false,
+          panY: false,
+          wheelX: "panX",
+          wheelY: "zoomX",
+          layout: root.verticalLayout
+        }));
+        var legend = chart.children.push(
+          am5.Legend.new(root, {
+            width: am5.percent(100),
+            centerX: am5.percent(50),
+            x: am5.percent(50),
+            marginTop:10,
+          })
+        );
+        
+        var data = {!! json_encode($excluded_groups) !!};
+        root.numberFormatter.setAll({
+          numberFormat: "#a",
+          bigNumberPrefixes: [
+            { "number": 1e+3, "suffix": "K" },
+            { "number": 1e+6, "suffix": "M" },
+            { "number": 1e+9, "suffix": "B" }
+          ],
+        
+          smallNumberPrefixes: []
+        });
+       
+        var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+          categoryField: "districts",
+          // xAxis:renderer.minGridDistance = 20,
+          renderer: am5xy.AxisRendererX.new(root, {
+            cellStartLocation: 0.1,
+            cellEndLocation: 0.9,
+            minGridDistance :20,
+          }),
+          tooltip: am5.Tooltip.new(root, {})
+        }));
+        
+        xAxis.data.setAll(data);
+        
+        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+          
+          renderer: am5xy.AxisRendererY.new(root, {})
+        }));
+        
+        function makeSeries(name, fieldName, color) {
+          var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+            name: name,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: fieldName,
+            categoryXField: "districts"
+            ,fill:color,
+          }));
+          
+        
+          series.columns.template.setAll({
+            tooltipText: "{name}, {categoryX}:{valueY}",
+            width: am5.percent(90),
+            tooltipY: 0
+          });
+        
+          series.data.setAll(data);
+        
+          series.appear();
+        
+          series.bullets.push(function () {
+            return am5.Bullet.new(root, {
+              locationY: 0,
+              sprite: am5.Label.new(root, {
+                text: "{valueY}",
+                fill: root.interfaceColors.get("alternativeText"),
+                centerY: 0,
+                centerX: am5.p50,
+                populateText: true
+              })
+            });
+          });
+        
+          legend.data.push(series);
+        }
+        
+
+        makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+        makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
+        makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
+        chart.appear(1000, 100);
+        });  
+    }
+     if(chart == 10){
+        $("#append_div").append('<div id="amchart"></div>');
+        am5.ready(function() {
+        var root = am5.Root.new("amchart");
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+          panX: false,
+          panY: false,
+          wheelX: "panX",
+          wheelY: "zoomX",
+          layout: root.verticalLayout
+        }));
+        var legend = chart.children.push(
+          am5.Legend.new(root, {
+            width: am5.percent(100),
+            centerX: am5.percent(50),
+            x: am5.percent(50),
+            marginTop:10,
+          })
+        );
+        
+        var data = {!! json_encode($volunteer) !!};
+        root.numberFormatter.setAll({
+          numberFormat: "#a",
+          bigNumberPrefixes: [
+            { "number": 1e+3, "suffix": "K" },
+            { "number": 1e+6, "suffix": "M" },
+            { "number": 1e+9, "suffix": "B" }
+          ],
+        
+          smallNumberPrefixes: []
+        });
+       
+        var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+          categoryField: "districts",
+          // xAxis:renderer.minGridDistance = 20,
+          renderer: am5xy.AxisRendererX.new(root, {
+            cellStartLocation: 0.1,
+            cellEndLocation: 0.9,
+            minGridDistance :20,
+          }),
+          tooltip: am5.Tooltip.new(root, {})
+        }));
+        
+        xAxis.data.setAll(data);
+        
+        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+          
+          renderer: am5xy.AxisRendererY.new(root, {})
+        }));
+        
+        function makeSeries(name, fieldName, color) {
+          var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+            name: name,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: fieldName,
+            categoryXField: "districts"
+            ,fill:color,
+          }));
+          
+        
+          series.columns.template.setAll({
+            tooltipText: "{name}, {categoryX}:{valueY}",
+            width: am5.percent(90),
+            tooltipY: 0
+          });
+        
+          series.data.setAll(data);
+        
+          series.appear();
+        
+          series.bullets.push(function () {
+            return am5.Bullet.new(root, {
+              locationY: 0,
+              sprite: am5.Label.new(root, {
+                text: "{valueY}",
+                fill: root.interfaceColors.get("alternativeText"),
+                centerY: 0,
+                centerX: am5.p50,
+                populateText: true
+              })
+            });
+          });
+        
+          legend.data.push(series);
+        }
+        
+
+        makeSeries("Number of meeting with NYKS", "nyks_number_meetings",am5.color("#6d1ed1"));
+        makeSeries("Number of Participants(Male)", "nyks_participants_male",am5.color("#f96fab"));
+        makeSeries("Number of Participants(Female)", "nyks_participants_female",am5.color("#007bff"));
+        makeSeries("Number of meeting with NSS", "nss_number_meetings",am5.color("#ccff66"));
+        makeSeries("Number of Participants(Male)", "nss_participants_male",am5.color("#f96fab"));
+        makeSeries("Number of Participants(Female)", "nss_participants_female",am5.color("#007bff"));
+        makeSeries("Number of meeting with Bharat Scout Guide", "bsg_number_meetings",am5.color("#ff3300"));
+        makeSeries("Number of Participants(Male)", "bsg_participants_male",am5.color("#f96fab"));
+        makeSeries("Number of Participants(Female)", "bsg_participants_female",am5.color("#007bff"));
+
+        chart.appear(1000, 100);
+        });  
     }
   });
 </script>

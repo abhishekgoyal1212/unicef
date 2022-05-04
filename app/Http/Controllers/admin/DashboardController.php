@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\SocialMobilization\SmMeetingInstitutionsReligious;
 use Auth;
 use Str;
 use Validator;
@@ -15,14 +16,132 @@ use DB;
 class DashboardController extends Controller
 {
 	public function index()
-	{	
+	{
+
+		// DB::getQueryLog();
+		// $data = SmMeetingInstitutionsReligious::with('Alldeta')->select('user_id','number_meetings','number_participants_male','number_participants_Female')->get()->sum('number_meetings','number_participants_male','number_participants_Female')->groupBy('districts');
+		// dd(DB::getQueryLog());
+
 		$data = DB::table('meeting_institutions_religious_leaders')
 		->join('users', 'users.id', '=', 'meeting_institutions_religious_leaders.user_id')
-		->select('users.districts', 'meeting_institutions_religious_leaders.number_meetings', 'meeting_institutions_religious_leaders.number_participants_male', 'meeting_institutions_religious_leaders.number_participants_female')->get();
+		->select('users.districts', DB::raw('SUM(meeting_institutions_religious_leaders.number_meetings) as meeting'), DB::raw('SUM(meeting_institutions_religious_leaders.number_participants_male) as male'), DB::raw('SUM(meeting_institutions_religious_leaders.number_participants_female) as female'))
+		->groupBy('users.districts')
+		->get();
+		foreach($data as $key => $value){
+			 $value->meeting = (int)$value->meeting;
+			 $value->male = (int)$value->male;
+			 $value->female = (int)$value->female;
+		}
 
+
+		$result = DB::table('sm_meeting_influencers')
+		->join('users', 'users.id', '=', 'sm_meeting_influencers.user_id')
+		->select('users.districts', DB::raw('SUM(sm_meeting_influencers.number_meetings) as meeting'), DB::raw('SUM(sm_meeting_influencers.number_participants_male) as male'), DB::raw('SUM(sm_meeting_influencers.number_participants_female) as female'))
+		->groupBy('users.districts')
+		->get();
+		foreach($result as $key => $value){
+			 $value->meeting = (int)$value->meeting;
+			 $value->male = (int)$value->male;
+			 $value->female = (int)$value->female;
+		}
+
+		$number_meeting = DB::table('sm_number_meeting')
+		->join('users', 'users.id', '=', 'sm_number_meeting.user_id')
+		->select('users.districts', DB::raw('SUM(sm_number_meeting.lions_club) as lions_club'), DB::raw('SUM(sm_number_meeting.rotary) as rotary_club'), DB::raw('SUM(sm_number_meeting.local_csos_Others) as locals'))
+		->groupBy('users.districts')
+		->get();
+
+		foreach($number_meeting as $key => $value){
+			 $value->lions_club = (int)$value->lions_club;
+			 $value->rotary_club = (int)$value->rotary_club;
+			 $value->locals = (int)$value->locals;
+		}
+
+		$sm_ipc = DB::table('sm_ipc')
+		->join('users', 'users.id', '=', 'sm_ipc.user_id')
+		->select('users.districts', DB::raw('SUM(sm_ipc.number_meetings) as meeting'), DB::raw('SUM(sm_ipc.number_participants_male) as male'), DB::raw('SUM(sm_ipc.number_participants_female) as female'))
+		->groupBy('users.districts')
+		->get();
+		foreach($sm_ipc as $key => $value){
+			 $value->meeting = (int)$value->meeting;
+			 $value->male = (int)$value->male;
+			 $value->female = (int)$value->female;
+		}
+
+		$mother_meeting = DB::table('sm_mother_meeting')
+		->join('users', 'users.id', '=', 'sm_mother_meeting.user_id')
+		->select('users.districts', DB::raw('SUM(sm_mother_meeting.number_meetings) as meeting'), DB::raw('SUM(sm_mother_meeting.number_participants_male) as male'), DB::raw('SUM(sm_mother_meeting.number_participants_female) as female'))
+		->groupBy('users.districts')
+		->get();
+		foreach($mother_meeting as $key => $value){
+			 $value->meeting = (int)$value->meeting;
+			 $value->male = (int)$value->male;
+			 $value->female = (int)$value->female;
+		}
+
+		$community_meeting = DB::table('sm_community_meeting')
+		->join('users', 'users.id', '=', 'sm_community_meeting.user_id')
+		->select('users.districts', DB::raw('SUM(sm_community_meeting.number_meetings) as meeting'), DB::raw('SUM(sm_community_meeting.number_participants_male) as male'), DB::raw('SUM(sm_community_meeting.number_participants_female) as female'))
+		->groupBy('users.districts')
+		->get();
+		foreach($community_meeting as $key => $value){
+			 $value->meeting = (int)$value->meeting;
+			 $value->male = (int)$value->male;
+			 $value->female = (int)$value->female;
+		}
+
+		$shg_meeting = DB::table('sm_shg_member_meeting')
+		->join('users', 'users.id', '=', 'sm_shg_member_meeting.user_id')
+		->select('users.districts', DB::raw('SUM(sm_shg_member_meeting.number_meetings) as meeting'), DB::raw('SUM(sm_shg_member_meeting.number_participants_male) as male'), DB::raw('SUM(sm_shg_member_meeting.number_participants_female) as female'))
+		->groupBy('users.districts')
+		->get();
+		foreach($shg_meeting as $key => $value){
+			 $value->meeting = (int)$value->meeting;
+			 $value->male = (int)$value->male;
+			 $value->female = (int)$value->female;
+		}
+
+		$vulrenable_meeting = DB::table('sm_vulrenable_groups_meeting')
+		->join('users', 'users.id', '=', 'sm_vulrenable_groups_meeting.user_id')
+		->select('users.districts', DB::raw('SUM(sm_vulrenable_groups_meeting.number_meetings) as meeting'), DB::raw('SUM(sm_vulrenable_groups_meeting.number_participants_male) as male'), DB::raw('SUM(sm_vulrenable_groups_meeting.number_participants_female) as female'))
+		->groupBy('users.districts')
+		->get();
+		foreach($vulrenable_meeting as $key => $value){
+			 $value->meeting = (int)$value->meeting;
+			 $value->male = (int)$value->male;
+			 $value->female = (int)$value->female;
+		}
+
+		$excluded_groups = DB::table('sm_excluded_groups_meeting')
+		->join('users', 'users.id', '=', 'sm_excluded_groups_meeting.user_id')
+		->select('users.districts', DB::raw('SUM(sm_excluded_groups_meeting.number_meetings) as meeting'), DB::raw('SUM(sm_excluded_groups_meeting.number_participants_male) as male'), DB::raw('SUM(sm_excluded_groups_meeting.number_participants_female) as female'))
+		->groupBy('users.districts')
+		->get();
+		foreach($excluded_groups as $key => $value){
+			 $value->meeting = (int)$value->meeting;
+			 $value->male = (int)$value->male;
+			 $value->female = (int)$value->female;
+		}
+
+		$volunteer = DB::table('sm_volunteer_organization_meeting')
+		->join('users', 'users.id', '=', 'sm_volunteer_organization_meeting.user_id')
+		->select('users.districts', DB::raw('SUM(sm_volunteer_organization_meeting.nyks_number_meetings) as nyks_number_meetings'), DB::raw('SUM(sm_volunteer_organization_meeting.nyks_participants_male) as nyks_participants_male'), DB::raw('SUM(sm_volunteer_organization_meeting.nyks_participants_female) as nyks_participants_female'), DB::raw('SUM(sm_volunteer_organization_meeting.nss_number_meetings) as nss_number_meetings'), DB::raw('SUM(sm_volunteer_organization_meeting.nss_participants_male) as nss_participants_male'), DB::raw('SUM(sm_volunteer_organization_meeting.nss_participants_female) as nss_participants_female'),DB::raw('SUM(sm_volunteer_organization_meeting.bsg_number_meetings) as bsg_number_meetings'),DB::raw('SUM(sm_volunteer_organization_meeting.bsg_participants_male) as bsg_participants_male'),DB::raw('SUM(sm_volunteer_organization_meeting.bsg_participants_female) as bsg_participants_female'))
+		->groupBy('users.districts')
+		->get();
 		
-		
-		return view('admin/dashboard/dashboard', ['data' => $data]);	
+		foreach($volunteer as $key => $value){
+			 $value->nyks_number_meetings = (int)$value->nyks_number_meetings;
+			 $value->nyks_participants_male = (int)$value->nyks_participants_male;
+			 $value->nyks_participants_female = (int)$value->nyks_participants_female;
+			 $value->nss_number_meetings = (int)$value->nss_number_meetings;
+			 $value->nss_participants_male = (int)$value->nss_participants_male;
+			 $value->nss_participants_female = (int)$value->nss_participants_female;
+			 $value->bsg_number_meetings = (int)$value->bsg_number_meetings;
+			 $value->bsg_participants_male = (int)$value->bsg_participants_male;
+			 $value->bsg_participants_female = (int)$value->bsg_participants_female;
+		}
+	
+		return view('admin/dashboard/dashboard', ['data' => $data, 'result' => $result, 'number_meeting' => $number_meeting, 'sm_ipc' => $sm_ipc, 'mother_meeting' => $mother_meeting, 'community_meeting' => $community_meeting, 'shg_meeting' => $shg_meeting, 'vulrenable_meeting' => $vulrenable_meeting, 'excluded_groups' => $excluded_groups, 'volunteer' => $volunteer]);	
 	}
 
 	public function logout(Request $request)
@@ -117,6 +236,6 @@ class DashboardController extends Controller
 		}else{
 			return redirect('profile?type=update_password')->with('flash-error', 'old password doesnt matched');
 		}
-		dd($inputs);
+		
 	}
 }
