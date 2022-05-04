@@ -109,23 +109,32 @@
         <div class="col-md-12 pr-lg-4">
          <!--  <h4 class="mb-4">Social Mobilization</h4> -->
 
-
-          <div class="select-sec-box">
-
-         <select id="chart_id">
-           <option >Social Mobilization</option>
-             <option value="1">Meeting with Faith Based Institutions /Religious Leaders</option>
-             <option value="2"> Meeting with Influencers </option>
-             <option value="3">Number of Meeting with</option>
-             <option value="4">IPC</option>
-             <option value="5">Mother Meetings</option>
-             <option value="6">Community Meetings</option>
-             <option value="7">Meeting with SHG Members</option>
-             <option value="8">Meeting with Vulrenable Groups Sites</option>
-             <option value="9">Meeting with excluded groups(PWD,Transgender)</option>
-             <option value="10">Meeting with the volunteer organization</option>
-         </select>
-</div>
+        <div class="row">
+           <div class="col-3">
+              <input type="text" name="from_date_field">
+            </div>
+            <div class="col-3">
+              <input type="text" name="to_date_field">
+            </div>
+            <div class="col-6">
+                  <div class="select-sec-box">
+                   <select id="chart_id">
+                     <option >Social Mobilization</option>
+                       <option value="1">Meeting with Faith Based Institutions /Religious Leaders</option>
+                       <option value="2"> Meeting with Influencers </option>
+                       <option value="3">Number of Meeting with</option>
+                       <option value="4">IPC</option>
+                       <option value="5">Mother Meetings</option>
+                       <option value="6">Community Meetings</option>
+                       <option value="7">Meeting with SHG Members</option>
+                       <option value="8">Meeting with Vulrenable Groups Sites</option>
+                       <option value="9">Meeting with excluded groups(PWD,Transgender)</option>
+                       <option value="10">Meeting with the volunteer organization</option>
+                   </select>
+                  </div>
+            </div>
+           
+        </div>
 
           <div id="append_div" style="background-color:white;">
         
@@ -301,131 +310,111 @@
 <script>
    $('#chart_id').on('change', function(){
     var chartvalueresult = this.value;
+      var from_date_field_value = $("input[name=from_date_field]").val();
+     var to_date_field_value = $("input[name=to_date_field]").val();
+     var csrf_token  = '{{csrf_token()}}';
      $("#append_div").empty();
      $("#append_div").append('<div id="amchart"></div>');
-        am5.ready(function() {
-        var root = am5.Root.new("amchart");
-        root.setThemes([
-          am5themes_Animated.new(root)
-        ]);
-        var chart = root.container.children.push(am5xy.XYChart.new(root, {
-          panX: false,
-          panY: false,
-          wheelX: "panX",
-          wheelY: "zoomX",
-          layout: root.verticalLayout
-        }));
-        var legend = chart.children.push(
-          am5.Legend.new(root, {
-            width: am5.percent(100),
-            centerX: am5.percent(50),
-            x: am5.percent(50),
-            marginTop:10,
-          })
-        );
-        
-            if(chartvalueresult == 1){
-               var data = {!! json_encode($data) !!};
-            }
-            if(chartvalueresult == 2){
-                var data = {!! json_encode($result) !!};
-            }
-            if(chartvalueresult == 3){
-                var data = {!! json_encode($number_meeting) !!};
-            }
-            if(chartvalueresult == 4){
-              var data = {!! json_encode($sm_ipc) !!};
-            }
-            if(chartvalueresult == 5){
-               var data = {!! json_encode($mother_meeting) !!};
-            }
-            if(chartvalueresult == 6){
-               var data = {!! json_encode($community_meeting) !!};
-            }
-            if(chartvalueresult == 7){
-              var data = {!! json_encode($shg_meeting) !!};
-            }
-            if(chartvalueresult == 8){
-              var data = {!! json_encode($vulrenable_meeting) !!};
-            }
-            if(chartvalueresult == 9){
-              var data = {!! json_encode($excluded_groups) !!};
-            }
-            if(chartvalueresult == 10){
-              var data = {!! json_encode($volunteer) !!};
-            }
+     $.ajax({
+            url: "{{route('fetch_graph_data')}}",
+            type:'POST',                                                            
+            data: {
+              _token:csrf_token,from_date:from_date_field_value, to_date:to_date_field_value, chartvalueresult: chartvalueresult},
+            success: function(dataquery){
+               var dataresult = JSON.parse(dataquery);
+               am5.ready(function() {
+                var root = am5.Root.new("amchart");
+                root.setThemes([
+                  am5themes_Animated.new(root)
+                ]);
+                var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                  panX: false,
+                  panY: false,
+                  wheelX: "panX",
+                  wheelY: "zoomX",
+                  layout: root.verticalLayout
+                }));
+                
+                var legend = chart.children.push(
+                  am5.Legend.new(root, {
+                    width: am5.percent(100),
+                    centerX: am5.percent(50),
+                    x: am5.percent(50),
+                    marginTop:10,
+                  })
+                );
+              var data = dataresult;
 
-
-        root.numberFormatter.setAll({
-          numberFormat: "#a",
-          bigNumberPrefixes: [
-            { "number": 1e+3, "suffix": "K" },
-            { "number": 1e+6, "suffix": "M" },
-            { "number": 1e+9, "suffix": "B" }
-          ],
-        
-          smallNumberPrefixes: []
-        });
-       
-        var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-          categoryField: "districts",
-          // xAxis:renderer.minGridDistance = 20,
-          renderer: am5xy.AxisRendererX.new(root, {
-            cellStartLocation: 0.1,
-            cellEndLocation: 0.9,
-            minGridDistance :20,
-          }),
-          tooltip: am5.Tooltip.new(root, {})
-        }));
-        
-        xAxis.data.setAll(data);
-        
-        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-          
-          renderer: am5xy.AxisRendererY.new(root, {})
-        }));
-        
-        function makeSeries(name, fieldName, color) {
-          var series = chart.series.push(am5xy.ColumnSeries.new(root, {
-            name: name,
-            xAxis: xAxis,
-            yAxis: yAxis,
-            valueYField: fieldName,
-            categoryXField: "districts"
-            ,fill:color,
-          }));
-          
-        
-          series.columns.template.setAll({
-            tooltipText: "{name}={valueY}",
-            width: am5.percent(90),
-            tooltipY: 0
-          });
-        
-          series.data.setAll(data);
-        
-          series.appear();
-        
-          series.bullets.push(function () {
-            return am5.Bullet.new(root, {
-              locationY: 0,
-              sprite: am5.Label.new(root, {
-                text: "{valueY}",
-                fill: root.interfaceColors.get("alternativeText"),
-                centerY: 0,
-                centerX: am5.p50,
-                populateText: true
-              })
-            });
-          });
-        
-          legend.data.push(series);
-        }
-        
+                root.numberFormatter.setAll({
+                  numberFormat: "#a",
+                  bigNumberPrefixes: [
+                    { "number": 1e+3, "suffix": "K" },
+                    { "number": 1e+6, "suffix": "M" },
+                    { "number": 1e+9, "suffix": "B" }
+                  ],
+                
+                  smallNumberPrefixes: []
+                });
+               
+                var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+                  categoryField: "districts",
+                  // xAxis:renderer.minGridDistance = 20,
+                  renderer: am5xy.AxisRendererX.new(root, {
+                    cellStartLocation: 0.1,
+                    cellEndLocation: 0.9,
+                    minGridDistance :20,
+                  }),
+                  tooltip: am5.Tooltip.new(root, {})
+                }));
+                
+                xAxis.data.setAll(data);
+                
+                var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                  
+                  renderer: am5xy.AxisRendererY.new(root, {})
+                }));
+                
+                function makeSeries(name, fieldName, color) {
+                  var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                    name: name,
+                    xAxis: xAxis,
+                    yAxis: yAxis,
+                    valueYField: fieldName,
+                    categoryXField: "districts"
+                    ,fill:color,
+                  }));
+                  
+                
+                  series.columns.template.setAll({
+                    tooltipText: "{name}={valueY}",
+                    width: am5.percent(90),
+                    tooltipY: 0
+                  });
+                
+                  series.data.setAll(data);
+                
+                  series.appear();
+                
+                  series.bullets.push(function () {
+                    return am5.Bullet.new(root, {
+                      locationY: 0,
+                      sprite: am5.Label.new(root, {
+                        text: "{valueY}",
+                        fill: root.interfaceColors.get("alternativeText"),
+                        centerY: 0,
+                        centerX: am5.p50,
+                        populateText: true
+                      })
+                    });
+                  });
+                
+                  legend.data.push(series);
+                }
+                
         if(chartvalueresult == 1){
           makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
           makeSeries("Number of Male", "male",am5.color("#f96fab"));
-        makeSeries("Number of Female", "female",am5.color("#007bff"));
+          makeSeries("Number of Female", "female",am5.color("#007bff"));
         }
         if(chartvalueresult == 2){
           makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
@@ -478,8 +467,12 @@
           makeSeries("Number of Participants(Male)", "bsg_participants_male",am5.color("#f96fab"));
           makeSeries("Number of Participants(Female)", "bsg_participants_female",am5.color("#007bff"));
         }
-        chart.appear(1000, 100);
-        }); 
+                chart.appear(1000, 100);
+                }); 
+
+            }
+          });
+    
 
   });
 </script>

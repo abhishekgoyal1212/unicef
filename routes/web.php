@@ -62,7 +62,7 @@ Route::get('/', function () {
 			Route::post('update-profile', 'update_profile')->name('update_profile');
 			Route::post('update-profile-photo', 'update_profile_photo')->name('update_profile_photo');
 			Route::post('update-password', 'update_password')->name('update_password');
-
+			Route::post('fetch-graph-data', 'fetch_graph_data')->name('fetch_graph_data');
 		});
 
 		Route::controller(PlaningPlatform::class)->group(function(){
