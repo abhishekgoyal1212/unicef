@@ -1,4 +1,4 @@
-
+// $("#datepicker").datepicker();
     function onlyOne(checkbox) {
     var checkboxes = document.getElementsByName('check')
     checkboxes.forEach((item) => {

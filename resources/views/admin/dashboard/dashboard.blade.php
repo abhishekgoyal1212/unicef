@@ -111,12 +111,15 @@
 
         <div class="row">
            <div class="col-3">
-              <input type="text" name="from_date_field">
+              <lable>From </lable>
+              <input type="text" name="from_date_field" id="start_date">
             </div>
             <div class="col-3">
-              <input type="text" name="to_date_field">
+              <lable>To </lable>
+              <input type="text" name="to_date_field" id="end_date">
             </div>
             <div class="col-6">
+                  <lable>Chart Type</lable>
                   <div class="select-sec-box">
                    <select id="chart_id">
                      <option >Social Mobilization</option>
@@ -308,6 +311,20 @@
   </div>
 </div>
 <script>
+  $( function() {
+  $( "#start_date" ).datepicker({
+    dateFormat: "yy-mm-dd"
+    , duration: "fast"
+  });
+});
+  $( function() {
+  $( "#end_date" ).datepicker({
+    dateFormat: "yy-mm-dd"
+    , duration: "fast"
+  });
+});
+  </script>
+<script>
    $('#chart_id').on('change', function(){
     var chartvalueresult = this.value;
       var from_date_field_value = $("input[name=from_date_field]").val();
@@ -475,5 +492,7 @@
     
 
   });
+
 </script>
+
 @stop

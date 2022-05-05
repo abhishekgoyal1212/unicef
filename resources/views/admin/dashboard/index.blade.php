@@ -21,6 +21,9 @@ $first_segments_sidebar = Request::route()->action['as'];
   <!-- toastr css-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
 
+    <!-- datepicker css-->
+  <link href="{{asset('public/template/plugins/datepicker/jquery-ui.css')}}" rel="stylesheet"/>
+
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -137,7 +140,7 @@ $first_segments_sidebar = Request::route()->action['as'];
 <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
-<script src="{{ asset('public/dashboard/js/amCharts.js') }}" ></script>
+<script src="{{asset('public/dashboard/js/amCharts.js') }}" ></script>
 
 
 
@@ -147,6 +150,8 @@ crossorigin="anonymous"></script>
 <script src="{{url('public/dashboard/calander/jquery.simple-calendar.js')}}"></script>
 <script type="text/javascript" src="{{url('public/dashboard/js/bootstrap-multiselect.js')}}"></script>
 
+<!-- datepicker js -->
+<script src="{{asset('public/template/plugins/datepicker/jquery-ui.js')}}"></script>
 
 <!-- Styles -->
 <style>

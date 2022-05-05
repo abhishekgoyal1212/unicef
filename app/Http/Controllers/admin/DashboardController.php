@@ -125,6 +125,7 @@ class DashboardController extends Controller
 		$to_date = date($inputs['to_date']);
 		$chartvalue = $inputs['chartvalueresult'];
 		if($chartvalue == 1){
+			// DB::getQueryLog();
 			$data = DB::table('meeting_institutions_religious_leaders')
 			->join('users', 'users.id', '=', 'meeting_institutions_religious_leaders.user_id')
 			->select('users.districts', DB::raw('SUM(meeting_institutions_religious_leaders.number_meetings) as meeting'), DB::raw('SUM(meeting_institutions_religious_leaders.number_participants_male) as male'), DB::raw('SUM(meeting_institutions_religious_leaders.number_participants_female) as female'))
