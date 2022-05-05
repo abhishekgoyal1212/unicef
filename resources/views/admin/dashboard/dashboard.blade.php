@@ -21,8 +21,7 @@
                 <p>Welcome back !!</p>
               </div>
               <div class="col-md-3 d-flex flex-column">
-
-                <img src="{{ asset('public/dashboard/img/aravali.png') }}" class="img-fluid" alt="">
+                <img src="{{asset('public/dashboard/img/aravali.png') }}" class="img-fluid" alt="">
                 <h2>ARAVALI</h2>
               </div>
             </div>
@@ -107,9 +106,9 @@
        
        <div class="row my-4">
         <div class="col-md-12 pr-lg-4">
-         <!--  <h4 class="mb-4">Social Mobilization</h4> -->
+          <center><h4 class="mb-4">Social Mobilization</h4></center>
 
-        <div class="row">
+        <div class="row" id="error_data_append">
            <div class="col-3">
               <lable>From </lable>
               <input type="text" name="from_date_field" id="start_date">
@@ -320,9 +319,12 @@
   $( function() {
   $( "#end_date" ).datepicker({
     dateFormat: "yy-mm-dd"
-    , duration: "fast"
+    , duration: "fast",
+    maxDate : "0",
   });
 });
+  
+
   </script>
 <script>
    $('#chart_id').on('change', function(){
@@ -332,13 +334,21 @@
      var csrf_token  = '{{csrf_token()}}';
      $("#append_div").empty();
      $("#append_div").append('<div id="amchart"></div>');
+     $("#error_data").remove();
+
      $.ajax({
             url: "{{route('fetch_graph_data')}}",
             type:'POST',                                                            
             data: {
               _token:csrf_token,from_date:from_date_field_value, to_date:to_date_field_value, chartvalueresult: chartvalueresult},
             success: function(dataquery){
-               var dataresult = JSON.parse(dataquery);
+              if(dataquery == 'error')
+              {
+                  $("#error_data_append").after('<div class="row" id="error_data"><div class="col-12"><div class="alert alert-danger">Data Not Found</div></div></div>')
+              }else{
+                 var dataresult = JSON.parse(dataquery);
+              }
+            
                am5.ready(function() {
                 var root = am5.Root.new("amchart");
                 root.setThemes([
@@ -489,8 +499,6 @@
 
             }
           });
-    
-
   });
 
 </script>

@@ -64,10 +64,10 @@ class DashboardController extends Controller
 		$previous_image = $res->profile;
 		if($_FILES['avatar']['name'] != ''){
 			$img_name  = time() . '-' . Str::of(md5(time() . $request->file('avatar')->getClientOriginalName()))->substr(0, 50) . '.' . $request->file('avatar')->extension();
-			$path = $request->file('avatar')->storeAs('public\user-assets\img\users-image', $img_name);
+			  $path = $request->file('avatar')->move(public_path('users-image'), $img_name);
         	$admindata['avatar'] = $img_name;
-        	if($previous_image !='' && $previous_image != null){
-        		$paths = public_path('public\user-assets\img\users-image/'.$previous_image);
+        	if($previous_image !=''){
+        		$paths = public_path('users-image'.$previous_image);
         		if(!empty(file_exists($paths))){
         			unlink($paths);
         		}
@@ -265,6 +265,13 @@ class DashboardController extends Controller
 			}
 		}
 
-		echo $data;
+		$count = count($data);
+		if($count == 0){
+			$data = 'error';
+			echo $data;
+		}
+		else{
+			echo $data;
+		}
 	}	
 }
