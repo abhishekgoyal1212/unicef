@@ -130,6 +130,8 @@ class DashboardController extends Controller
 			->join('users', 'users.id', '=', 'meeting_institutions_religious_leaders.user_id')
 			->select('users.districts', DB::raw('SUM(meeting_institutions_religious_leaders.number_meetings) as meeting'), DB::raw('SUM(meeting_institutions_religious_leaders.number_participants_male) as male'), DB::raw('SUM(meeting_institutions_religious_leaders.number_participants_female) as female'))
 			->whereBetween('meeting_institutions_religious_leaders.created_at', [$from_date, $to_date])
+			->orWhereDate('meeting_institutions_religious_leaders.created_at', $from_date)
+			->orWhereDate('meeting_institutions_religious_leaders.created_at', $to_date)
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
@@ -143,6 +145,8 @@ class DashboardController extends Controller
 			->join('users', 'users.id', '=', 'sm_meeting_influencers.user_id')
 			->select('users.districts', DB::raw('SUM(sm_meeting_influencers.number_meetings) as meeting'), DB::raw('SUM(sm_meeting_influencers.number_participants_male) as male'), DB::raw('SUM(sm_meeting_influencers.number_participants_female) as female'))
 			->whereBetween('sm_meeting_influencers.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_meeting_influencers.created_at', $from_date)
+			->orWhereDate('sm_meeting_influencers.created_at', $to_date)
 			->groupBy('users.districts')
 			->get();
 			 foreach($data as $key => $value){
@@ -156,6 +160,8 @@ class DashboardController extends Controller
 			->join('users', 'users.id', '=', 'sm_number_meeting.user_id')
 			->select('users.districts', DB::raw('SUM(sm_number_meeting.lions_club) as lions_club'), DB::raw('SUM(sm_number_meeting.rotary) as rotary_club'), DB::raw('SUM(sm_number_meeting.local_csos_Others) as locals'))
 			->whereBetween('sm_number_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_number_meeting.created_at', $from_date)
+			->orWhereDate('sm_number_meeting.created_at', $to_date)
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
@@ -169,6 +175,8 @@ class DashboardController extends Controller
 			->join('users', 'users.id', '=', 'sm_ipc.user_id')
 			->select('users.districts', DB::raw('SUM(sm_ipc.number_meetings) as meeting'), DB::raw('SUM(sm_ipc.number_participants_male) as male'), DB::raw('SUM(sm_ipc.number_participants_female) as female'))
 			->whereBetween('sm_ipc.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_ipc.created_at', $from_date)
+			->orWhereDate('sm_ipc.created_at', $to_date)
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
@@ -182,6 +190,8 @@ class DashboardController extends Controller
 			->join('users', 'users.id', '=', 'sm_mother_meeting.user_id')
 			->select('users.districts', DB::raw('SUM(sm_mother_meeting.number_meetings) as meeting'), DB::raw('SUM(sm_mother_meeting.number_participants_male) as male'), DB::raw('SUM(sm_mother_meeting.number_participants_female) as female'))
 			->whereBetween('sm_mother_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_mother_meeting.created_at', $from_date)
+			->orWhereDate('sm_mother_meeting.created_at', $to_date)
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
@@ -196,6 +206,8 @@ class DashboardController extends Controller
 			->join('users', 'users.id', '=', 'sm_community_meeting.user_id')
 			->select('users.districts', DB::raw('SUM(sm_community_meeting.number_meetings) as meeting'), DB::raw('SUM(sm_community_meeting.number_participants_male) as male'), DB::raw('SUM(sm_community_meeting.number_participants_female) as female'))
 			->whereBetween('sm_community_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_community_meeting.created_at', $from_date)
+			->orWhereDate('sm_community_meeting.created_at', $to_date)
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
@@ -209,6 +221,8 @@ class DashboardController extends Controller
 			->join('users', 'users.id', '=', 'sm_shg_member_meeting.user_id')
 			->select('users.districts', DB::raw('SUM(sm_shg_member_meeting.number_meetings) as meeting'), DB::raw('SUM(sm_shg_member_meeting.number_participants_male) as male'), DB::raw('SUM(sm_shg_member_meeting.number_participants_female) as female'))
 			->whereBetween('sm_shg_member_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_shg_member_meeting.created_at', $from_date)
+			->orWhereDate('sm_shg_member_meeting.created_at', $to_date)
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
@@ -222,6 +236,8 @@ class DashboardController extends Controller
 			->join('users', 'users.id', '=', 'sm_vulrenable_groups_meeting.user_id')
 			->select('users.districts', DB::raw('SUM(sm_vulrenable_groups_meeting.number_meetings) as meeting'), DB::raw('SUM(sm_vulrenable_groups_meeting.number_participants_male) as male'), DB::raw('SUM(sm_vulrenable_groups_meeting.number_participants_female) as female'))
 			->whereBetween('sm_vulrenable_groups_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_vulrenable_groups_meeting.created_at', $from_date)
+			->orWhereDate('sm_vulrenable_groups_meeting.created_at', $to_date)
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
@@ -235,6 +251,8 @@ class DashboardController extends Controller
 			->join('users', 'users.id', '=', 'sm_excluded_groups_meeting.user_id')
 			->select('users.districts', DB::raw('SUM(sm_excluded_groups_meeting.number_meetings) as meeting'), DB::raw('SUM(sm_excluded_groups_meeting.number_participants_male) as male'), DB::raw('SUM(sm_excluded_groups_meeting.number_participants_female) as female'))
 			->whereBetween('sm_excluded_groups_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_excluded_groups_meeting.created_at', $from_date)
+			->orWhereDate('sm_excluded_groups_meeting.created_at', $to_date)
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
@@ -249,6 +267,8 @@ class DashboardController extends Controller
 			->join('users', 'users.id', '=', 'sm_volunteer_organization_meeting.user_id')
 			->select('users.districts', DB::raw('SUM(sm_volunteer_organization_meeting.nyks_number_meetings) as nyks_number_meetings'), DB::raw('SUM(sm_volunteer_organization_meeting.nyks_participants_male) as nyks_participants_male'), DB::raw('SUM(sm_volunteer_organization_meeting.nyks_participants_female) as nyks_participants_female'), DB::raw('SUM(sm_volunteer_organization_meeting.nss_number_meetings) as nss_number_meetings'), DB::raw('SUM(sm_volunteer_organization_meeting.nss_participants_male) as nss_participants_male'), DB::raw('SUM(sm_volunteer_organization_meeting.nss_participants_female) as nss_participants_female'),DB::raw('SUM(sm_volunteer_organization_meeting.bsg_number_meetings) as bsg_number_meetings'),DB::raw('SUM(sm_volunteer_organization_meeting.bsg_participants_male) as bsg_participants_male'),DB::raw('SUM(sm_volunteer_organization_meeting.bsg_participants_female) as bsg_participants_female'))
 			->whereBetween('sm_volunteer_organization_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_volunteer_organization_meeting.created_at', $from_date)
+			->orWhereDate('sm_volunteer_organization_meeting.created_at', $to_date)
 			->groupBy('users.districts')
 			->get();
 			

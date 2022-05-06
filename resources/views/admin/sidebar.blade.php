@@ -48,7 +48,7 @@ $first_segments_sidebar = Request::route()->action['as'];
       <div class="col-sm-3">
         <div class="sidebar">
           <div class="userimg">
-          <img class="rounded-circle" src="{{asset('public/user-assets/img/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100" alt=""></div>
+          <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100" alt=""></div>
           <ul class="nav nav-tabs tabs-left d-flex flex-column" role="tablist">
 
             <li class="d-block" role="presentation">

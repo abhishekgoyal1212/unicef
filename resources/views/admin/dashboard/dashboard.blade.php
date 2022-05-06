@@ -7,7 +7,31 @@
     height: 350px;
     background-color: white;
 }
+.select-sec-box h5{
+    padding-top: 30px;
+
+
+  }
+.custom-date-sec{
+  padding-top: 35px
+}
+
+.custom-date-sec input{
+   padding: 23px 10px !important;
+   background: #f7f2ef !important;
+
+}
+.custom-date-sec-s input{
+   background: #f7f2ef !important;
+
+}
+.select-sec-box select{
+  padding: 10px;
+  width: 95%;
+} 
   </style>
+
+
  
 <div class="col-sm-9">
   <div class='row'>
@@ -72,11 +96,11 @@
           <div class="col-md-4 pl-5">
              <!--  <a href="{{route('admin.logout')}}" class="logout"><span>Sign Out</span></a> -->
                 <div class="deshboard-img-sec" >
-                  <a href="#"> <img class="rounded-circle" src="{{asset('public/user-assets/img/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100" id="showmenu"></a>
+                  <a href="#"> <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100" id="showmenu"></a>
                 </div>
                 <div class="deshboard-conteant-sec"  style="display: none;">
                   <div class="arrow"></div>
-                 <img class="rounded-circle" src="{{asset('public/user-assets/img/users-image/'. auth()->user()->profile)}}" alt="">
+                 <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="">
                     <span>Admin</span>
 
 
@@ -110,13 +134,17 @@
 
         <div class="row" id="error_data_append">
            <div class="col-3">
-              <lable>From </lable>
+            <div class="custom-date-sec-s">
+              <lable>From Date</lable>
               <input type="text" name="from_date_field" id="start_date">
             </div>
+            </div>
             <div class="col-3">
-              <lable>To </lable>
+              <div class="custom-date-sec-s">
+              <lable>To Date</lable>
               <input type="text" name="to_date_field" id="end_date">
             </div>
+          </div>
             <div class="col-6">
                   <lable>Chart Type</lable>
                   <div class="select-sec-box">
@@ -144,11 +172,66 @@
          
           {{--<img src="{{asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
         </div>
-        <div class="col-md-6 pl-lg-4">
-          <h4 class="mb-4">Mass Media</h4>
-          <div id="amchart2"></div>
-          {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
+
+        <div class="select-sec-box col-md-4">
+            <h5>Select Planing Platform Table</h5>
+          <select class="select_value" id="select_value">
+             <option value="1">DTF/DHS Meeting</option>
+             <option value="2">Nigrani Samiti meeting</option>
+             <option value="3">District Communication plan availability</option>
+             <option value="4">Fortnightly Implementation Report of DCP</option>
+        </select>
         </div>
+       <div class="select-sec-box for-show-hide col-md-4" id="show-1">
+           <h5>Planing Platform Columns</h5>
+          <select>
+             <option value="1" class="select" hidden>Select Column</option>
+             <option value="1" class="select">Wheather Meeting Held</option>
+             <option value="1" class="select">Whether SBCC Consultant participated</option>
+             <option value="1" class="select">Suggestions provided by SBCC Consultant</option>
+        </select>
+        </div>
+        <div class="select-sec-box for-show-hide" id="show-2" style="display: none;">
+           <h5>Planing Platform Columns</h5>
+          <select>
+             <option value="1" class="select" hidden>Select Column</option>
+             <option value="1" class="select">Wheather Meeting Held</option>
+             <option value="1" class="select">Whether SBCC Consultant participated</option>
+        </select>
+        </div>
+        <div class="select-sec-box for-show-hide" id="show-3" style="display: none;">
+           <h5>Planing Platform Columns</h5>
+        <select>
+             <option value="1" class="select" hidden>Select Column</option>
+             <option value="1" class="select">Wheather DCP Developed</option>
+        </select>
+        </div>
+         <div class="select-sec-box for-show-hide" id="show-4" style="display: none;">
+           <h5>Planing Platform Columns</h5>
+        <select>
+             <option value="1" class="select" hidden>Select Column</option>
+             <option value="1" class="select">1st Fortnighly Report sent by District</option>
+             <option value="1" class="select">2nd Fortnighly Report sent by District</option>
+        </select>
+        </div>
+
+      <div class="col-3">
+        <div class="custom-date-sec">
+
+              <lable>Select Date</lable>
+              <input type="text" name="from_date_field" id="start_date_pl">
+            </div>
+          </div>
+
+      
+
+      <div class="col-md-8 pl-lg-6">
+       <h4 class="mb-4">Planing Platform</h4>
+       <div id="chartdiv"></div>
+       {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
+     </div>
+
+
       </div>
       <div class="row my-4">
         <div class="col-md-6 pr-lg-4 ">
@@ -255,11 +338,14 @@
 
         {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
       </div>
-      <div class="col-md-6 pl-lg-4">
-       <h4 class="mb-4">Orientation</h4>
-       <div id="chartdiv"></div>
-       {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
-     </div>
+      
+   <div class="col-md-6 pl-lg-4">
+          <h4 class="mb-4">Mass Media</h4>
+          <div id="amchart2"></div>
+          {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
+        </div>  
+
+
    </div>
  </div>
 
@@ -310,24 +396,34 @@
   </div>
 </div>
 <script>
-  $( function() {
-  $( "#start_date" ).datepicker({
-    dateFormat: "yy-mm-dd"
-    , duration: "fast"
-  });
+  $(document).ready(function () {
+    $("#start_date").datepicker({
+        dateFormat: "yy-mm-dd",
+        maxDate: 0,
+        onSelect: function () {
+            var dt2 = $('#end_date');
+            var startDate = $(this).datepicker('getDate');
+            startDate.setDate(startDate.getDate() + 30);
+            var minDate = $(this).datepicker('getDate');
+            var dt2Date = dt2.datepicker('getDate');
+            var dateDiff = (dt2Date - minDate)/(86400 * 1000);
+            if (dt2Date == null || dateDiff < 0) {
+                    dt2.datepicker('setDate', minDate);
+            }
+            else if (dateDiff > 30){
+                    dt2.datepicker('setDate', startDate);
+            }
+            dt2.datepicker('option', 'minDate', minDate);
+        }
+    });
+    $('#end_date').datepicker({
+        dateFormat: "yy-mm-dd",
+        maxDate : "0",
+    });
 });
-  $( function() {
-  $( "#end_date" ).datepicker({
-    dateFormat: "yy-mm-dd"
-    , duration: "fast",
-    maxDate : "0",
-  });
-});
-  
-
-  </script>
+</script>
 <script>
-   $('#chart_id').on('change', function(){
+    $('#chart_id').on('change', function(){
     var chartvalueresult = this.value;
       var from_date_field_value = $("input[name=from_date_field]").val();
      var to_date_field_value = $("input[name=to_date_field]").val();
@@ -496,11 +592,73 @@
         }
                 chart.appear(1000, 100);
                 }); 
-
             }
           });
   });
+</script>
 
+<script type="text/javascript">
+            $( function() {
+  $( "#start_date_pl" ).datepicker({
+    dateFormat: "yy-mm-dd"
+    , duration: "fast"
+  });
+});
+</script>
+<script>
+   $('#select_value').click(function(event) {
+        $(".for-show-hide").hide().removeClass('col-md-4');
+        $("#show-"+$(this).val()).addClass('col-md-4').show();
+    });
+
+  am5.ready(function() {
+    var root = am5.Root.new("chartdiv");
+    root.setThemes([
+      am5themes_Animated.new(root)
+    ]);
+    var chart = root.container.children.push(am5percent.PieChart.new(root, {
+      radius: am5.percent(90),
+      innerRadius: am5.percent(50),
+      layout: root.horizontalLayout
+    }));
+    var series = chart.series.push(am5percent.PieSeries.new(root, {
+      name: "Series",
+      valueField: "sales",
+      categoryField: "country"
+    }));
+    series.data.setAll([{
+      country: "Sirohi",
+      sales: 908
+    }, {
+      country: "Dungarpur",
+      sales: 418
+    }]);
+    series.labels.template.set("visible", false);
+    series.ticks.template.set("visible", false);
+    series.slices.template.set("strokeOpacity", 0);
+    series.slices.template.set("fillGradient", am5.RadialGradient.new(root, {
+      stops: [{
+        brighten: -0.8
+      }, {
+        brighten: -0.8
+      }, {
+        brighten: -0.5
+      }, {
+        brighten: 0
+      }, {
+        brighten: -0.5
+      }]
+    }));
+    var legend = chart.children.push(am5.Legend.new(root, {
+      centerY: am5.percent(50),
+      y: am5.percent(50),
+      marginTop: 15,
+      marginBottom: 15,
+      layout: root.verticalLayout
+    }));
+    legend.data.setAll(series.dataItems);
+    series.appear(1000, 100);
+    }); 
 </script>
 
 @stop
