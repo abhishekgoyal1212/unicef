@@ -5,7 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\SocialMobilization\SmMeetingInstitutionsReligious;
+use App\Models\PlaningPlatform\Planing;
+use App\Models\PlaningPlatform\NigraniSamitiMeeting;
+use App\Models\PlaningPlatform\DistrictCommunication;
+use App\Models\PlaningPlatform\FortnightlyReport;
+
 use Auth;
 use Str;
 use Validator;
@@ -64,14 +68,14 @@ class DashboardController extends Controller
 		$previous_image = $res->profile;
 		if($_FILES['avatar']['name'] != ''){
 			$img_name  = time() . '-' . Str::of(md5(time() . $request->file('avatar')->getClientOriginalName()))->substr(0, 50) . '.' . $request->file('avatar')->extension();
-			  $path = $request->file('avatar')->move(public_path('users-image'), $img_name);
-        	$admindata['avatar'] = $img_name;
-        	if($previous_image !=''){
-        		$paths = public_path('users-image'.$previous_image);
-        		if(!empty(file_exists($paths))){
-        			unlink($paths);
-        		}
-        	}
+			$path = $request->file('avatar')->move(public_path('users-image'), $img_name);
+			$admindata['avatar'] = $img_name;
+			if($previous_image !=''){
+				$paths = public_path('users-image'.$previous_image);
+				if(!empty(file_exists($paths))){
+					unlink($paths);
+				}
+			}
         	// if (!empty($previous_image)) {
          //        Storage::delete('public\user-assets\img\users-image'. $previous_image);
          //    }
@@ -80,11 +84,11 @@ class DashboardController extends Controller
 		$res->profile = $admindata['avatar'];
 		$result = $res->save();
 
-		 if ($result) {
-            echo  '1' ;
-        } else {
-            echo  '0' ;
-        }
+		if ($result) {
+			echo  '1' ;
+		} else {
+			echo  '0' ;
+		}
 	}
 
 	public function update_password(Request $request){
@@ -135,9 +139,9 @@ class DashboardController extends Controller
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
-				 $value->meeting = (int)$value->meeting;
-				 $value->male = (int)$value->male;
-				 $value->female = (int)$value->female;
+				$value->meeting = (int)$value->meeting;
+				$value->male = (int)$value->male;
+				$value->female = (int)$value->female;
 			}
 		}
 		if($chartvalue == 2){
@@ -149,11 +153,11 @@ class DashboardController extends Controller
 			->orWhereDate('sm_meeting_influencers.created_at', $to_date)
 			->groupBy('users.districts')
 			->get();
-			 foreach($data as $key => $value){
-			 $value->meeting = (int)$value->meeting;
-			 $value->male = (int)$value->male;
-			 $value->female = (int)$value->female;
-			 }
+			foreach($data as $key => $value){
+				$value->meeting = (int)$value->meeting;
+				$value->male = (int)$value->male;
+				$value->female = (int)$value->female;
+			}
 		}
 		if($chartvalue == 3){
 			$data = DB::table('sm_number_meeting')
@@ -165,9 +169,9 @@ class DashboardController extends Controller
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
-				 $value->lions_club = (int)$value->lions_club;
-				 $value->rotary_club = (int)$value->rotary_club;
-				 $value->locals = (int)$value->locals;
+				$value->lions_club = (int)$value->lions_club;
+				$value->rotary_club = (int)$value->rotary_club;
+				$value->locals = (int)$value->locals;
 			}
 		}
 		if($chartvalue == 4){
@@ -180,9 +184,9 @@ class DashboardController extends Controller
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
-				 $value->meeting = (int)$value->meeting;
-				 $value->male = (int)$value->male;
-				 $value->female = (int)$value->female;
+				$value->meeting = (int)$value->meeting;
+				$value->male = (int)$value->male;
+				$value->female = (int)$value->female;
 			}
 		}
 		if($chartvalue == 5){
@@ -195,9 +199,9 @@ class DashboardController extends Controller
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
-				 $value->meeting = (int)$value->meeting;
-				 $value->male = (int)$value->male;
-				 $value->female = (int)$value->female;
+				$value->meeting = (int)$value->meeting;
+				$value->male = (int)$value->male;
+				$value->female = (int)$value->female;
 			}
 
 		}
@@ -211,9 +215,9 @@ class DashboardController extends Controller
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
-				 $value->meeting = (int)$value->meeting;
-				 $value->male = (int)$value->male;
-				 $value->female = (int)$value->female;
+				$value->meeting = (int)$value->meeting;
+				$value->male = (int)$value->male;
+				$value->female = (int)$value->female;
 			}
 		}
 		if($chartvalue == 7){
@@ -226,9 +230,9 @@ class DashboardController extends Controller
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
-				 $value->meeting = (int)$value->meeting;
-				 $value->male = (int)$value->male;
-				 $value->female = (int)$value->female;
+				$value->meeting = (int)$value->meeting;
+				$value->male = (int)$value->male;
+				$value->female = (int)$value->female;
 			}
 		}
 		if($chartvalue == 8){
@@ -241,9 +245,9 @@ class DashboardController extends Controller
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
-				 $value->meeting = (int)$value->meeting;
-				 $value->male = (int)$value->male;
-				 $value->female = (int)$value->female;
+				$value->meeting = (int)$value->meeting;
+				$value->male = (int)$value->male;
+				$value->female = (int)$value->female;
 			}
 		}
 		if($chartvalue == 9){
@@ -256,9 +260,9 @@ class DashboardController extends Controller
 			->groupBy('users.districts')
 			->get();
 			foreach($data as $key => $value){
-				 $value->meeting = (int)$value->meeting;
-				 $value->male = (int)$value->male;
-				 $value->female = (int)$value->female;
+				$value->meeting = (int)$value->meeting;
+				$value->male = (int)$value->male;
+				$value->female = (int)$value->female;
 			}
 
 		}
@@ -273,15 +277,15 @@ class DashboardController extends Controller
 			->get();
 			
 			foreach($data as $key => $value){
-				 $value->nyks_number_meetings = (int)$value->nyks_number_meetings;
-				 $value->nyks_participants_male = (int)$value->nyks_participants_male;
-				 $value->nyks_participants_female = (int)$value->nyks_participants_female;
-				 $value->nss_number_meetings = (int)$value->nss_number_meetings;
-				 $value->nss_participants_male = (int)$value->nss_participants_male;
-				 $value->nss_participants_female = (int)$value->nss_participants_female;
-				 $value->bsg_number_meetings = (int)$value->bsg_number_meetings;
-				 $value->bsg_participants_male = (int)$value->bsg_participants_male;
-				 $value->bsg_participants_female = (int)$value->bsg_participants_female;
+				$value->nyks_number_meetings = (int)$value->nyks_number_meetings;
+				$value->nyks_participants_male = (int)$value->nyks_participants_male;
+				$value->nyks_participants_female = (int)$value->nyks_participants_female;
+				$value->nss_number_meetings = (int)$value->nss_number_meetings;
+				$value->nss_participants_male = (int)$value->nss_participants_male;
+				$value->nss_participants_female = (int)$value->nss_participants_female;
+				$value->bsg_number_meetings = (int)$value->bsg_number_meetings;
+				$value->bsg_participants_male = (int)$value->bsg_participants_male;
+				$value->bsg_participants_female = (int)$value->bsg_participants_female;
 			}
 		}
 
@@ -293,5 +297,88 @@ class DashboardController extends Controller
 		else{
 			echo $data;
 		}
+	}
+
+	public function planning_graph(Request $request){
+		$inputs = $request->all();
+		$from_date = date($inputs['date']);
+		$planingchartvalue = ($inputs['planingchartvalue']);
+		if ($planingchartvalue == 1) {
+			$data = Planing::whereDate('created_at',$from_date)->select('wheather_meeting as yes')->get();
+		}else if($planingchartvalue == 2) {
+			$data = Planing::whereDate('created_at',$from_date)->select('wheather_Consultant as yes')->get();
+		}else if($planingchartvalue == 3) {
+			$data = Planing::whereDate('created_at',$from_date)->select('suggestions_Consultant as yes')->get();
+		}else if($planingchartvalue == 4) {
+			$data = NigraniSamitiMeeting::whereDate('created_at',$from_date)->select('wheather_meeting as yes')->get();
+		}else if($planingchartvalue == 5) {
+			$data = NigraniSamitiMeeting::whereDate('created_at',$from_date)->select('wheather_consultant_participated as yes')->get();
+		}else if($planingchartvalue == 6) {
+			$data = DistrictCommunication::whereDate('created_at',$from_date)->select('wheather_developed as yes')->get();
+		}else if($planingchartvalue == 7) {
+			$data = FortnightlyReport::whereDate('created_at',$from_date)->select('first_fortnighly_report as yes')->get();
+		}else if($planingchartvalue == 8) {
+			$data = FortnightlyReport::whereDate('created_at',$from_date)->select('second_fortnighly_report as yes')->get();
+		}
+		$arrayName = ["Yes" => 0,"No" => 0];
+		foreach($data as $key => $value){
+			if($value->yes == 0){
+				$arrayName['No']++;
+			}elseif($value->yes == 1){
+				$arrayName['Yes']++;
+			}
+		}
+
+		$date = $inputs['date'];
+		$chartvaluenumber = $inputs['planingchartvalue'];
+			if($chartvaluenumber == 1) {
+				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting as condition')->get();
+			}else if($chartvaluenumber == 2) {
+				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_Consultant as condition')->get();
+			}else if($chartvaluenumber == 3) {
+				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','suggestions_Consultant as condition')->get();
+			}else if($chartvaluenumber == 4) {
+				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting as condition')->get();
+			}else if($chartvaluenumber == 5) {
+				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_consultant_participated as condition')->get();
+			}else if($chartvaluenumber == 6) {
+				$data = DistrictCommunication::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_developed as condition')->get();
+			}else if($chartvaluenumber == 7) {
+				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','first_fortnighly_report as condition')->get();
+			}else if($chartvaluenumber == 8) {
+				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','second_fortnighly_report as condition')->get();
+			}
+		// echo json_encode($data);
+			$arrayName['yes_no_values'] = $data;
+
+
+		///////////////
+			echo json_encode($arrayName);
+	}
+
+
+	public function planning_districts(Request $request){	
+		$inputs = $request->input();
+		$date = $inputs['date'];
+		$table_colum_value = $inputs['yes_no_value'];
+		$chartvaluenumber = $inputs['chartvaluenumber'];
+			if($chartvaluenumber == 1) {
+				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting')->where('wheather_meeting',$table_colum_value)->get();
+			}else if($chartvaluenumber == 2) {
+				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_Consultant')->where('wheather_Consultant',$table_colum_value)->get();
+			}else if($chartvaluenumber == 3) {
+				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','suggestions_Consultant')->where('suggestions_Consultant',$table_colum_value)->get();
+			}else if($chartvaluenumber == 4) {
+				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting')->where('wheather_meeting',$table_colum_value)->get();
+			}else if($chartvaluenumber == 5) {
+				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_consultant_participated')->where('wheather_consultant_participated',$table_colum_value)->get();
+			}else if($chartvaluenumber == 6) {
+				$data = DistrictCommunication::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_developed')->where('wheather_developed',$table_colum_value)->get();
+			}else if($chartvaluenumber == 7) {
+				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','first_fortnighly_report')->where('first_fortnighly_report',$table_colum_value)->get();
+			}else if($chartvaluenumber == 8) {
+				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','second_fortnighly_report')->where('second_fortnighly_report',$table_colum_value)->get();
+			}
+		echo json_encode($data);
 	}	
 }

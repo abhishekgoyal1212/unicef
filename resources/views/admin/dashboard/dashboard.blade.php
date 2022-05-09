@@ -6,33 +6,59 @@
     width: 100%;
     height: 350px;
     background-color: white;
-}
-.select-sec-box h5{
-    padding-top: 30px;
-
-
   }
-.custom-date-sec{
-  padding-top: 35px
-}
+  .select-sec-box h5 {
+    padding-top: 0px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .pp_append_div {
+    width: 100%;
+    height: 350px;
+    background-color: white;
+  }
+  .custom-date-sec{
+    padding-top: 2px
+  }
 
-.custom-date-sec input{
-   padding: 23px 10px !important;
+  .custom-date-sec input{
+   padding: 22px 10px !important;
+   background: #f7f2ef !important;
+   margin-top: 4px !important
+
+ }
+ .custom-date-sec-s input{
    background: #f7f2ef !important;
 
-}
-.custom-date-sec-s input{
-   background: #f7f2ef !important;
-
-}
-.select-sec-box select{
+ }
+ .select-sec-box select{
   padding: 10px;
   width: 95%;
 } 
-  </style>
+.select-sec-box.topic button{
+  border: 1px solid #cecece;
+  height: 40px;
+  width: 100px;
+  margin-top: 40px;
+  font-size: 16px;
+  color: #000000;
+}
+select#yes_no_in_district {
+  width: 85%;
+}
+ul#list_group li {
+  list-style: none;
+  font-size: 14px;
+  padding: 5px;
+  color: #000
+}
+ul#list_group li:first-child{
+  padding-top: 0px
+}
+</style>
 
 
- 
+
 <div class="col-sm-9">
   <div class='row'>
     <div class="tab-content">
@@ -94,262 +120,309 @@
             </div>
           </div>
           <div class="col-md-4 pl-5">
-             <!--  <a href="{{route('admin.logout')}}" class="logout"><span>Sign Out</span></a> -->
-                <div class="deshboard-img-sec" >
-                  <a href="#"> <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100" id="showmenu"></a>
-                </div>
-                <div class="deshboard-conteant-sec"  style="display: none;">
-                  <div class="arrow"></div>
-                 <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="">
-                    <span>Admin</span>
+           <!--  <a href="{{route('admin.logout')}}" class="logout"><span>Sign Out</span></a> -->
+           <div class="deshboard-img-sec" >
+            <a href="#"> <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100" id="showmenu"></a>
+          </div>
+          <div class="deshboard-conteant-sec"  style="display: none;">
+            <div class="arrow"></div>
+            <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="">
+            <span>Admin</span>
 
 
-                    <div class="deshboard-conteant-btn">
-                      <a href="{{route('profile')}}"><button class="mr-2">Profile</button></a>
-                      <a href="{{route('admin.logout')}}"><button class="ml-2">Sign out</button></a>
-                    </div>
-                </div>
+            <div class="deshboard-conteant-btn">
+              <a href="{{route('profile')}}"><button class="mr-2">Profile</button></a>
+              <a href="{{route('admin.logout')}}"><button class="ml-2">Sign out</button></a>
+            </div>
+          </div>
 
 
 
-              <div class="calender logout-calender bg-white p-2">
-                <div class="logo text-center mb-3">
+          <div class="calender logout-calender bg-white p-2">
+            <div class="logo text-center mb-3">
 
-                  <img src="{{ asset('public/dashboard/img/unicefnewlogo.png') }}" class="mt-2" alt="">
-                </div>
+              <img src="{{ asset('public/dashboard/img/unicefnewlogo.png') }}" class="mt-2" alt="">
+            </div>
 
 
-                <div class="cal text-center py-3 border-top">
-                 <div id="container" class="calendar-container"></div>
+            <div class="cal text-center py-3 border-top">
+             <div id="container" class="calendar-container"></div>
 
-                 {{--<img src="{{ asset('public/dashboard/img/cal.jpg') }}" class="img-fluid" alt="">--}}
-               </div>
-             </div>
+             {{--<img src="{{ asset('public/dashboard/img/cal.jpg') }}" class="img-fluid" alt="">--}}
            </div>
+         </div>
        </div>
-       
-       <div class="row my-4">
-        <div class="col-md-12 pr-lg-4">
-          <center><h4 class="mb-4">Social Mobilization</h4></center>
-
-        <div class="row" id="error_data_append">
-           <div class="col-3">
-            <div class="custom-date-sec-s">
-              <lable>From Date</lable>
-              <input type="text" name="from_date_field" id="start_date">
-            </div>
-            </div>
-            <div class="col-3">
-              <div class="custom-date-sec-s">
-              <lable>To Date</lable>
-              <input type="text" name="to_date_field" id="end_date">
-            </div>
-          </div>
-            <div class="col-6">
-                  <lable>Chart Type</lable>
-                  <div class="select-sec-box">
-                   <select id="chart_id">
-                     <option >Social Mobilization</option>
-                       <option value="1">Meeting with Faith Based Institutions /Religious Leaders</option>
-                       <option value="2"> Meeting with Influencers </option>
-                       <option value="3">Number of Meeting with</option>
-                       <option value="4">IPC</option>
-                       <option value="5">Mother Meetings</option>
-                       <option value="6">Community Meetings</option>
-                       <option value="7">Meeting with SHG Members</option>
-                       <option value="8">Meeting with Vulrenable Groups Sites</option>
-                       <option value="9">Meeting with excluded groups(PWD,Transgender)</option>
-                       <option value="10">Meeting with the volunteer organization</option>
-                   </select>
-                  </div>
-            </div>
-           
-        </div>
-
-          <div id="append_div" style="background-color:white;">
-        
-          </div>
-         
-          {{--<img src="{{asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
-        </div>
-
-        <div class="select-sec-box col-md-4">
-            <h5>Select Planing Platform Table</h5>
-          <select class="select_value" id="select_value">
-             <option value="1">DTF/DHS Meeting</option>
-             <option value="2">Nigrani Samiti meeting</option>
-             <option value="3">District Communication plan availability</option>
-             <option value="4">Fortnightly Implementation Report of DCP</option>
-        </select>
-        </div>
-       <div class="select-sec-box for-show-hide col-md-4" id="show-1">
-           <h5>Planing Platform Columns</h5>
-          <select>
-             <option value="1" class="select" hidden>Select Column</option>
-             <option value="1" class="select">Wheather Meeting Held</option>
-             <option value="1" class="select">Whether SBCC Consultant participated</option>
-             <option value="1" class="select">Suggestions provided by SBCC Consultant</option>
-        </select>
-        </div>
-        <div class="select-sec-box for-show-hide" id="show-2" style="display: none;">
-           <h5>Planing Platform Columns</h5>
-          <select>
-             <option value="1" class="select" hidden>Select Column</option>
-             <option value="1" class="select">Wheather Meeting Held</option>
-             <option value="1" class="select">Whether SBCC Consultant participated</option>
-        </select>
-        </div>
-        <div class="select-sec-box for-show-hide" id="show-3" style="display: none;">
-           <h5>Planing Platform Columns</h5>
-        <select>
-             <option value="1" class="select" hidden>Select Column</option>
-             <option value="1" class="select">Wheather DCP Developed</option>
-        </select>
-        </div>
-         <div class="select-sec-box for-show-hide" id="show-4" style="display: none;">
-           <h5>Planing Platform Columns</h5>
-        <select>
-             <option value="1" class="select" hidden>Select Column</option>
-             <option value="1" class="select">1st Fortnighly Report sent by District</option>
-             <option value="1" class="select">2nd Fortnighly Report sent by District</option>
-        </select>
-        </div>
-
-      <div class="col-3">
-        <div class="custom-date-sec">
-
-              <lable>Select Date</lable>
-              <input type="text" name="from_date_field" id="start_date_pl">
-            </div>
-          </div>
-
-      
-
-      <div class="col-md-8 pl-lg-6">
-       <h4 class="mb-4">Planing Platform</h4>
-       <div id="chartdiv"></div>
-       {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
      </div>
 
+     <div class="row my-4">
+      <div class="col-md-12 pr-lg-4">
+        <center><h4 class="mb-4">Social Mobilization</h4></center>
 
-      </div>
-      <div class="row my-4">
-        <div class="col-md-6 pr-lg-4 ">
-         <h4 class="mb-4">Pvt Bodies</h4>
-         <div class="bg-white p-4" style="height: 350px;">
-          <div class="row mt-4">
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle"><i class="fa fa-circle"></i></div>
-            </div>    
-            <div class="col-md-10">
-              <div class="progressive_bars" >
-                <div class="progress  ">    
-                  <div class="progress-bar progress_bg " style="width:87%">Sirohi</div>
-                  <div class="progress-bar bg-white progress_text"  style="width:13%">908</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle"><i class="fa fa-circle"></i></div>
-            </div>
-          </div>                   
-          <div class="row mt-4">
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle1"><i class="fa fa-circle"></i></div>
-            </div>    
-            <div class="col-md-10">
-              <div class="progressive_bars" >
-                <div class="progress  ">
-                  <div class="progress-bar progress_bg1" style="width:80%">Jaisalmer</div>
-                  <div class="progress-bar bg-white progress_text1" style="width:20%">533</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle1"><i class="fa fa-circle"></i></div>
-            </div>
-          </div>                    
-          <div class="row mt-4">
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle2"><i class="fa fa-circle"></i></div>
-            </div>    
-            <div class="col-md-10">
-              <div class="progressive_bars" >
-                <div class="progress  ">
-                  <div class="progress-bar progress_bg2" style="width:70%">Dungarpur</div>
-                  <div class="progress-bar bg-white progress_text2" style="width:30%">418</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle2"><i class="fa fa-circle"></i></div>
-            </div>
-          </div>                     
-          <div class="row mt-4" >
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle3" ><i class="fa fa-circle"></i></div>
-            </div>    
-            <div class="col-md-10">
-              <div class="progressive_bars" >
-                <div class="progress  ">
-                  <div class="progress-bar progress_bg3" style="width:60%">Karauli</div>
-                  <div class="progress-bar bg-white progress_text3" style="width:40%">293</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle3"><i class="fa fa-circle"></i></div>
-            </div>
-          </div>                     
-          <div class="row mt-4" >
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle4"><i class="fa fa-circle"></i></div>
-            </div>    
-            <div class="col-md-10">
-              <div class="progressive_bars" >
-                <div class="progress  ">
-                  <div class="progress-bar progress_bg4" style="width:50%">Baran</div>
-                  <div class="progress-bar bg-white progress_text4" style="width:50%">166</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle4"><i class="fa fa-circle"></i></div>
-            </div>
+        <div class="row" id="error_data_append">
+         <div class="col-3">
+          <div class="custom-date-sec-s">
+            <lable>From Date</lable>
+            <input type="text" name="from_date_field" class="start_date" value="2022-05-02">
           </div>
+        </div>
+        <div class="col-3">
+          <div class="custom-date-sec-s">
+            <lable>To Date</lable>
+            <input type="text" name="to_date_field" class="end_date" value="2022-05-02">
+          </div>
+        </div>
+        <div class="col-6">
+          <lable>Chart Type</lable>
+          <div class="select-sec-box">
+           <select id="chart_id">
+             <option >Social Mobilization</option>
+             <option value="1">Meeting with Faith Based Institutions /Religious Leaders</option>
+             <option value="2"> Meeting with Influencers </option>
+             <option value="3">Number of Meeting with</option>
+             <option value="4">IPC</option>
+             <option value="5">Mother Meetings</option>
+             <option value="6">Community Meetings</option>
+             <option value="7">Meeting with SHG Members</option>
+             <option value="8">Meeting with Vulrenable Groups Sites</option>
+             <option value="9">Meeting with excluded groups(PWD,Transgender)</option>
+             <option value="10">Meeting with the volunteer organization</option>
+           </select>
+         </div>
+       </div>
 
-          <div class="row mt-4" >
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle5"><i class="fa fa-circle"></i></div>
-            </div>    
-            <div class="col-md-10">
-              <div class="progressive_bars" >
-                <div class="progress  ">
-                  <div class="progress-bar progress_bg5" style="width:40%">Dholpur</div>
-                  <div class="progress-bar bg-white progress_text5" style="width:60%">97</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <div class="dot_round progress_cricle5"><i class="fa fa-circle"></i></div>
+     </div>
+
+     <div id="append_div" style="background-color:white;">
+     </div>
+
+     {{--<img src="{{asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
+     <center><h4 class="m-5">Planing Platform</h4></center>
+   </div>
+   <div class="col-3">
+    <div class="custom-date-sec">
+      <lable>Select Date</lable>
+      <input type="text" name="from_date" class="start_date" value="2022-04-20">
+    </div>
+  </div>
+
+  <div class="select-sec-box col-md-4">
+    <h5>Select Planing Platform Table</h5>
+    <select class="select_value" id="select_value">
+     <option value="1">DTF/DHS Meeting</option>
+     <option value="2">Nigrani Samiti meeting</option>
+     <option value="3">District Communication plan availability</option>
+     <option value="4">Fortnightly Implementation Report of DCP</option>
+   </select>
+ </div>
+ <div class="col-md-4" >
+   <div class="select-sec-box for-show-hide" id="show-1">
+     <h5>Planing Platform Columns</h5>
+     <select class="planning_chart" id="pp_select_value_id1">
+       <!-- <option value="" class="select" hidden>Select Column</option> -->
+       <option value="1" class="select">Wheather Meeting Held</option>
+       <option value="2" class="select">Whether SBCC Consultant participated</option>
+       <option value="3" class="select">Suggestions provided by SBCC Consultant</option>
+     </select>
+   </div>
+   <div class="select-sec-box for-show-hide" id="show-2" style="display: none;">
+     <h5>Planing Platform Columns</h5>
+     <select class="planning_chart" id="pp_select_value_id2">
+       <option value="" class="select" hidden>Select Column</option>
+       <option value="4" class="select">Wheather Meeting Held</option>
+       <option value="5" class="select">Whether SBCC Consultant participated</option>
+     </select>
+   </div>
+   <div class="select-sec-box for-show-hide" id="show-3" style="display: none;">
+     <h5>Planing Platform Columns</h5>
+     <select class="planning_chart" id="pp_select_value_id3">
+       <option value="0" class="select" hidden>Select Column</option>
+       <option value="6" class="select">Wheather DCP Developed</option>
+     </select>
+   </div>
+   <div class="select-sec-box for-show-hide" id="show-4" style="display: none;">
+     <h5>Planing Platform Columns</h5>
+     <select class="planning_chart" id="pp_select_value_id4">
+       <option value="0" class="select" hidden>Select Column</option>
+       <option value="7" class="select">1st Fortnighly Report sent by District</option>
+       <option value="8" class="select">2nd Fortnighly Report sent by District</option>
+     </select>
+   </div>
+
+
+ </div>
+ <div class="col-md-3">
+  <div class="select-sec-box topic">
+   <h5 class="pt-2">Select Topic</h5>
+   <select class="planning_chart w-100">
+     <option value="0" >Topic1</option>
+     <option value="7" >Topic2</option>
+     <option value="8" >Topic3</option>
+   </select>
+ </div>
+</div>
+
+</div>
+
+<div class="row">
+
+
+  <div class="col-md-8 pl-lg-6">
+   <h4 class="mb-4">Planing Platform</h4>
+   <div id="append_chartdiv" style="background-color:white;"></div>
+   {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}"  width="100%" alt="">--}}
+ </div>
+ <div class="col-md-4 pl-lg-6">
+   <div class="col-md-12 pp_append_div mt-5" style="background-color:transparent;">
+    <div class="select-sec-box" id="yes_no_div_show" style="display: none;">
+      <h6>District List</h6>
+<!--               <select class="select_value" id="yes_no_in_district">
+                 <option value="1">Yes</option>
+                 <option value="0">No</option>
+               </select> -->
+               <table class="table table-hover table-bordered table-striped el-table">
+                <tr>
+                  <th>Yes</th>
+                  <th>No</th>
+                </tr>
+                <tbody id="yes_no_table_district">
+                 
+                </tbody>
+              </table>
+              <style>
+                .list-group {
+                  display: flex;
+                }
+              </style>
+
+              <ul class="list-group" id="list_group">
+                <li>
+
+                </li>
+              </ul>
             </div>
           </div>
         </div>
 
-        {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
       </div>
-      
-   <div class="col-md-6 pl-lg-4">
-          <h4 class="mb-4">Mass Media</h4>
-          <div id="amchart2"></div>
-          {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
-        </div>  
+
+    </div>
+    <div class="row my-4">
+      <div class="col-md-6 pr-lg-4 ">
+       <h4 class="mb-4">Pvt Bodies</h4>
+       <div class="bg-white p-4" style="height: 350px;">
+        <div class="row mt-4">
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle"><i class="fa fa-circle"></i></div>
+          </div>    
+          <div class="col-md-10">
+            <div class="progressive_bars" >
+              <div class="progress  ">    
+                <div class="progress-bar progress_bg " style="width:87%">Sirohi</div>
+                <div class="progress-bar bg-white progress_text"  style="width:13%">908</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle"><i class="fa fa-circle"></i></div>
+          </div>
+        </div>                   
+        <div class="row mt-4">
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle1"><i class="fa fa-circle"></i></div>
+          </div>    
+          <div class="col-md-10">
+            <div class="progressive_bars" >
+              <div class="progress  ">
+                <div class="progress-bar progress_bg1" style="width:80%">Jaisalmer</div>
+                <div class="progress-bar bg-white progress_text1" style="width:20%">533</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle1"><i class="fa fa-circle"></i></div>
+          </div>
+        </div>                    
+        <div class="row mt-4">
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle2"><i class="fa fa-circle"></i></div>
+          </div>    
+          <div class="col-md-10">
+            <div class="progressive_bars" >
+              <div class="progress  ">
+                <div class="progress-bar progress_bg2" style="width:70%">Dungarpur</div>
+                <div class="progress-bar bg-white progress_text2" style="width:30%">418</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle2"><i class="fa fa-circle"></i></div>
+          </div>
+        </div>                     
+        <div class="row mt-4" >
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle3" ><i class="fa fa-circle"></i></div>
+          </div>    
+          <div class="col-md-10">
+            <div class="progressive_bars" >
+              <div class="progress  ">
+                <div class="progress-bar progress_bg3" style="width:60%">Karauli</div>
+                <div class="progress-bar bg-white progress_text3" style="width:40%">293</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle3"><i class="fa fa-circle"></i></div>
+          </div>
+        </div>                     
+        <div class="row mt-4" >
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle4"><i class="fa fa-circle"></i></div>
+          </div>    
+          <div class="col-md-10">
+            <div class="progressive_bars" >
+              <div class="progress  ">
+                <div class="progress-bar progress_bg4" style="width:50%">Baran</div>
+                <div class="progress-bar bg-white progress_text4" style="width:50%">166</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle4"><i class="fa fa-circle"></i></div>
+          </div>
+        </div>
+
+        <div class="row mt-4" >
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle5"><i class="fa fa-circle"></i></div>
+          </div>    
+          <div class="col-md-10">
+            <div class="progressive_bars" >
+              <div class="progress  ">
+                <div class="progress-bar progress_bg5" style="width:40%">Dholpur</div>
+                <div class="progress-bar bg-white progress_text5" style="width:60%">97</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="dot_round progress_cricle5"><i class="fa fa-circle"></i></div>
+          </div>
+        </div>
+      </div>
+
+      {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
+    </div>
+
+    <div class="col-md-6 pl-lg-4">
+      <h4 class="mb-4">Mass Media</h4>
+      <div id="amchart2"></div>
+      {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
+    </div>  
 
 
-   </div>
- </div>
+  </div>
+</div>
 
- <div id="Communication" class="tab-pane fade">
+<div id="Communication" class="tab-pane fade">
   <div class="header">
     <h4>Communication Act..</h4>
   </div>
@@ -387,7 +460,7 @@
               </ul>
             </div>
             <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-            <!-- <div id="chartdiv"></div> -->
+
             <canvas id="myChart" width="1006" height="503" style="display: block; width: 1006px; height: 503px;" class="chartjs-render-monitor"></canvas>
           </div>
         </div>
@@ -395,92 +468,98 @@
     </section>
   </div>
 </div>
+
 <script>
   $(document).ready(function () {
-    $("#start_date").datepicker({
-        dateFormat: "yy-mm-dd",
-        maxDate: 0,
-        onSelect: function () {
-            var dt2 = $('#end_date');
-            var startDate = $(this).datepicker('getDate');
-            startDate.setDate(startDate.getDate() + 30);
-            var minDate = $(this).datepicker('getDate');
-            var dt2Date = dt2.datepicker('getDate');
-            var dateDiff = (dt2Date - minDate)/(86400 * 1000);
-            if (dt2Date == null || dateDiff < 0) {
-                    dt2.datepicker('setDate', minDate);
-            }
-            else if (dateDiff > 30){
-                    dt2.datepicker('setDate', startDate);
-            }
-            dt2.datepicker('option', 'minDate', minDate);
+    $(".start_date").datepicker({
+      onSelect: function() {
+        $(this).change();
+      },
+      dateFormat: "yy-mm-dd",
+      maxDate: 0,
+      onSelect: function () {
+        var dt2 = $('#end_date');
+        var startDate = $(this).datepicker('getDate');
+        startDate.setDate(startDate.getDate() + 30);
+        var minDate = $(this).datepicker('getDate');
+        var dt2Date = dt2.datepicker('getDate');
+        var dateDiff = (dt2Date - minDate)/(86400 * 1000);
+        if (dt2Date == null || dateDiff < 0) {
+          dt2.datepicker('setDate', minDate);
         }
+        else if (dateDiff > 30){
+          dt2.datepicker('setDate', startDate);
+        }
+        dt2.datepicker('option', 'minDate', minDate);
+      }
     });
-    $('#end_date').datepicker({
-        dateFormat: "yy-mm-dd",
-        maxDate : "0",
+    $('.end_date').datepicker({
+      dateFormat: "yy-mm-dd",
+      maxDate : "0",
     });
-});
+  });
 </script>
+
+
 <script>
-    $('#chart_id').on('change', function(){
+
+  $('#chart_id').on('change', function(){
     var chartvalueresult = this.value;
-      var from_date_field_value = $("input[name=from_date_field]").val();
-     var to_date_field_value = $("input[name=to_date_field]").val();
-     var csrf_token  = '{{csrf_token()}}';
-     $("#append_div").empty();
-     $("#append_div").append('<div id="amchart"></div>');
-     $("#error_data").remove();
+    var from_date_field_value = $("input[name=from_date_field]").val();
+    var to_date_field_value = $("input[name=to_date_field]").val();
+    var csrf_token  = '{{csrf_token()}}';
+    $("#append_div").empty();
+    $("#append_div").append('<div id="amchart"></div>');
+    $("#error_data").remove();
+    $.ajax({
+      url: "{{route('fetch_graph_data')}}",
+      type:'POST',                                                            
+      data: {
+        _token:csrf_token,from_date:from_date_field_value, to_date:to_date_field_value, chartvalueresult: chartvalueresult},
+        success: function(dataquery){
+          if(dataquery == 'error')
+          {
+            $("#error_data_append").after('<div class="row" id="error_data"><div class="col-12"><div class="alert alert-danger">Data Not Found</div></div></div>')
+          }else{
+           var dataresult = JSON.parse(dataquery);
+         }
 
-     $.ajax({
-            url: "{{route('fetch_graph_data')}}",
-            type:'POST',                                                            
-            data: {
-              _token:csrf_token,from_date:from_date_field_value, to_date:to_date_field_value, chartvalueresult: chartvalueresult},
-            success: function(dataquery){
-              if(dataquery == 'error')
-              {
-                  $("#error_data_append").after('<div class="row" id="error_data"><div class="col-12"><div class="alert alert-danger">Data Not Found</div></div></div>')
-              }else{
-                 var dataresult = JSON.parse(dataquery);
-              }
-            
-               am5.ready(function() {
-                var root = am5.Root.new("amchart");
-                root.setThemes([
-                  am5themes_Animated.new(root)
-                ]);
-                var chart = root.container.children.push(am5xy.XYChart.new(root, {
-                  panX: false,
-                  panY: false,
-                  wheelX: "panX",
-                  wheelY: "zoomX",
-                  layout: root.verticalLayout
-                }));
-                
-                var legend = chart.children.push(
-                  am5.Legend.new(root, {
-                    width: am5.percent(100),
-                    centerX: am5.percent(50),
-                    x: am5.percent(50),
-                    marginTop:10,
-                  })
-                );
-              var data = dataresult;
+         am5.ready(function() {
+          var root = am5.Root.new("amchart");
+          root.setThemes([
+            am5themes_Animated.new(root)
+            ]);
+          var chart = root.container.children.push(am5xy.XYChart.new(root, {
+            panX: false,
+            panY: false,
+            wheelX: "panX",
+            wheelY: "zoomX",
+            layout: root.verticalLayout
+          }));
 
-                root.numberFormatter.setAll({
-                  numberFormat: "#a",
-                  bigNumberPrefixes: [
-                    { "number": 1e+3, "suffix": "K" },
-                    { "number": 1e+6, "suffix": "M" },
-                    { "number": 1e+9, "suffix": "B" }
-                  ],
-                
-                  smallNumberPrefixes: []
-                });
-               
-                var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-                  categoryField: "districts",
+          var legend = chart.children.push(
+            am5.Legend.new(root, {
+              width: am5.percent(100),
+              centerX: am5.percent(50),
+              x: am5.percent(50),
+              marginTop:10,
+            })
+            );
+          var data = dataresult;
+
+          root.numberFormatter.setAll({
+            numberFormat: "#a",
+            bigNumberPrefixes: [
+            { "number": 1e+3, "suffix": "K" },
+            { "number": 1e+6, "suffix": "M" },
+            { "number": 1e+9, "suffix": "B" }
+            ],
+
+            smallNumberPrefixes: []
+          });
+
+          var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+            categoryField: "districts",
                   // xAxis:renderer.minGridDistance = 20,
                   renderer: am5xy.AxisRendererX.new(root, {
                     cellStartLocation: 0.1,
@@ -489,87 +568,87 @@
                   }),
                   tooltip: am5.Tooltip.new(root, {})
                 }));
-                
-                xAxis.data.setAll(data);
-                
-                var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-                  
-                  renderer: am5xy.AxisRendererY.new(root, {})
-                }));
-                
-                function makeSeries(name, fieldName, color) {
-                  var series = chart.series.push(am5xy.ColumnSeries.new(root, {
-                    name: name,
-                    xAxis: xAxis,
-                    yAxis: yAxis,
-                    valueYField: fieldName,
-                    categoryXField: "districts"
-                    ,fill:color,
-                  }));
-                  
-                
-                  series.columns.template.setAll({
-                    tooltipText: "{name}={valueY}",
-                    width: am5.percent(90),
-                    tooltipY: 0
-                  });
-                
-                  series.data.setAll(data);
-                
-                  series.appear();
-                
-                  series.bullets.push(function () {
-                    return am5.Bullet.new(root, {
-                      locationY: 0,
-                      sprite: am5.Label.new(root, {
-                        text: "{valueY}",
-                        fill: root.interfaceColors.get("alternativeText"),
-                        centerY: 0,
-                        centerX: am5.p50,
-                        populateText: true
-                      })
-                    });
-                  });
-                
-                  legend.data.push(series);
-                }
-                
-        if(chartvalueresult == 1){
-          makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
-          makeSeries("Number of Male", "male",am5.color("#f96fab"));
-          makeSeries("Number of Female", "female",am5.color("#007bff"));
-        }
-        if(chartvalueresult == 2){
-          makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
-          makeSeries("Number of Male", "male",am5.color("#f96fab"));
-          makeSeries("Number of Female", "female",am5.color("#007bff"));
-        }
-        if (chartvalueresult == 3){
-          makeSeries("Number of Meetings with Lions Club", "lions_club",am5.color("#6d1ed1"));
-          makeSeries("Number of Meetings with Rotary", "rotary_club",am5.color("#f96fab"));
-          makeSeries("Number of Meetings with local CSOs/Others", "locals",am5.color("#007bff"));
-        }
-         if (chartvalueresult == 4){
-          makeSeries("Number of IPC", "meeting",am5.color("#6d1ed1"));
-          makeSeries("Number of family visited(male)", "male",am5.color("#f96fab"));
-          makeSeries("Number of family visited(Female)", "female",am5.color("#007bff"));
-        }
-        if(chartvalueresult == 5){
-          makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
-          makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
-          makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
-        }
-        if(chartvalueresult == 6){
-          makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
-          makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
-          makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
-        }
-        if(chartvalueresult == 7){
-         makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
-          makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
-          makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
-        }
-        if(chartvalueresult == 8){
+
+          xAxis.data.setAll(data);
+
+          var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+
+            renderer: am5xy.AxisRendererY.new(root, {})
+          }));
+
+          function makeSeries(name, fieldName, color) {
+            var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+              name: name,
+              xAxis: xAxis,
+              yAxis: yAxis,
+              valueYField: fieldName,
+              categoryXField: "districts"
+              ,fill:color,
+            }));
+
+
+            series.columns.template.setAll({
+              tooltipText: "{name}={valueY}",
+              width: am5.percent(90),
+              tooltipY: 0
+            });
+
+            series.data.setAll(data);
+
+            series.appear();
+
+            series.bullets.push(function () {
+              return am5.Bullet.new(root, {
+                locationY: 0,
+                sprite: am5.Label.new(root, {
+                  text: "{valueY}",
+                  fill: root.interfaceColors.get("alternativeText"),
+                  centerY: 0,
+                  centerX: am5.p50,
+                  populateText: true
+                })
+              });
+            });
+
+            legend.data.push(series);
+          }
+
+          if(chartvalueresult == 1){
+            makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+            makeSeries("Number of Male", "male",am5.color("#f96fab"));
+            makeSeries("Number of Female", "female",am5.color("#007bff"));
+          }
+          if(chartvalueresult == 2){
+            makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+            makeSeries("Number of Male", "male",am5.color("#f96fab"));
+            makeSeries("Number of Female", "female",am5.color("#007bff"));
+          }
+          if (chartvalueresult == 3){
+            makeSeries("Number of Meetings with Lions Club", "lions_club",am5.color("#6d1ed1"));
+            makeSeries("Number of Meetings with Rotary", "rotary_club",am5.color("#f96fab"));
+            makeSeries("Number of Meetings with local CSOs/Others", "locals",am5.color("#007bff"));
+          }
+          if (chartvalueresult == 4){
+            makeSeries("Number of IPC", "meeting",am5.color("#6d1ed1"));
+            makeSeries("Number of family visited(male)", "male",am5.color("#f96fab"));
+            makeSeries("Number of family visited(Female)", "female",am5.color("#007bff"));
+          }
+          if(chartvalueresult == 5){
+            makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+            makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
+            makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
+          }
+          if(chartvalueresult == 6){
+            makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+            makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
+            makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
+          }
+          if(chartvalueresult == 7){
+           makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
+           makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
+           makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
+         }
+         if(chartvalueresult == 8){
           makeSeries("Number of Meetings", "meeting",am5.color("#6d1ed1"));
           makeSeries("Number of Participants(Male)", "male",am5.color("#f96fab"));
           makeSeries("Number of Participants(Female)", "female",am5.color("#007bff"));
@@ -590,75 +669,156 @@
           makeSeries("Number of Participants(Male)", "bsg_participants_male",am5.color("#f96fab"));
           makeSeries("Number of Participants(Female)", "bsg_participants_female",am5.color("#007bff"));
         }
-                chart.appear(1000, 100);
-                }); 
-            }
-          });
-  });
+        chart.appear(1000, 100);
+      }); 
+}
+});
+});
+</script>
+
+<script>
+ $('#select_value').click(function(event) {
+  $(".for-show-hide").hide();
+  $("#show-"+$(this).val()).show();
+});
 </script>
 
 <script type="text/javascript">
-            $( function() {
-  $( "#start_date_pl" ).datepicker({
-    dateFormat: "yy-mm-dd"
-    , duration: "fast"
-  });
-});
-</script>
-<script>
-   $('#select_value').click(function(event) {
-        $(".for-show-hide").hide().removeClass('col-md-4');
-        $("#show-"+$(this).val()).addClass('col-md-4').show();
-    });
+  var chartvaluenumber = 1;
+  $('.planning_chart').on('change', function() {
+    chartvaluenumber = $(this).val();
+    create_chart_flow(chartvaluenumber);
+  }); 
+  function create_chart_flow(IdValue){
+    $("#yes_no_table_district").html("");
+    $("#yes_no_div_show").hide();
+    $("#append_chartdiv").empty();
+    $("#append_chartdiv").append('<div id="chartdiv"></div>');
+    var planingchartvalue = IdValue;
+    var date = $("input[name=from_date]").val();
+    var csrf_token = '{{csrf_token()}}';
+    $.ajax({
+      url: "{{route('planning_graph')}}",
+      type: 'POST',
+      data: {
+        date:date,
+        _token:csrf_token,
+        planingchartvalue:planingchartvalue
+      },
+      success:function(data){
+        var planing_graph = JSON.parse(data);
+        yesVal = 0;
+        noVal = 0;
+        var forLoop = (planing_graph.No < planing_graph.Yes) ? planing_graph.Yes : planing_graph.No;
+        for (var i = 0; i < planing_graph.yes_no_values.length; i++) {
+          var tabstr = `
+            <tr id="forrow${i}">
+              <td id="yesStr${i}"></td>
+              <td id="noStr${i}"></td>
+            </tr>`;
+          $("#yes_no_table_district").append(tabstr);
+          var flag = "";
+          if(planing_graph.yes_no_values[i].condition){
+            flag = "#yesStr"+yesVal; 
+            yesVal++;
+          }else{
+            flag = "#noStr"+noVal; 
+            noVal++;
+          }
+          $(flag).html(planing_graph.yes_no_values[i].all_data.districts);
+          if($("#yesStr"+i).html() == "" && $("#noStr"+i).html() == "")
+          {
+            $("#forrow"+i).remove();
+            console.log("#forrow"+i);
+          }
+        }
+       am5.ready(function() {
+        var root = am5.Root.new("chartdiv");
+        root.setThemes([
+          am5themes_Animated.new(root)
+          ]);
+        var chart = root.container.children.push(am5percent.PieChart.new(root, {
+          radius: am5.percent(90),
+          innerRadius: am5.percent(50),
+          layout: root.horizontalLayout
+        }));
+        var series = chart.series.push(am5percent.PieSeries.new(root, {
+          name: "Series",
+          valueField: "numberofmiting",
+          categoryField: "meeting",
+          legendLabelText: "{category}",
+          legendValueText: "{value}",
 
-  am5.ready(function() {
-    var root = am5.Root.new("chartdiv");
-    root.setThemes([
-      am5themes_Animated.new(root)
-    ]);
-    var chart = root.container.children.push(am5percent.PieChart.new(root, {
-      radius: am5.percent(90),
-      innerRadius: am5.percent(50),
-      layout: root.horizontalLayout
-    }));
-    var series = chart.series.push(am5percent.PieSeries.new(root, {
-      name: "Series",
-      valueField: "sales",
-      categoryField: "country"
-    }));
-    series.data.setAll([{
-      country: "Sirohi",
-      sales: 908
-    }, {
-      country: "Dungarpur",
-      sales: 418
-    }]);
-    series.labels.template.set("visible", false);
-    series.ticks.template.set("visible", false);
-    series.slices.template.set("strokeOpacity", 0);
-    series.slices.template.set("fillGradient", am5.RadialGradient.new(root, {
-      stops: [{
-        brighten: -0.8
-      }, {
-        brighten: -0.8
-      }, {
-        brighten: -0.5
-      }, {
-        brighten: 0
-      }, {
-        brighten: -0.5
-      }]
-    }));
-    var legend = chart.children.push(am5.Legend.new(root, {
-      centerY: am5.percent(50),
-      y: am5.percent(50),
-      marginTop: 15,
-      marginBottom: 15,
-      layout: root.verticalLayout
-    }));
-    legend.data.setAll(series.dataItems);
-    series.appear(1000, 100);
+        }));
+        $("#yes_no_div_show").show(); 
+        series.data.setAll([{
+          meeting:"Yes",
+          numberofmiting:parseInt(planing_graph.Yes)
+        },{
+          meeting:"No",
+          numberofmiting:parseInt(planing_graph.No) 
+        }]);
+        series.labels.template.set("visible", false);
+        series.ticks.template.set("visible", false);
+        series.slices.template.set("strokeOpacity", 0);
+        series.slices.template.set("fillGradient", am5.RadialGradient.new(root, {
+          stops: [{
+            brighten: -0.8
+          }, {
+            brighten: -0.8
+          }, {
+            brighten: -0.5
+          }, {
+            brighten: 0
+          }, {
+            brighten: -0.5
+          }]
+        }));
+
+        var legend = chart.children.push(am5.Legend.new(root, {
+          centerY: am5.percent(50),
+          y: am5.percent(50),
+          marginTop: 15,
+          marginBottom: 15,
+          marginRight: 80,
+          layout: root.verticalLayout
+        }));
+        legend.data.setAll(series.dataItems);
+        series.appear(1000, 100);
+      });
+     }
+   });
+  }
+  create_chart_flow(chartvaluenumber);
+</script>
+
+<script>
+  $('#yes_no_in_district').on('change', function(){
+    $("#list_group").empty();
+    var yes_no_value = this.value;
+    var date_value = $("input[name=from_date]").val();
+    var pl_select_value = $('#select_value').val();
+    var csrf_token  = '{{csrf_token()}}';
+    $.ajax({
+      url: "{{route('planning_districts')}}",
+      type:'POST',                                                            
+      data: {
+        _token:csrf_token,
+        date:date_value,
+        yes_no_value:yes_no_value,
+        chartvaluenumber:chartvaluenumber
+      },
+      success: function(data){
+        var yesnodata = JSON.parse(data);
+        console.log(yesnodata);
+        for (var i = 0; i < yesnodata.length; i++) {
+          $("#list_group").append(`<tr><td>${hello}</td></tr>`);                      
+        }
+      }
     }); 
+  });
 </script>
 
 @stop
+
+<!-- '<li>'+yesnodata[i].all_data.districts+'( '+(yes_no_value == '1' ?'Yes':'No')+' ) +'</li>' -->
