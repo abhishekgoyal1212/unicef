@@ -1,7 +1,9 @@
 @extends('admin.dashboard.index')
 @section('title','Dashboard')
 @section('content')
+
 <style>
+
   #append_div {
     width: 100%;
     height: 350px;
@@ -14,7 +16,7 @@
   }
   .pp_append_div {
     width: 100%;
-    height: 350px;
+    
     background-color: white;
   }
   .custom-date-sec{
@@ -56,6 +58,7 @@ ul#list_group li:first-child{
   padding-top: 0px
 }
 </style>
+
 
 
 
@@ -285,7 +288,7 @@ ul#list_group li:first-child{
                   <th>No</th>
                 </tr>
                 <tbody id="yes_no_table_district">
-                 
+
                 </tbody>
               </table>
               <style>
@@ -502,9 +505,15 @@ ul#list_group li:first-child{
 
 
 <script>
-
+   var chartvalue = 1;
   $('#chart_id').on('change', function(){
-    var chartvalueresult = this.value;
+    var chartvalue = this.value;
+    default_data(chartvalue);  
+});
+
+  function default_data(Idvalue)
+  {
+    var chartvalueresult = Idvalue;
     var from_date_field_value = $("input[name=from_date_field]").val();
     var to_date_field_value = $("input[name=to_date_field]").val();
     var csrf_token  = '{{csrf_token()}}';
@@ -673,7 +682,8 @@ ul#list_group li:first-child{
       }); 
 }
 });
-});
+  }
+  default_data(chartvalue); 
 </script>
 
 <script>
@@ -686,8 +696,8 @@ ul#list_group li:first-child{
 <script type="text/javascript">
   var chartvaluenumber = 1;
   $('.planning_chart').on('change', function() {
-    chartvaluenumber = $(this).val();
-    create_chart_flow(chartvaluenumber);
+      chartvaluenumber = $(this).val();
+      create_chart_flow(chartvaluenumber);
   }); 
   function create_chart_flow(IdValue){
     $("#yes_no_table_district").html("");
@@ -706,33 +716,35 @@ ul#list_group li:first-child{
         planingchartvalue:planingchartvalue
       },
       success:function(data){
+        console.log(data);
         var planing_graph = JSON.parse(data);
         yesVal = 0;
         noVal = 0;
-        var forLoop = (planing_graph.No < planing_graph.Yes) ? planing_graph.Yes : planing_graph.No;
+        // var forLoop = (planing_graph.No < planing_graph.Yes) ? planing_graph.Yes : planing_graph.No;
         for (var i = 0; i < planing_graph.yes_no_values.length; i++) {
           var tabstr = `
-            <tr id="forrow${i}">
-              <td id="yesStr${i}"></td>
-              <td id="noStr${i}"></td>
-            </tr>`;
+          <tr id="forrow${i}">
+            <td id="noStr${i}" class="tdy"></td>
+            <td id="yesStr${i}" class="tdn"></td>
+          </tr>`;
           $("#yes_no_table_district").append(tabstr);
           var flag = "";
           if(planing_graph.yes_no_values[i].condition){
-            flag = "#yesStr"+yesVal; 
-            yesVal++;
-          }else{
-            flag = "#noStr"+noVal; 
-            noVal++;
+           flag = "#noStr"+noVal;
+           noVal++;
+         }else{
+           flag = "#yesStr"+yesVal; 
+           yesVal++;
+         }
+         $(flag).html(planing_graph.yes_no_values[i].all_data.districts);
+      }
+      for (var i = 0; i < $("#yes_no_table_district tr").length; i++) {
+          if($("#forrow"+i+" #noStr"+i).html() == "" && $("#forrow"+i+" #yesStr"+i).html() == ""){
+            $("#forrow"+i).hide();
           }
-          $(flag).html(planing_graph.yes_no_values[i].all_data.districts);
-          if($("#yesStr"+i).html() == "" && $("#noStr"+i).html() == "")
-          {
-            $("#forrow"+i).remove();
-            console.log("#forrow"+i);
-          }
-        }
-       am5.ready(function() {
+
+      }
+      am5.ready(function() {
         var root = am5.Root.new("chartdiv");
         root.setThemes([
           am5themes_Animated.new(root)
@@ -748,10 +760,14 @@ ul#list_group li:first-child{
           categoryField: "meeting",
           legendLabelText: "{category}",
           legendValueText: "{value}",
-
         }));
+        series.get("colors").set("colors", [
+          am5.color(0x54f011),
+          am5.color(0xff7a7a),
+        ]);
         $("#yes_no_div_show").show(); 
         series.data.setAll([{
+          color: "chocolate",
           meeting:"Yes",
           numberofmiting:parseInt(planing_graph.Yes)
         },{
@@ -786,13 +802,13 @@ ul#list_group li:first-child{
         legend.data.setAll(series.dataItems);
         series.appear(1000, 100);
       });
-     }
-   });
+    }
+  });
   }
   create_chart_flow(chartvaluenumber);
 </script>
 
-<script>
+<!-- <script>
   $('#yes_no_in_district').on('change', function(){
     $("#list_group").empty();
     var yes_no_value = this.value;
@@ -810,14 +826,13 @@ ul#list_group li:first-child{
       },
       success: function(data){
         var yesnodata = JSON.parse(data);
-        console.log(yesnodata);
         for (var i = 0; i < yesnodata.length; i++) {
           $("#list_group").append(`<tr><td>${hello}</td></tr>`);                      
         }
       }
     }); 
   });
-</script>
+</script> -->
 
 @stop
 

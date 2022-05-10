@@ -357,28 +357,28 @@ class DashboardController extends Controller
 	}
 
 
-	public function planning_districts(Request $request){	
-		$inputs = $request->input();
-		$date = $inputs['date'];
-		$table_colum_value = $inputs['yes_no_value'];
-		$chartvaluenumber = $inputs['chartvaluenumber'];
-			if($chartvaluenumber == 1) {
-				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting')->where('wheather_meeting',$table_colum_value)->get();
-			}else if($chartvaluenumber == 2) {
-				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_Consultant')->where('wheather_Consultant',$table_colum_value)->get();
-			}else if($chartvaluenumber == 3) {
-				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','suggestions_Consultant')->where('suggestions_Consultant',$table_colum_value)->get();
-			}else if($chartvaluenumber == 4) {
-				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting')->where('wheather_meeting',$table_colum_value)->get();
-			}else if($chartvaluenumber == 5) {
-				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_consultant_participated')->where('wheather_consultant_participated',$table_colum_value)->get();
-			}else if($chartvaluenumber == 6) {
-				$data = DistrictCommunication::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_developed')->where('wheather_developed',$table_colum_value)->get();
-			}else if($chartvaluenumber == 7) {
-				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','first_fortnighly_report')->where('first_fortnighly_report',$table_colum_value)->get();
-			}else if($chartvaluenumber == 8) {
-				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','second_fortnighly_report')->where('second_fortnighly_report',$table_colum_value)->get();
-			}
-		echo json_encode($data);
-	}	
+	// public function planning_districts(Request $request){	
+	// 	$inputs = $request->input();
+	// 	$date = $inputs['date'];
+	// 	$table_colum_value = $inputs['yes_no_value'];
+	// 	$chartvaluenumber = $inputs['chartvaluenumber'];
+	// 		if($chartvaluenumber == 1) {
+	// 			$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting')->where('wheather_meeting',$table_colum_value)->get();
+	// 		}else if($chartvaluenumber == 2) {
+	// 			$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_Consultant')->where('wheather_Consultant',$table_colum_value)->get();
+	// 		}else if($chartvaluenumber == 3) {
+	// 			$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','suggestions_Consultant')->where('suggestions_Consultant',$table_colum_value)->get();
+	// 		}else if($chartvaluenumber == 4) {
+	// 			$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting')->where('wheather_meeting',$table_colum_value)->get();
+	// 		}else if($chartvaluenumber == 5) {
+	// 			$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_consultant_participated')->where('wheather_consultant_participated',$table_colum_value)->get();
+	// 		}else if($chartvaluenumber == 6) {
+	// 			$data = DistrictCommunication::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_developed')->where('wheather_developed',$table_colum_value)->get();
+	// 		}else if($chartvaluenumber == 7) {
+	// 			$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','first_fortnighly_report')->where('first_fortnighly_report',$table_colum_value)->get();
+	// 		}else if($chartvaluenumber == 8) {
+	// 			$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','second_fortnighly_report')->where('second_fortnighly_report',$table_colum_value)->get();
+	// 		}
+	// 	echo json_encode($data);
+	// }	
 }
