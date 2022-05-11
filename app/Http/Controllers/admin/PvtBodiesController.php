@@ -17,130 +17,151 @@ class PvtBodiesController extends Controller
 	public function meeting_ima(Request $request)
 	{
 		$user_id = Auth::id();
-		$inputs = $request->all();
-		$validator = Validator::make($request->all(), [
-			'number_meeting'        => 'required',
-			'number_participants' => 'required',
-		]);
-		if ($validator->fails()) {
-			return redirect()->back()->withErrors($validator)->withinput();
-		}
-		$dhs_meeting = new MeetingIMA;
-		$dhs_meeting->cate_name = 'Pvt Bodies';
-		$dhs_meeting->user_id = $user_id;
-		$dhs_meeting->number_meeting = $inputs['number_meeting']; 
-		$dhs_meeting->number_participants = $inputs['number_participants'];
+	    $today_date = date('Y-m-d');
+	    $user = MeetingIMA::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+    	if($user == 0){	
+			$user_id = Auth::id();
+			$inputs = $request->all();
+			$validator = Validator::make($request->all(), [
+				'number_meeting'        => 'required',
+				'number_participants' => 'required',
+			]);
+			if ($validator->fails()) {
+				return redirect()->back()->withErrors($validator)->withinput();
+			}
+			$dhs_meeting = new MeetingIMA;
+			$dhs_meeting->cate_name = 'Pvt Bodies';
+			$dhs_meeting->user_id = $user_id;
+			$dhs_meeting->number_meeting = $inputs['number_meeting']; 
+			$dhs_meeting->number_participants = $inputs['number_participants'];
 
-		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Meeting with IMA/IAP added successfully');
+			if($dhs_meeting->save()){
+				return back()->with('flash-success', 'Meeting with IMA/IAP added successfully');
+			}else{
+				return back()->with('flash-error', 'Error occured in adding data');
+			}
 		}else{
-			return back()->with('flash-error', 'Error occured in adding data');
-
-	}
+				 return redirect()->back()->with('flash-error', 'Today Details Already Submitted');
+		}
 }
 
-		public function meeting_private(Request $request)
-	{
+	public function meeting_private(Request $request){
 		$user_id = Auth::id();
-		$inputs = $request->all();
-		$validator = Validator::make($request->all(), [
-			'number_meeting'        => 'required',
-			'number_participants' => 'required',
-		]);
-		if ($validator->fails()) {
-			return redirect()->back()->withErrors($validator,'Private_Meeting')->withinput();
-		}
-		$dhs_meeting = new MeetingPractitioners;
-		$dhs_meeting->cate_name = 'Pvt Bodies';
-		$dhs_meeting->user_id = $user_id;
-		$dhs_meeting->number_meeting = $inputs['number_meeting']; 
-		$dhs_meeting->number_participants = $inputs['number_participants'];
+	    $today_date = date('Y-m-d');
+	    $user = MeetingPractitioners::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+    	if($user == 0){	
+			$inputs = $request->all();
+			$validator = Validator::make($request->all(), [
+				'number_meeting'        => 'required',
+				'number_participants' => 'required',
+			]);
+			if ($validator->fails()) {
+				return redirect()->back()->withErrors($validator,'Private_Meeting')->withinput();
+			}
+			$dhs_meeting = new MeetingPractitioners;
+			$dhs_meeting->cate_name = 'Pvt Bodies';
+			$dhs_meeting->user_id = $user_id;
+			$dhs_meeting->number_meeting = $inputs['number_meeting']; 
+			$dhs_meeting->number_participants = $inputs['number_participants'];
 
-		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Meeting with private practitioners added successfully')->with('meeting-practitioners', 'meeting-practitioners');
+			if($dhs_meeting->save()){
+				return back()->with('flash-success', 'Meeting with private practitioners added successfully')->with('meeting-practitioners', 'meeting-practitioners');
+			}else{
+				return back()->with('flash-error', 'Error occured in adding data');
+			} 
 		}else{
-			return back()->with('flash-error', 'Error occured in adding data');
-		} 
-
+				 return redirect()->back()->with('flash-error', 'Today Details Already Submitted')->with('meeting-practitioners', 'meeting-practitioners');
+		}
 	}
 
 
-		public function pharmacists_associations(Request $request)
-	{
+	public function pharmacists_associations(Request $request){
 		$user_id = Auth::id();
-		$inputs = $request->all();
-		$validator = Validator::make($request->all(), [
-			'number_meeting'        => 'required',
-			'number_participants' => 'required',
-		]);
-		if ($validator->fails()) {
-			return redirect()->back()->withErrors($validator, 'Pharmacists_Associations')->withinput();
+	    $today_date = date('Y-m-d');
+	    $user = PharmacistsAssociations::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+    	if($user == 0){	
+			$inputs = $request->all();
+			$validator = Validator::make($request->all(), [
+				'number_meeting'        => 'required',
+				'number_participants' => 'required',
+			]);
+			if ($validator->fails()) {
+				return redirect()->back()->withErrors($validator, 'Pharmacists_Associations')->withinput();
+			}
+			$dhs_meeting = new PharmacistsAssociations;
+			$dhs_meeting->cate_name = 'Pvt Bodies';
+			$dhs_meeting->user_id = $user_id;
+			$dhs_meeting->number_meeting = $inputs['number_meeting']; 
+			$dhs_meeting->number_participants = $inputs['number_participants'];
+
+			if($dhs_meeting->save()){
+				return back()->with('flash-success', 'Pharmacists associations added successfully')->with('pharmacists-associations', 'pharmacists-associations');
+			}else{
+				return back()->with('flash-error', 'Error occured in adding data');
+			} 
 		}
-		$dhs_meeting = new PharmacistsAssociations;
-		$dhs_meeting->cate_name = 'Pvt Bodies';
-		$dhs_meeting->user_id = $user_id;
-		$dhs_meeting->number_meeting = $inputs['number_meeting']; 
-		$dhs_meeting->number_participants = $inputs['number_participants'];
-
-		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Pharmacists associations added successfully')->with('pharmacists-associations', 'pharmacists-associations');
-		}else{
-			return back()->with('flash-error', 'Error occured in adding data');
-		} 
-
+		else{
+				return redirect()->back()->with('flash-error', 'Today Details Already Submitted')->with('pharmacists-associations', 'pharmacists-associations');
+		}
 	}
 
 
-		public function merchant_association(Request $request)
-	{
+	public function merchant_association(Request $request){
 		$user_id = Auth::id();
-		$inputs = $request->all();
-		$validator = Validator::make($request->all(), [
-			'number_meeting'        => 'required',
-			'number_participants' => 'required',
-		]);
-		if ($validator->fails()) {
-			return redirect()->back()->withErrors($validator, 'Merchant_Association')->withinput();
-		}
-		$dhs_meeting = new MerchantAssociation;
-		$dhs_meeting->cate_name = 'Pvt Bodies';
-		$dhs_meeting->user_id = $user_id;
-		$dhs_meeting->number_meeting = $inputs['number_meeting']; 
-		$dhs_meeting->number_participants = $inputs['number_participants'];
+	    $today_date = date('Y-m-d');
+	    $user = MerchantAssociation::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+    	if($user == 0){	
+			$inputs = $request->all();
+			$validator = Validator::make($request->all(), [
+				'number_meeting'        => 'required',
+				'number_participants' => 'required',
+			]);
+			if ($validator->fails()) {
+				return redirect()->back()->withErrors($validator, 'Merchant_Association')->withinput();
+			}
+			$dhs_meeting = new MerchantAssociation;
+			$dhs_meeting->cate_name = 'Pvt Bodies';
+			$dhs_meeting->user_id = $user_id;
+			$dhs_meeting->number_meeting = $inputs['number_meeting']; 
+			$dhs_meeting->number_participants = $inputs['number_participants'];
 
-		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Merchant association added successfully')->with('merchant-association', 'merchant-association');
+			if($dhs_meeting->save()){
+				return back()->with('flash-success', 'Merchant association added successfully')->with('merchant-association', 'merchant-association');
+			}else{
+				return back()->with('flash-error', 'Error occured in adding data');
+			} 
 		}else{
-			return back()->with('flash-error', 'Error occured in adding data');
-		} 
-
+				return redirect()->back()->with('flash-error', 'Today Details Already Submitted')->with('merchant-association', 'merchant-association');
+		}
 	}
 
 
-		public function Others(Request $request)
-	{
+	public function Others(Request $request){
 		$user_id = Auth::id();
-		$inputs = $request->all();
-		$validator = Validator::make($request->all(), [
-			'number_meeting'        => 'required',
-			'number_participants' => 'required',
-		]);
-		if ($validator->fails()) {
-			return redirect()->back()->withErrors($validator, 'Others_Pvt')->withinput();
-		}
-		$dhs_meeting = new Others;
-		$dhs_meeting->cate_name = 'Pvt Bodies';
-		$dhs_meeting->user_id = $user_id;
-		$dhs_meeting->number_meeting = $inputs['number_meeting']; 
-		$dhs_meeting->number_participants = $inputs['number_participants'];
+	    $today_date = date('Y-m-d');
+	    $user = Others::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+    	if($user == 0){
+			$inputs = $request->all();
+			$validator = Validator::make($request->all(), [
+				'number_meeting'        => 'required',
+				'number_participants' => 'required',
+			]);
+			if ($validator->fails()) {
+				return redirect()->back()->withErrors($validator, 'Others_Pvt')->withinput();
+			}
+			$dhs_meeting = new Others;
+			$dhs_meeting->cate_name = 'Pvt Bodies';
+			$dhs_meeting->user_id = $user_id;
+			$dhs_meeting->number_meeting = $inputs['number_meeting']; 
+			$dhs_meeting->number_participants = $inputs['number_participants'];
 
-		if($dhs_meeting->save()){
-			return back()->with('flash-success', 'Others added successfully')->with('others', 'others');
+			if($dhs_meeting->save()){
+				return back()->with('flash-success', 'Others added successfully')->with('others', 'others');
+			}else{
+				return back()->with('flash-error', 'Error occured in adding data');
+			} 
 		}else{
-			return back()->with('flash-error', 'Error occured in adding data');
-		} 
-
+				return redirect()->back()->with('flash-error', 'Today Details Already Submitted')->with('others', 'others');
+		}
 	}
-
-
 }

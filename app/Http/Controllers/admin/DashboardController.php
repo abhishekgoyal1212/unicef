@@ -21,7 +21,6 @@ class DashboardController extends Controller
 {
 	public function index()
 	{
-
 		// DB::getQueryLog();
 		// $data = SmMeetingInstitutionsReligious::with('Alldeta')->select('user_id','number_meetings','number_participants_male','number_participants_Female')->get()->sum('number_meetings','number_participants_male','number_participants_Female')->groupBy('districts');
 		// dd(DB::getQueryLog());
@@ -301,24 +300,25 @@ class DashboardController extends Controller
 
 	public function planning_graph(Request $request){
 		$inputs = $request->all();
+		$to_date = $inputs['todate'];
 		$from_date = date($inputs['date']);
 		$planingchartvalue = ($inputs['planingchartvalue']);
 		if ($planingchartvalue == 1) {
-			$data = Planing::whereDate('created_at',$from_date)->select('wheather_meeting as yes')->get();
+			$data = Planing::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('wheather_meeting as yes')->get();
 		}else if($planingchartvalue == 2) {
-			$data = Planing::whereDate('created_at',$from_date)->select('wheather_Consultant as yes')->get();
+			$data = Planing::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('wheather_Consultant as yes')->get();
 		}else if($planingchartvalue == 3) {
-			$data = Planing::whereDate('created_at',$from_date)->select('suggestions_Consultant as yes')->get();
+			$data = Planing::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('suggestions_Consultant as yes')->get();
 		}else if($planingchartvalue == 4) {
-			$data = NigraniSamitiMeeting::whereDate('created_at',$from_date)->select('wheather_meeting as yes')->get();
+			$data = NigraniSamitiMeeting::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('wheather_meeting as yes')->get();
 		}else if($planingchartvalue == 5) {
-			$data = NigraniSamitiMeeting::whereDate('created_at',$from_date)->select('wheather_consultant_participated as yes')->get();
+			$data = NigraniSamitiMeeting::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('wheather_consultant_participated as yes')->get();
 		}else if($planingchartvalue == 6) {
-			$data = DistrictCommunication::whereDate('created_at',$from_date)->select('wheather_developed as yes')->get();
+			$data = DistrictCommunication::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('wheather_developed as yes')->get();
 		}else if($planingchartvalue == 7) {
-			$data = FortnightlyReport::whereDate('created_at',$from_date)->select('first_fortnighly_report as yes')->get();
+			$data = FortnightlyReport::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('first_fortnighly_report as yes')->get();
 		}else if($planingchartvalue == 8) {
-			$data = FortnightlyReport::whereDate('created_at',$from_date)->select('second_fortnighly_report as yes')->get();
+			$data = FortnightlyReport::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('second_fortnighly_report as yes')->get();
 		}
 		$arrayName = ["Yes" => 0,"No" => 0];
 		foreach($data as $key => $value){
@@ -332,25 +332,25 @@ class DashboardController extends Controller
 		$date = $inputs['date'];
 		$chartvaluenumber = $inputs['planingchartvalue'];
 			if($chartvaluenumber == 1) {
-				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting as condition')->get();
+				$data = Planing::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','wheather_meeting as condition')->get()->groupBy('all_data');
+
 			}else if($chartvaluenumber == 2) {
-				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_Consultant as condition')->get();
+				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_Consultant as condition')->get()->groupBy('all_data');
 			}else if($chartvaluenumber == 3) {
-				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','suggestions_Consultant as condition')->get();
+				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','suggestions_Consultant as condition')->get()->groupBy('all_data');
 			}else if($chartvaluenumber == 4) {
-				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting as condition')->get();
+				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting as condition')->get()->groupBy('all_data');
 			}else if($chartvaluenumber == 5) {
-				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_consultant_participated as condition')->get();
+				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_consultant_participated as condition')->get()->groupBy('all_data');
 			}else if($chartvaluenumber == 6) {
-				$data = DistrictCommunication::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_developed as condition')->get();
+				$data = DistrictCommunication::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_developed as condition')->get()->groupBy('all_data');
 			}else if($chartvaluenumber == 7) {
-				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','first_fortnighly_report as condition')->get();
+				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','first_fortnighly_report as condition')->get()->groupBy('all_data');
 			}else if($chartvaluenumber == 8) {
-				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','second_fortnighly_report as condition')->get();
+				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','second_fortnighly_report as condition')->get()->groupBy('all_data');
 			}
 		// echo json_encode($data);
 			$arrayName['yes_no_values'] = $data;
-
 
 		///////////////
 			echo json_encode($arrayName);

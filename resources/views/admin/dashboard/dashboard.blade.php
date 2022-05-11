@@ -57,11 +57,11 @@ ul#list_group li {
 ul#list_group li:first-child{
   padding-top: 0px
 }
+.District-List h6{
+  font-size: 23px;
+  color: #000;
+}
 </style>
-
-
-
-
 <div class="col-sm-9">
   <div class='row'>
     <div class="tab-content">
@@ -165,20 +165,20 @@ ul#list_group li:first-child{
          <div class="col-3">
           <div class="custom-date-sec-s">
             <lable>From Date</lable>
-            <input type="text" name="from_date_field" class="start_date" value="2022-05-02">
+            <input type="text" name="from_date_field" class="start_date" value="2022-04-01">
           </div>
         </div>
         <div class="col-3">
           <div class="custom-date-sec-s">
             <lable>To Date</lable>
-            <input type="text" name="to_date_field" class="end_date" value="2022-05-02">
+            <input type="text" name="to_date_field" class="end_date" value="2022-04-15">
           </div>
         </div>
         <div class="col-6">
           <lable>Chart Type</lable>
           <div class="select-sec-box">
            <select id="chart_id">
-             <option >Social Mobilization</option>
+             <!-- <option >Social Mobilization</option> -->
              <option value="1">Meeting with Faith Based Institutions /Religious Leaders</option>
              <option value="2"> Meeting with Influencers </option>
              <option value="3">Number of Meeting with</option>
@@ -203,8 +203,14 @@ ul#list_group li:first-child{
    </div>
    <div class="col-3">
     <div class="custom-date-sec">
-      <lable>Select Date</lable>
-      <input type="text" name="from_date" class="start_date" value="2022-04-20">
+      <lable>From Date</lable>
+      <input type="text" name="from_date" class="start_date" value="2022-04-01">
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="custom-date-sec">
+      <lable>To Date</lable>
+      <input type="text" name="to_date" class="start_date" value="2022-04-15">
     </div>
   </div>
 
@@ -275,9 +281,9 @@ ul#list_group li:first-child{
    {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}"  width="100%" alt="">--}}
  </div>
  <div class="col-md-4 pl-lg-6">
-   <div class="col-md-12 pp_append_div mt-5" style="background-color:transparent;">
-    <div class="select-sec-box" id="yes_no_div_show" style="display: none;">
-      <h6>District List</h6>
+   <div class="col-md-12 pp_append_div" style="background-color:transparent;">
+    <div class="select-sec-box District-List" id="yes_no_div_show" style="display: none;">
+      <h6 class="mb-4">District List</h6>
 <!--               <select class="select_value" id="yes_no_in_district">
                  <option value="1">Yes</option>
                  <option value="0">No</option>
@@ -295,6 +301,7 @@ ul#list_group li:first-child{
                 .list-group {
                   display: flex;
                 }
+
               </style>
 
               <ul class="list-group" id="list_group">
@@ -481,7 +488,7 @@ ul#list_group li:first-child{
       dateFormat: "yy-mm-dd",
       maxDate: 0,
       onSelect: function () {
-        var dt2 = $('#end_date');
+        var dt2 = $('.end_date');
         var startDate = $(this).datepicker('getDate');
         startDate.setDate(startDate.getDate() + 30);
         var minDate = $(this).datepicker('getDate');
@@ -505,14 +512,12 @@ ul#list_group li:first-child{
 
 
 <script>
-   var chartvalue = 1;
+  var chartvaluenumber = 1 ;
   $('#chart_id').on('change', function(){
-    var chartvalue = this.value;
-    default_data(chartvalue);  
-});
-
-  function default_data(Idvalue)
-  {
+    chartvaluenumber = $(this).val();
+    default_data(chartvaluenumber);
+  });
+  function default_data(Idvalue){
     var chartvalueresult = Idvalue;
     var from_date_field_value = $("input[name=from_date_field]").val();
     var to_date_field_value = $("input[name=to_date_field]").val();
@@ -679,11 +684,12 @@ ul#list_group li:first-child{
           makeSeries("Number of Participants(Female)", "bsg_participants_female",am5.color("#007bff"));
         }
         chart.appear(1000, 100);
-      }); 
+      });
+      } 
+  });
 }
-});
-  }
-  default_data(chartvalue); 
+default_data(chartvaluenumber);
+
 </script>
 
 <script>
@@ -696,8 +702,8 @@ ul#list_group li:first-child{
 <script type="text/javascript">
   var chartvaluenumber = 1;
   $('.planning_chart').on('change', function() {
-      chartvaluenumber = $(this).val();
-      create_chart_flow(chartvaluenumber);
+    chartvaluenumber = $(this).val();
+    create_chart_flow(chartvaluenumber);
   }); 
   function create_chart_flow(IdValue){
     $("#yes_no_table_district").html("");
@@ -706,26 +712,29 @@ ul#list_group li:first-child{
     $("#append_chartdiv").append('<div id="chartdiv"></div>');
     var planingchartvalue = IdValue;
     var date = $("input[name=from_date]").val();
+    var to_date = $("input[name=to_date]").val();
     var csrf_token = '{{csrf_token()}}';
     $.ajax({
       url: "{{route('planning_graph')}}",
       type: 'POST',
       data: {
-        date:date,
+          date:date,
+          todate:to_date,
         _token:csrf_token,
         planingchartvalue:planingchartvalue
       },
       success:function(data){
-        console.log(data);
+        // console.log(data);
         var planing_graph = JSON.parse(data);
         yesVal = 0;
         noVal = 0;
-        // var forLoop = (planing_graph.No < planing_graph.Yes) ? planing_graph.Yes : planing_graph.No;
-        for (var i = 0; i < planing_graph.yes_no_values.length; i++) {
+        var forLoop = (planing_graph.No < planing_graph.Yes) ? planing_graph.Yes : planing_graph.No;
+        alert(forLoop);
+        for (var i = 0; i < forLoop.yes_no_values; i++) {
           var tabstr = `
           <tr id="forrow${i}">
-            <td id="noStr${i}" class="tdy"></td>
-            <td id="yesStr${i}" class="tdn"></td>
+          <td id="noStr${i}" class="tdy"></td>
+          <td id="yesStr${i}" class="tdn"></td>
           </tr>`;
           $("#yes_no_table_district").append(tabstr);
           var flag = "";
@@ -736,12 +745,13 @@ ul#list_group li:first-child{
            flag = "#yesStr"+yesVal; 
            yesVal++;
          }
+         console.log(flag);
          $(flag).html(planing_graph.yes_no_values[i].all_data.districts);
-      }
-      for (var i = 0; i < $("#yes_no_table_district tr").length; i++) {
-          if($("#forrow"+i+" #noStr"+i).html() == "" && $("#forrow"+i+" #yesStr"+i).html() == ""){
-            $("#forrow"+i).hide();
-          }
+       }
+       for (var i = 0; i < $("#yes_no_table_district tr").length; i++) {
+        if($("#forrow"+i+" #noStr"+i).html() == "" && $("#forrow"+i+" #yesStr"+i).html() == ""){
+          $("#forrow"+i).hide();
+        }
 
       }
       am5.ready(function() {
@@ -762,9 +772,9 @@ ul#list_group li:first-child{
           legendValueText: "{value}",
         }));
         series.get("colors").set("colors", [
-          am5.color(0x54f011),
-          am5.color(0xff7a7a),
-        ]);
+          am5.color(0x90f5ad),
+          am5.color(0xed5585),
+          ]);
         $("#yes_no_div_show").show(); 
         series.data.setAll([{
           color: "chocolate",

@@ -10,68 +10,75 @@ use Validator;
 
 class MassMediaController extends Controller
 {
-    public function insert_mass_media(Request $request){  
-        $validator = Validator::make($request->all(), [
-            'rally_covid_vaccination' => 'required',
-            'rally_covid_reach_male' => 'required|numeric',
-            'rally_covid_reach_female' => 'required|numeric',
-            'nukad_natak' => 'required',
-            'nukad_natak_reach_male' => 'required|numeric',
-            'nukad_natak_reach_female' => 'required|numeric',
-            'flok_program' => 'required',
-            'flok_program_reach_male' => 'required|numeric',
-            'flok_program_reach_female' => 'required|numeric',
-            'local_community' => 'required',
-            'local_community_reach_male' => 'required|numeric',
-            'local_community_reach_female' => 'required|numeric',
-            'cable_tv' => 'required',
-            'cable_tv_reach_male' => 'required|numeric',
-            'cable_tv_reach_female' => 'required|numeric',
-            'flash_mob' => 'required',
-            'flash_mob_reach_male' => 'required|numeric',
-            'flash_mob_reach_female' => 'required|numeric',
-            'others' => 'required',
-            'others_reach_male' => 'required|numeric',
-            'others_reach_female' => 'required|numeric',
-        ]);
-
-         if ($validator->fails()) {
-         return redirect()->back()->withErrors($validator)
-                        ->withInput();
-        }
-
-        $inputs = $request->input();
+    public function insert_mass_media(Request $request){
         $user_id = Auth::id();
-        $res = New MassMedia();
-        $res->user_id = $user_id;
-        $res->cate_name = ' Mass Media Mid Media';
-        $res->rally_covid_vaccination = $inputs['rally_covid_vaccination'];
-        $res->rally_covid_reach_male = $inputs['rally_covid_reach_male'];
-        $res->rally_covid_reach_female = $inputs['rally_covid_reach_female'];
-        $res->nukad_natak = $inputs['nukad_natak'];
-        $res->nukad_natak_reach_male = $inputs['nukad_natak_reach_male'];
-        $res->nukad_natak_reach_female = $inputs['nukad_natak_reach_female'];
-        $res->flok_program = $inputs['flok_program'];
-        $res->flok_program_reach_male = $inputs['flok_program_reach_male'];
-        $res->flok_program_reach_female = $inputs['flok_program_reach_female'];
-        $res->local_community = $inputs['local_community'];
-        $res->local_community_reach_male = $inputs['local_community_reach_male'];
-        $res->local_community_reach_female = $inputs['local_community_reach_female'];
-        $res->cable_tv = $inputs['cable_tv'];
-        $res->cable_tv_reach_male = $inputs['cable_tv_reach_male'];
-        $res->cable_tv_reach_female = $inputs['cable_tv_reach_female'];
-        $res->flash_mob = $inputs['flash_mob'];
-        $res->flash_mob_reach_male = $inputs['flash_mob_reach_male'];
-        $res->flash_mob_reach_female = $inputs['flash_mob_reach_female'];
-        $res->others = $inputs['others'];
-        $res->others_reach_male = $inputs['others_reach_male'];
-        $res->others_reach_female = $inputs['others_reach_female'];
-        $result = $res->save();
+        $today_date = date('Y-m-d');
+        $user = MassMedia::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+        if($user == 0){    
+            $validator = Validator::make($request->all(), [
+                'rally_covid_vaccination' => 'required',
+                'rally_covid_reach_male' => 'required|numeric',
+                'rally_covid_reach_female' => 'required|numeric',
+                'nukad_natak' => 'required',
+                'nukad_natak_reach_male' => 'required|numeric',
+                'nukad_natak_reach_female' => 'required|numeric',
+                'flok_program' => 'required',
+                'flok_program_reach_male' => 'required|numeric',
+                'flok_program_reach_female' => 'required|numeric',
+                'local_community' => 'required',
+                'local_community_reach_male' => 'required|numeric',
+                'local_community_reach_female' => 'required|numeric',
+                'cable_tv' => 'required',
+                'cable_tv_reach_male' => 'required|numeric',
+                'cable_tv_reach_female' => 'required|numeric',
+                'flash_mob' => 'required',
+                'flash_mob_reach_male' => 'required|numeric',
+                'flash_mob_reach_female' => 'required|numeric',
+                'others' => 'required',
+                'others_reach_male' => 'required|numeric',
+                'others_reach_female' => 'required|numeric',
+            ]);
 
-        if($result){
-            return back()->with('flash-success', 'Coordination meeting with line dept Added Successfully');
-        }else{
-            return back()->with('flash-error', 'Error occured in adding data');
+             if ($validator->fails()) {
+             return redirect()->back()->withErrors($validator)
+                            ->withInput();
+            }
+
+            $inputs = $request->input();
+            $user_id = Auth::id();
+            $res = New MassMedia();
+            $res->user_id = $user_id;
+            $res->cate_name = ' Mass Media Mid Media';
+            $res->rally_covid_vaccination = $inputs['rally_covid_vaccination'];
+            $res->rally_covid_reach_male = $inputs['rally_covid_reach_male'];
+            $res->rally_covid_reach_female = $inputs['rally_covid_reach_female'];
+            $res->nukad_natak = $inputs['nukad_natak'];
+            $res->nukad_natak_reach_male = $inputs['nukad_natak_reach_male'];
+            $res->nukad_natak_reach_female = $inputs['nukad_natak_reach_female'];
+            $res->flok_program = $inputs['flok_program'];
+            $res->flok_program_reach_male = $inputs['flok_program_reach_male'];
+            $res->flok_program_reach_female = $inputs['flok_program_reach_female'];
+            $res->local_community = $inputs['local_community'];
+            $res->local_community_reach_male = $inputs['local_community_reach_male'];
+            $res->local_community_reach_female = $inputs['local_community_reach_female'];
+            $res->cable_tv = $inputs['cable_tv'];
+            $res->cable_tv_reach_male = $inputs['cable_tv_reach_male'];
+            $res->cable_tv_reach_female = $inputs['cable_tv_reach_female'];
+            $res->flash_mob = $inputs['flash_mob'];
+            $res->flash_mob_reach_male = $inputs['flash_mob_reach_male'];
+            $res->flash_mob_reach_female = $inputs['flash_mob_reach_female'];
+            $res->others = $inputs['others'];
+            $res->others_reach_male = $inputs['others_reach_male'];
+            $res->others_reach_female = $inputs['others_reach_female'];
+            $result = $res->save();
+            if($result){
+                return back()->with('flash-success', 'Coordination meeting with line dept Added Successfully');
+            }else{
+                return back()->with('flash-error', 'Error occured in adding data');
+            }
+        }
+        else{
+            return redirect()->back()->with('flash-error', 'Today Details Already Submitted');
         }
     }
 }
