@@ -64,6 +64,8 @@ Route::get('/', function () {
 			Route::post('update-password', 'update_password')->name('update_password');
 			Route::post('fetch-graph-data', 'fetch_graph_data')->name('fetch_graph_data');
 			Route::post('planning-graph', 'planning_graph')->name('planning_graph');
+			Route::post('coordination-graph', 'coordination_graph')->name('coordination_graph');
+
 			Route::post('planning-districts', 'planning_districts')->name('planning_districts');
 
 		});

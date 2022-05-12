@@ -9,6 +9,7 @@ use App\Models\PlaningPlatform\Planing;
 use App\Models\PlaningPlatform\NigraniSamitiMeeting;
 use App\Models\PlaningPlatform\DistrictCommunication;
 use App\Models\PlaningPlatform\FortnightlyReport;
+use App\Models\Coordination\Coordination;
 
 use Auth;
 use Str;
@@ -300,7 +301,7 @@ class DashboardController extends Controller
 
 	public function planning_graph(Request $request){
 		$inputs = $request->all();
-		$to_date = $inputs['todate'];
+		$to_date = date($inputs['todate']);
 		$from_date = date($inputs['date']);
 		$planingchartvalue = ($inputs['planingchartvalue']);
 		if ($planingchartvalue == 1) {
@@ -332,22 +333,22 @@ class DashboardController extends Controller
 		$date = $inputs['date'];
 		$chartvaluenumber = $inputs['planingchartvalue'];
 			if($chartvaluenumber == 1) {
-				$data = Planing::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','wheather_meeting as condition')->get()->groupBy('all_data');
+				$data = Planing::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','wheather_meeting as condition')->limit(18)->get();
 
 			}else if($chartvaluenumber == 2) {
-				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_Consultant as condition')->get()->groupBy('all_data');
+				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_Consultant as condition')->limit(18)->get();
 			}else if($chartvaluenumber == 3) {
-				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','suggestions_Consultant as condition')->get()->groupBy('all_data');
+				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','suggestions_Consultant as condition')->limit(18)->get();
 			}else if($chartvaluenumber == 4) {
-				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting as condition')->get()->groupBy('all_data');
+				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting as condition')->limit(18)->get();
 			}else if($chartvaluenumber == 5) {
-				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_consultant_participated as condition')->get()->groupBy('all_data');
+				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_consultant_participated as condition')->limit(18)->get();
 			}else if($chartvaluenumber == 6) {
-				$data = DistrictCommunication::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_developed as condition')->get()->groupBy('all_data');
+				$data = DistrictCommunication::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_developed as condition')->limit(18)->get();
 			}else if($chartvaluenumber == 7) {
-				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','first_fortnighly_report as condition')->get()->groupBy('all_data');
+				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','first_fortnighly_report as condition')->limit(18)->get();
 			}else if($chartvaluenumber == 8) {
-				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','second_fortnighly_report as condition')->get()->groupBy('all_data');
+				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','second_fortnighly_report as condition')->limit(18)->get();
 			}
 		// echo json_encode($data);
 			$arrayName['yes_no_values'] = $data;
@@ -356,29 +357,63 @@ class DashboardController extends Controller
 			echo json_encode($arrayName);
 	}
 
+	public function coordination_graph(Request $request){
+		$inputs = $request->all();
+		$from_date = date($inputs['date']);
+		$to_date = date($inputs['todate']);
+		$coordinationchartvalue = ($inputs['coordinationvalue']);
+	
+		if($coordinationchartvalue == 1) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('panchayti_rural_development as yes')->get();
+		}
+		if($coordinationchartvalue == 2) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('icds as yes')->get();
+		}
+		if($coordinationchartvalue == 3) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('education as yes')->get();
+		}
+		if($coordinationchartvalue == 4) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('srlm as yes')->get();
+		}
+		if($coordinationchartvalue == 5) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('tribal_area as yes')->get();
+		}
+		if($coordinationchartvalue == 6) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->select('dmwo as yes')->get();
+		}
+			
+			$arrayName = ["Yes" => 0,"No" => 0];
+			foreach($data as $key => $value){
+				if($value->yes == 0){
+					$arrayName['No']++;
+				}elseif($value->yes == 1){
+					$arrayName['Yes']++;
+				}
+			}
 
-	// public function planning_districts(Request $request){	
-	// 	$inputs = $request->input();
-	// 	$date = $inputs['date'];
-	// 	$table_colum_value = $inputs['yes_no_value'];
-	// 	$chartvaluenumber = $inputs['chartvaluenumber'];
-	// 		if($chartvaluenumber == 1) {
-	// 			$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting')->where('wheather_meeting',$table_colum_value)->get();
-	// 		}else if($chartvaluenumber == 2) {
-	// 			$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_Consultant')->where('wheather_Consultant',$table_colum_value)->get();
-	// 		}else if($chartvaluenumber == 3) {
-	// 			$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','suggestions_Consultant')->where('suggestions_Consultant',$table_colum_value)->get();
-	// 		}else if($chartvaluenumber == 4) {
-	// 			$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting')->where('wheather_meeting',$table_colum_value)->get();
-	// 		}else if($chartvaluenumber == 5) {
-	// 			$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_consultant_participated')->where('wheather_consultant_participated',$table_colum_value)->get();
-	// 		}else if($chartvaluenumber == 6) {
-	// 			$data = DistrictCommunication::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_developed')->where('wheather_developed',$table_colum_value)->get();
-	// 		}else if($chartvaluenumber == 7) {
-	// 			$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','first_fortnighly_report')->where('first_fortnighly_report',$table_colum_value)->get();
-	// 		}else if($chartvaluenumber == 8) {
-	// 			$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','second_fortnighly_report')->where('second_fortnighly_report',$table_colum_value)->get();
-	// 		}
-	// 	echo json_encode($data);
-	// }	
+		if($coordinationchartvalue == 1) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','panchayti_rural_development as condition')->limit(18)->get();
+		}
+		if($coordinationchartvalue == 2) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','icds as condition')->limit(18)->get();
+		}
+		if($coordinationchartvalue == 3) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','education as condition')->limit(18)->get();
+		}
+		if($coordinationchartvalue == 4) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','srlm as condition')->limit(18)->get();
+		}
+		if($coordinationchartvalue == 5) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','tribal_area as condition')->limit(18)->get();
+		}
+		if($coordinationchartvalue == 6) {
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','dmwo as condition')->limit(18)->get();
+		}
+
+		$arrayName['yes_no_values'] = $data;
+			echo json_encode($arrayName);
+	}
+
+
+	
 }

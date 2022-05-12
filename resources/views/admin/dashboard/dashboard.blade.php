@@ -3,6 +3,11 @@
 @section('content')
 
 <style>
+  .chartdiv {
+    width: 100%;
+    height: 350px;
+    background-color: white;
+  }
 
   #append_div {
     width: 100%;
@@ -273,11 +278,10 @@ ul#list_group li:first-child{
 </div>
 
 <div class="row">
-
-
   <div class="col-md-8 pl-lg-6">
    <h4 class="mb-4">Planing Platform</h4>
    <div id="append_chartdiv" style="background-color:white;"></div>
+   
    {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}"  width="100%" alt="">--}}
  </div>
  <div class="col-md-4 pl-lg-6">
@@ -316,8 +320,65 @@ ul#list_group li:first-child{
       </div>
 
     </div>
-    <div class="row my-4">
-      <div class="col-md-6 pr-lg-4 ">
+   <div class="row mt-4">
+        <div class="col-3" >
+            <lable>From Date</lable>
+            <input type="text" name="coordination_from_date" class="start_date" value="2022-04-01">
+        </div>
+        <div class="col-3">
+            <lable>To Date</lable>
+          <input type="text" name="coordination_to_date" class="start_date" value="2022-04-15">
+        </div>
+              <div class="select-sec-box col-md-4">
+              <h5>Select Coordination Meeting Line Table</h5>
+                  <select class="select_value" id="coordination_select_value">
+                    <option value="1">Panchayti Raj/Rural Development</option>
+                    <option value="2">ICDS</option>
+                    <option value="3">Education</option>
+                    <option value="4">SRLM</option>
+                    <option value="5">Tribal Area Development Dept</option>
+                    <option value="6">DMWO</option>
+                  </select>
+              </div>
+      </div>
+<div class="row">
+    <div class="col-md-8 pl-lg-4">
+      <br>
+       <center><h4 class="mb-4">Coordination Meeting Line</h4></center>
+      <div id="append_coordination_chard_div" style="background-color:white;"></div>
+    </div>
+
+
+    <div class="col-md-4 pl-lg-4">
+      <br>
+      <h6 class="mb-4">District List</h6>
+<!--               <select class="select_value" id="yes_no_in_district">
+                 <option value="1">Yes</option>
+                 <option value="0">No</option>
+               </select> -->
+               <table class="table table-hover table-bordered table-striped el-table">
+                <tr>
+                  <th>Yes</th>
+                  <th>No</th>
+                </tr>
+                <tbody id="yes_no_table_district_coordination">
+
+                </tbody>
+              </table>
+              <style>
+                .list-group {
+                  display: flex;
+                }
+
+              </style>
+    </div>
+  </div>
+
+     
+
+
+
+    <div class="col-md-6 pr-lg-4 ">
        <h4 class="mb-4">Pvt Bodies</h4>
        <div class="bg-white p-4" style="height: 350px;">
         <div class="row mt-4">
@@ -417,16 +478,22 @@ ul#list_group li:first-child{
             <div class="dot_round progress_cricle5"><i class="fa fa-circle"></i></div>
           </div>
         </div>
-      </div>
+    </div>
 
       {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
     </div>
+
+
+
 
     <div class="col-md-6 pl-lg-4">
       <h4 class="mb-4">Mass Media</h4>
       <div id="amchart2"></div>
       {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
     </div>  
+
+     
+
 
 
   </div>
@@ -689,7 +756,6 @@ ul#list_group li:first-child{
   });
 }
 default_data(chartvaluenumber);
-
 </script>
 
 <script>
@@ -709,7 +775,7 @@ default_data(chartvaluenumber);
     $("#yes_no_table_district").html("");
     $("#yes_no_div_show").hide();
     $("#append_chartdiv").empty();
-    $("#append_chartdiv").append('<div id="chartdiv"></div>');
+    $("#append_chartdiv").append('<div class="chartdiv" id="chartdiv1"></div>');
     var planingchartvalue = IdValue;
     var date = $("input[name=from_date]").val();
     var to_date = $("input[name=to_date]").val();
@@ -729,8 +795,7 @@ default_data(chartvaluenumber);
         yesVal = 0;
         noVal = 0;
         var forLoop = (planing_graph.No < planing_graph.Yes) ? planing_graph.Yes : planing_graph.No;
-        alert(forLoop);
-        for (var i = 0; i < forLoop.yes_no_values; i++) {
+        for (var i = 0; i < planing_graph.yes_no_values.length; i++) {
           var tabstr = `
           <tr id="forrow${i}">
           <td id="noStr${i}" class="tdy"></td>
@@ -752,10 +817,9 @@ default_data(chartvaluenumber);
         if($("#forrow"+i+" #noStr"+i).html() == "" && $("#forrow"+i+" #yesStr"+i).html() == ""){
           $("#forrow"+i).hide();
         }
-
       }
       am5.ready(function() {
-        var root = am5.Root.new("chartdiv");
+        var root = am5.Root.new("chartdiv1");
         root.setThemes([
           am5themes_Animated.new(root)
           ]);
@@ -818,32 +882,123 @@ default_data(chartvaluenumber);
   create_chart_flow(chartvaluenumber);
 </script>
 
-<!-- <script>
-  $('#yes_no_in_district').on('change', function(){
-    $("#list_group").empty();
-    var yes_no_value = this.value;
-    var date_value = $("input[name=from_date]").val();
-    var pl_select_value = $('#select_value').val();
-    var csrf_token  = '{{csrf_token()}}';
-    $.ajax({
-      url: "{{route('planning_districts')}}",
-      type:'POST',                                                            
-      data: {
-        _token:csrf_token,
-        date:date_value,
-        yes_no_value:yes_no_value,
-        chartvaluenumber:chartvaluenumber
-      },
-      success: function(data){
-        var yesnodata = JSON.parse(data);
-        for (var i = 0; i < yesnodata.length; i++) {
-          $("#list_group").append(`<tr><td>${hello}</td></tr>`);                      
-        }
-      }
-    }); 
+<script>
+  var coordination_select_value = 1;
+  $('#coordination_select_value').on('change', function(){
+    var coordination_select_value = $(this).val();
+    coordination_chart(coordination_select_value);
   });
-</script> -->
 
+  function coordination_chart(IdValue){
+    var from_date = $("input[name=coordination_from_date]").val();
+    var to_date = $("input[name=coordination_to_date]").val();
+    var coordination_select_value = IdValue;
+    var csrf_token = '{{csrf_token()}}';
+    $("#append_coordination_chard_div").empty();
+    $("#append_coordination_chard_div").append('<div class="chartdiv" id="chartdiv2"></div>');
+    $.ajax({
+         url: "{{route('coordination_graph')}}",
+          type: 'POST',
+          data: {
+              date:from_date,
+              todate:to_date,
+            _token:csrf_token,
+            coordinationvalue:coordination_select_value
+          },
+            success:function(data){
+              
+            var coordination_graph = JSON.parse(data);
+              yesVal = 0;
+              noVal = 0;
+              var forLoop = (coordination_graph.No < coordination_graph.Yes) ? coordination_graph.Yes : coordination_graph.No;
+              for (var i = 0; i < coordination_graph.yes_no_values.length; i++) {
+                var tabstr = `
+                <tr id="forrowc${i}">
+                <td id="noStrc${i}" class="tdy"></td>
+                <td id="yesStrc${i}" class="tdn"></td>
+                </tr>`;
+                $("#yes_no_table_district_coordination").append(tabstr);
+                var flag = "";
+                if(coordination_graph.yes_no_values[i].condition){
+                 flag = "#noStrc"+noVal;
+                 noVal++;
+               }else{
+                 flag = "#yesStrc"+yesVal; 
+                 yesVal++;
+               }
+               console.log(flag);
+               $(flag).html(coordination_graph.yes_no_values[i].all_data.districts);
+             }
+             for (var i = 0; i < $("#yes_no_table_district_coordination tr").length; i++) {
+              if($("#forrowc"+i+" #noStrc"+i).html() == "" && $("#forrowc"+i+" #yesStrc"+i).html() == ""){
+                $("#forrowc"+i).hide();
+              }
+            }
+           
+
+              am5.ready(function() {
+                var root = am5.Root.new("chartdiv2");
+                root.setThemes([
+                  am5themes_Animated.new(root)
+                  ]);
+                var chart = root.container.children.push(am5percent.PieChart.new(root, {
+                  radius: am5.percent(90),
+                  innerRadius: am5.percent(50),
+                  layout: root.horizontalLayout
+                }));
+                var series = chart.series.push(am5percent.PieSeries.new(root, {
+                  name: "Series",
+                  valueField: "numberofmiting",
+                  categoryField: "meeting",
+                  legendLabelText: "{category}",
+                  legendValueText: "{value}",
+                }));
+                series.get("colors").set("colors", [
+                  am5.color(0xffff00),
+                  am5.color(0x0000ff),
+                  ]);
+                $("#yes_no_div_show").show(); 
+                series.data.setAll([{
+                  color: "chocolate",
+                  meeting:"Yes",
+                  numberofmiting:parseInt(coordination_graph.Yes)
+                },{
+                  meeting:"No",
+                  numberofmiting:parseInt(coordination_graph.No) 
+                }]);
+                series.labels.template.set("visible", false);
+                series.ticks.template.set("visible", false);
+                series.slices.template.set("strokeOpacity", 0);
+                series.slices.template.set("fillGradient", am5.RadialGradient.new(root, {
+                  stops: [{
+                    brighten: -0.8
+                  }, {
+                    brighten: -0.8
+                  }, {
+                    brighten: -0.5
+                  }, {
+                    brighten: 0
+                  }, {
+                    brighten: -0.5
+                  }]
+                }));
+
+                var legend = chart.children.push(am5.Legend.new(root, {
+                  centerY: am5.percent(50),
+                  y: am5.percent(50),
+                  marginTop: 15,
+                  marginBottom: 15,
+                  marginRight: 80,
+                  layout: root.verticalLayout
+                }));
+                legend.data.setAll(series.dataItems);
+                series.appear(1000, 100);
+              });
+            }
+      });
+  }
+coordination_chart(coordination_select_value);
+  
+</script>
 @stop
 
-<!-- '<li>'+yesnodata[i].all_data.districts+'( '+(yes_no_value == '1' ?'Yes':'No')+' ) +'</li>' -->
