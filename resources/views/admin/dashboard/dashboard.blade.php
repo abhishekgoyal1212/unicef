@@ -374,125 +374,42 @@ ul#list_group li:first-child{
     </div>
   </div>
 
+   <div class="row mt-4">
+        <div class="col-3" >
+            <lable>From Date</lable>
+            <input type="text" name="pvtbodies_from_date" class="start_date" value="2022-04-01">
+        </div>
+        <div class="col-3">
+            <lable>To Date</lable>
+          <input type="text" name="pvtbodies_to_date" class="start_date" value="2022-04-15">
+        </div>
+              <div class="select-sec-box col-md-4">
+                <h5>Select Coordination Meeting Line Table</h5>
+                  <select class="select_value" id="pvtbodies_select_value">
+                    <option value="pvt_ima_iap_meeting">Meeting with IMA/IAP</option>
+                    <option value="private_practitionerst_meeting">Meeting with Private practitioners</option>
+                    <option value="pvt_pharmacists_associations_meeting">Pharmacists Associations</option>
+                    <option value="pvt_merchant_associations_meeting">Merchant Association</option>
+                    <option value="pvt_others_meeting">Others</option>
+                  </select>
+              </div>
+      </div>
+
+
 
     <div class="col-md-8 pr-lg-4 ">
        <h4 class="mb-4">Pvt Bodies</h4>
-       <div class="bg-white p-4" style="height: 350px;">
-        <div class="row mt-4">
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle"><i class="fa fa-circle"></i></div>
-          </div>    
-          <div class="col-md-10">
-            <div class="progressive_bars" >
-              <div class="progress  ">    
-                <div class="progress-bar progress_bg " style="width:87%">Sirohi</div>
-                <div class="progress-bar bg-white progress_text"  style="width:13%">908</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle"><i class="fa fa-circle"></i></div>
-          </div>
-        </div>                   
-        <div class="row mt-4">
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle1"><i class="fa fa-circle"></i></div>
-          </div>    
-          <div class="col-md-10">
-            <div class="progressive_bars" >
-              <div class="progress  ">
-                <div class="progress-bar progress_bg1" style="width:80%">Jaisalmer</div>
-                <div class="progress-bar bg-white progress_text1" style="width:20%">533</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle1"><i class="fa fa-circle"></i></div>
-          </div>
-        </div>                    
-        <div class="row mt-4">
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle2"><i class="fa fa-circle"></i></div>
-          </div>    
-          <div class="col-md-10">
-            <div class="progressive_bars" >
-              <div class="progress  ">
-                <div class="progress-bar progress_bg2" style="width:70%">Dungarpur</div>
-                <div class="progress-bar bg-white progress_text2" style="width:30%">418</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle2"><i class="fa fa-circle"></i></div>
-          </div>
-        </div>                     
-        <div class="row mt-4" >
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle3" ><i class="fa fa-circle"></i></div>
-          </div>    
-          <div class="col-md-10">
-            <div class="progressive_bars" >
-              <div class="progress  ">
-                <div class="progress-bar progress_bg3" style="width:60%">Karauli</div>
-                <div class="progress-bar bg-white progress_text3" style="width:40%">293</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle3"><i class="fa fa-circle"></i></div>
-          </div>
-        </div>                     
-        <div class="row mt-4" >
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle4"><i class="fa fa-circle"></i></div>
-          </div>    
-          <div class="col-md-10">
-            <div class="progressive_bars" >
-              <div class="progress  ">
-                <div class="progress-bar progress_bg4" style="width:50%">Baran</div>
-                <div class="progress-bar bg-white progress_text4" style="width:50%">166</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle4"><i class="fa fa-circle"></i></div>
-          </div>
-        </div>
-
-        <div class="row mt-4" >
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle5"><i class="fa fa-circle"></i></div>
-          </div>    
-          <div class="col-md-10">
-            <div class="progressive_bars" >
-              <div class="progress  ">
-                <div class="progress-bar progress_bg5" style="width:40%">Dholpur</div>
-                <div class="progress-bar bg-white progress_text5" style="width:60%">97</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="dot_round progress_cricle5"><i class="fa fa-circle"></i></div>
-          </div>
-        </div>
+       <div class="bg-white p-4" id="append_pvt_bodies_graph"style="height: 1000px;">         
     </div>
 
       {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
     </div>
-
-
-
 
     <div class="col-md-6 pl-lg-4">
       <h4 class="mb-4">Mass Media</h4>
       <div id="amchart2"></div>
       {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
     </div>  
-
-     
-
-
-
   </div>
 </div>
 
@@ -807,7 +724,6 @@ default_data(chartvaluenumber);
            flag = "#yesStr"+yesVal; 
            yesVal++;
          }
-         console.log(flag);
          $(flag).html(planing_graph.yes_no_values[i].all_data.districts);
        }
        for (var i = 0; i < $("#yes_no_table_district tr").length; i++) {
@@ -924,7 +840,6 @@ default_data(chartvaluenumber);
                  flag = "#yesStrc"+yesVal; 
                  yesVal++;
                }
-               console.log(flag);
                $(flag).html(coordination_graph.yes_no_values[i].all_data.districts);
              }
              for (var i = 0; i < $("#yes_no_table_district_coordination tr").length; i++) {
@@ -997,6 +912,40 @@ default_data(chartvaluenumber);
   }
 coordination_chart(coordination_select_value);
   
+</script>
+<script>
+  var pvtbodies_select_value = 'pvt_ima_iap_meeting';
+  $('#pvtbodies_select_value').on('change', function(){
+    var pvtbodies_select_value = $(this).val();
+    pvtbodies_chart(pvtbodies_select_value)
+  });
+  function pvtbodies_chart(IdValue){
+    $('#append_pvt_bodies_graph').html('');
+    var start_date = $('input[name=pvtbodies_from_date]').val();
+    var end_date = $('input[name=pvtbodies_to_date]').val();
+    var pvtbodies_select_value = IdValue;
+    var csrf_token = '{{csrf_token()}}';
+    $.ajax({
+        url : "{{route('pvt_bodies_graph')}}",
+        type : 'POST',
+        data: {
+          start_date:start_date,
+          end_date : end_date,
+          _token:csrf_token,
+          pvtbodiesvalue:pvtbodies_select_value
+        },
+          success:function(pvtbodies){
+              console.log(pvtbodies);
+            var pvtbodies = JSON.parse(pvtbodies);
+        
+            $.each(pvtbodies, function(key, value) {
+              $('#append_pvt_bodies_graph').append(
+                '<h6 class="state-heading">'+value.districts+'</h6><div class="row "><div class="col-md-1"><div class="dot_round progress_cricle"><i class="fa fa-circle">'+value.meeting+'</i></div></div> <div class="col-md-10"><div class="progressive_bars"><div class="progress  "> <div class="progress-bar progress_bg'+key+'" style="width: '+value.percent+'%"></div><div class="progress-bar  progress_text'+key+'">'+value.participants+'</div></div></div></div><div class="col-md-1"><div class="dot_round progress_cricle"><i class="fa fa-circle" style="heigh:200px;"></i></div></div></div>');
+            });
+          }
+    });
+  }
+  pvtbodies_chart(pvtbodies_select_value);
 </script>
 @stop
 

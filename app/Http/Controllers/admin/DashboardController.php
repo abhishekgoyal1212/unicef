@@ -10,13 +10,12 @@ use App\Models\PlaningPlatform\NigraniSamitiMeeting;
 use App\Models\PlaningPlatform\DistrictCommunication;
 use App\Models\PlaningPlatform\FortnightlyReport;
 use App\Models\Coordination\Coordination;
-
+use App\Models\PvtBodies\MeetingIMA;
 use Auth;
 use Str;
 use Validator;
 use Hash;
 use DB;
-
 
 class DashboardController extends Controller
 {
@@ -25,7 +24,6 @@ class DashboardController extends Controller
 		// DB::getQueryLog();
 		// $data = SmMeetingInstitutionsReligious::with('Alldeta')->select('user_id','number_meetings','number_participants_male','number_participants_Female')->get()->sum('number_meetings','number_participants_male','number_participants_Female')->groupBy('districts');
 		// dd(DB::getQueryLog());
-		
 		return view('admin/dashboard/dashboard');	
 	}
 
@@ -413,7 +411,32 @@ class DashboardController extends Controller
 		$arrayName['yes_no_values'] = $data;
 			echo json_encode($arrayName);
 	}
+	public function pvt_bodies_graph(Request $request){
+		$inputs = $request->input();
+		$from_date = date($inputs['start_date']);
+		$to_date = date($inputs['end_date']);
+		$pvtchartvalue = $inputs['pvtbodiesvalue'];
 
+		$total_participants = DB::table($pvtchartvalue)->select(DB::raw('SUM(number_participants) as participants'))->whereBetween('created_at', [$from_date, $to_date])
+		->orWhereDate('created_at', $from_date)
+		->orWhereDate('created_at', $to_date)
+		->first();
+		$total_participants = $total_participants->participants;
+		
+		
+		$data = DB::table($pvtchartvalue)
+		->join('users', 'users.id', '=', $pvtchartvalue.'.user_id')
+		->select('users.districts', DB::raw('SUM('.$pvtchartvalue.'.number_meeting) as meeting'), DB::raw('SUM('.$pvtchartvalue.'.number_participants) as participants'), DB::raw('COUNT(users.districts) as districtscount'))
+		->whereBetween($pvtchartvalue.'.created_at', [$from_date, $to_date])
+		->orWhereDate($pvtchartvalue.'.created_at', $from_date)
+		->orWhereDate($pvtchartvalue.'.created_at', $to_date)
+		->groupBy('users.districts')
+		->get();
 
-	
+			foreach($data as $key => $value){
+				$value->percent = round($value->participants*100/$total_participants);
+			}
+			
+		echo json_encode($data);
+	}
 }

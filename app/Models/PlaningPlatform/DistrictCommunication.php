@@ -12,7 +12,7 @@ class DistrictCommunication extends Model
     use HasFactory;
     protected $table = 'district_communication_plan';
 
-        public function all_data()
+    public function all_data()
     {
     	return $this->hasOne(User::class, 'id','user_id')->select('id','districts');
     }

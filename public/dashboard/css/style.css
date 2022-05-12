@@ -15,6 +15,7 @@ overflow-x:hidden;
   height: 28px!important;
   width: 93%;
   margin: auto; 
+  background: transparent !important;
 }
 .progressive_bars.bars {
   width: 88%;
@@ -31,6 +32,12 @@ overflow-x:hidden;
   padding-left: 2%;
   font-size: 18px;
   font-weight: 800;
+  background: transparent !important;
+  
+}
+.progress-bar.progress_text0{
+ background: transparent;
+ color: #000;
 }
 .progress_text {
   color: #ffc107!important;
@@ -581,4 +588,16 @@ h4{
     outline: none;
     background: #f7f2ef;
     border: 1px solid #d3cccc;
+}
+
+.state-heading {
+    padding: 20px 0px 0px 70px;
+}
+
+.state-heading:first-child {
+    padding-top: 0px;
+}
+
+.progress-bar.progress_bg0 {
+    background: #ffc107 !important;
 }
