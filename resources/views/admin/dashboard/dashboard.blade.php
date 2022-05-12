@@ -374,11 +374,8 @@ ul#list_group li:first-child{
     </div>
   </div>
 
-     
 
-
-
-    <div class="col-md-6 pr-lg-4 ">
+    <div class="col-md-8 pr-lg-4 ">
        <h4 class="mb-4">Pvt Bodies</h4>
        <div class="bg-white p-4" style="height: 350px;">
         <div class="row mt-4">
@@ -890,6 +887,7 @@ default_data(chartvaluenumber);
   });
 
   function coordination_chart(IdValue){
+    $("#yes_no_table_district_coordination").html("");
     var from_date = $("input[name=coordination_from_date]").val();
     var to_date = $("input[name=coordination_to_date]").val();
     var coordination_select_value = IdValue;
