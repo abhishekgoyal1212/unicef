@@ -430,7 +430,7 @@ class DashboardController extends Controller
 		->whereBetween($pvtchartvalue.'.created_at', [$from_date, $to_date])
 		->orWhereDate($pvtchartvalue.'.created_at', $from_date)
 		->orWhereDate($pvtchartvalue.'.created_at', $to_date)
-		->orderBy($pvtchartvalue.'.number_participants', 'Desc')
+		->orderBy('participants', 'Desc')
 		->groupBy('users.districts')
 		->get();
 

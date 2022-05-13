@@ -128,77 +128,68 @@ ul#list_group li:first-child{
             </div>
           </div>
           <div class="col-md-4 pl-5">
-           <!--  <a href="{{route('admin.logout')}}" class="logout"><span>Sign Out</span></a> -->
-           <div class="deshboard-img-sec" >
-            <a href="#"> <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100" id="showmenu"></a>
+              <div class="deshboard-img-sec" >
+                  <a href="#"> <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100" id="showmenu"></a>
+              </div>
+              <div class="deshboard-conteant-sec"  style="display: none;">
+                  <div class="arrow"></div>
+                <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="">
+                <span>Admin</span>
+
+
+                <div class="deshboard-conteant-btn">
+                  <a href="{{route('profile')}}"><button class="mr-2">Profile</button></a>
+                  <a href="{{route('admin.logout')}}"><button class="ml-2">Sign out</button></a>
+                </div>
+              </div>
+              <div class="calender logout-calender bg-white p-2">
+                <div class="logo text-center mb-3">
+
+                  <img src="{{ asset('public/dashboard/img/unicefnewlogo.png') }}" class="mt-2" alt="">
+                </div>
+                <div class="cal text-center py-3 border-top">
+                 <div id="container" class="calendar-container"></div>
+                </div>
+              </div>
           </div>
-          <div class="deshboard-conteant-sec"  style="display: none;">
-            <div class="arrow"></div>
-            <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="">
-            <span>Admin</span>
-
-
-            <div class="deshboard-conteant-btn">
-              <a href="{{route('profile')}}"><button class="mr-2">Profile</button></a>
-              <a href="{{route('admin.logout')}}"><button class="ml-2">Sign out</button></a>
-            </div>
-          </div>
-
-
-
-          <div class="calender logout-calender bg-white p-2">
-            <div class="logo text-center mb-3">
-
-              <img src="{{ asset('public/dashboard/img/unicefnewlogo.png') }}" class="mt-2" alt="">
-            </div>
-
-
-            <div class="cal text-center py-3 border-top">
-             <div id="container" class="calendar-container"></div>
-
-             {{--<img src="{{ asset('public/dashboard/img/cal.jpg') }}" class="img-fluid" alt="">--}}
-           </div>
-         </div>
-       </div>
-     </div>
+        </div>
 
      <div class="row my-4">
       <div class="col-md-12 pr-lg-4">
         <center><h4 class="mb-4">Social Mobilization</h4></center>
 
         <div class="row" id="error_data_append">
-         <div class="col-3">
-          <div class="custom-date-sec-s">
-            <lable>From Date</lable>
-            <input type="text" name="from_date_field" class="start_date" value="2022-04-01">
-          </div>
+             <div class="col-3">
+              <div class="custom-date-sec-s">
+                <lable>From Date</lable>
+                <input type="text" name="from_date_field" class="start_date" value="2022-04-01">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="custom-date-sec-s">
+                <lable>To Date</lable>
+                <input type="text" name="to_date_field" class="end_date" value="2022-04-15">
+              </div>
+            </div>
+            <div class="col-6">
+              <lable>Chart Type</lable>
+              <div class="select-sec-box">
+               <select id="chart_id">
+                 <!-- <option >Social Mobilization</option> -->
+                 <option value="1">Meeting with Faith Based Institutions /Religious Leaders</option>
+                 <option value="2"> Meeting with Influencers </option>
+                 <option value="3">Number of Meeting with</option>
+                 <option value="4">IPC</option>
+                 <option value="5">Mother Meetings</option>
+                 <option value="6">Community Meetings</option>
+                 <option value="7">Meeting with SHG Members</option>
+                 <option value="8">Meeting with Vulrenable Groups Sites</option>
+                 <option value="9">Meeting with excluded groups(PWD,Transgender)</option>
+                 <option value="10">Meeting with the volunteer organization</option>
+               </select>
+              </div>
         </div>
-        <div class="col-3">
-          <div class="custom-date-sec-s">
-            <lable>To Date</lable>
-            <input type="text" name="to_date_field" class="end_date" value="2022-04-15">
-          </div>
         </div>
-        <div class="col-6">
-          <lable>Chart Type</lable>
-          <div class="select-sec-box">
-           <select id="chart_id">
-             <!-- <option >Social Mobilization</option> -->
-             <option value="1">Meeting with Faith Based Institutions /Religious Leaders</option>
-             <option value="2"> Meeting with Influencers </option>
-             <option value="3">Number of Meeting with</option>
-             <option value="4">IPC</option>
-             <option value="5">Mother Meetings</option>
-             <option value="6">Community Meetings</option>
-             <option value="7">Meeting with SHG Members</option>
-             <option value="8">Meeting with Vulrenable Groups Sites</option>
-             <option value="9">Meeting with excluded groups(PWD,Transgender)</option>
-             <option value="10">Meeting with the volunteer organization</option>
-           </select>
-         </div>
-       </div>
-
-     </div>
 
      <div id="append_div" style="background-color:white;">
      </div>
@@ -374,7 +365,7 @@ ul#list_group li:first-child{
     </div>
   </div>
 
-   <div class="row mt-4">
+    <div class="row mt-4">
         <div class="col-3" >
             <lable>From Date</lable>
             <input type="text" name="pvtbodies_from_date" class="start_date" value="2022-04-01">
@@ -395,14 +386,15 @@ ul#list_group li:first-child{
               </div>
       </div>
 
-
-
-    <div class="col-md-8 pr-lg-4 ">
-       <h4 class="mb-4">Pvt Bodies</h4>
-       <div class="bg-white p-4" id="append_pvt_bodies_graph">         
-    </div>
-
-      {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
+    <div class="row mt-4">
+        <div class="col-md-5 pr-lg-4 ">
+           <h4 class="mb-4">Pvt Bodies</h4>
+           <div class="bg-white p-4" id="append_pvt_bodies_graph"> </div>
+        </div>
+        <div class="col-md-5 pr-lg-3">
+           <h4 class="mb-4">Pvt Bodies</h4>
+           <div class="bg-white p-4" id="append_pvt_bodies_graph2"> </div>
+        </div>
     </div>
 
     <div class="col-md-6 pl-lg-4">
@@ -820,7 +812,6 @@ default_data(chartvaluenumber);
             coordinationvalue:coordination_select_value
           },
             success:function(data){
-              
             var coordination_graph = JSON.parse(data);
               yesVal = 0;
               noVal = 0;
@@ -921,6 +912,7 @@ coordination_chart(coordination_select_value);
   });
   function pvtbodies_chart(IdValue){
     $('#append_pvt_bodies_graph').html('');
+    $('#append_pvt_bodies_graph2').html('');
     var start_date = $('input[name=pvtbodies_from_date]').val();
     var end_date = $('input[name=pvtbodies_to_date]').val();
     var pvtbodies_select_value = IdValue;
@@ -937,10 +929,13 @@ coordination_chart(coordination_select_value);
           success:function(pvtbodies){
               console.log(pvtbodies);
             var pvtbodies = JSON.parse(pvtbodies);
-        
             $.each(pvtbodies, function(key, value) {
-              $('#append_pvt_bodies_graph').append(
-                '<h6 class="state-heading">'+value.districts+'</h6><div class="row align-items-center "><div class="col-md-1"><div class="dot_round progress_cricle  left-cricle  "><i class="fa fa-circle">'+value.meeting+'</i></div></div> <div class="col-md-10"><div class="progressive_bars"><div class="progress  "> <div class="progress-bar progress_bg'+key+'" style="width: '+value.percent+'%"></div><div class="progress-bar  progress_text'+key+'">'+value.participants+'</div></div></div></div><div class="col-md-1"><div class="dot_round progress_cricle right-cricle "><i class="fa fa-circle" style="heigh:200px;"></i></div></div></div>');
+               var pvtbodies_graph_append = '<h6 class="state-heading">'+value.districts+'</h6><div class="row align-items-center "><div class="col-md-1"><div class="dot_round progress_cricle  left-cricle  "><i class="fa fa-circle">'+value.meeting+'</i></div></div> <div class="col-md-10"><div class="progressive_bars"><div class="progress  "> <div class="progress-bar progress_bg'+key+'" style="width: '+value.percent+'%"></div><div class="progress-bar  progress_text'+key+'">'+value.participants+'</div></div></div></div><div class="col-md-1"><div class="dot_round progress_cricle right-cricle "><i class="fa fa-circle" style="heigh:200px;"></i></div></div></div>'
+              if(key <= 7){
+                $('#append_pvt_bodies_graph').append(pvtbodies_graph_append);
+              }else if(key > 7){
+                $('#append_pvt_bodies_graph2').append(pvtbodies_graph_append);
+              }
             });
           }
     });
