@@ -430,11 +430,12 @@ class DashboardController extends Controller
 		->whereBetween($pvtchartvalue.'.created_at', [$from_date, $to_date])
 		->orWhereDate($pvtchartvalue.'.created_at', $from_date)
 		->orWhereDate($pvtchartvalue.'.created_at', $to_date)
+		->orderBy($pvtchartvalue.'.number_participants', 'Desc')
 		->groupBy('users.districts')
 		->get();
 
 			foreach($data as $key => $value){
-				$value->percent = round($value->participants*100/$total_participants);
+				$value->percent = $value->participants*100/$total_participants;
 			}
 			
 		echo json_encode($data);

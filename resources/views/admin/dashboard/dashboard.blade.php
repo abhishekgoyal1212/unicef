@@ -1,4 +1,4 @@
-@extends('admin.dashboard.index')
+ @extends('admin.dashboard.index')
 @section('title','Dashboard')
 @section('content')
 
@@ -399,7 +399,7 @@ ul#list_group li:first-child{
 
     <div class="col-md-8 pr-lg-4 ">
        <h4 class="mb-4">Pvt Bodies</h4>
-       <div class="bg-white p-4" id="append_pvt_bodies_graph"style="height: 1000px;">         
+       <div class="bg-white p-4" id="append_pvt_bodies_graph">         
     </div>
 
       {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
@@ -940,7 +940,7 @@ coordination_chart(coordination_select_value);
         
             $.each(pvtbodies, function(key, value) {
               $('#append_pvt_bodies_graph').append(
-                '<h6 class="state-heading">'+value.districts+'</h6><div class="row "><div class="col-md-1"><div class="dot_round progress_cricle"><i class="fa fa-circle">'+value.meeting+'</i></div></div> <div class="col-md-10"><div class="progressive_bars"><div class="progress  "> <div class="progress-bar progress_bg'+key+'" style="width: '+value.percent+'%"></div><div class="progress-bar  progress_text'+key+'">'+value.participants+'</div></div></div></div><div class="col-md-1"><div class="dot_round progress_cricle"><i class="fa fa-circle" style="heigh:200px;"></i></div></div></div>');
+                '<h6 class="state-heading">'+value.districts+'</h6><div class="row align-items-center "><div class="col-md-1"><div class="dot_round progress_cricle  left-cricle  "><i class="fa fa-circle">'+value.meeting+'</i></div></div> <div class="col-md-10"><div class="progressive_bars"><div class="progress  "> <div class="progress-bar progress_bg'+key+'" style="width: '+value.percent+'%"></div><div class="progress-bar  progress_text'+key+'">'+value.participants+'</div></div></div></div><div class="col-md-1"><div class="dot_round progress_cricle right-cricle "><i class="fa fa-circle" style="heigh:200px;"></i></div></div></div>');
             });
           }
     });
