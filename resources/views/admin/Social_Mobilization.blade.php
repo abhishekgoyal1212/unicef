@@ -1,8 +1,7 @@
 @extends('admin.sidebar')
 @section('title','Dashboard')
 @section('content')
-
-
+    
     <div class="row  bg-white shadow-sm ground-section">
       <div class="col-md-3 px-2">
 
@@ -60,7 +59,8 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_meetings" value="{{old('number_meetings')}}">
+                      <input type="number" name="number_meetings" 
+                      value="{{old('number_meetings', $FathBasedCount == 1 ? $FathBasedData['number_meetings'] : '')}}">
                       @error('number_meetings')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -74,16 +74,18 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="male">Male</label>
-                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male')}}">
+                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male', $FathBasedCount == 1 ? $FathBasedData['number_participants_male'] : '')}}">
                       @error('number_participants_male')
-                      <div class="form-valid-error text-danger">{{ $message }}</div>
+                      <div class="form-valid-error text-danger">{{$message}}</div>
                       @enderror
                     </div>
                   </div>
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="Female">Female</label>
-                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female')}}">
+                       <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female', $FathBasedCount == 1 ? $FathBasedData['number_participants_Female'] : '')}}">
+
+
                       @error('number_participants_female')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -96,21 +98,20 @@
                   </div>
                   <div class="col-md-8">
                     <div class="form-group mb-0">
-                      <input type="text" placeholder="Institutions/Religious leaders" name="reach_faitrh" value="{{old('reach_faitrh')}}">
+                      <input type="text" placeholder="Institutions/Religious leaders" name="reach_faitrh" value="{{old('reach_faitrh', $FathBasedCount == 1 ? $FathBasedData['reach_through_faitrh'] : '')}}">
                       @error('reach_faitrh')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
                     </div>
                   </div>
                 </div>
-                
                 <div class="col-md-12 mt-4 text-center">
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">
+                    {{$FathBasedCount == 1 ? 'UPDATE' : 'SUBMIT'}}
+                  </button>
                 </div>
-                
               </div>
             </form>
-            
           </div>
           
           
@@ -128,7 +129,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_meetings" value="{{old('number_meetings')}}">
+                      <input type="number" name="number_meetings" value="{{old('number_meetings', $InfluencersCount == 1 ? $InfluencerData['number_meetings'] : '')}}">
                       @error('number_meetings', 'Meeting_Influencers')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -142,7 +143,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="male">Male</label>
-                      <input type="text" id="male" name="number_participants_male" value="{{old('number_participants_male')}}">
+                      <input type="text" id="male" name="number_participants_male" value="{{old('number_participants_male', $InfluencersCount == 1 ? $InfluencerData['number_participants_male'] : '')}}">
                       @error('number_participants_male', 'Meeting_Influencers')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -151,7 +152,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="Female">Female</label>
-                      <input type="text" id="Female" name="number_participants_female" value="{{old('number_participants_female')}}">
+                      <input type="text" id="Female" name="number_participants_female" value="{{old('number_participants_female', $InfluencersCount == 1 ? $InfluencerData['number_participants_female'] : '')}}">
                       @error('number_participants_female', 'Meeting_Influencers')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -164,15 +165,15 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="text" name="reach_influencers" value="{{old('reach_influencers')}}">
+                      <input type="text" name="reach_influencers" value="{{old('reach_influencers', $InfluencersCount == 1 ? $InfluencerData['reach_influencers'] : '') }}">
                       @error('reach_influencers', 'Meeting_Influencers')
-                      <div class="form-valid-error text-danger">{{ $message }}</div>
+                      <div class="form-valid-error text-danger">{{$message}}</div>
                       @enderror
                     </div>
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$InfluencersCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
               </div>
             </div>
@@ -193,7 +194,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="text" name="lions_club" value="{{old('lions_club')}}">
+                      <input type="text" name="lions_club" value="{{old('lions_club', $NumberMeetingCount  == 1 ? $NumberMeetingData['lions_club'] : '')}}">
                       @error('lions_club', 'Meeting_Numbers')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -206,7 +207,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="text" name="rotary" value="{{old('rotary')}}">
+                      <input type="text" name="rotary" value="{{old('rotary', $NumberMeetingCount == 1 ? $NumberMeetingData['rotary'] : '')}}">
                       @error('rotary', 'Meeting_Numbers')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -219,7 +220,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="text" name="local_csos_Others" value="{{old('local_csos_Others')}}">
+                      <input type="text" name="local_csos_Others" value="{{old('local_csos_Others', $NumberMeetingCount == 1 ? $NumberMeetingData['local_csos_Others'] : '')}}">
                       @error('local_csos_Others', 'Meeting_Numbers')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -227,8 +228,7 @@
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$NumberMeetingCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
                 
               </div>
@@ -250,7 +250,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_meetings" value="{{old('number_meetings')}}">
+                      <input type="number" name="number_meetings" value="{{old('number_meetings', $IpcMeetingCount == 1 ? $IpcMeetingData['number_meetings'] : '')}}">
                       @error('number_meetings', 'Meeting_IPC')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -264,7 +264,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="male">Male</label>
-                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male')}}">
+                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male', $IpcMeetingCount == 1 ? $IpcMeetingData['number_participants_male'] : '')}}">
                       @error('number_participants_male', 'Meeting_IPC')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -273,7 +273,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="Female">Female</label>
-                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female')}}">
+                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female', $IpcMeetingCount == 1 ? $IpcMeetingData['number_participants_female'] : '')}}">
                       @error('number_participants_female', 'Meeting_IPC')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -281,8 +281,7 @@
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$IpcMeetingCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
                 
               </div>
@@ -304,7 +303,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_meetings" value="{{old('number_meetings')}}">
+                      <input type="number" name="number_meetings" value="{{old('number_meetings', $MotherMeetingCount == 1 ? $MotherMeetingData['number_meetings'] : '')}}">
                       @error('number_meetings', 'Mother_Meeting')
                       <div class="form-valid-error text-danger">{{$message }}</div>
                       @enderror
@@ -318,7 +317,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="male">Male</label>
-                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male')}}">
+                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male', $MotherMeetingCount == 1 ? $MotherMeetingData['number_participants_male'] : '')}}">
                       @error('number_participants_male', 'Mother_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -327,7 +326,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="Female">Female</label>
-                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female')}}">
+                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female', $MotherMeetingCount == 1 ? $MotherMeetingData['number_participants_female'] : '')}}">
                       @error('number_participants_female', 'Mother_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -335,8 +334,7 @@
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$MotherMeetingCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
                 
               </div>
@@ -359,7 +357,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_meetings" value="{{old('number_meetings')}}">
+                      <input type="number" name="number_meetings" value="{{old('number_meetings', $CommunityMeetingCount == 1 ? $CommunityMeetingData['number_meetings'] : '')}}">
                       @error('number_meetings', 'Community_Meeting')
                       <div class="form-valid-error text-danger">{{$message }}</div>
                       @enderror
@@ -373,7 +371,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="male">Male</label>
-                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male')}}">
+                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male', $CommunityMeetingCount == 1 ? $CommunityMeetingData['number_participants_male'] : '')}}">
                       @error('number_participants_male', 'Community_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -382,7 +380,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="Female">Female</label>
-                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female')}}">
+                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female', $CommunityMeetingCount == 1 ? $CommunityMeetingData['number_participants_female'] : '')}}">
                       @error('number_participants_female', 'Community_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -391,7 +389,7 @@
                 </div>
                 <div class="col-md-12 mt-4 text-center">
                   
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$CommunityMeetingCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
                 
               </div>

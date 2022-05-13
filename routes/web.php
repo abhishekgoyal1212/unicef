@@ -49,7 +49,6 @@ Route::get('/', function () {
 			Route::get('dashboard','index')->name('admin.dashboard');
 			Route::get('logout','logout')->name('admin.logout');
 			Route::view('Planing_Platform','admin/Planing_Platform')->name('admin.planingPlatform');
-			Route::view('Social_Mobilization','admin/Social_Mobilization')->name('admin.socialMobilization');
 			Route::view('Orientation','admin/Orientation')->name('admin.Orientation');
 			Route::view('Pvt_Bodies','admin/Pvt Bodies')->name('admin.pvtBodies');
 			Route::view('Coordination','admin/Coordination Meeting Line')->name('admin.coordinationMeetingLine');
@@ -93,6 +92,7 @@ Route::get('/', function () {
 			Route::post('Others','Others')->name('admin.Others');
 		});
 		Route::controller(SocialMobilizationController::class)->group(function(){
+			Route::get('Social_Mobilization','social_mobilization')->name('admin.socialMobilization');
 			Route::post('insert-sm-meeting-faith-based','insert_sm_meeting_faith_based')->name('admin.SmMeetingFaithBased');
 			Route::post('insert-sm-meeting-influencers','insert_sm_meeting_influencers')->name('admin.SmMeetingInfluencers');
 			Route::post('insert-sm-meeting-numbers','insert_sm_meeting_numbers')->name('admin.SmMeetingNumbers');
