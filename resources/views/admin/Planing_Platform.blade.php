@@ -2,7 +2,6 @@
     @section('title','Dashboard')
     @section('content')
 
-       
         <div class="row  bg-white shadow-sm ground-section">
           <div class="col-md-3 px-2">
             <ul class="nav nav-tabs sub-tabs d-flex w-100" role="tablist">
@@ -48,9 +47,9 @@
                         <ul class="list-unstyled mb-0">
                           <li class="d-inline mr-4">
                             <div class="form-check d-inline">
-                              <input type="radio" name="wheather_meeting" value="1" class="form-check-input" id="exampleCheck1" {{old('wheather_meeting') == '1' ? 'checked' : ''}}>
+                              <input type="radio" name="wheather_meeting" value="1" class="form-check-input" id="exampleCheck1" {{old('wheather_meeting') == '1' ? 'checked' : ($PlaningCount == 1 ? ($PlaningData['wheather_meeting'] == '1' ? 'checked' : '') : '') }}>
                               <label class="form-check-label mr-5" for="exampleCheck1">Yes</label>
-                              <input type="radio" value="0" name="wheather_meeting" class="form-check-input" id="exampleCheck2" {{old('wheather_meeting') == '0' ? 'checked' : ''}}>
+                              <input type="radio" value="0" name="wheather_meeting" class="form-check-input" id="exampleCheck2" {{old('wheather_meeting') == '0' ? 'checked' : ($PlaningCount == 1 ? ($PlaningData['wheather_meeting'] == '0' ? 'checked' : '') : '')}}>
                               <label class="form-check-label" for="exampleCheck2">No</label>
                               <div>
                                 @error('wheather_meeting')
@@ -69,13 +68,13 @@
                       </div>
                       <div class="col-md-7">
                         <select id="line_department_meeting" name="line_departments_meeting[]" class="bg-transparent w-50 py-2 px-2 category line_departments_meetings" multiple="multiple">
-                          <option value="PRI" @if(old('line_departments_meeting')){{(in_array('PRI',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>PRI</option>
-                          <option value="ICDS" @if(old('line_departments_meeting')){{(in_array('ICDS',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>ICDS</option>
-                          <option value="Education" @if(old('line_departments_meeting')){{(in_array('Education',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>Education</option>
-                          <option value="SRLM" @if(old('line_departments_meeting')){{(in_array('SRLM',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>SRLM</option>
-                          <option value="Minority-DMWO" @if(old('line_departments_meeting')){{(in_array('Minority-DMWO',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>Minority-DMWO</option>
-                          <option value="TAD" @if(old('line_departments_meeting')){{(in_array('TAD',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>TAD</option>
-                          <option value="Other" @if(old('line_departments_meeting')){{(in_array('Other',old('line_departments_meeting'))) ? 'selected' : ''}} @endif>Others</option>
+                          <option value="PRI" @if(old('line_departments_meeting')){{(in_array('PRI',old('line_departments_meeting'))) ? 'selected' : ''}} @elseif($PlaningCount == 1){{(in_array('PRI', $line_departments)) ? 'selected' : ''}} @endif>PRI</option>
+                          <option value="ICDS" @if(old('line_departments_meeting')){{(in_array('ICDS',old('line_departments_meeting'))) ? 'selected' : ''}} @elseif($PlaningCount == 1){{(in_array('ICDS', $line_departments)) ? 'selected' : ''}} @endif>ICDS</option>
+                          <option value="Education" @if(old('line_departments_meeting')){{(in_array('Education',old('line_departments_meeting'))) ? 'selected' : ''}} @elseif($PlaningCount == 1) {{(in_array('Education', $line_departments)) ? 'selected' : ''}} @endif>Education</option>
+                          <option value="SRLM" @if(old('line_departments_meeting')){{(in_array('SRLM',old('line_departments_meeting'))) ? 'selected' : ''}} @elseif($PlaningCount == 1) {{(in_array('SRLM', $line_departments)) ? 'selected' : ''}} @endif>SRLM</option>
+                          <option value="Minority-DMWO" @if(old('line_departments_meeting')){{(in_array('Minority-DMWO',old('line_departments_meeting'))) ? 'selected' : ''}} @elseif($PlaningCount == 1) {{(in_array('Minority-DMWO', $line_departments)) ? 'selected' : ''}} @endif>Minority-DMWO</option>
+                          <option value="TAD" @if(old('line_departments_meeting')){{(in_array('TAD',old('line_departments_meeting'))) ? 'selected' : ''}} @elseif($PlaningCount == 1) {{(in_array('TAD', $line_departments)) ? 'selected' : ''}} @endif>TAD</option>
+                          <option value="Other" @if(old('line_departments_meeting')) {{(in_array('Other',old('line_departments_meeting'))) ? 'selected' : ''}} @elseif($PlaningCount == 1) {{(in_array('Other', $line_departments)) ? 'selected' : ''}} @endif>Others</option>
                         </select>
 
                           @error('line_departments_meeting')
@@ -97,12 +96,9 @@
                         <ul class="list-unstyled mb-0">
                           <li class="d-inline mr-4">
                             <div class="form-check d-inline">
-                              <input type="radio" value="1" class="form-check-input" id="participated1" name="wheather_consultant" {{old('wheather_consultant') == '1' ? 'checked' : ''}}>
+                              <input type="radio" value="1" class="form-check-input" id="participated1" name="wheather_consultant" {{old('wheather_consultant') == '1' ? 'checked' : ($PlaningCount == 1 ? ($PlaningData['wheather_Consultant'] == '1' ? 'checked' : '') : '') }}>
                               <label class="form-check-label mr-5"  for="participated1">Yes</label>
-
-
-                              <input type="radio" value="0" class="form-check-input" id="participated2" name="wheather_consultant" {{old('wheather_consultant') == '0' ? 'checked' : ''}}>
-
+                              <input type="radio" value="0" class="form-check-input" id="participated2" name="wheather_consultant" {{old('wheather_consultant') == '0' ? 'checked' : ($PlaningCount == 1 ? ($PlaningData['wheather_Consultant'] == '0' ? 'checked' : '') : '')}}>
                               <label class="form-check-label"  for="participated2">No</label>
                             </div>
                             @error('wheather_consultant')
@@ -120,9 +116,9 @@
                       <div class="col-md-7">
                         <ul class="list-unstyled mb-0">
                           <li class="d-inline mr-4"><div class="form-check d-inline">
-                            <input type="radio" value="1" class="form-check-input" id="participates1" name="suggestions_consultant" {{old('suggestions_consultant') == '1' ? 'checked' : ''}}>
+                            <input type="radio" value="1" class="form-check-input" id="participates1" name="suggestions_consultant" {{old('suggestions_consultant') == '1' ? 'checked' : ($PlaningCount == 1 ? ($PlaningData['suggestions_Consultant'] == '1' ? 'checked' : '') : '') }}>
                             <label class="form-check-label mr-5" for="participates1">Yes</label>
-                            <input type="radio" value="0" class="form-check-input"  id="participates2" name="suggestions_consultant" {{old('suggestions_consultant') == '0' ? 'checked' : ''}}>
+                            <input type="radio" value="0" class="form-check-input"  id="participates2" name="suggestions_consultant" {{old('suggestions_consultant') == '0' ? 'checked' : ($PlaningCount == 1 ? ($PlaningData['suggestions_Consultant'] == '0' ? 'checked' : '') : '') }}>
                             <label class="form-check-label" for="participates2">No</label>
                           </div>
                           @error('suggestions_consultant')
@@ -137,15 +133,13 @@
                       <p class="mb-0">A cell provided for description:</p>
                     </div>
                     <div class="col-md-7">
-                      <textarea name="provided_description" id="" class="sub-textarea">{{old('provided_description')}}</textarea>
+                      <textarea name="provided_description" id="" class="sub-textarea">{{old('provided_description', $PlaningCount == 1 ? $PlaningData['provided_description'] : '')}}</textarea>
                       @error('provided_description')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
                     </div>
                   </div>
                   <br>
-                 
-
                   <div class="row">
                     <div class="col-md-5">
                       <p class="mb-0">Upload Image:</p>
@@ -165,20 +159,18 @@
                   <br>
                   <div class="row">
                     <div class="col-md-5">
-
                     </div>
                     <div class="col-md-7">
-                      <img id="blah" src=""  width="200" heigh="200"/>
+                      <img id="blah" src="{{old('for_old_value') != '' ? old('for_old_value') : ($PlaningCount == 1 ? asset('public/DTF_DHS_Meeting/'.$PlaningData['file']) : '')}}" width="300" heigh="200"/>
                     </div>
                   </div>
-
+                  <input type='hidden' name="for_old_value" id="for_old_value" value="{{old('for_old_value')}}">
                   <div class="col-md-10 mt-4 text-center">
-                   <button type="submit" id="form_submit1" class="login-btn">SUBMIT</button>
+                    <button type="submit" id="form_submit1" class="login-btn">{{$PlaningCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                  </div>
                </div>
              </form>
            </div>
-           
 
            <div role="tabpanel" class="tab-pane fade  {{$errors->hasBag('sector_meeting')  || session()->has('sector-meeting') ? 'show active' : '' }}  " id="buzz">
             <div class="sub-tab-heading">
@@ -193,7 +185,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="total_district">
+                      <input type="number" name="total_district" value="{{old('total_district', $SectorMeetingCount == 1 ? $SectorMeetingData['total_district'] : '')}}">
                     </div>
                     @error('total_district','sector_meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -206,7 +198,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_meetings">
+                      <input type="number" name="number_meetings" value="{{old('number_meetings', $SectorMeetingCount == 1 ? $SectorMeetingData['number_meetings'] : '')}}">
                     </div>
                     @error('number_meetings','sector_meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -219,7 +211,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="meetings_participated">
+                      <input type="number" name="meetings_participated" value="{{old('meetings_participated', $SectorMeetingCount == 1 ? $SectorMeetingData['meetings_participated'] : '')}}">
                     </div>
                     @error('meetings_participated','sector_meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -231,7 +223,7 @@
                     <p class="mb-0">Suggestions provided by SBCC Consultan:</p>
                   </div>
                   <div class="col-md-7">
-                    <textarea name="suggestions_consultan_description" id="" class="sub-textarea" ></textarea>
+                    <textarea name="suggestions_consultan_description" id="" class="sub-textarea" >{{old('suggestions_consultan_description', $SectorMeetingCount == 1 ? $SectorMeetingData['suggestions_consultan_description'] : '')}}</textarea>
                     @error('suggestions_consultan_description','sector_meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
                     @enderror
@@ -240,7 +232,7 @@
 
                 <div class="col-md-10 mt-4 text-center">
 
-                 <button type="submit" class="login-btn">SUBMIT</button>
+                 <button type="submit" class="login-btn">{{$SectorMeetingCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                </div>
              </div>
            </form>
@@ -263,9 +255,9 @@
                   <ul class="list-unstyled mb-0">
                     <li class="d-inline mr-4">
                       <div class="form-check d-inline">
-                        <input type="radio" class="form-check-input" id="exampleCheckn1" value="1" name="wheather_meeting" {{old('wheather_meeting') == '1' ? 'checked' : ''}}>
+                        <input type="radio" class="form-check-input" id="exampleCheckn1" value="1" name="wheather_meeting" {{old('wheather_meeting') == '1' ? 'checked' : ($NigraniSamitiMeetingCount == 1 ? ($NigraniSamitiMeetingData['wheather_meeting'] == '1' ? 'checked' : '') : '') }}>
                         <label class="form-check-label mr-5" for="exampleCheckn1">Yes</label>
-                        <input type="radio" class="form-check-input" id="exampleCheckn2" value="0" name="wheather_meeting" {{old('wheather_meeting') == '0' ? 'checked' : ''}}>
+                        <input type="radio" class="form-check-input" id="exampleCheckn2" value="0" name="wheather_meeting" {{old('wheather_meeting') == '0' ? 'checked' : ($NigraniSamitiMeetingCount == 1 ? ($NigraniSamitiMeetingData['wheather_meeting'] == '0' ? 'checked' : '') : '') }}>
                         <label class="form-check-label" for="exampleCheckn2">No</label>
                       </div>
                       @error('wheather_meeting','samiti_meeting')
@@ -284,9 +276,9 @@
                   <ul class="list-unstyled mb-0">
                     <li class="d-inline mr-4">
                       <div class="form-check d-inline">
-                        <input type="radio" class="form-check-input" id="sbccparticipated1" name="wheather_consultant_participated" value="1" {{old('wheather_consultant_participated') == '1' ? 'checked' : ''}}>
+                        <input type="radio" class="form-check-input" id="sbccparticipated1" name="wheather_consultant_participated" value="1" {{old('wheather_consultant_participated') == '1' ? 'checked' : ($NigraniSamitiMeetingCount == 1 ? ($NigraniSamitiMeetingData['wheather_consultant_participated'] == '1' ? 'checked' : '') : '') }}>
                         <label class="form-check-label mr-5" for="sbccparticipated1">Yes</label>
-                        <input type="radio" class="form-check-input" id="sbccparticipated2" name="wheather_consultant_participated" value="0" {{old('wheather_consultant_participated') == '0' ? 'checked' : ''}}>
+                        <input type="radio" class="form-check-input" id="sbccparticipated2" name="wheather_consultant_participated" value="0" {{old('wheather_consultant_participated') == '0' ? 'checked' : ($NigraniSamitiMeetingCount == 1 ? ($NigraniSamitiMeetingData['wheather_consultant_participated'] == '0' ? 'checked' : '') : '') }}>
                         <label class="form-check-label" for="sbccparticipated2">No</label>
                       </div>
                       @error('wheather_consultant_participated','samiti_meeting')
@@ -300,7 +292,7 @@
 
               <div class="col-md-10 mt-4 text-center">
 
-               <button type="submit" class="login-btn">SUBMIT</button>
+               <button type="submit" class="login-btn">{{$NigraniSamitiMeetingCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
              </div>
            </div>
          </form>
@@ -324,9 +316,9 @@
                 <ul class="list-unstyled mb-0">
                   <li class="d-inline mr-4">
                     <div class="form-check d-inline">
-                      <input type="radio" class="form-check-input" id="exampleCheckDcp1" name="wheather_developed" value="1" {{old('wheather_developed') == '1' ? 'checked' : ''}} >
+                      <input type="radio" class="form-check-input" id="exampleCheckDcp1" name="wheather_developed" value="1" {{old('wheather_developed') == '1' ? 'checked' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['wheather_developed'] == '1' ? 'checked' : '') : '')}} >
                       <label class="form-check-label mr-5" for="exampleCheckDcp1">Yes</label>
-                      <input type="radio" class="form-check-input" id="exampleCheckDcp2" name="wheather_developed" value="0" >
+                      <input type="radio" id="nobutton" class="form-check-input" id="exampleCheckDcp2" name="wheather_developed" value="0" {{old('wheather_developed') == '1' ? '' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['wheather_developed'] == '0' ? 'checked' : '') : '')}} >
                       <label class="form-check-label" for="exampleCheckDcp2">No</label>
                     </div>
                     @error('wheather_developed','district_communication')
@@ -341,20 +333,31 @@
                 <p class="mb-0">If Yes Month (Attachement option should be there):</p>
               </div>
               <div class="col-md-7">
-                <select name="If_yes_month" id="" class="bg-transparent w-50 py-2 px-2 category">
+                <select name="If_yes_month" id="If_yes_month" class="bg-transparent w-50 py-2 px-2 category">
                   <option disabled selected hidden>Month</option>
-                  <option value="1">January</option>
-                  <option value="2">February</option>
-                  <option value="3">March</option>
-                  <option value="4">April</option>
-                  <option value="5">May</option>
-                  <option value="6">June</option>
-                  <option value="7">July</option>
-                  <option value="8">August</option>
-                  <option value="9">September</option>
-                  <option value="10">October</option>
-                  <option value="11">November</option>
-                  <option value="12">December</option>
+                  <option value="1" {{old('If_yes_month') == '1' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '1' ? 'selected' : '') : '')}}>January</option>
+                  
+                  <option value="2" {{old('If_yes_month') == '2' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '2' ? 'selected' : '') : '')}}>February</option>
+                 
+                  <option value="3" {{old('If_yes_month') == '3' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '3' ? 'selected' : '') : '')}}>March</option>
+                  
+                  <option value="4" {{old('If_yes_month') == '4' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '4' ? 'selected' : '') : '')}}>April</option>
+
+                  <option value="5" {{old('If_yes_month') == '5' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '5' ? 'selected' : '') : '')}}>May</option>
+                  
+                  <option value="6" {{old('If_yes_month') == '6' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '6' ? 'selected' : '') : '')}}>June</option>
+                  
+                  <option value="7" {{old('If_yes_month') == '7' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '7' ? 'selected' : '') : '')}}>July</option>
+                  
+                  <option value="8" {{old('If_yes_month') == '8' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '8' ? 'selected' : '') : '')}}>August</option>
+                 
+                 <option value="9" {{old('If_yes_month') == '9' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '9' ? 'selected' : '') : '')}}>September</option>
+
+                  <option value="10" {{old('If_yes_month') == '10' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '10' ? 'selected' : '') : '')}}>October</option>
+                 
+                  <option value="11" {{old('If_yes_month') == '11' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '11' ? 'selected' : '') : '')}}>November</option>
+                 
+                 <option value="12" {{old('If_yes_month') == '12' ? 'selected' : ($DistrictCommunicationCount == 1 ? ($DistrictCommunicationData['If_yes_month'] == '12' ? 'selected' : '') : '')}}>December</option>
                 </select>
                 @error('If_yes_month','district_communication')
                 <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -364,7 +367,7 @@
             </div>
             <div class="col-md-10 mt-4 text-center">
 
-             <button type="submit" class="login-btn">SUBMIT</button>
+             <button type="submit" class="login-btn">{{$DistrictCommunicationCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
            </div>
          </div>
        </form>
@@ -385,9 +388,10 @@
               <ul class="list-unstyled mb-0">
                 <li class="d-inline mr-4">
                   <div class="form-check d-inline">
-                    <input type="radio" class="form-check-input" id="fortnightly1" name="first_fortnighly_report" value="1" {{old('first_fortnighly_report') == '1' ? 'checked' : ''}}>
+                    <input type="radio" class="form-check-input" id="fortnightly1" name="first_fortnighly_report" value="1"  {{old('first_fortnighly_report') == '1' ? 'checked' : ($FortnightlyReportCount == 1 ? ($FortnightlyReportData['first_fortnighly_report'] == '1' ? 'checked' : '') : '') }}>
+
                     <label class="form-check-label mr-5" for="fortnightly1">Yes</label>
-                    <input type="radio" class="form-check-input" id="fortnightly2" name="first_fortnighly_report" value="0" {{old('first_fortnighly_report') == '0' ? 'checked' : ''}}>
+                    <input type="radio" class="form-check-input" id="fortnightly2" name="first_fortnighly_report" value="0" {{old('first_fortnighly_report') == '0' ? 'checked' : ($FortnightlyReportCount == 1 ? ($FortnightlyReportData['first_fortnighly_report'] == '0' ? 'checked' : '') : '') }}>
                     <label class="form-check-label" for="fortnightly2">No</label>
                   </div>
                 </li>
@@ -405,9 +409,9 @@
               <ul class="list-unstyled mb-0">
                 <li class="d-inline mr-4">
                   <div class="form-check d-inline">
-                    <input type="radio" class="form-check-input" id="FortnighlyCheck1" name="second_fortnighly_report" value="1" {{old('second_fortnighly_report') == '1' ? 'checked' : ''}}>
+                    <input type="radio" class="form-check-input" id="FortnighlyCheck1" name="second_fortnighly_report" value="1" {{old('second_fortnighly_report') == '1' ? 'checked' : ($FortnightlyReportCount == 1 ? ($FortnightlyReportData['second_fortnighly_report'] == '1' ? 'checked' : '') : '') }}>
                     <label class="form-check-label mr-5"  name="" for="FortnighlyCheck1">Yes</label>
-                    <input type="radio" class="form-check-input" id="FortnighlyCheck2" name="second_fortnighly_report" value="0" {{old('second_fortnighly_report') == '0' ? 'checked' : ''}}>
+                    <input type="radio" class="form-check-input" id="FortnighlyCheck2" name="second_fortnighly_report" value="0"  {{old('second_fortnighly_report') == '0' ? 'checked' : ($FortnightlyReportCount == 1 ? ($FortnightlyReportData['second_fortnighly_report'] == '0' ? 'checked' : '') : '') }}>
                     <label class="form-check-label" for="FortnighlyCheck2">No</label>
                   </div>
                 </li>
@@ -419,7 +423,7 @@
           </div>
           <div class="col-md-10 mt-4 text-center">
 
-           <button type="submit" class="login-btn">SUBMIT</button>
+           <button type="submit" class="login-btn">{{$FortnightlyReportCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
          </div>
        </div>
      </form>
@@ -437,12 +441,32 @@
 
 </div>
 <script>
-  imgInp.onchange = evt => {
-  const [file] = imgInp.files
-  if (file) {
-    blah.src = URL.createObjectURL(file)
-  }
-}
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+            $('#for_old_value').attr('value', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+     }
+ }
+  $("#imgInp").change(function(){
+    readURL(this);
+     var formData = new FormData();
+     formData.append('image_upload', $('#imgInp')[0].files[0]);
+  });
+  
+//   imgInp.onchange = evt => {
+//   const [file] = imgInp.files
+//   if (file) {
+//     blah.src = URL.createObjectURL(file)
+//   }
+// }
+$('#nobutton').on('change', function(){
+  $('#If_yes_month').val($("#If_yes_month option:first").val());
+});
+
 </script>
 <script>
   
@@ -465,7 +489,8 @@ if(select_value == 'Other')
   //         '</div>'
   // );
     $("#add_other_detail").append(
-          `<div class="col-md-5"></div><div class="col-md-7" id="add_other_detail"><textarea name="other_meeting[]" class="sub-textarea" placeholder="Other Meeting">{{old('other_meeting') ? old("other_meeting")[0] : ''}}</textarea>@error('other_meeting')<div class="form-valid-error text-danger">{{ $message }}</div>@enderror </div>` 
+          `<div class="col-md-5"></div><div class="col-md-7" id="add_other_detail"><textarea name="other_meeting[]" class="sub-textarea" placeholder="Other Meeting">@if(old('other_meeting')){{old("other_meeting")[0]}}@elseif($PlaningCount == 1){{$line_departments[0] == 'Other' ? $line_departments[1] : ''}}
+            @endif</textarea>@error('other_meeting.*')<div class="form-valid-error text-danger">{{ $message }}</div>@enderror </div>` 
   );
 }
 });
@@ -480,7 +505,7 @@ $('#line_department_meeting').on('change', function(e){
      $("#line_department_meeting").val("Other");
       $("#add_other_detail").empty();
       $("#add_other_detail").append(
-          `<div class="col-md-5"></div><div class="col-md-7" id="add_other_detail"><textarea name="other_meeting[]" class="sub-textarea" placeholder="Other Meeting"></textarea></div> @error("other_meeting")<div class="form-valid-error text-danger">{{ $message }}</div>@enderror`
+          `<div class="col-md-5"></div><div class="col-md-7" id="add_other_detail"><textarea name="other_meeting[]" class="sub-textarea" placeholder="Other Meeting"></textarea></div> @error("other_meeting.*")<div class="form-valid-error text-danger">{{ $message }}</div>@enderror`
           );
    }
    else{

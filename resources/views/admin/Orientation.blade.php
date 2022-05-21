@@ -44,7 +44,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_orientation">
+                      <input type="number" name="number_orientation" value="{{old('number_orientation', $EducationCount == 1 ? $EducationData['number_orientation'] : '')}}">
                     </div>
                     @error('number_orientation')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -57,15 +57,15 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_participants">
+                      <input type="number" name="number_participants" value="{{old('number_participants', $EducationCount == 1 ? $EducationData['number_participants'] : '')}}">
                     </div>
                     @error('number_participants')
-                    <div class="form-valid-error text-danger">{{ $message }}</div>
+                    <div class="form-valid-error text-danger">{{$message }}</div>
                     @enderror
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$EducationCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
               </div>
             </form>
@@ -86,10 +86,10 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_orientation">
+                      <input type="number" name="number_orientation" value="{{old('number_orientation', $PanchayatiRajCount == 1 ? $PanchayatiRajData['number_orientation'] : '')}}">
                     </div>
                     @error('number_orientation','panchayati_raj')
-                    <div class="form-valid-error text-danger">{{ $message }}</div>
+                    <div class="form-valid-error text-danger">{{$message}}</div>
                     @enderror
                   </div>
                 </div>
@@ -99,7 +99,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_participants">
+                      <input type="number" name="number_participants" value="{{old('number_participants', $PanchayatiRajCount == 1 ? $PanchayatiRajData['number_participants'] : '')}}">
                     </div>
                     @error('number_participants','panchayati_raj')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -107,7 +107,7 @@
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$PanchayatiRajCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
               </div>
             </form> 
@@ -127,7 +127,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_orientation">
+                      <input type="number" name="number_orientation" value="{{old('number_orientation', $MinorityCount == 1 ? $MinorityData['number_orientation'] : '')}}">
                     </div>
                     @error('number_orientation','minority_deparment')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -140,7 +140,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_participants">
+                      <input type="number" name="number_participants" value="{{old('number_participants', $MinorityCount == 1 ? $MinorityData['number_participants'] : '')}}">
                     </div>
                     @error('number_participants','minority_deparment')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -148,7 +148,7 @@
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$MinorityCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
               </div>
 
@@ -169,7 +169,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_orientation">
+                      <input type="number" name="number_orientation" value="{{old('number_orientation', $UlbCount == 1 ? $UlbData['number_orientation'] : '')}}">
                     </div>
                     @error('number_orientation','ulb_deparment')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -182,7 +182,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_participants">
+                      <input type="number" name="number_participants" value="{{old('number_participants', $UlbCount == 1 ? $UlbData['number_participants'] : '')}}">
                     </div>
                     @error('number_participants','ulb_deparment')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -190,7 +190,7 @@
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$UlbCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
               </div>
             </form>
@@ -209,7 +209,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_orientation">
+                      <input type="number" name="number_orientation" value="{{old('number_orientation', $CsrCount == 1 ? $CsrData['number_orientation'] : '')}}">
                     </div>
                     @error('number_orientation','csr_deparment')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -222,15 +222,15 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_participants">
+                      <input type="number" name="number_participants" value="{{old('number_participants', $CsrCount == 1 ? $CsrData['number_participants'] : '')}}">
                     </div>
                     @error('number_participants','csr_deparment')
-                    <div class="form-valid-error text-danger">{{ $message }}</div>
+                    <div class="form-valid-error text-danger">{{$message}}</div>
                     @enderror
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$CsrCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
               </div>
             </form>

@@ -25,7 +25,7 @@
                           </div>
                           <div class="col-md-8 col-lg-4">
                             <div class="form-group mb-0">
-                              <input type="number" name="number_orientation" value="{{old('number_orientation')}}">
+                              <input type="number" name="number_orientation" value="{{old('number_orientation', $OrientationHealthCount == 1 ? $OrientationHealthData['number_orientation'] : '')}}">
                               @error('number_orientation')
                               <div class="form-valid-error text-danger">{{ $message }}</div>
                               @enderror
@@ -38,7 +38,7 @@
                           </div>
                           <div class="col-md-8 col-lg-4">
                             <div class="form-group mb-0">
-                              <input type="text" name="anm" value="{{old('anm')}}">
+                              <input type="text" name="anm" value="{{old('anm', $OrientationHealthCount == 1 ? $OrientationHealthData['anm'] : '')}}">
                               @error('anm')
                               <div class="form-valid-error text-danger">{{ $message }}</div>
                               @enderror
@@ -51,7 +51,7 @@
                           </div>
                           <div class="col-md-8 col-lg-4">
                             <div class="form-group mb-0">
-                              <input type="text" name="asha" value="{{old('asha')}}">
+                              <input type="text" name="asha" value="{{old('asha', $OrientationHealthCount == 1 ? $OrientationHealthData['asha'] : '')}}">
                               @error('asha')
                               <div class="form-valid-error text-danger">{{ $message }}</div>
                               @enderror
@@ -64,7 +64,7 @@
                           </div>
                           <div class="col-md-8 col-lg-4">
                             <div class="form-group mb-0">
-                              <input type="text" name="anganwadi" value="{{old('anganwadi')}}">
+                              <input type="text" name="anganwadi" value="{{old('anganwadi', $OrientationHealthCount == 1 ? $OrientationHealthData['anganwadi'] : '')}}">
                               @error('anganwadi')
                               <div class="form-valid-error text-danger">{{ $message }}</div>
                               @enderror
@@ -77,7 +77,7 @@
                           </div>
                           <div class="col-md-8 col-lg-4">
                             <div class="form-group mb-0">
-                              <input type="text" name="cha" value="{{old('cha')}}">
+                              <input type="text" name="cha" value="{{old('cha', $OrientationHealthCount == 1 ? $OrientationHealthData['cha'] : '')}}">
                               @error('cha')
                               <div class="form-valid-error text-danger">{{ $message }}</div>
                               @enderror
@@ -86,7 +86,7 @@
                         </div>
                         <div class="col-md-10 mt-4 text-center">
 
-                           <button type="submit" class="login-btn">SUBMIT</button>
+                           <button type="submit" class="login-btn">{{$OrientationHealthCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                           </div>
                       </div>
                   </form>

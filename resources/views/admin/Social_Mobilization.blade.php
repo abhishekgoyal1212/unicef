@@ -410,7 +410,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_meetings" value="{{old('number_meetings')}}">
+                      <input type="number" name="number_meetings" value="{{old('number_meetings', $ShgMeetingCount == 1 ? $ShgMeetingData['number_meetings'] : '')}}">
                       @error('number_meetings', 'SHG_Meeting')
                       <div class="form-valid-error text-danger">{{$message }}</div>
                       @enderror
@@ -424,7 +424,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="male">Male</label>
-                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male')}}">
+                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male', $ShgMeetingCount == 1 ? $ShgMeetingData['number_participants_male'] : '')}}">
                       @error('number_participants_male', 'SHG_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -433,7 +433,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="Female">Female</label>
-                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female')}}">
+                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female', $ShgMeetingCount == 1 ? $ShgMeetingData['number_participants_female'] : '')}}">
                       @error('number_participants_female', 'SHG_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -441,7 +441,7 @@
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$ShgMeetingCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
               </div>
             </form>
@@ -462,7 +462,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_meetings" value="{{old('number_meetings')}}">
+                      <input type="number" name="number_meetings" value="{{old('number_meetings', $VulrenableMeetingCount == 1 ? $VulrenableMeetingData['number_meetings'] : '')}}">
                       @error('number_meetings', 'Vulrenable_Meeting')
                       <div class="form-valid-error text-danger">{{$message }}</div>
                       @enderror
@@ -476,7 +476,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="male">Male</label>
-                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male')}}">
+                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male', $VulrenableMeetingCount == 1 ? $VulrenableMeetingData['number_participants_male'] : '')}}">
                       @error('number_participants_male', 'Vulrenable_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -485,7 +485,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="Female">Female</label>
-                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female')}}">
+                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female', $VulrenableMeetingCount == 1 ? $VulrenableMeetingData['number_participants_female'] : '')}}">
                       @error('number_participants_female', 'Vulrenable_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -493,12 +493,11 @@
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$VulrenableMeetingCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
               </div>
             </form>
           </div>
-          
           
           <div role="tabpanel" class="tab-pane fade {{$errors->hasBag('Excluded_Meeting') || session()->has('excluded-group-meeting') ? 'show active' : ''}}" id="PWD">
             <div class="sub-tab-heading">
@@ -513,7 +512,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_meetings" value="{{old('number_meetings')}}">
+                      <input type="number" name="number_meetings" value="{{old('number_meetings', $ExcludedMeetingCount == 1 ? $ExcludedMeetingData['number_meetings'] : '')}}">
                       @error('number_meetings', 'Excluded_Meeting')
                       <div class="form-valid-error text-danger">{{$message }}</div>
                       @enderror
@@ -527,7 +526,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="male">Male</label>
-                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male')}}">
+                      <input type="number" id="male" name="number_participants_male" value="{{old('number_participants_male', $ExcludedMeetingCount == 1 ? $ExcludedMeetingData['number_participants_male'] : '')}}">
                       @error('number_participants_male', 'Excluded_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -536,7 +535,7 @@
                   <div class="col-md-2">
                     <div class="form-group mb-0">
                       <label for="Female">Female</label>
-                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female')}}">
+                      <input type="number" id="Female" name="number_participants_female" value="{{old('number_participants_female', $ExcludedMeetingCount == 1 ? $ExcludedMeetingData['number_participants_female'] : '')}}">
                       @error('number_participants_female', 'Excluded_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
                       @enderror
@@ -544,8 +543,7 @@
                   </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  
-                  <button type="submit" class="login-btn">SUBMIT</button>
+                  <button type="submit" class="login-btn">{{$ExcludedMeetingCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                 </div>
               </div>
             </form>
@@ -566,7 +564,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number" name="nyks_number_meetings" value="{{old('nyks_number_meetings')}}">
+                    <input type="number" name="nyks_number_meetings" value="{{old('nyks_number_meetings', $VolunteerMeetingCount == 1 ? $VolunteerMeetingData['nyks_number_meetings'] : '')}}">
                     @error('nyks_number_meetings', 'Volunteer_Meeting')
                     <div class="form-valid-error text-danger">{{$message }}</div>
                     @enderror
@@ -580,7 +578,7 @@
                 <div class="col-md-2">
                   <div class="form-group mb-0">
                     <label for="male">Male</label>
-                    <input type="number" id="male" name="nyks_participants_male" value="{{old('nyks_participants_male')}}">
+                    <input type="number" id="male" name="nyks_participants_male" value="{{old('nyks_participants_male', $VolunteerMeetingCount == 1 ? $VolunteerMeetingData['nyks_participants_male'] : '')}}">
                     @error('nyks_participants_male', 'Volunteer_Meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
                     @enderror
@@ -589,7 +587,7 @@
                 <div class="col-md-2">
                   <div class="form-group mb-0">
                     <label for="Female">Female</label>
-                    <input type="number" id="Female" name="nyks_participants_female" value="{{old('nyks_participants_female')}}">
+                    <input type="number" id="Female" name="nyks_participants_female" value="{{old('nyks_participants_female', $VolunteerMeetingCount == 1 ? $VolunteerMeetingData['nyks_participants_female'] : '')}}">
                     @error('nyks_participants_female', 'Volunteer_Meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
                     @enderror
@@ -602,7 +600,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number" name="nss_number_meetings" value="{{old('nss_number_meetings')}}">
+                    <input type="number" name="nss_number_meetings" value="{{old('nss_number_meetings', $VolunteerMeetingCount == 1 ? $VolunteerMeetingData['nss_number_meetings'] : '')}}">
                     @error('nss_number_meetings', 'Volunteer_Meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
                     @enderror
@@ -616,7 +614,7 @@
                 <div class="col-md-2">
                   <div class="form-group mb-0">
                     <label for="male">Male</label>
-                    <input type="number" id="male" name="nss_participants_male" value="{{old('nss_participants_male')}}">
+                    <input type="number" id="male" name="nss_participants_male" value="{{old('nss_participants_male', $VolunteerMeetingCount == 1 ? $VolunteerMeetingData['nss_participants_male'] : '')}}">
                     @error('nss_participants_male', 'Volunteer_Meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
                     @enderror
@@ -625,7 +623,7 @@
                 <div class="col-md-2">
                   <div class="form-group mb-0">
                     <label for="Female">Female</label>
-                    <input type="number" id="Female" name="nss_participants_female" value="{{old('nss_participants_female')}}">
+                    <input type="number" id="Female" name="nss_participants_female" value="{{old('nss_participants_female', $VolunteerMeetingCount == 1 ? $VolunteerMeetingData['nss_participants_female'] : '')}}">
                     @error('nss_participants_female', 'Volunteer_Meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
                     @enderror
@@ -638,7 +636,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number" name="bsg_number_meetings" value="{{old('bsg_number_meetings')}}">
+                    <input type="number" name="bsg_number_meetings" value="{{old('bsg_number_meetings', $VolunteerMeetingCount == 1 ? $VolunteerMeetingData['bsg_number_meetings'] : '')}}">
                     @error('bsg_number_meetings', 'Volunteer_Meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
                     @enderror
@@ -652,7 +650,7 @@
                 <div class="col-md-2">
                   <div class="form-group mb-0">
                     <label for="male">Male</label>
-                    <input type="number" id="male" name="bsg_participants_male" value="{{old('bsg_participants_male')}}">
+                    <input type="number" id="male" name="bsg_participants_male" value="{{old('bsg_participants_male', $VolunteerMeetingCount == 1 ? $VolunteerMeetingData['bsg_participants_male'] : '')}}">
                     @error('bsg_participants_male', 'Volunteer_Meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
                     @enderror
@@ -661,7 +659,7 @@
                 <div class="col-md-2">
                   <div class="form-group mb-0">
                     <label for="Female">Female</label>
-                    <input type="number" id="Female" name="bsg_participants_female" value="{{old('bsg_participants_female')}}">
+                    <input type="number" id="Female" name="bsg_participants_female" value="{{old('bsg_participants_female', $VolunteerMeetingCount == 1 ? $VolunteerMeetingData['bsg_participants_female'] : '')}}">
                     @error('bsg_participants_female', 'Volunteer_Meeting')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
                     @enderror
@@ -670,7 +668,7 @@
               </div>
               <div class="col-md-12 mt-4 text-center">
                 
-                <button type="submit" class="login-btn">SUBMIT</button>
+                <button type="submit" class="login-btn">{{$VolunteerMeetingCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
               </div>
             </div>
             

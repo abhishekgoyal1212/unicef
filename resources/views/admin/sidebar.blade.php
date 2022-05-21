@@ -42,6 +42,9 @@ $first_segments_sidebar = Request::route()->action['as'];
   @if (session('flash-success'))
   <script> toastr["success"]("{{session()->get('flash-success')}}") </script>
   @endif
+  @if (session('flash-update'))
+  <script> toastr["info"]("{{session()->get('flash-update')}}") </script>
+  @endif
   <div class="container-fluid">
 
     <div class="row">

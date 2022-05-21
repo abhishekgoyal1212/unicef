@@ -10,11 +10,18 @@ use Validator;
 
 class OrientationHealthController extends Controller
 {
-     public function orientation_health(Request $request){
+    
+    public function orientation_health_view(){
         $user_id = Auth::id();
         $today_date = date('Y-m-d');
-        $user = OrientationHealth::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
-        if($user == 0){
+        $data['OrientationHealthCount'] = OrientationHealth::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+        $data['OrientationHealthData'] = OrientationHealth::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first();
+        return view('admin/Orientation Health', $data);
+    }
+
+        
+
+    public function orientation_health(Request $request){
             $validator = Validator::make($request->all(), [
                 'number_orientation' => 'required|numeric',
                 'anm' => 'required',
@@ -28,7 +35,14 @@ class OrientationHealthController extends Controller
             }
             $inputs = $request->input();
             $user_id = Auth::id();
-            $res = New OrientationHealth();
+            $today_date = date('Y-m-d');
+            $rowcount = OrientationHealth::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+            if($rowcount == 0){
+                $res = New OrientationHealth();
+            }elseif($rowcount == 1){
+                $rowid = OrientationHealth::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first();
+                $res = OrientationHealth::find($rowid['id']);
+            }
             $res->user_id = $user_id;
             $res->cate_name = 'Orientation Health';
             $res->number_orientation = $inputs['number_orientation'];
@@ -39,12 +53,13 @@ class OrientationHealthController extends Controller
             $result = $res->save();
 
             if($result){
-                return back()->with('flash-success', 'Ground Level Health Functionaries Added Successfully');
+                if($rowcount == 0){
+                    return back()->with('flash-success', 'Ground Level Health Functionaries Added Successfully');
+                }elseif($rowcount == 1){
+                    return back()->with('flash-update', 'Ground Level Health Functionaries Update Successfully');
+                }
             }else{
                 return back()->with('flash-error', 'Error occured in adding data');
             }
-        }else{
-            return redirect()->back()->with('flash-error', 'Today Details Already Submitted');
-        }
     }
 }

@@ -39,7 +39,7 @@
                       </div>
                       <div class="col-md-4">
                         <div class="form-group mb-0">
-                          <input type="number" name="number_meeting" value="{{old('number_meeting')}}">
+                          <input type="number" name="number_meeting" value="{{old('number_meeting', $ImaCount == 1 ? $ImaData['number_meeting'] : '')}}">
                         </div>
                         @error('number_meeting')
                         <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -52,7 +52,7 @@
                       </div>
                       <div class="col-md-4">
                         <div class="form-group mb-0">
-                          <input type="number" name="number_participants" value="{{old('number_participants')}}">
+                          <input type="number" name="number_participants" value="{{old('number_participants', $ImaCount == 1 ? $ImaData['number_participants'] : '')}}">
                         </div>
                         @error('number_participants')
                         <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -60,12 +60,9 @@
                       </div>
                     </div>
                     <div class="col-md-10 mt-4 text-center">
-
-                     <button type="submit" class="login-btn">SUBMIT</button>
+                     <button type="submit" class="login-btn">{{$ImaCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                    </div>
                  </div>
-
-
                </form>
 
 
@@ -86,7 +83,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group mb-0">
-                        <input type="number" name="number_meeting" value="{{old('number_meeting')}}">
+                        <input type="number" name="number_meeting" value="{{old('number_meeting', $PractitionersCount == 1 ? $PractitionersData['number_meeting'] : '')}}">
                       </div>
                       @error('number_meeting','Private_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -99,7 +96,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group mb-0">
-                        <input type="number" name="number_participants" value="{{old('number_participants')}}">
+                        <input type="number" name="number_participants" value="{{old('number_participants', $PractitionersCount == 1 ? $PractitionersData['number_participants'] : '')}}">
                       </div>
                       @error('number_participants','Private_Meeting')
                       <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -108,7 +105,7 @@
                   </div>
                   <div class="col-md-10 mt-4 text-center">
 
-                   <button type="submit" class="login-btn">SUBMIT</button>
+                   <button type="submit" class="login-btn">{{$PractitionersCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                  </div>
                </div>
 
@@ -130,7 +127,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_meeting" value="{{old('number_meeting')}}">
+                      <input type="number" name="number_meeting" value="{{old('number_meeting', $PharmacistsCount == 1 ? $PharmacistsData['number_meeting'] : '')}}">
                     </div>
                     @error('number_meeting', 'Pharmacists_Associations')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -143,7 +140,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group mb-0">
-                      <input type="number" name="number_participants"  value="{{old('number_participants')}}">
+                      <input type="number" name="number_participants"  value="{{old('number_participants', $PharmacistsCount == 1 ? $PharmacistsData['number_participants'] : '')}}">
                     </div>
                     @error('number_participants', 'Pharmacists_Associations')
                     <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -152,7 +149,7 @@
                 </div>
                 <div class="col-md-10 mt-4 text-center">
 
-                 <button type="submit" class="login-btn">SUBMIT</button>
+                 <button type="submit" class="login-btn">{{$PharmacistsCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
                </div>
              </div>
 
@@ -174,7 +171,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number" name="number_meeting" value="{{old('number_meeting')}}">
+                    <input type="number" name="number_meeting" value="{{old('number_meeting', $MerchantCount == 1 ? $MerchantData['number_meeting'] : '')}}">
                   </div>
                   @error('number_meeting', 'Merchant_Association')
                   <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -187,7 +184,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-0">
-                    <input type="number" name="number_participants" value="{{old('number_participants')}}">
+                    <input type="number" name="number_participants" value="{{old('number_participants', $MerchantCount == 1 ? $MerchantData['number_participants'] : '')}}">
                   </div>
                   @error('number_participants', 'Merchant_Association')
                   <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -195,7 +192,7 @@
                 </div>
               </div>
               <div class="col-md-10 mt-4 text-center">
-               <button type="submit" class="login-btn">SUBMIT</button>
+               <button type="submit" class="login-btn">{{$MerchantCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
              </div>
            </div>
          </form>
@@ -214,7 +211,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-group mb-0">
-                  <input type="number" name="number_meeting" value="{{old('number_meeting')}}">
+                  <input type="number" name="number_meeting" value="{{old('number_meeting', $OtherCount == 1 ? $OtherData['number_meeting'] : '')}}">
                 </div>
                 @error('number_meeting', 'Others_Pvt')
                 <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -227,7 +224,7 @@
               </div>
               <div class="col-md-4">
                 <div class="form-group mb-0">
-                  <input type="number" name="number_participants" value="{{old('number_participants')}}">
+                  <input type="number" name="number_participants" value="{{old('number_participants', $OtherCount == 1 ? $OtherData['number_participants'] : '')}}">
                 </div>
                 @error('number_participants', 'Others_Pvt')
                 <div class="form-valid-error text-danger">{{ $message }}</div>
@@ -236,7 +233,7 @@
             </div>
             <div class="col-md-10 mt-4 text-center">
 
-             <button type="submit" class="login-btn">SUBMIT</button>
+             <button type="submit" class="login-btn">{{$OtherCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
            </div>
          </div>
        </form>

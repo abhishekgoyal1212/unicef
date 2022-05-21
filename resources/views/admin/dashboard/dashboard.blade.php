@@ -9,6 +9,18 @@
     background-color: white;
   }
 
+  .amchart{
+      width: 100%;
+    height: 350px;
+    background-color: white;
+  }
+  .amchart2{
+      width: 100%;
+    height: 350px;
+    background-color: white;
+  }
+
+
   #append_div {
     width: 100%;
     height: 350px;
@@ -258,7 +270,7 @@ ul#list_group li:first-child{
  <div class="col-md-3">
   <div class="select-sec-box topic">
    <h5 class="pt-2">Select Topic</h5>
-   <select class="planning_chart w-100">
+   <select class=" w-100">
      <option value="0" >Topic1</option>
      <option value="7" >Topic2</option>
      <option value="8" >Topic3</option>
@@ -387,21 +399,77 @@ ul#list_group li:first-child{
       </div>
 
     <div class="row mt-4">
-        <div class="col-md-5 pr-lg-4 ">
+        <div class="col-md-6 pr-lg-4 ">
            <h4 class="mb-4">Pvt Bodies</h4>
            <div class="bg-white p-4" id="append_pvt_bodies_graph"> </div>
         </div>
-        <div class="col-md-5 pr-lg-3">
+        <div class="col-md-6 pr-lg-3">
            <h4 class="mb-4">Pvt Bodies</h4>
            <div class="bg-white p-4" id="append_pvt_bodies_graph2"> </div>
         </div>
     </div>
 
-    <div class="col-md-6 pl-lg-4">
-      <h4 class="mb-4">Mass Media</h4>
-      <div id="amchart2"></div>
-      {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
-    </div>  
+    <br></br>
+     <div class="row mt-4">
+        <div class="col-3" >
+            <lable>From Date</lable>
+            <input type="text" name="mass_media_from_date" class="start_date" value="2022-04-01">
+        </div>
+        <div class="col-3">
+            <lable>To Date</lable>
+          <input type="text" name="mass_media_to_date" class="start_date" value="2022-04-15">
+        </div>
+              <div class="select-sec-box col-md-4">
+                <h5>Select District</h5>
+                  <select class="select_value" id="mass_select_value">
+                    @foreach($districts as $value)
+                    <option value="{{$value->id}}">{{$value->districts}}</option>
+                    @endforeach
+                  </select>
+              </div>
+      </div>
+
+      <div class="row mt-0">
+        <div class="col-md-11 pl-lg-4">
+          <h4 class="mt-4">Mass Media</h4>
+          <div id="appendamchart2">
+          </div>
+        </div> 
+      </div>
+
+      <br></br>
+     <div class="row mt-4">
+        <div class="col-3" >
+            <lable>From Date</lable>
+            <input type="text" name="group_tracking_from_date" class="start_date" value="2022-04-01">
+        </div>
+        <div class="col-3">
+            <lable>To Date</lable>
+          <input type="text" name="group_tracking_to_date" class="start_date" value="2022-04-15">
+        </div>
+              <div class="select-sec-box col-md-4">
+                <h5>Select District</h5>
+                  <select class="select_value" id="group_select_value">
+                    @foreach($districts as $value)
+                    <option value="{{$value->id}}">{{$value->districts}}</option>
+                    @endforeach
+                  </select>
+              </div>
+      </div>
+
+      <div class="row mt-0">
+        <div class="col-md-11 pl-lg-4">
+          <h4 class="mt-4">Group Tracking</h4>
+          <div id="append_group_chart">
+           
+          </div>
+        </div> 
+      </div>
+
+
+
+
+
   </div>
 </div>
 
@@ -496,7 +564,7 @@ ul#list_group li:first-child{
     var to_date_field_value = $("input[name=to_date_field]").val();
     var csrf_token  = '{{csrf_token()}}';
     $("#append_div").empty();
-    $("#append_div").append('<div id="amchart"></div>');
+    $("#append_div").append('<div class="amchart" id="amchart_sm"></div>');
     $("#error_data").remove();
     $.ajax({
       url: "{{route('fetch_graph_data')}}",
@@ -504,6 +572,7 @@ ul#list_group li:first-child{
       data: {
         _token:csrf_token,from_date:from_date_field_value, to_date:to_date_field_value, chartvalueresult: chartvalueresult},
         success: function(dataquery){
+
           if(dataquery == 'error')
           {
             $("#error_data_append").after('<div class="row" id="error_data"><div class="col-12"><div class="alert alert-danger">Data Not Found</div></div></div>')
@@ -512,7 +581,7 @@ ul#list_group li:first-child{
          }
 
          am5.ready(function() {
-          var root = am5.Root.new("amchart");
+          var root = am5.Root.new("amchart_sm");
           root.setThemes([
             am5themes_Animated.new(root)
             ]);
@@ -858,8 +927,8 @@ default_data(chartvaluenumber);
                   legendValueText: "{value}",
                 }));
                 series.get("colors").set("colors", [
-                  am5.color(0xffff00),
-                  am5.color(0x0000ff),
+                  am5.color(0x145a32),
+                  am5.color(0xF1948A),
                   ]);
                 $("#yes_no_div_show").show(); 
                 series.data.setAll([{
@@ -902,7 +971,6 @@ default_data(chartvaluenumber);
       });
   }
 coordination_chart(coordination_select_value);
-  
 </script>
 <script>
   var pvtbodies_select_value = 'pvt_ima_iap_meeting';
@@ -927,10 +995,9 @@ coordination_chart(coordination_select_value);
           pvtbodiesvalue:pvtbodies_select_value
         },
           success:function(pvtbodies){
-              console.log(pvtbodies);
             var pvtbodies = JSON.parse(pvtbodies);
             $.each(pvtbodies, function(key, value) {
-               var pvtbodies_graph_append = '<h6 class="state-heading">'+value.districts+'</h6><div class="row align-items-center "><div class="col-md-1"><div class="dot_round progress_cricle  left-cricle  "><i class="fa fa-circle">'+value.meeting+'</i></div></div> <div class="col-md-10"><div class="progressive_bars"><div class="progress  "> <div class="progress-bar progress_bg'+key+'" style="width: '+value.percent+'%"></div><div class="progress-bar  progress_text'+key+'">'+value.participants+'</div></div></div></div><div class="col-md-1"><div class="dot_round progress_cricle right-cricle "><i class="fa fa-circle" style="heigh:200px;"></i></div></div></div>'
+                var pvtbodies_graph_append = '<h6 class="state-heading state_color'+key+'" >'+value.districts+'</h6><div class="row align-items-center "><div class="col-md-1"><div class="dot_round progress_cricle  left-cricle'+key+'"><i class="fa fa-circle ">'+value.meeting+'</i></div></div> <div class="col-md-10"><div class="progressive_bars"><div class="progress  "> <div class="progress-bar  progress_bg'+key+'" style="width: '+value.percent+'%"></div><div class="progress-bar   progress_text'+key+'">'+value.participants+'</div></div></div></div><div class="col-md-1"><div><i class="fa fa-circle" style="heigh:200px;"></i></div></div></div>'
               if(key <= 7){
                 $('#append_pvt_bodies_graph').append(pvtbodies_graph_append);
               }else if(key > 7){
@@ -941,6 +1008,255 @@ coordination_chart(coordination_select_value);
     });
   }
   pvtbodies_chart(pvtbodies_select_value);
+</script>
+<script type="text/javascript">
+var mass_media_value = 13;
+$('#mass_select_value').on('change', function (){
+  var mass_media_value = this.value;
+  mass_media_graph(mass_media_value);
+});
+
+function mass_media_graph(OptionValue){
+  var start_date =$("input[name=mass_media_from_date]").val();
+  var end_date = $("input[name=mass_media_to_date]").val();
+  var mass_media_value = OptionValue;
+  var csrf_token = '{{csrf_token()}}';
+  $("#appendamchart2").empty();
+  $("#appendamchart2").append('<div class="amchart2" id="amchartmass"></div>');
+  $.ajax({
+    url: "{{route('mass_media_graph')}}",
+    type : 'POST',
+    data :{
+        start_date:start_date,
+        end_date : end_date,
+        _token:csrf_token,
+        mass_media_value:mass_media_value
+      },
+      success:function(data){
+        if(data == 'error')
+          {
+            $("#error_data_append").after('<div class="row" id="error_data"><div class="col-12"><div class="alert alert-danger">Data Not Found</div></div></div>')
+          }else{
+           var mass_graph_data = JSON.parse(data);
+         }
+                am5.ready(function() {
+                var root = am5.Root.new("amchartmass");
+                root.setThemes([
+                  am5themes_Animated.new(root)
+                ]);
+                var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                  panX: false,
+                  panY: false,
+                  wheelX: "panX",
+                  wheelY: "zoomX",
+                  layout: root.verticalLayout
+                }));
+                var legend = chart.children.push(
+                  am5.Legend.new(root, {
+                    width: am5.percent(100),
+                    x: am5.percent(50),
+                    marginTop:10,
+                    layout: root.horizontalLayout
+                  })
+                );
+                var data = mass_graph_data;
+                root.numberFormatter.setAll({
+                  numberFormat: "#a",
+                  bigNumberPrefixes: [
+                    { "number": 1e+3, "suffix": "K" },
+                    { "number": 1e+6, "suffix": "M" },
+                    { "number": 1e+9, "suffix": "B" }
+                  ],
+                  smallNumberPrefixes: []
+                });
+                var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+                  categoryField: "type",
+                  renderer: am5xy.AxisRendererX.new(root, {
+                    cellStartLocation: 0.1,
+                    cellEndLocation: 0.9,
+                    minGridDistance :20,
+                  }),
+                  tooltip: am5.Tooltip.new(root, {})
+                }));
+                
+                xAxis.data.setAll(data);
+                var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                  renderer: am5xy.AxisRendererY.new(root, {})
+                }));
+                function makeSeries(name, fieldName, color) {
+                  var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                    name: name,
+                    xAxis: xAxis,
+                    yAxis: yAxis,
+                    valueYField: fieldName,
+                    categoryXField: "type",
+                    fill:color,
+                  }));
+                
+                  series.columns.template.setAll({
+                    tooltipText: "{name}, {categoryX}:{valueY}",
+                    width: am5.percent(90),
+                    tooltipY: 0
+                  });
+                
+                  series.data.setAll(data);
+                  series.appear();
+                
+                  series.bullets.push(function () {
+                    return am5.Bullet.new(root, {
+                      locationY: 0,
+                      sprite: am5.Label.new(root, {
+                        text: "{valueY}",
+                        fill: root.interfaceColors.get("alternativeText"),
+                        centerY: 0,
+                        centerX: am5.p50,
+                        populateText: true
+                      })
+                    });
+                  });
+                
+                  legend.data.push(series);
+                } 
+                makeSeries("Male", "male",am5.color("#ffc107"));
+                makeSeries("Female", "female",am5.color("#f96fab"));
+                chart.appear(1000, 100);
+                }); 
+      }
+  });
+}
+mass_media_graph(mass_media_value);
+</script>
+<script>
+  var group_select_value = 13;
+$("#group_select_value").on('change', function(){
+  var group_select_value = $(this).val();
+  group_tracking_graph(group_select_value);
+});
+function group_tracking_graph(OptionValue){
+  var group_select_value = OptionValue;
+  var start_date = $("input[name=group_tracking_from_date]").val();
+  var end_date = $("input[name=group_tracking_to_date]").val();
+  var csrf_token = '{{csrf_token()}}';
+  $("#append_group_chart").empty();
+  $("#append_group_chart").append('<div class="amchart" id="amchartgroup"></div>');
+    $.ajax({
+      url : "{{route('groups_tracking_graph')}}",
+      type : 'POST',
+      data : {
+        start_date:start_date,
+        end_date: end_date,
+        group_select_value : group_select_value,
+        _token : csrf_token,
+      },
+      success:function(data){
+       var group_tracking_graph_data = JSON.parse(data);
+       console.log(group_tracking_graph_data);
+
+
+
+       am5.ready(function() {
+          var root = am5.Root.new("amchartgroup");
+          root.setThemes([
+            am5themes_Animated.new(root)
+            ]);
+          var chart = root.container.children.push(am5xy.XYChart.new(root, {
+            panX: false,
+            panY: false,
+            wheelX: "panX",
+            wheelY: "zoomX",
+            layout: root.verticalLayout
+          }));
+
+          var legend = chart.children.push(
+            am5.Legend.new(root, {
+              width: am5.percent(100),
+              centerX: am5.percent(50),
+              x: am5.percent(50),
+              marginTop:10,
+            })
+            );
+          var data = group_tracking_graph_data;
+
+          root.numberFormatter.setAll({
+            numberFormat: "#a",
+            bigNumberPrefixes: [
+            { "number": 1e+3, "suffix": "K" },
+            { "number": 1e+6, "suffix": "M" },
+            { "number": 1e+9, "suffix": "B" }
+            ],
+
+            smallNumberPrefixes: []
+          });
+
+          var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+            categoryField: "user_id",
+                  // xAxis:renderer.minGridDistance = 20,
+                  renderer: am5xy.AxisRendererX.new(root, {
+                    cellStartLocation: 0.1,
+                    cellEndLocation: 0.9,
+                    minGridDistance :20,
+                  }),
+                  tooltip: am5.Tooltip.new(root, {})
+                }));
+
+          xAxis.data.setAll(data);
+
+          var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+
+            renderer: am5xy.AxisRendererY.new(root, {})
+          }));
+
+          function makeSeries(name, fieldName, color) {
+            var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+              name: name,
+              xAxis: xAxis,
+              yAxis: yAxis,
+              valueYField: fieldName,
+              categoryXField: "user_id"
+              ,fill:color,
+            }));
+
+
+            series.columns.template.setAll({
+              tooltipText: "{name}={valueY}",
+              width: am5.percent(90),
+              tooltipY: 0
+            });
+
+            series.data.setAll(data);
+
+            series.appear();
+
+            series.bullets.push(function () {
+              return am5.Bullet.new(root, {
+                locationY: 0,
+                sprite: am5.Label.new(root, {
+                  text: "{valueY}",
+                  fill: root.interfaceColors.get("alternativeText"),
+                  centerY: 0,
+                  centerX: am5.p50,
+                  populateText: true
+                })
+              });
+            });
+
+            legend.data.push(series);
+          }
+              makeSeries("Nomadic locations", "Nomadic_Locations",am5.color("#8800cc"));
+                makeSeries("Construction Labour sites", "Construction_Labour_Sites",am5.color("#9900e6"));
+              makeSeries("Bricklin Labour sites", "Bricklin_Labour_Sites",am5.color("#b31aff"));
+              makeSeries("Mine Labour Sites", "Mine_Labour_Sites",am5.color("#c44dff"));
+              makeSeries("Excluded Groups Sites", "Excluded_Groups_Sites",am5.color("#d580ff"));
+              makeSeries("Pastrol Community", "Pastrol_Community",am5.color("#dd99ff"));
+              makeSeries("Slum Dwellers", "Slum_Dwellers",am5.color("#eeccff"));
+              makeSeries("Sex Workers", "Sex_Workers",am5.color("#f7e6ff"));
+              chart.appear(1000, 100);
+                });  
+      }
+    });
+}
+group_tracking_graph(group_select_value);
+  
 </script>
 @stop
 

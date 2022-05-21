@@ -48,15 +48,7 @@ Route::get('/', function () {
 			// Route::get('dashboard','index')->name('dashboard');
 			Route::get('dashboard','index')->name('admin.dashboard');
 			Route::get('logout','logout')->name('admin.logout');
-			Route::view('Planing_Platform','admin/Planing_Platform')->name('admin.planingPlatform');
-			Route::view('Orientation','admin/Orientation')->name('admin.Orientation');
-			Route::view('Pvt_Bodies','admin/Pvt Bodies')->name('admin.pvtBodies');
-			Route::view('Coordination','admin/Coordination Meeting Line')->name('admin.coordinationMeetingLine');
-			Route::view('Mass','admin/Mass Media Mid Media')->name('admin.massMediaMidMedia');
-			Route::view('Orientation_Health','admin/Orientation Health')->name('admin.orientationHealth');
 			Route::view('Iec','admin/Iec')->name('admin.Iec');
-			Route::view('Groups_Tracking','admin/Groups Tracking')->name('admin.GroupsTracking');
-
 			Route::get('profile', 'profile')->name('profile');
 			Route::post('update-profile', 'update_profile')->name('update_profile');
 			Route::post('update-profile-photo', 'update_profile_photo')->name('update_profile_photo');
@@ -65,12 +57,13 @@ Route::get('/', function () {
 			Route::post('planning-graph', 'planning_graph')->name('planning_graph');
 			Route::post('coordination-graph', 'coordination_graph')->name('coordination_graph');
 			Route::post('pvt-bodies-graph', 'pvt_bodies_graph')->name('pvt_bodies_graph');
-
+			Route::post('mass-media-graph', 'mass_media_graph')->name('mass_media_graph');
+			Route::post('groups-tracking-graph', 'groups_tracking_graph')->name('groups_tracking_graph');
 			Route::post('planning-districts', 'planning_districts')->name('planning_districts');
-
 		});
 
-		Route::controller(PlaningPlatform::class)->group(function(){
+			Route::controller(PlaningPlatform::class)->group(function(){
+			Route::get('Planing_Platform','Planing_Platform')->name('admin.planingPlatform');
 			Route::post('Planing_platform_save','planing_platform_save')->name('admin.planingPlatformSave');
 			Route::post('Sector_meeting','sector_meeting')->name('admin.sectorMeeting');
 			Route::post('Nigrani_samiti_meeting','nigrani_samiti_meeting')->name('admin.nigraniSamitiMeeting');
@@ -78,6 +71,7 @@ Route::get('/', function () {
 			Route::post('Fortnightly_implementation','fortnightly_implementation')->name('admin.fortnightlyImplementation');
 		});
 		Route::controller(OrientationController::class)->group(function(){
+			Route::get('Orientation','orientation')->name('admin.Orientation');
 			Route::post('Education_department','education_department')->name('admin.educationDepartment');
 			Route::post('Panchayati_raj','panchayati_raj')->name('admin.panchayatiRaj');
 			Route::post('Minority_deparment','minority_deparment')->name('admin.minorityDeparment');
@@ -85,6 +79,7 @@ Route::get('/', function () {
 			Route::post('Csr_deparment','csr_deparment')->name('admin.csrDeparment');
 		});
 		Route::controller(PvtBodiesController::class)->group(function(){
+			Route::get('Pvt_Bodies','pvt_bodies')->name('admin.pvtBodies');
 			Route::post('Meeting_IMA','meeting_ima')->name('admin.meetingIMA');
 			Route::post('Meeting_Private','meeting_private')->name('admin.meetingPrivate');
 			Route::post('Pharmacists_associations','pharmacists_associations')->name('admin.pharmacistsAssociations');
@@ -111,15 +106,19 @@ Route::get('/', function () {
 		// 	Route::post('Special_iec_material','Special_iec_material')->name('admin.specialIecMaterial');
 		// }); 
 		Route::controller(CoordinationController::class)->group(function(){
+   			Route::get('Coordination','coordination')->name('admin.coordinationMeetingLine');
    			Route::post('insert-coordination','insert_coordination')->name('admin.coordination');
 		});
 		Route::controller(MassMediaController::class)->group(function(){
+			Route::get('Mass','mass')->name('admin.massMediaMidMedia');
    			Route::post('mass-media','insert_mass_media')->name('admin.MassMedia');
 		});
 		Route::controller(OrientationHealthController::class)->group(function(){
+   			Route::get('Orientation_Health','orientation_health_view')->name('admin.orientationHealth');
    			Route::post('orientation-health','orientation_health')->name('admin.OrientationHealth');
 		});
 		Route::controller(GroupsTrackingController::class)->group(function(){
+   			Route::get('Groups_Tracking','groups_tracking_view')->name('admin.GroupsTracking');
    			Route::post('groups-tracking','groups_tracking')->name('admin.GroupsTrackingpost');;
 		});
 	});

@@ -10,11 +10,14 @@ use Validator;
 
 class MassMediaController extends Controller
 {
-    public function insert_mass_media(Request $request){
+    public function mass(){
         $user_id = Auth::id();
         $today_date = date('Y-m-d');
-        $user = MassMedia::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
-        if($user == 0){    
+        $data['MassCount'] = MassMedia::where('user_id', $user_id)->whereDate('created_at', $today_date)->count();
+        $data['MassData'] = MassMedia::where('user_id', $user_id)->whereDate('created_at', $today_date)->first();
+        return view('admin/Mass Media Mid Media', $data);
+    }
+    public function insert_mass_media(Request $request){       
             $validator = Validator::make($request->all(), [
                 'rally_covid_vaccination' => 'required',
                 'rally_covid_reach_male' => 'required|numeric',
@@ -43,10 +46,17 @@ class MassMediaController extends Controller
              return redirect()->back()->withErrors($validator)
                             ->withInput();
             }
-
-            $inputs = $request->input();
             $user_id = Auth::id();
-            $res = New MassMedia();
+            $today_date = date('Y-m-d');
+            $rowcount = MassMedia::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count(); 
+
+            $inputs = $request->input(); 
+            if($rowcount == 0){
+                $res = New MassMedia();
+            }elseif($rowcount == 1){
+                $rowid = MassMedia::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first(); 
+                $res = MassMedia::find($rowid['id']);
+            }
             $res->user_id = $user_id;
             $res->cate_name = ' Mass Media Mid Media';
             $res->rally_covid_vaccination = $inputs['rally_covid_vaccination'];
@@ -72,13 +82,13 @@ class MassMediaController extends Controller
             $res->others_reach_female = $inputs['others_reach_female'];
             $result = $res->save();
             if($result){
-                return back()->with('flash-success', 'Coordination meeting with line dept Added Successfully');
+                if($rowcount == 0){
+                    return back()->with('flash-success', 'Coordination meeting with line dept Added Successfully');
+                }elseif($rowcount == 1){
+                     return back()->with('flash-update', 'Coordination meeting with line dept Update Successfully');
+                }
             }else{
                 return back()->with('flash-error', 'Error occured in adding data');
             }
-        }
-        else{
-            return redirect()->back()->with('flash-error', 'Today Details Already Submitted');
-        }
     }
 }

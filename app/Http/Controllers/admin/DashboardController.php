@@ -11,6 +11,9 @@ use App\Models\PlaningPlatform\DistrictCommunication;
 use App\Models\PlaningPlatform\FortnightlyReport;
 use App\Models\Coordination\Coordination;
 use App\Models\PvtBodies\MeetingIMA;
+use App\Models\MassMedia\MassMedia;
+
+
 use Auth;
 use Str;
 use Validator;
@@ -24,7 +27,8 @@ class DashboardController extends Controller
 		// DB::getQueryLog();
 		// $data = SmMeetingInstitutionsReligious::with('Alldeta')->select('user_id','number_meetings','number_participants_male','number_participants_Female')->get()->sum('number_meetings','number_participants_male','number_participants_Female')->groupBy('districts');
 		// dd(DB::getQueryLog());
-		return view('admin/dashboard/dashboard');	
+		$districts['districts'] = User::orderBy('districts', 'Asc')->get();
+		return view('admin/dashboard/dashboard', $districts);	
 	}
 
 	public function logout(Request $request)
@@ -332,8 +336,7 @@ class DashboardController extends Controller
 		$chartvaluenumber = $inputs['planingchartvalue'];
 			if($chartvaluenumber == 1) {
 				$data = Planing::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','wheather_meeting as condition')->limit(18)->get();
-
-			}else if($chartvaluenumber == 2) {
+			}else if($chartvaluenumber == 2){
 				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_Consultant as condition')->limit(18)->get();
 			}else if($chartvaluenumber == 3) {
 				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','suggestions_Consultant as condition')->limit(18)->get();
@@ -348,10 +351,7 @@ class DashboardController extends Controller
 			}else if($chartvaluenumber == 8) {
 				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','second_fortnighly_report as condition')->limit(18)->get();
 			}
-		// echo json_encode($data);
 			$arrayName['yes_no_values'] = $data;
-
-		///////////////
 			echo json_encode($arrayName);
 	}
 
@@ -438,6 +438,146 @@ class DashboardController extends Controller
 				$value->percent = $value->participants*100/$total_participants;
 			}
 			
+		echo json_encode($data);
+	}
+
+	public function mass_media_graph(Request $request)
+	{
+		$inputs = $request->all();
+		$from_date = date($inputs['start_date']);
+		$to_date = date($inputs['end_date']);
+		$masschartvalue = $inputs['mass_media_value'];
+
+		$data = DB::table('mass_media_mid_media')
+		->select(DB::raw('SUM(rally_covid_reach_male) as male'),
+			DB::raw('SUM(rally_covid_reach_female) as female'),
+			DB::raw('SUM(nukad_natak_reach_male) as male1'), 
+			DB::raw('SUM(nukad_natak_reach_female) as female1'),
+			DB::raw('SUM(flok_program_reach_male) as male2'), 
+			DB::raw('SUM(flok_program_reach_female) as female2'),
+			DB::raw('SUM(local_community_reach_male) as male3'), 
+			DB::raw('SUM(local_community_reach_female) as female3'),
+			DB::raw('SUM(cable_tv_reach_male) as male4'),
+			DB::raw('SUM(cable_tv_reach_female) as female4'),
+			DB::raw('SUM(flash_mob_reach_male) as male5'), 
+			DB::raw('SUM(flash_mob_reach_female) as female5'),
+			DB::raw('SUM(others_reach_male) as male6'), 
+			DB::raw('SUM(others_reach_female) as female6'))
+		->where('user_id', $masschartvalue)
+		->Where(function($query) use ($from_date, $to_date){
+                $query->whereBetween('created_at', [$from_date, $to_date])
+               			->orWhereDate('created_at', $from_date)
+						->orWhereDate('created_at', $to_date);
+            })
+		->get();
+
+		foreach($data as $key => $value){
+			$value->male = (int)$value->male;
+			$value->female = (int)$value->female;
+			$value->male1 = (int)$value->male1;
+			$value->female1 = (int)$value->female1;
+			$value->male2 = (int)$value->male2;
+			$value->female2 = (int)$value->female2;
+			$value->male3 = (int)$value->male3;
+			$value->female3 = (int)$value->female3;
+			$value->male4 = (int)$value->male4;
+			$value->female4 = (int)$value->female4;
+			$value->male5 = (int)$value->male5;
+			$value->female5 = (int)$value->female5;
+			$value->male6 = (int)$value->male6;
+			$value->female6 = (int)$value->female6;
+			$data = (array) $value;
+		}
+		$result = array_chunk($data, 2, true);
+		foreach($result as $key => $value){
+			if($key == 0){
+				$result[$key]['type'] = "Rally Covid Vaccination";
+				$result[$key] = array_reverse($result[$key]);
+			}
+			if($key == 1){
+				$result[$key]["type"] = "Nukad Natak";
+				$result[$key]["male"] = $result[$key]['male1'];
+				$result[$key]["female"] = $result[$key]['female1'];
+				unset($result[$key]['male1']);
+				unset($result[$key]['female1']);
+			}
+			if($key == 2){
+				$result[$key]["type"] = "Flok Program";
+				$result[$key]["male"] = $result[$key]['male2'];
+				$result[$key]["female"] = $result[$key]['female2'];
+				unset($result[$key]['male2']);
+				unset($result[$key]['female2']);
+			}
+			if($key == 3){
+				$result[$key]["type"] = "Local/Community Radio";
+				$result[$key]["male"] = $result[$key]['male3'];
+				$result[$key]["female"] = $result[$key]['female3'];
+				unset($result[$key]['male3']);
+				unset($result[$key]['female3']);
+			}
+			if($key == 4){
+				$result[$key]["type"] = "TV/Cable TV";
+				$result[$key]["male"] = $result[$key]['male4'];
+				$result[$key]["female"] = $result[$key]['female4'];
+				unset($result[$key]['male4']);
+				unset($result[$key]['female4']);
+			}
+			if($key == 5){
+				$result[$key]["type"] = "Flash Mob";
+				$result[$key]["male"] = $result[$key]['male5'];
+				$result[$key]["female"] = $result[$key]['female5'];
+				unset($result[$key]['male5']);
+				unset($result[$key]['female5']);
+			}
+			if($key == 6){
+				$result[$key]["type"] = "Others";
+				$result[$key]["male"] = $result[$key]['male6'];
+				$result[$key]["female"] = $result[$key]['female6'];
+				unset($result[$key]['male6']);
+				unset($result[$key]['female6']);
+			}
+		}
+		foreach($result as $key => $value){
+			$result[$key] = (object) $result[$key];
+		}	
+		echo json_encode($result);
+	}
+
+	public function groups_tracking_graph(Request $request){
+		$inputs = $request->all();
+		$from_date = date($inputs['start_date']);
+		$to_date = date($inputs['end_date']);
+		$group_select_value = $inputs['group_select_value'];
+		$data = DB::table('vulnerable_groups_tracking')
+		->select('user_id',DB::raw('SUM(no_nomadic_locations) as Nomadic_Locations'),
+			DB::raw('SUM(no_construction_labour_sites) as Construction_Labour_Sites'),
+			DB::raw('SUM(no_bricklin_labour_sites) as Bricklin_Labour_Sites'), 
+			DB::raw('SUM(no_mine_labour_sites) as Mine_Labour_Sites'),
+			DB::raw('SUM(no_excluded_groups_sites) as Excluded_Groups_Sites'), 
+			DB::raw('SUM(no_pastrol_community) as Pastrol_Community'),
+			DB::raw('SUM(no_slum_dwellers) as Slum_Dwellers'), 
+			DB::raw('SUM(no_sex_workers) as Sex_Workers'))
+		->where('user_id', $group_select_value)
+		->Where(function($query) use ($from_date, $to_date){
+                $query->whereBetween('created_at', [$from_date, $to_date])
+               			->orWhereDate('created_at', $from_date)
+						->orWhereDate('created_at', $to_date);
+            })
+		->groupBy('user_id')
+		->get();
+
+		foreach($data as $key => $value){
+			$value->user_id = '';
+			$value->Nomadic_Locations = (int) $value->Nomadic_Locations;
+			$value->Construction_Labour_Sites = (int) $value->Construction_Labour_Sites;
+			$value->Bricklin_Labour_Sites = (int) $value->Bricklin_Labour_Sites;
+			$value->Mine_Labour_Sites = (int) $value->Mine_Labour_Sites;
+			$value->Excluded_Groups_Sites = (int) $value->Excluded_Groups_Sites;
+			$value->Pastrol_Community = (int) $value->Pastrol_Community;
+			$value->Slum_Dwellers = (int) $value->Slum_Dwellers;
+			$value->Sex_Workers = (int) $value->Sex_Workers;
+		}
+
 		echo json_encode($data);
 	}
 }

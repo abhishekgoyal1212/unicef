@@ -41,9 +41,21 @@ class SocialMobilizationController extends Controller
     $data['CommunityMeetingCount'] = SmMeetingCommunity::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
     $data['CommunityMeetingData'] = SmMeetingCommunity::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first(); 
 
+    $data['ShgMeetingCount'] = SmMeetingShg::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+    $data['ShgMeetingData'] = SmMeetingShg::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first(); 
+   
+    $data['VulrenableMeetingCount'] = SmMeetingVulrenable::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+    $data['VulrenableMeetingData'] = SmMeetingVulrenable::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first(); 
+
+    $data['ExcludedMeetingCount'] = SmExcludedGroups::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+    $data['ExcludedMeetingData'] = SmExcludedGroups::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first(); 
+
+    $data['VolunteerMeetingCount'] = SmVolunteerMeeting::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+    $data['VolunteerMeetingData'] = SmVolunteerMeeting::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first(); 
 
        return view('admin/Social_Mobilization', $data); 
     }
+
     public function insert_sm_meeting_faith_based(Request $request)
     {
             $validator = Validator::make($request->all(), [
@@ -86,7 +98,7 @@ class SocialMobilizationController extends Controller
                     if($rowcount == 0){
                      return redirect()->back()->with('flash-success', 'Meeting with Faith Based Institutions /Religious Leaders Added Successfully');
                  }elseif($rowcount == 1){
-                     return redirect()->back()->with('flash-success', 'Meeting with Faith Based Institutions /Religious Leaders Update Successfully');
+                     return redirect()->back()->with('flash-update', 'Meeting with Faith Based Institutions /Religious Leaders Update Successfully');
                  }
             }else{
                    return redirect()->back()->with('flash-error', 'Error occured in adding data');
@@ -121,7 +133,7 @@ class SocialMobilizationController extends Controller
                 $res = New SmMeetingInfluencer();
             }elseif($rowcount == 1){
                 $rowid = SmMeetingInfluencer::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first();
-                 $res =  SmMeetingInstitutionsReligious::find($rowid['id']);
+                 $res =  SmMeetingInfluencer::find($rowid['id']);
             }
            
            $res->cate_name = 'Social Mobilization';
@@ -136,7 +148,7 @@ class SocialMobilizationController extends Controller
                 if($rowcount == 0){
                    return redirect()->back()->with('flash-success', 'Meeting with Influencers Added Successfully')->with('meeting-influencers', 'meeting-influencer');
                 }elseif($rowcount == 1){
-                    return redirect()->back()->with('flash-success', 'Meeting with Influencers Update Successfully')->with('meeting-influencers', 'meeting-influencer');
+                    return redirect()->back()->with('flash-update', 'Meeting with Influencers Update Successfully')->with('meeting-influencers', 'meeting-influencer');
                 }
                 
             }else{
@@ -183,7 +195,7 @@ class SocialMobilizationController extends Controller
                 if($rowcount == 0){
                     return redirect()->back()->with('flash-success', 'Number of Meeting Added Successfully')->with('number-meeting', 'number-meeting');
                 }elseif($rowcount == 1){
-                    return redirect()->back()->with('flash-success', 'Number of Meeting Update Successfully')->with('number-meeting', 'number-meeting');
+                    return redirect()->back()->with('flash-update', 'Number of Meeting Update Successfully')->with('number-meeting', 'number-meeting');
                 }
 
             }else{
@@ -232,7 +244,7 @@ class SocialMobilizationController extends Controller
                 if($rowcount == 0){
                     return redirect()->back()->with('flash-success', 'IPC Meeting Added Successfully')->with('meeting-ipc', 'meeting-ipc');
                 }elseif($rowcount == 1){
-                    return redirect()->back()->with('flash-success', 'IPC Meeting Update Successfully')->with('meeting-ipc', 'meeting-ipc');
+                    return redirect()->back()->with('flash-update', 'IPC Meeting Update Successfully')->with('meeting-ipc', 'meeting-ipc');
                 }
             }else{
                 return redirect()->back()->with('flash-error', 'Error occured in adding data');
@@ -276,7 +288,7 @@ class SocialMobilizationController extends Controller
             if($rowcount == 0){
                 return redirect()->back()->with('flash-success', 'Mother Meetings Added Successfully')->with('mother-meeting', 'mother-meeting');
             }elseif($rowcount == 1){
-                return redirect()->back()->with('flash-success', 'Mother Meetings Update Successfully')->with('mother-meeting', 'mother-meeting');
+                return redirect()->back()->with('flash-update', 'Mother Meetings Update Successfully')->with('mother-meeting', 'mother-meeting');
             }
         }else{
             return redirect()->back()->with('flash-error', 'Error occured in adding data');
@@ -320,59 +332,59 @@ class SocialMobilizationController extends Controller
             if($rowcount == 0){
                 return redirect()->back()->with('flash-success', 'Community Meetings Added Successfully')->with('community-meeting', 'community-meeting');
             }elseif($rowcount == 1){
-                return redirect()->back()->with('flash-success', 'Community Meetings Update Successfully')->with('community-meeting', 'community-meeting');
+                return redirect()->back()->with('flash-update', 'Community Meetings Update Successfully')->with('community-meeting', 'community-meeting');
                }
             }else{
                 return redirect()->back()->with('flash-error', 'Error occured in adding data');
             }
     }
-public function sm_shg_meeting(Request $request){
+    public function sm_shg_meeting(Request $request){     
+            $validator = Validator::make($request->all(), [
+                'number_meetings' => 'required|numeric',
+                'number_participants_male' => 'required|numeric',
+                'number_participants_female' => 'required|numeric',
+            ],[
+                'number_meetings.required' => 'This field is required',
+                'number_meetings.numeric' => 'Value must be numeric',
+                'number_participants_male.required' => 'This field is required',
+                'number_participants_male.numeric' => 'Value must be numeric',
+                'number_participants_female.required' => 'This field is required',
+                'number_participants_female.numeric' => 'Value must be numeric',
+            ]);
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator, 'SHG_Meeting')->withInput();
+            }
 
-    $user_id = Auth::id();
-    $today_date = date('Y-m-d');
-    $user = SmMeetingShg::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
-    if($user == 0){
-        $validator = Validator::make($request->all(), [
-            'number_meetings' => 'required|numeric',
-            'number_participants_male' => 'required|numeric',
-            'number_participants_female' => 'required|numeric',
-        ],[
-            'number_meetings.required' => 'This field is required',
-            'number_meetings.numeric' => 'Value must be numeric',
-            'number_participants_male.required' => 'This field is required',
-            'number_participants_male.numeric' => 'Value must be numeric',
-            'number_participants_female.required' => 'This field is required',
-            'number_participants_female.numeric' => 'Value must be numeric',
-        ]);
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator, 'SHG_Meeting')->withInput();
-        }
-        $user_id = Auth::id();
-        $inputs = $request->input();
-        $res = New SmMeetingShg();
-        $res->user_id = $user_id;
-        $res->cate_name = 'Social Mobilization';
-        $res->number_meetings = $inputs['number_meetings'];
-        $res->number_participants_male  = $inputs['number_participants_male'];
-        $res->number_participants_female  = $inputs['number_participants_female'];
-        $result = $res->save();
+            $user_id = Auth::id();
+            $today_date = date('Y-m-d');
+            $rowcount = SmMeetingShg::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+            $inputs = $request->input();
+            if($rowcount == 0){
+                $res = New SmMeetingShg();
+            }elseif($rowcount == 1){
+                $rowid = SmMeetingShg::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first();
+                $res = SmMeetingShg::find($rowid['id']);
+            }
+            $res->user_id = $user_id;
+            $res->cate_name = 'Social Mobilization';
+            $res->number_meetings = $inputs['number_meetings'];
+            $res->number_participants_male  = $inputs['number_participants_male'];
+            $res->number_participants_female  = $inputs['number_participants_female'];
+            $result = $res->save();
 
-        if($result){
-            return redirect()->back()->with('flash-success', 'Meeting with SHG Members Added Successfully')->with('shg-meeting', 'shg-meeting');
-        }else{
-            return redirect()->back()->with('flash-error', 'Error occured in adding data');
-        }
-    }else{
-             return redirect()->back()->with('flash-error', 'Today Details Already Submitted')->with('shg-meeting', 'shg-meeting');
+            if($result){
+                if($rowcount == 0){
+                    return redirect()->back()->with('flash-success', 'Meeting with SHG Members Added Successfully')->with('shg-meeting', 'shg-meeting');
+                }elseif($rowcount == 1){
+                    return redirect()->back()->with('flash-update', 'Meeting with SHG Members Update Successfully')->with('shg-meeting', 'shg-meeting');
+                }
+            }else{
+                return redirect()->back()->with('flash-error', 'Error occured in adding data');
+            }
     }
-}
 
-public function sm_vulrenable_meeting(Request $request){
-    $user_id = Auth::id();
-    $today_date = date('Y-m-d');
-    $user = SmMeetingVulrenable::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
-    if($user == 0){
-        $validator = Validator::make($request->all(), [
+    public function sm_vulrenable_meeting(Request $request){
+            $validator = Validator::make($request->all(), [
             'number_meetings' => 'required|numeric',
             'number_participants_male' => 'required|numeric',
             'number_participants_female' => 'required|numeric',
@@ -387,9 +399,16 @@ public function sm_vulrenable_meeting(Request $request){
         if($validator->fails()){
             return redirect()->back()->withErrors($validator, 'Vulrenable_Meeting')->withInput();
         }
-
+        $user_id = Auth::id();
+        $today_date = date('Y-m-d');
+        $rowcount = SmMeetingVulrenable::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
         $inputs = $request->input();
-        $res = New SmMeetingVulrenable();
+        if($rowcount == 0){
+             $res = New SmMeetingVulrenable();
+        }elseif($rowcount == 1){
+             $rowid = SmMeetingVulrenable::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first();
+             $res = SmMeetingVulrenable::find($rowid['id']);
+        }
         $res->user_id = $user_id;
         $res->cate_name = 'Social Mobilization';
         $res->number_meetings = $inputs['number_meetings'];
@@ -398,62 +417,62 @@ public function sm_vulrenable_meeting(Request $request){
         $result = $res->save();
 
         if($result){
-            return redirect()->back()->with('flash-success', 'Meeting with Vulrenable Groups Sites Added Successfully')->with('vulrenable-group-meeting', 'vulrenable-group-meeting');
+            if($rowcount == 0){
+                 return redirect()->back()->with('flash-success', 'Meeting with Vulrenable Groups Sites Added Successfully')->with('vulrenable-group-meeting', 'vulrenable-group-meeting');
+            }elseif($rowcount == 1){
+                 return redirect()->back()->with('flash-update', 'Meeting with Vulrenable Groups Sites Update Successfully')->with('vulrenable-group-meeting', 'vulrenable-group-meeting');
+            }
         }else{
             return redirect()->back()->with('flash-error', 'Error occured in adding data');
         }
     }
-    else{
-            return redirect()->back()->with('flash-error', 'Today Details Already Submitted')->with('vulrenable-group-meeting', 'vulrenable-group-meeting');
+
+    public function sm_excluded_groups(Request $request){
+            $validator = Validator::make($request->all(), [
+                'number_meetings' => 'required|numeric',
+                'number_participants_male' => 'required|numeric',
+                'number_participants_female' => 'required|numeric',
+            ],[
+                'number_meetings.required' => 'This field is required',
+                'number_meetings.numeric' => 'Value must be numeric',
+                'number_participants_male.required' => 'This field is required',
+                'number_participants_male.numeric' => 'Value must be numeric',
+                'number_participants_female.required' => 'This field is required',
+                'number_participants_female.numeric' => 'Value must be numeric',
+            ]);
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator, 'Excluded_Meeting')->withInput();
+            }
+
+            $user_id = Auth::id();
+            $today_date = date('Y-m-d');
+            $rowcount = SmExcludedGroups::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+            $inputs = $request->input();
+            if($rowcount == 0){
+                $res = New SmExcludedGroups();
+            }elseif($rowcount == 1){
+                $rowid = SmExcludedGroups::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first();
+                $res = SmExcludedGroups::find($rowid['id']);
+            }
+            $res->user_id = $user_id;
+            $res->cate_name = 'Social Mobilization';
+            $res->number_meetings = $inputs['number_meetings'];
+            $res->number_participants_male  = $inputs['number_participants_male'];
+            $res->number_participants_female  = $inputs['number_participants_female'];
+            $result = $res->save();
+
+            if($result){
+                if($rowcount == 0){
+                    return redirect()->back()->with('flash-success', 'Meeting with excluded groups(PWD,Transgender) Added Successfully')->with('excluded-group-meeting', 'excluded-group-meeting');
+                }elseif($rowcount == 1){
+                    return redirect()->back()->with('flash-update', 'Meeting with excluded groups(PWD,Transgender) Update Successfully')->with('excluded-group-meeting', 'excluded-group-meeting');
+                }
+            }else{
+                return redirect()->back()->with('flash-error', 'Error occured in adding data');
+            }
     }
 
-}
-
-public function sm_excluded_groups(Request $request){
-    $user_id = Auth::id();
-    $today_date = date('Y-m-d');
-    $user = SmExcludedGroups::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
-    if($user == 0){
-        $validator = Validator::make($request->all(), [
-            'number_meetings' => 'required|numeric',
-            'number_participants_male' => 'required|numeric',
-            'number_participants_female' => 'required|numeric',
-        ],[
-            'number_meetings.required' => 'This field is required',
-            'number_meetings.numeric' => 'Value must be numeric',
-            'number_participants_male.required' => 'This field is required',
-            'number_participants_male.numeric' => 'Value must be numeric',
-            'number_participants_female.required' => 'This field is required',
-            'number_participants_female.numeric' => 'Value must be numeric',
-        ]);
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator, 'Excluded_Meeting')->withInput();
-        }
-
-        $inputs = $request->input();
-        $res = New SmExcludedGroups();
-        $res->user_id = $user_id;
-        $res->cate_name = 'Social Mobilization';
-        $res->number_meetings = $inputs['number_meetings'];
-        $res->number_participants_male  = $inputs['number_participants_male'];
-        $res->number_participants_female  = $inputs['number_participants_female'];
-        $result = $res->save();
-
-        if($result){
-            return redirect()->back()->with('flash-success', 'Meeting with excluded groups(PWD,Transgender) Added Successfully')->with('excluded-group-meeting', 'excluded-group-meeting');
-        }else{
-            return redirect()->back()->with('flash-error', 'Error occured in adding data');
-        }
-    }else{
-            return redirect()->back()->with('flash-error', 'Today Details Already Submitted')->with('excluded-group-meeting', 'excluded-group-meeting');
-    }
-}
-
-public function sm_volunteer_meeting(Request $request){
-    $user_id = Auth::id();
-    $today_date = date('Y-m-d');
-    $user = SmVolunteerMeeting::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
-    if($user == 0){
+    public function sm_volunteer_meeting(Request $request){
            $inputs = $request->input();
            $validator = Validator::make($request->all(), [
             'nyks_number_meetings' => 'required|numeric',
@@ -471,8 +490,16 @@ public function sm_volunteer_meeting(Request $request){
             }
 
             $user_id = Auth::id();
+            $today_date = date('Y-m-d');
+            $rowcount = SmVolunteerMeeting::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->count();
+
             $inputs = $request->input();
-            $res = New SmVolunteerMeeting();
+            if($rowcount == 0){
+                $res = New SmVolunteerMeeting();
+            }elseif($rowcount == 1){
+                $rowid = SmVolunteerMeeting::where('user_id', '=', $user_id)->WhereDate('created_at', $today_date)->first();
+                $res = SmVolunteerMeeting::find($rowid['id']);
+            }
             $res->user_id = $user_id;
             $res->cate_name = 'Social Mobilization';
             $res->nyks_number_meetings = $inputs['nyks_number_meetings'];
@@ -487,14 +514,13 @@ public function sm_volunteer_meeting(Request $request){
             $result = $res->save();
 
             if($result){
-                return redirect()->back()->with('flash-success', 'Meeting with the volunteer organization Added Successfully')->with('volunteer-meeting', 'volunteer-meeting');
+                if($rowcount == 0){
+                   return redirect()->back()->with('flash-success', 'Meeting with the volunteer organization Added Successfully')->with('volunteer-meeting', 'volunteer-meeting');
+                }elseif($rowcount == 1){
+                    return redirect()->back()->with('flash-update', 'Meeting with the volunteer organization Update Successfully')->with('volunteer-meeting', 'volunteer-meeting');
+                }
             }else{
                 return redirect()->back()->with('flash-error', 'Error occured in adding data')->with('volunteer-meeting', 'volunteer-meeting');
             }
-        }else{
-            return redirect()->back()->with('flash-error', 'Today Details Already Submitted')->with('volunteer-meeting', 'volunteer-meeting');
-        }
     }
-
-
 }

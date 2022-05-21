@@ -61,7 +61,7 @@
                       </div>
                       <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle" 
-                        src="{{asset('public/user-assets/img/users-image/'. auth()->user()->profile)}}" alt="User profile picture" id="imagePreview">
+                        src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="User profile picture" id="imagePreview">
                       </div>
                       <h3 class="profile-username text-center"></h3>
                       <p class="text-muted text-center"></p> 
@@ -248,7 +248,7 @@
 </div>
 </section>
 <script>
-   function readURL(input) {
+  function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -260,7 +260,6 @@
 
   $("#profile_image_input").change(function(){
     readURL(this);
-
     var formData = new FormData();
     var csrf_token = $("input[name='_token']").val();
     formData.append('avatar', $('#profile_image_input')[0].files[0]);
