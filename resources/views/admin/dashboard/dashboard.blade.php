@@ -530,6 +530,7 @@ ul#list_group li:first-child{
       maxDate: 0,
       onSelect: function () {
         var dt2 = $('.end_date');
+        console.log(dt2);
         var startDate = $(this).datepicker('getDate');
         startDate.setDate(startDate.getDate() + 30);
         var minDate = $(this).datepicker('getDate');
@@ -1094,7 +1095,7 @@ function mass_media_graph(OptionValue){
                   }));
                 
                   series.columns.template.setAll({
-                    tooltipText: "{name}, {categoryX}:{valueY}",
+                    tooltipText: "{name}:{valueY}",
                     width: am5.percent(90),
                     tooltipY: 0
                   });
@@ -1151,9 +1152,6 @@ function group_tracking_graph(OptionValue){
       success:function(data){
        var group_tracking_graph_data = JSON.parse(data);
        console.log(group_tracking_graph_data);
-
-
-
        am5.ready(function() {
           var root = am5.Root.new("amchartgroup");
           root.setThemes([

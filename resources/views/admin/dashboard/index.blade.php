@@ -94,6 +94,12 @@ $first_segments_sidebar = Request::route()->action['as'];
             </li>
 
             <li class="d-block" role="presentation">
+              <img src="{{asset('public/user-assets/img/logo2.png')}} " alt="">
+              <a href="{{route('admin.Dcp')}}" aria-controls="Platform" class="
+              {{$first_segments_sidebar == 'admin.Dcp' ? 'active' : '' }}">District Communication Plan</a>
+            </li>
+
+            <li class="d-block" role="presentation">
               <img src="{{asset('public/user-assets/img/logo3.png')}} " alt="">
               <a href="Social_Mobilization" class="
               {{$first_segments_sidebar == 'admin.socialMobilization' ? 'active' : '' }}">Social Mobilization</a>

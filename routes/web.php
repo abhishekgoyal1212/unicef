@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\MassMediaController;
 use App\Http\Controllers\admin\OrientationHealthController;
 use App\Http\Controllers\admin\GroupsTrackingController;
 use App\Http\Controllers\admin\AdminDashboardController;
+use App\Http\Controllers\admin\DistrictCommunicationPlanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,6 +121,15 @@ Route::get('/', function () {
 		Route::controller(GroupsTrackingController::class)->group(function(){
    			Route::get('Groups_Tracking','groups_tracking_view')->name('admin.GroupsTracking');
    			Route::post('groups-tracking','groups_tracking')->name('admin.GroupsTrackingpost');;
+		});
+		Route::controller(GroupsTrackingController::class)->group(function(){
+   			Route::get('Groups_Tracking','groups_tracking_view')->name('admin.GroupsTracking');
+   			Route::post('groups-tracking','groups_tracking')->name('admin.GroupsTrackingpost');;
+		});
+		
+		Route::controller(DistrictCommunicationPlanController::class)->group(function(){
+			Route::get('dcp', 'index')->name('admin.Dcp');
+			Route::post('insert-dcp', 'dcp')->name('admin.DcpInsert');
 		});
 	});
 

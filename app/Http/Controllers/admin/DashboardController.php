@@ -12,8 +12,6 @@ use App\Models\PlaningPlatform\FortnightlyReport;
 use App\Models\Coordination\Coordination;
 use App\Models\PvtBodies\MeetingIMA;
 use App\Models\MassMedia\MassMedia;
-
-
 use Auth;
 use Str;
 use Validator;
@@ -447,20 +445,33 @@ class DashboardController extends Controller
 		$from_date = date($inputs['start_date']);
 		$to_date = date($inputs['end_date']);
 		$masschartvalue = $inputs['mass_media_value'];
-
 		$data = DB::table('mass_media_mid_media')
-		->select(DB::raw('SUM(rally_covid_reach_male) as male'),
+		->select(DB::raw('SUM(rally_covid_vaccination) as type'),
+			DB::raw('SUM(rally_covid_reach_male) as male'),
 			DB::raw('SUM(rally_covid_reach_female) as female'),
+
+			DB::raw('SUM(nukad_natak) as type1'),
 			DB::raw('SUM(nukad_natak_reach_male) as male1'), 
 			DB::raw('SUM(nukad_natak_reach_female) as female1'),
+
+			DB::raw('SUM(flok_program) as type2'),
 			DB::raw('SUM(flok_program_reach_male) as male2'), 
 			DB::raw('SUM(flok_program_reach_female) as female2'),
+
+
+			DB::raw('SUM(local_community) as type3'),
 			DB::raw('SUM(local_community_reach_male) as male3'), 
 			DB::raw('SUM(local_community_reach_female) as female3'),
+
+			DB::raw('SUM(cable_tv) as type4'),
 			DB::raw('SUM(cable_tv_reach_male) as male4'),
 			DB::raw('SUM(cable_tv_reach_female) as female4'),
+
+			DB::raw('SUM(flash_mob) as type5'),
 			DB::raw('SUM(flash_mob_reach_male) as male5'), 
 			DB::raw('SUM(flash_mob_reach_female) as female5'),
+
+			DB::raw('SUM(others) as type6'),
 			DB::raw('SUM(others_reach_male) as male6'), 
 			DB::raw('SUM(others_reach_female) as female6'))
 		->where('user_id', $masschartvalue)
@@ -488,55 +499,64 @@ class DashboardController extends Controller
 			$value->female6 = (int)$value->female6;
 			$data = (array) $value;
 		}
-		$result = array_chunk($data, 2, true);
+
+		$result = array_chunk($data, 3, true);
+		
+
 		foreach($result as $key => $value){
 			if($key == 0){
-				$result[$key]['type'] = "Rally Covid Vaccination";
-				$result[$key] = array_reverse($result[$key]);
+				$result[$key]['type'] = "RCV (".$result[$key]['type'].")";
 			}
 			if($key == 1){
-				$result[$key]["type"] = "Nukad Natak";
+				$result[$key]["type"] = "NN (".$result[$key]['type1'].")";
 				$result[$key]["male"] = $result[$key]['male1'];
 				$result[$key]["female"] = $result[$key]['female1'];
+				unset($result[$key]["type1"]);
 				unset($result[$key]['male1']);
 				unset($result[$key]['female1']);
 			}
 			if($key == 2){
-				$result[$key]["type"] = "Flok Program";
+				$result[$key]["type"] = "FP (".$result[$key]['type2'].")";
 				$result[$key]["male"] = $result[$key]['male2'];
 				$result[$key]["female"] = $result[$key]['female2'];
+				unset($result[$key]["type2"]);
 				unset($result[$key]['male2']);
 				unset($result[$key]['female2']);
 			}
 			if($key == 3){
-				$result[$key]["type"] = "Local/Community Radio";
+				$result[$key]["type"] = "L/C R (".$result[$key]['type3'].")";
 				$result[$key]["male"] = $result[$key]['male3'];
 				$result[$key]["female"] = $result[$key]['female3'];
+				unset($result[$key]["type3"]);
 				unset($result[$key]['male3']);
 				unset($result[$key]['female3']);
 			}
 			if($key == 4){
-				$result[$key]["type"] = "TV/Cable TV";
+				$result[$key]["type"] = "TV/Cable TV (".$result[$key]['type4'].")";
 				$result[$key]["male"] = $result[$key]['male4'];
 				$result[$key]["female"] = $result[$key]['female4'];
+				unset($result[$key]["type4"]);
 				unset($result[$key]['male4']);
 				unset($result[$key]['female4']);
 			}
 			if($key == 5){
-				$result[$key]["type"] = "Flash Mob";
+				$result[$key]["type"] = "FM (".$result[$key]['type5'].")";
 				$result[$key]["male"] = $result[$key]['male5'];
 				$result[$key]["female"] = $result[$key]['female5'];
+				unset($result[$key]["type5"]);
 				unset($result[$key]['male5']);
 				unset($result[$key]['female5']);
 			}
 			if($key == 6){
-				$result[$key]["type"] = "Others";
+				$result[$key]["type"] = "Others (".$result[$key]['type6'].")";
 				$result[$key]["male"] = $result[$key]['male6'];
 				$result[$key]["female"] = $result[$key]['female6'];
+				unset($result[$key]["type6"]);
 				unset($result[$key]['male6']);
 				unset($result[$key]['female6']);
 			}
 		}
+	
 		foreach($result as $key => $value){
 			$result[$key] = (object) $result[$key];
 		}	

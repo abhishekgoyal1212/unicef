@@ -66,6 +66,15 @@ $first_segments_sidebar = Request::route()->action['as'];
               {{$first_segments_sidebar == 'admin.planingPlatform' ? 'active' : '' }}">Planing Platform</a>
             </li>
 
+
+            <li class="d-block" role="presentation">
+              <img src="{{asset('public/user-assets/img/logo2.png')}} " alt="">
+              <a href="{{route('admin.Dcp')}}" aria-controls="Platform" class="
+              {{$first_segments_sidebar == 'admin.Dcp' ? 'active' : '' }}">District Communication Plan</a>
+            </li>
+
+            
+
             <li class="d-block" role="presentation">
               <img src="{{asset('public/user-assets/img/logo3.png')}} " alt="">
               <a href="Social_Mobilization" class="
@@ -115,6 +124,7 @@ $first_segments_sidebar = Request::route()->action['as'];
                   <option value="" hidden>  Select Category</option>
                   <option value="{{route('admin.planingPlatform')}}" 
                   {{$first_segments_sidebar == 'admin.planingPlatform' ? 'selected' : '' }}>Planning Platforms</option>
+                  <option value="{{route('admin.Dcp')}}" {{$first_segments_sidebar == 'admin.Dcp' ? 'selected' : '' }}>District Communication Plan</option>
                   <option value="{{route('admin.socialMobilization')}}" {{$first_segments_sidebar == 'admin.socialMobilization' ? 'selected' : '' }}>Social Mobilization</option>
                   <option value="{{route('admin.Orientation')}}" {{$first_segments_sidebar == 'admin.Orientation' ? 'selected' : '' }}>Orientation</option>
                   <option value="{{route('admin.pvtBodies')}}" {{$first_segments_sidebar == 'admin.pvtBodies' ? 'selected' : '' }}>Pvt Bodies</option>

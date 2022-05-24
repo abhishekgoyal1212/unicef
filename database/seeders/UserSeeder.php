@@ -51,7 +51,15 @@ class UserSeeder extends Seeder
                 'email'    => 'vishuskb@gmail.com',
                 'role'     =>  2,
                 'password' => Hash::make('admin1234'),
+            ],            [
+                'name'     => 'Bharatpur',
+                'mobile_no'=>  8868991104,
+                'districts'=> 'Bharatpur',
+                'email'    => 'bharatpur@gmail.com',
+                'role'     =>  2,
+                'password' => Hash::make('admin1234'),
             ]
+
         ];
          foreach ($inputs as $key => $value) {
              User::create($value);

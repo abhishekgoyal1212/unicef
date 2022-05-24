@@ -58,7 +58,7 @@ class MassMediaController extends Controller
                 $res = MassMedia::find($rowid['id']);
             }
             $res->user_id = $user_id;
-            $res->cate_name = ' Mass Media Mid Media';
+            $res->cate_name = 'Mass Media Mid Media';
             $res->rally_covid_vaccination = $inputs['rally_covid_vaccination'];
             $res->rally_covid_reach_male = $inputs['rally_covid_reach_male'];
             $res->rally_covid_reach_female = $inputs['rally_covid_reach_female'];
