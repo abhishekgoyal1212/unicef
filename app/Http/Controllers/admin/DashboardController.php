@@ -12,6 +12,8 @@ use App\Models\PlaningPlatform\FortnightlyReport;
 use App\Models\Coordination\Coordination;
 use App\Models\PvtBodies\MeetingIMA;
 use App\Models\MassMedia\MassMedia;
+
+
 use Auth;
 use Str;
 use Validator;
@@ -333,21 +335,22 @@ class DashboardController extends Controller
 		$date = $inputs['date'];
 		$chartvaluenumber = $inputs['planingchartvalue'];
 			if($chartvaluenumber == 1) {
-				$data = Planing::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','wheather_meeting as condition')->limit(18)->get();
+			$data = Planing::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','wheather_meeting as condition')->groupBy('user_id','condition')->get();
+
 			}else if($chartvaluenumber == 2){
-				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_Consultant as condition')->limit(18)->get();
+				$data = Planing::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','wheather_Consultant as condition')->groupBy('user_id','condition')->get();
 			}else if($chartvaluenumber == 3) {
-				$data = Planing::whereDate('created_at',$date)->with('all_data')->select('user_id','suggestions_Consultant as condition')->limit(18)->get();
+				$data = Planing::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','suggestions_Consultant as condition')->groupBy('user_id','condition')->get();
 			}else if($chartvaluenumber == 4) {
-				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_meeting as condition')->limit(18)->get();
+				$data = NigraniSamitiMeeting::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','wheather_meeting as condition')->groupBy('user_id','condition')->get();				
 			}else if($chartvaluenumber == 5) {
-				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_consultant_participated as condition')->limit(18)->get();
+				$data = NigraniSamitiMeeting::whereDate('created_at',$date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','wheather_consultant_participated as condition')->groupBy('user_id','condition')->get();
 			}else if($chartvaluenumber == 6) {
-				$data = DistrictCommunication::whereDate('created_at',$date)->with('all_data')->select('user_id','wheather_developed as condition')->limit(18)->get();
+				$data = DistrictCommunication::whereDate('created_at',$date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','wheather_developed as condition')->groupBy('user_id','condition')->get();
 			}else if($chartvaluenumber == 7) {
-				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','first_fortnighly_report as condition')->limit(18)->get();
+				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','first_fortnighly_report as condition')->groupBy('user_id','condition')->get();
 			}else if($chartvaluenumber == 8) {
-				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select('user_id','second_fortnighly_report as condition')->limit(18)->get();
+				$data = FortnightlyReport::whereDate('created_at',$date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','second_fortnighly_report as condition')->groupBy('user_id','condition')->get();
 			}
 			$arrayName['yes_no_values'] = $data;
 			echo json_encode($arrayName);
@@ -388,22 +391,22 @@ class DashboardController extends Controller
 			}
 
 		if($coordinationchartvalue == 1) {
-			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','panchayti_rural_development as condition')->limit(18)->get();
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','panchayti_rural_development as condition')->groupBy('user_id','condition')->get();
 		}
 		if($coordinationchartvalue == 2) {
-			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','icds as condition')->limit(18)->get();
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','icds as condition')->groupBy('user_id','condition')->get();
 		}
 		if($coordinationchartvalue == 3) {
-			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','education as condition')->limit(18)->get();
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','education as condition')->groupBy('user_id','condition')->get();
 		}
 		if($coordinationchartvalue == 4) {
-			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','srlm as condition')->limit(18)->get();
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','srlm as condition')->groupBy('user_id','condition')->get();
 		}
 		if($coordinationchartvalue == 5) {
-			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','tribal_area as condition')->limit(18)->get();
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','tribal_area as condition')->groupBy('user_id','condition')->get();
 		}
 		if($coordinationchartvalue == 6) {
-			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select('user_id','dmwo as condition')->limit(18)->get();
+			$data = Coordination::whereBetween('created_at', [$from_date, $to_date])->orWhereDate('created_at',$from_date)->orWhereDate('created_at',$to_date)->with('all_data')->select(DB::raw('COUNT(*) `cnt`'),'user_id','dmwo as condition')->groupBy('user_id','condition')->get();
 		}
 
 		$arrayName['yes_no_values'] = $data;
@@ -445,6 +448,7 @@ class DashboardController extends Controller
 		$from_date = date($inputs['start_date']);
 		$to_date = date($inputs['end_date']);
 		$masschartvalue = $inputs['mass_media_value'];
+
 		$data = DB::table('mass_media_mid_media')
 		->select(DB::raw('SUM(rally_covid_vaccination) as type'),
 			DB::raw('SUM(rally_covid_reach_male) as male'),
@@ -585,7 +589,6 @@ class DashboardController extends Controller
             })
 		->groupBy('user_id')
 		->get();
-
 		foreach($data as $key => $value){
 			$value->user_id = '';
 			$value->Nomadic_Locations = (int) $value->Nomadic_Locations;
@@ -597,7 +600,8 @@ class DashboardController extends Controller
 			$value->Slum_Dwellers = (int) $value->Slum_Dwellers;
 			$value->Sex_Workers = (int) $value->Sex_Workers;
 		}
-
 		echo json_encode($data);
 	}
+
 }
+

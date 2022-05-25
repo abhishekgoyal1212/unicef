@@ -20,7 +20,6 @@
     background-color: white;
   }
 
-
   #append_div {
     width: 100%;
     height: 350px;
@@ -434,6 +433,7 @@ ul#list_group li:first-child{
           <h4 class="mt-4">Mass Media</h4>
           <div id="appendamchart2">
           </div>
+          {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
         </div> 
       </div>
 
@@ -466,10 +466,6 @@ ul#list_group li:first-child{
         </div> 
       </div>
 
-
-
-
-
   </div>
 </div>
 
@@ -501,17 +497,18 @@ ul#list_group li:first-child{
                 Line Chart
               </h3> -->
               <ul class="pl-0 mb-0 graph-head list-unstyled d-flex align-items-center flex-row flex-wrap">
-                <li class="d-inline-block mx-4">review</li>
-                <li class="d-inline-block mx-4">social</li>
-                <li class="d-inline-block mx-4">private</li>
-                <li class="d-inline-block mx-4">mass </li>
-                <li class="d-inline-block mx-4">FLWs </li>
-                <li class="d-inline-block mx-4">DCP </li>
-                <li class="d-inline-block mx-4">vaccination</li>
+                <li class="d-inline-block mx-4">Planing Platform</li>
+                <li class="d-inline-block mx-4">Social Mobilization</li>
+                <li class="d-inline-block mx-4">Orientation</li>
+                <li class="d-inline-block mx-4">Pvt Bodies</li>
+                <li class="d-inline-block mx-4">Coordination Meeting Line</li>
+                <li class="d-inline-block mx-4">Mass Media Mid Media</li>
+                <li class="d-inline-block mx-4">Orientation Health</li>
+                <li class="d-inline-block mx-4">Iec</li>
+                <li class="d-inline-block mx-4">Groups Tracking</li> 
               </ul>
             </div>
             <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-
             <canvas id="myChart" width="1006" height="503" style="display: block; width: 1006px; height: 503px;" class="chartjs-render-monitor"></canvas>
           </div>
         </div>
@@ -530,7 +527,6 @@ ul#list_group li:first-child{
       maxDate: 0,
       onSelect: function () {
         var dt2 = $('.end_date');
-        console.log(dt2);
         var startDate = $(this).datepicker('getDate');
         startDate.setDate(startDate.getDate() + 30);
         var minDate = $(this).datepicker('getDate');
@@ -565,7 +561,7 @@ ul#list_group li:first-child{
     var to_date_field_value = $("input[name=to_date_field]").val();
     var csrf_token  = '{{csrf_token()}}';
     $("#append_div").empty();
-    $("#append_div").append('<div class="amchart" id="amchart_sm"></div>');
+    $("#append_div").append('<div id="amchart"></div>');
     $("#error_data").remove();
     $.ajax({
       url: "{{route('fetch_graph_data')}}",
@@ -582,7 +578,7 @@ ul#list_group li:first-child{
          }
 
          am5.ready(function() {
-          var root = am5.Root.new("amchart_sm");
+          var root = am5.Root.new("amchart");
           root.setThemes([
             am5themes_Animated.new(root)
             ]);
@@ -781,12 +777,16 @@ default_data(chartvaluenumber);
           var flag = "";
           if(planing_graph.yes_no_values[i].condition){
            flag = "#noStr"+noVal;
-           noVal++;
-         }else{
+           noVal++
+;         }else{
            flag = "#yesStr"+yesVal; 
            yesVal++;
          }
-         $(flag).html(planing_graph.yes_no_values[i].all_data.districts);
+            var group_data = planing_graph.yes_no_values[i].all_data.districts;
+           if (planing_graph.yes_no_values[i].cnt > 1) {
+              group_data = group_data+" ("+planing_graph.yes_no_values[i].cnt+")";
+           }
+           $(flag).html( group_data );
        }
        for (var i = 0; i < $("#yes_no_table_district tr").length; i++) {
         if($("#forrow"+i+" #noStr"+i).html() == "" && $("#forrow"+i+" #yesStr"+i).html() == ""){
@@ -901,7 +901,12 @@ default_data(chartvaluenumber);
                  flag = "#yesStrc"+yesVal; 
                  yesVal++;
                }
-               $(flag).html(coordination_graph.yes_no_values[i].all_data.districts);
+                var group_data = coordination_graph.yes_no_values[i].all_data.districts;
+                if (coordination_graph.yes_no_values[i].cnt > 1) {
+                    group_data = group_data+" ("+coordination_graph.yes_no_values[i].cnt+")";
+                }
+                $(flag).html( group_data );
+
              }
              for (var i = 0; i < $("#yes_no_table_district_coordination tr").length; i++) {
               if($("#forrowc"+i+" #noStrc"+i).html() == "" && $("#forrowc"+i+" #yesStrc"+i).html() == ""){
@@ -1023,7 +1028,7 @@ function mass_media_graph(OptionValue){
   var mass_media_value = OptionValue;
   var csrf_token = '{{csrf_token()}}';
   $("#appendamchart2").empty();
-  $("#appendamchart2").append('<div class="amchart2" id="amchartmass"></div>');
+ $("#appendamchart2").append('<div class="amchart2" id="amchartmass"></div>');
   $.ajax({
     url: "{{route('mass_media_graph')}}",
     type : 'POST',
@@ -1053,6 +1058,7 @@ function mass_media_graph(OptionValue){
                   layout: root.verticalLayout
                 }));
                 var legend = chart.children.push(
+                  // legend.align = "right",
                   am5.Legend.new(root, {
                     width: am5.percent(100),
                     x: am5.percent(50),
@@ -1127,6 +1133,7 @@ function mass_media_graph(OptionValue){
 }
 mass_media_graph(mass_media_value);
 </script>
+
 <script>
   var group_select_value = 13;
 $("#group_select_value").on('change', function(){
@@ -1151,7 +1158,6 @@ function group_tracking_graph(OptionValue){
       },
       success:function(data){
        var group_tracking_graph_data = JSON.parse(data);
-       console.log(group_tracking_graph_data);
        am5.ready(function() {
           var root = am5.Root.new("amchartgroup");
           root.setThemes([
@@ -1164,7 +1170,6 @@ function group_tracking_graph(OptionValue){
             wheelY: "zoomX",
             layout: root.verticalLayout
           }));
-
           var legend = chart.children.push(
             am5.Legend.new(root, {
               width: am5.percent(100),
@@ -1174,7 +1179,6 @@ function group_tracking_graph(OptionValue){
             })
             );
           var data = group_tracking_graph_data;
-
           root.numberFormatter.setAll({
             numberFormat: "#a",
             bigNumberPrefixes: [
@@ -1182,10 +1186,8 @@ function group_tracking_graph(OptionValue){
             { "number": 1e+6, "suffix": "M" },
             { "number": 1e+9, "suffix": "B" }
             ],
-
             smallNumberPrefixes: []
           });
-
           var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
             categoryField: "user_id",
                   // xAxis:renderer.minGridDistance = 20,
@@ -1196,14 +1198,10 @@ function group_tracking_graph(OptionValue){
                   }),
                   tooltip: am5.Tooltip.new(root, {})
                 }));
-
           xAxis.data.setAll(data);
-
           var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-
             renderer: am5xy.AxisRendererY.new(root, {})
           }));
-
           function makeSeries(name, fieldName, color) {
             var series = chart.series.push(am5xy.ColumnSeries.new(root, {
               name: name,
@@ -1213,18 +1211,13 @@ function group_tracking_graph(OptionValue){
               categoryXField: "user_id"
               ,fill:color,
             }));
-
-
             series.columns.template.setAll({
               tooltipText: "{name}={valueY}",
               width: am5.percent(90),
               tooltipY: 0
             });
-
             series.data.setAll(data);
-
             series.appear();
-
             series.bullets.push(function () {
               return am5.Bullet.new(root, {
                 locationY: 0,
@@ -1254,7 +1247,5 @@ function group_tracking_graph(OptionValue){
     });
 }
 group_tracking_graph(group_select_value);
-  
 </script>
 @stop
-
