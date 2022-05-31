@@ -123,18 +123,26 @@
                 </div>
               </div>
             </div>
+            <div class="row align-items-center my-2">
+              <div class="col-md-3">
+                <p class="mb-0">Total No. Sites/Locations of HRG tracked:</p>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mb-0">
+                  <input type="number" name="hrg_tracked" value="{{old('hrg_tracked', $GroupsTrackingCount == 1 ? $GroupsTrackingData['hrg_tracked'] : '')}}">
+                  @error('hrg_tracked')
+                  <div class="form-valid-error text-danger">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+            </div>
             <div class="col-md-10 mt-4 text-center">
-
-             <button type="submit" class="login-btn">SUBMIT</button>
+             <button type="submit" class="login-btn"> {{$GroupsTrackingCount == 1 ? 'UPDATE' : 'SUBMIT'}}</button>
            </div>
          </div>
-
-
        </form>
      </div>
    </div>
  </div>
 </div>
-
-
 @stop

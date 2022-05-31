@@ -29,6 +29,7 @@ class GroupsTrackingController extends Controller
                 'no_pastrol_community' => 'required|numeric',
                 'no_slum_dwellers' => 'required|numeric',
                 'no_sex_workers' => 'required|numeric',
+                'hrg_tracked' => 'required|numeric',
             ]);
             if($validator->fails()) {
              return redirect()->back()->withErrors($validator)->withInput();
@@ -53,13 +54,14 @@ class GroupsTrackingController extends Controller
             $res->no_pastrol_community = $inputs['no_pastrol_community'];
             $res->no_slum_dwellers = $inputs['no_slum_dwellers'];
             $res->no_sex_workers = $inputs['no_sex_workers'];
+            $res->hrg_tracked = $inputs['hrg_tracked'];
             $result = $res->save();
 
             if($result){
                 if($rowcount == 0){
                     return back()->with('flash-success', 'Ground Level Health Functionaries Added Successfully');
                 }elseif($rowcount == 1){
-                    return back()->with('flash-success', 'Ground Level Health Functionaries Update Successfully');
+                    return back()->with('flash-update', 'Ground Level Health Functionaries Update Successfully');
                 }
             }else{
                 return back()->with('flash-error', 'Error occured in adding data');

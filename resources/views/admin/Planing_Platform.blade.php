@@ -497,7 +497,6 @@ if(select_value == 'Other')
 
 $('#line_department_meeting').on('change', function(e){
     var selected = $(e.target).val();
-   console.log(selected);
     
    if(selected && Object.values(selected).includes('Other')){
     var counter = 0;

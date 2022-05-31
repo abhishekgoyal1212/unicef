@@ -172,7 +172,6 @@ class SocialMobilizationController extends Controller
             if ($validator->fails()) {
                return redirect()->back()->withErrors($validator, 'Meeting_Numbers')->withInput();
            }
-
             
             $user_id = Auth::id();
             $today_date = date('Y-m-d');

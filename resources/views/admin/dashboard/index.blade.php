@@ -181,54 +181,6 @@ crossorigin="anonymous"></script>
 
 </style>
 <script>
-
-
-
-    /*
-     * LINE CHART
-     * ----------
-     */
-    //LINE randomly generated data
-
-    var xValues = [0, 'Banswara', 'Chittaurgarh', 'Churu', 'Hanumangarh', 'Jalore', 'Jhalawar', 'Tonk'];
-    // var yValues = [0, 'Banswara', 'Chittaurgarh', 'Churu', 'Hanumangarh', 'Jalore', 'Jhalawar', 'Tonk'];
-    var yLabels = {
-    0 : 'Jan-1st', 2 : 'Jan-2nd',4 : 'Feb-1st', 6 : 'Feb-2nd', 8 : 'Mar-1st',
-    10 : 'Mar-2nd', 12 : 'Apr-1st', 14 : 'Apr-2nd', 16 : 'May-1st',
-    18 : 'May-2nd', 20 : 'Jun-1st'
-}
-
-    new Chart("myChart", {
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [{
-                // data: ['Banswara', 'Banswara', 'Banswara', 'Banswara', 'Banswara', 'Banswara', 'Banswara', 'Banswara'],
-                data: [0,1,14,8,6,10,0],
-                borderColor: "#ffe7db",
-                fill: false
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-             scales: {
-        yAxes: [{
-            ticks: {
-                callback: function(value, index, values) {
-                    // for a value (tick) equals to 8
-                    return yLabels[value];
-                    // 'junior-dev' will be returned instead and displayed on your chart
-                }
-            }
-        }]
-    }
-        }
-    });
-</script>
-
-<script>
   var $calendar;
   $(document).ready(function () {
     let container = $("#container").simpleCalendar({
@@ -259,19 +211,7 @@ crossorigin="anonymous"></script>
     $calendar = container.data('plugin_simpleCalendar')
   });
 </script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#mySelect').multiselect();
-  });
-</script>
 
-<script>
-  $(document).ready(function() {
-    $('#showmenu').click(function() {
-            $('.deshboard-conteant-sec').slideToggle("");
-    });
-});
-</script>
 
   </body>
   </html>

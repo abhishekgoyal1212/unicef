@@ -10,7 +10,7 @@ overflow-x:hidden;
 *{
   font-family: 'Roboto', sans-serif;
 }
-/* //mycss */
+/ //mycss /
 .progress {
   height: 28px!important;
   width: 93%;
@@ -24,7 +24,7 @@ overflow-x:hidden;
   font-size: 8px;
   background: white;
   color: white;
-  /* border: 8px solid red; */
+  / border: 8px solid red; /
   border-radius: 100%;
 }
 .progress-bar {
@@ -322,7 +322,9 @@ overflow-x:hidden;
     border-radius: 100px;
 }
 @media screen and (min-width:1280px) and (max-width:1440px) { 
-
+.dropdown dt a{
+  padding: 10px !important;
+}
 #Covid h3 {
     font-size: 25px;
 }
@@ -470,7 +472,14 @@ h4{
 .bar-graph .graph-head li:nth-child(4), 
 .bar-graph .graph-head li:nth-child(5), 
 .bar-graph .graph-head li:nth-child(6), 
-.bar-graph .graph-head li:nth-child(7){
+.bar-graph .graph-head li:nth-child(7),
+.bar-graph .graph-head li:nth-child(8),
+.bar-graph .graph-head li:nth-child(10),
+.bar-graph .graph-head li:nth-child(12),
+.bar-graph .graph-head li:nth-child(14),
+.bar-graph .graph-head li:nth-child(16),
+.bar-graph .graph-head li:nth-child(18)
+{
     position: relative;
 }
 
@@ -480,7 +489,14 @@ h4{
 .bar-graph .graph-head li:nth-child(4)::before, 
 .bar-graph .graph-head li:nth-child(5)::before,
 .bar-graph .graph-head li:nth-child(6)::before,
-.bar-graph .graph-head li:nth-child(7)::before{
+.bar-graph .graph-head li:nth-child(7)::before,
+.bar-graph .graph-head li:nth-child(8)::before,
+.bar-graph .graph-head li:nth-child(10)::before,
+.bar-graph .graph-head li:nth-child(12)::before,
+.bar-graph .graph-head li:nth-child(14)::before,
+.bar-graph .graph-head li:nth-child(16)::before,
+.bar-graph .graph-head li:nth-child(18)::before
+{
     content: '';
     height: 10px;
     width: 10px;
@@ -494,22 +510,43 @@ h4{
    background: #d8d0ff;
 }
 .bar-graph .graph-head li:nth-child(2)::before {
-    background:#ffd7d1;
+    background:#ff1a1a;
 }
 .bar-graph .graph-head li:nth-child(3)::before {
     background: #ffe6c9;
 }
 .bar-graph .graph-head li:nth-child(4)::before {
-    background: #cdf3ff;
+    background: #0000ff;
 }
 .bar-graph .graph-head li:nth-child(5)::before {
     background: #fff7d0;
 }
 .bar-graph .graph-head li:nth-child(6)::before {
-    background:#c9facd;
+    background:#006600;
 }
 .bar-graph .graph-head li:nth-child(7)::before {
     background: #ffe7db;
+}
+.bar-graph .graph-head li:nth-child(8)::before {
+    background:#cc00ff;
+}
+.bar-graph .graph-head li:nth-child(10)::before {
+    background:#000;
+}
+.bar-graph .graph-head li:nth-child(12)::before {
+    background:#008080;
+}
+
+.bar-graph .graph-head li:nth-child(14)::before {
+    background:#333300;
+}
+
+.bar-graph .graph-head li:nth-child(16)::before {
+    background:#ff6600;
+}
+
+.bar-graph .graph-head li:nth-child(18)::before {
+    background:#ff6600;
 }
 
 
@@ -529,7 +566,7 @@ h4{
 
 }
 .deshboard-conteant-sec {
-    /* background: red; */
+    / background: red; /
     padding: 30px;
     text-align: center;
     position: absolute;

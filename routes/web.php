@@ -13,7 +13,8 @@ use App\Http\Controllers\admin\OrientationHealthController;
 use App\Http\Controllers\admin\GroupsTrackingController;
 use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\admin\DistrictCommunicationPlanController;
-
+use App\Http\Controllers\admin\IecController;
+use App\Http\Controllers\admin\ChartsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,7 +50,6 @@ Route::get('/', function () {
 			// Route::get('dashboard','index')->name('dashboard');
 			Route::get('dashboard','index')->name('admin.dashboard');
 			Route::get('logout','logout')->name('admin.logout');
-			Route::view('Iec','admin/Iec')->name('admin.Iec');
 			Route::get('profile', 'profile')->name('profile');
 			Route::post('update-profile', 'update_profile')->name('update_profile');
 			Route::post('update-profile-photo', 'update_profile_photo')->name('update_profile_photo');
@@ -61,6 +61,8 @@ Route::get('/', function () {
 			Route::post('mass-media-graph', 'mass_media_graph')->name('mass_media_graph');
 			Route::post('groups-tracking-graph', 'groups_tracking_graph')->name('groups_tracking_graph');
 			Route::post('planning-districts', 'planning_districts')->name('planning_districts');
+			Route::post('performance-graph', 'performance_graph')->name('performance_graph');
+			Route::post('monthwise-sum', 'monthwise_sum')->name('monthwise_sum');
 		});
 
 			Route::controller(PlaningPlatform::class)->group(function(){
@@ -101,11 +103,7 @@ Route::get('/', function () {
 			Route::post('sm-volunteer-meeting','sm_volunteer_meeting')->name('admin.SmVolunteerMeeting');
 
 		});
-		// Route::controller(IecController::class)->group(function(){
-		// 	Route::post('iec_material','iec_material')->name('admin.iecMaterial');
-		// 	Route::post('local_iec_material','local_iec_material')->name('admin.localIecMaterial');
-		// 	Route::post('Special_iec_material','Special_iec_material')->name('admin.specialIecMaterial');
-		// }); 
+	
 		Route::controller(CoordinationController::class)->group(function(){
    			Route::get('Coordination','coordination')->name('admin.coordinationMeetingLine');
    			Route::post('insert-coordination','insert_coordination')->name('admin.coordination');
@@ -130,6 +128,18 @@ Route::get('/', function () {
 		Route::controller(DistrictCommunicationPlanController::class)->group(function(){
 			Route::get('dcp', 'index')->name('admin.Dcp');
 			Route::post('insert-dcp', 'dcp')->name('admin.DcpInsert');
+		});
+
+		Route::controller(IecController::class)->group(function(){
+			Route::get('Iec','index')->name('admin.Iec');
+			Route::post('iec-material','iec_material')->name('admin.iecMaterial');
+			Route::post('local-iec-material','local_iec_material')->name('admin.localIecMaterial');
+			Route::post('special-iec-material','special_iec_material')->name('admin.specialIecMaterial');
+		}); 
+		Route::controller(ChartsController::class)->group(function (){
+			Route::get('sm-chart','sm_chart')->name('admin.smchart');
+			Route::get('pvt-chart','pvt_chart')->name('admin.pvtchart');
+			Route::get('mass-chart','mass_chart')->name('admin.masschart');
 		});
 	});
 

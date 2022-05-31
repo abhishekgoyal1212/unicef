@@ -12,6 +12,20 @@ use App\Models\PlaningPlatform\FortnightlyReport;
 use App\Models\Coordination\Coordination;
 use App\Models\PvtBodies\MeetingIMA;
 use App\Models\MassMedia\MassMedia;
+use App\Models\SocialMobilization\SmExcludedGroups;
+use App\Models\SocialMobilization\SmMeetingCommunity;
+use App\Models\SocialMobilization\SmMeetingInfluencer;
+use App\Models\SocialMobilization\SmMeetingInstitutionsReligious;
+use App\Models\SocialMobilization\SmMeetingIpc;
+use App\Models\SocialMobilization\SmMeetingMother;
+use App\Models\SocialMobilization\SmMeetingNumbers;
+use App\Models\SocialMobilization\SmMeetingShg;
+use App\Models\SocialMobilization\SmMeetingVulrenable;
+use App\Models\SocialMobilization\SmVolunteerMeeting;
+use App\Models\PvtBodies\MeetingPractitioners;
+use App\Models\PvtBodies\MerchantAssociation;
+use App\Models\PvtBodies\Others;
+use App\Models\PvtBodies\PharmacistsAssociations;
 
 
 use Auth;
@@ -24,11 +38,31 @@ class DashboardController extends Controller
 {
 	public function index()
 	{
-		// DB::getQueryLog();
-		// $data = SmMeetingInstitutionsReligious::with('Alldeta')->select('user_id','number_meetings','number_participants_male','number_participants_Female')->get()->sum('number_meetings','number_participants_male','number_participants_Female')->groupBy('districts');
-		// dd(DB::getQueryLog());
-		$districts['districts'] = User::orderBy('districts', 'Asc')->get();
-		return view('admin/dashboard/dashboard', $districts);	
+		$SmSum1 = SmExcludedGroups::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->first();	
+		$SmSum2 = SmMeetingCommunity::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->first();	
+		$SmSum3 = SmMeetingInfluencer::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->first();	
+		$SmSum4 = SmMeetingInstitutionsReligious::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_Female) as total'))->first();	
+		$SmSum5 = SmMeetingIpc::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->first();	
+		$SmSum6 = SmMeetingMother::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->first();	
+		$SmSum7 = SmMeetingShg::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->first();	
+		$SmSum8 = SmMeetingVulrenable::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->first();	
+		$SmSum9 = SmVolunteerMeeting::select(DB::raw('SUM(nyks_participants_male)+SUM(nyks_participants_female)+SUM(nss_participants_male)+SUM(nss_participants_female)+SUM(bsg_participants_male)+SUM(bsg_participants_female) as total'))->first();	
+
+		$data['SmSum'] = $SmSum1->total + $SmSum2->total+ $SmSum3->total+ $SmSum4->total+ $SmSum5->total+ $SmSum6->total+ $SmSum7->total+ $SmSum8->total+ $SmSum9->total;
+
+		$MmSum= MassMedia::select(DB::raw('SUM(rally_covid_reach_male)+SUM(rally_covid_reach_female)+SUM(nukad_natak_reach_male)+SUM(nukad_natak_reach_female)+SUM(flok_program_reach_male)+SUM(flok_program_reach_female)+SUM(local_community_reach_male)+SUM(local_community_reach_female)+SUM(cable_tv_reach_male)+SUM(cable_tv_reach_female)+SUM(flash_mob_reach_male)+SUM(flash_mob_reach_female)+SUM(others_reach_male)+SUM(others_reach_female)  as total'))->first();
+
+		$data['MassMediaSum'] = $MmSum->total;
+
+		$PvtSum1 = MeetingIMA::select(DB::raw('SUM(number_participants) as total'))->first();	
+		$PvtSum2 = MeetingPractitioners::select(DB::raw('SUM(number_participants) as total'))->first();	
+		$PvtSum3 = MerchantAssociation::select(DB::raw('SUM(number_participants) as total'))->first();	
+		$PvtSum4 = Others::select(DB::raw('SUM(number_participants) as total'))->first();	
+		$PvtSum5 = PharmacistsAssociations::select(DB::raw('SUM(number_participants) as total'))->first();	
+		$data['PvtSum'] = $PvtSum1->total + $PvtSum2->total + $PvtSum3->total + $PvtSum4->total + $PvtSum5->total;
+
+		$data['districts'] = User::orderBy('districts', 'Asc')->get();
+		return view('admin/dashboard/dashboard', $data);	
 	}
 
 	public function logout(Request $request)
@@ -567,20 +601,57 @@ class DashboardController extends Controller
 		echo json_encode($result);
 	}
 
+	// public function groups_tracking_graph(Request $request){
+	// 	$inputs = $request->all();
+	// 	$from_date = date($inputs['start_date']);
+	// 	$to_date = date($inputs['end_date']);
+	// 	$group_select_value = $inputs['group_select_value'];
+	// 	$data = DB::table('vulnerable_groups_tracking')
+	// 	->select('user_id',DB::raw('SUM(no_nomadic_locations) as Nomadic_Locations'),
+	// 		DB::raw('SUM(no_construction_labour_sites) as Construction_Labour_Sites'),
+	// 		DB::raw('SUM(no_bricklin_labour_sites) as Bricklin_Labour_Sites'), 
+	// 		DB::raw('SUM(no_mine_labour_sites) as Mine_Labour_Sites'),
+	// 		DB::raw('SUM(no_excluded_groups_sites) as Excluded_Groups_Sites'), 
+	// 		DB::raw('SUM(no_pastrol_community) as Pastrol_Community'),
+	// 		DB::raw('SUM(no_slum_dwellers) as Slum_Dwellers'), 
+	// 		DB::raw('SUM(no_sex_workers) as Sex_Workers'))
+	// 	->where('user_id', $group_select_value)
+	// 	->Where(function($query) use ($from_date, $to_date){
+ //                $query->whereBetween('created_at', [$from_date, $to_date])
+ //               			->orWhereDate('created_at', $from_date)
+	// 					->orWhereDate('created_at', $to_date);
+ //            })
+	// 	->groupBy('user_id')
+	// 	->get();
+	// 	foreach($data as $key => $value){
+	// 		$value->user_id = '';
+	// 		$value->Nomadic_Locations = (int) $value->Nomadic_Locations;
+	// 		$value->Construction_Labour_Sites = (int) $value->Construction_Labour_Sites;
+	// 		$value->Bricklin_Labour_Sites = (int) $value->Bricklin_Labour_Sites;
+	// 		$value->Mine_Labour_Sites = (int) $value->Mine_Labour_Sites;
+	// 		$value->Excluded_Groups_Sites = (int) $value->Excluded_Groups_Sites;
+	// 		$value->Pastrol_Community = (int) $value->Pastrol_Community;
+	// 		$value->Slum_Dwellers = (int) $value->Slum_Dwellers;
+	// 		$value->Sex_Workers = (int) $value->Sex_Workers;
+	// 	}
+	// 	echo json_encode($data);
+	// }
+
 	public function groups_tracking_graph(Request $request){
 		$inputs = $request->all();
 		$from_date = date($inputs['start_date']);
 		$to_date = date($inputs['end_date']);
 		$group_select_value = $inputs['group_select_value'];
 		$data = DB::table('vulnerable_groups_tracking')
-		->select('user_id',DB::raw('SUM(no_nomadic_locations) as Nomadic_Locations'),
+		->select(DB::raw('SUM(no_nomadic_locations) as Nomadic_Locations'),
 			DB::raw('SUM(no_construction_labour_sites) as Construction_Labour_Sites'),
 			DB::raw('SUM(no_bricklin_labour_sites) as Bricklin_Labour_Sites'), 
 			DB::raw('SUM(no_mine_labour_sites) as Mine_Labour_Sites'),
 			DB::raw('SUM(no_excluded_groups_sites) as Excluded_Groups_Sites'), 
 			DB::raw('SUM(no_pastrol_community) as Pastrol_Community'),
 			DB::raw('SUM(no_slum_dwellers) as Slum_Dwellers'), 
-			DB::raw('SUM(no_sex_workers) as Sex_Workers'))
+			DB::raw('SUM(no_sex_workers) as Sex_Workers'),
+			DB::raw('SUM(hrg_tracked) as hrg_tracked')) 
 		->where('user_id', $group_select_value)
 		->Where(function($query) use ($from_date, $to_date){
                 $query->whereBetween('created_at', [$from_date, $to_date])
@@ -589,19 +660,440 @@ class DashboardController extends Controller
             })
 		->groupBy('user_id')
 		->get();
+
 		foreach($data as $key => $value){
-			$value->user_id = '';
-			$value->Nomadic_Locations = (int) $value->Nomadic_Locations;
-			$value->Construction_Labour_Sites = (int) $value->Construction_Labour_Sites;
-			$value->Bricklin_Labour_Sites = (int) $value->Bricklin_Labour_Sites;
-			$value->Mine_Labour_Sites = (int) $value->Mine_Labour_Sites;
-			$value->Excluded_Groups_Sites = (int) $value->Excluded_Groups_Sites;
-			$value->Pastrol_Community = (int) $value->Pastrol_Community;
-			$value->Slum_Dwellers = (int) $value->Slum_Dwellers;
-			$value->Sex_Workers = (int) $value->Sex_Workers;
+			$data = (array) $value;
 		}
+
+		$data = array_chunk($data, 1, true);
+		foreach($data as $key => $value){
+			if($key == 0){
+				$data[$key]['field'] = (int) $data[$key]['Nomadic_Locations'];
+				unset($data[$key]['Nomadic_Locations']);
+				$data[$key]['type'] = 'Nomadic locations';
+			}
+			if($key == 1){
+				$data[$key]['field'] = (int) $data[$key]['Construction_Labour_Sites'];
+				unset($data[$key]['Construction_Labour_Sites']);
+				$data[$key]['type'] = 'Construction Labour Sites';
+			}
+			if($key == 2){
+				$data[$key]['field'] = (int) $data[$key]['Bricklin_Labour_Sites'];
+				unset($data[$key]['Bricklin_Labour_Sites']);
+				$data[$key]['type'] = 'Bricklin Labour Sites';
+			}
+			if($key == 3){
+				$data[$key]['field'] = (int) $data[$key]['Mine_Labour_Sites'];
+				unset($data[$key]['Mine_Labour_Sites']);
+				$data[$key]['type'] = 'Mine Labour Sites';
+			}
+			if($key == 4){
+				$data[$key]['field'] = (int) $data[$key]['Excluded_Groups_Sites'];
+				unset($data[$key]['Excluded Groups Sites']);
+				$data[$key]['type'] = 'Excluded Groups Sites';
+			}
+			if($key == 5){
+				$data[$key]['field'] = (int) $data[$key]['Pastrol_Community'];
+				unset($data[$key]['Pastrol_Community']);
+					$data[$key]['type'] = 'Pastrol Community';
+			}
+			if($key == 6){
+				$data[$key]['field'] = (int) $data[$key]['Slum_Dwellers'];
+				unset($data[$key]['Slum_Dwellers']);
+				$data[$key]['type'] = 'Slum Dwellers';
+			}
+			if($key == 7){
+				$data[$key]['field'] = (int) $data[$key]['Sex_Workers'];
+				unset($data[$key]['Sex_Workers']);
+				$data[$key]['type'] = 'Sex Workers';
+			}
+			if($key == 8){
+				$data[$key]['field'] = (int) $data[$key]['hrg_tracked'];
+				unset($data[$key]['hrg_tracked']);
+				$data[$key]['type'] = 'S/L of HRG tracked';
+			}
+			$data[$key]  = array_reverse($data[$key]);
+
+		}
+	
 		echo json_encode($data);
 	}
 
+	public function performance_graph(Request $request){
+		$inputs = $request->all();
+		$from_date = date($inputs['start_date']);
+		$to_date = date($inputs['end_date']);
+
+
+		$userStates = DB::table('users')
+			->select('districts')
+        	->get();
+
+	$data['PPSumDistricts']  = array();
+	$data['SMSumDistricts']  = array();
+	$data['OrientationSumDistricts']  = array();
+	$data['PvtSumDistricts']  = array();
+	$data['CoordinationSumDistricts']  = array();		
+	$data['MassMediaSumDistricts']  = array();	
+	$data['GroundHealthSumDistricts']  = array();
+	$data['GroundTrackingSumDistricts']  = array();	
+
+	if(in_array('1', $inputs['checkbox_value'])){
+		$table1 = DB::table('dhs_meeting')
+			->join('users', 'dhs_meeting.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(wheather_meeting)+SUM(wheather_Consultant)+SUM(suggestions_Consultant) as column1'))->whereBetween('dhs_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('dhs_meeting.created_at', $from_date)
+			->orWhereDate('dhs_meeting.created_at', $to_date)->groupBy('users.districts')->get()->toArray();
+		$table2 = DB::table('sector_meeting')
+			->join('users', 'sector_meeting.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_meetings)+SUM(meetings_participated)+SUM(suggestions_consultan_description) as column1'))
+			->whereBetween('sector_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sector_meeting.created_at', $from_date)
+			->orWhereDate('sector_meeting.created_at', $to_date)->groupBy('users.districts')->get()->toArray();
+
+		$table3 = DB::table('nigrani_samiti_meeting')
+			->join('users', 'nigrani_samiti_meeting.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(wheather_meeting)+SUM(wheather_consultant_participated) as column1'))
+			->whereBetween('nigrani_samiti_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('nigrani_samiti_meeting.created_at', $from_date)
+			->orWhereDate('nigrani_samiti_meeting.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+
+		foreach ($userStates as $loopkey => $value) {
+			$key = array_search($value->districts,array_column($table1,'districts'));
+			$data['PPSumDistricts'][$value->districts] = ($key != '' ? $table1[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table2,'districts'));
+			$data['PPSumDistricts'][$value->districts] += ($key != '' ? $table2[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table3,'districts'));
+			$data['PPSumDistricts'][$value->districts] += ($key != '' ? $table3[$key]->column1 : 0);
+		}
+	}
+	
+	if(in_array('2', $inputs['checkbox_value'])){	
+		$table4 = DB::table('meeting_institutions_religious_leaders')
+			->join('users', 'meeting_institutions_religious_leaders.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_meetings) as column1'))
+			->whereBetween('meeting_institutions_religious_leaders.created_at', [$from_date, $to_date])
+			->orWhereDate('meeting_institutions_religious_leaders.created_at', $from_date)
+			->orWhereDate('meeting_institutions_religious_leaders.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+			// dd($table1[0]->districts);
+
+		$table5 = DB::table('sm_community_meeting')
+			->join('users', 'sm_community_meeting.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_meetings) as column1'))
+			->whereBetween('sm_community_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_community_meeting.created_at', $from_date)
+			->orWhereDate('sm_community_meeting.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+		$table6 = DB::table('sm_excluded_groups_meeting')
+			->join('users', 'sm_excluded_groups_meeting.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_meetings) as column1'))
+			->whereBetween('sm_excluded_groups_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_excluded_groups_meeting.created_at', $from_date)
+			->orWhereDate('sm_excluded_groups_meeting.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+		$table7 = DB::table('sm_ipc')
+			->join('users', 'sm_ipc.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_meetings) as column1'))
+			->whereBetween('sm_ipc.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_ipc.created_at', $from_date)
+			->orWhereDate('sm_ipc.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+		$table8 = DB::table('sm_meeting_influencers')
+			->join('users', 'sm_meeting_influencers.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_meetings) as column1'))
+			->whereBetween('sm_meeting_influencers.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_meeting_influencers.created_at', $from_date)
+			->orWhereDate('sm_meeting_influencers.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+		$table9 = DB::table('sm_mother_meeting')
+			->join('users', 'sm_mother_meeting.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_meetings) as column1'))
+			->whereBetween('sm_mother_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_mother_meeting.created_at', $from_date)
+			->orWhereDate('sm_mother_meeting.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+
+		$table10 = DB::table('sm_shg_member_meeting')
+			->join('users', 'sm_shg_member_meeting.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_meetings) as column1'))
+			->whereBetween('sm_shg_member_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_shg_member_meeting.created_at', $from_date)
+			->orWhereDate('sm_shg_member_meeting.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+		$table11 = DB::table('sm_volunteer_organization_meeting')
+			->join('users', 'sm_volunteer_organization_meeting.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(nyks_number_meetings)+SUM(nss_number_meetings)+SUM(bsg_number_meetings) as column1'))
+			->whereBetween('sm_volunteer_organization_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_volunteer_organization_meeting.created_at', $from_date)
+			->orWhereDate('sm_volunteer_organization_meeting.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+		$table12 = DB::table('sm_vulrenable_groups_meeting')
+			->join('users', 'sm_vulrenable_groups_meeting.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_meetings) as column1'))
+			->whereBetween('sm_vulrenable_groups_meeting.created_at', [$from_date, $to_date])
+			->orWhereDate('sm_vulrenable_groups_meeting.created_at', $from_date)
+			->orWhereDate('sm_vulrenable_groups_meeting.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+		
+		foreach ($userStates as $loopkey => $value) {
+			$key = array_search($value->districts,array_column($table4,'districts'));
+			$data['SMSumDistricts'][$value->districts] = ($key != '' ? $table4[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table5,'districts'));
+			$data['SMSumDistricts'][$value->districts] += ($key != '' ? $table5[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table6,'districts'));
+			$data['SMSumDistricts'][$value->districts] += ($key != '' ? $table6[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table7,'districts'));
+			$data['SMSumDistricts'][$value->districts] += ($key != '' ? $table7[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table8,'districts'));
+			$data['SMSumDistricts'][$value->districts] += ($key != '' ? $table8[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table9,'districts'));
+			$data['SMSumDistricts'][$value->districts] += ($key != '' ? $table9[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table10,'districts'));
+			$data['SMSumDistricts'][$value->districts] += ($key != '' ? $table10[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table11,'districts'));
+			$data['SMSumDistricts'][$value->districts] += ($key != '' ? $table11[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table12,'districts'));
+			$data['SMSumDistricts'][$value->districts] += ($key != '' ? $table12[$key]->column1 : 0);
+		}
+	}
+	if(in_array('3', $inputs['checkbox_value'])){
+		$table13 = DB::table('orient_education_depart')
+			->join('users', 'orient_education_depart.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_orientation) as column1'))
+			->whereBetween('orient_education_depart.created_at', [$from_date, $to_date])
+			->orWhereDate('orient_education_depart.created_at', $from_date)
+			->orWhereDate('orient_education_depart.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+
+		$table14 = DB::table('orient_panchayat_rural_devlopment')
+			->join('users', 'orient_panchayat_rural_devlopment.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_orientation) as column1'))
+			->whereBetween('orient_panchayat_rural_devlopment.created_at', [$from_date, $to_date])
+			->orWhereDate('orient_panchayat_rural_devlopment.created_at', $from_date)
+			->orWhereDate('orient_panchayat_rural_devlopment.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+		$table15 = DB::table('orient_minority_dmwo_paratecher')
+			->join('users', 'orient_minority_dmwo_paratecher.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_orientation) as column1'))
+			->whereBetween('orient_minority_dmwo_paratecher.created_at', [$from_date, $to_date])
+			->orWhereDate('orient_minority_dmwo_paratecher.created_at', $from_date)
+			->orWhereDate('orient_minority_dmwo_paratecher.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+		$table16 = DB::table('orient_ulb_department')
+			->join('users', 'orient_ulb_department.user_id', '=', 'users.id')
+			->select('users.districts', DB::raw('SUM(number_orientation) as column1'))
+			->whereBetween('orient_ulb_department.created_at', [$from_date, $to_date])
+			->orWhereDate('orient_ulb_department.created_at', $from_date)
+			->orWhereDate('orient_ulb_department.created_at', $to_date)
+			->groupBy('users.districts')->get()->toArray();
+
+		$table17 = DB::table('orient_csr_department')
+				->join('users', 'orient_csr_department.user_id', '=', 'users.id')
+				->select('users.districts', DB::raw('SUM(number_orientation) as column1'))
+				->whereBetween('orient_csr_department.created_at', [$from_date, $to_date])
+				->orWhereDate('orient_csr_department.created_at', $from_date)
+				->orWhereDate('orient_csr_department.created_at', $to_date)
+				->groupBy('users.districts')->get()->toArray();
+
+		foreach ($userStates as $loopkey => $value) {
+			$key = array_search($value->districts,array_column($table13,'districts'));
+			$data['OrientationSumDistricts'][$value->districts] = ($key != '' ? $table13[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table14,'districts'));
+			$data['OrientationSumDistricts'][$value->districts] += ($key != '' ? $table14[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table15,'districts'));
+			$data['OrientationSumDistricts'][$value->districts] += ($key != '' ? $table15[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table16,'districts'));
+			$data['OrientationSumDistricts'][$value->districts] += ($key != '' ? $table16[$key]->column1 : 0);
+
+			$key = array_search($value->districts,array_column($table17,'districts'));
+			$data['OrientationSumDistricts'][$value->districts] += ($key != '' ? $table17[$key]->column1 : 0);
+		}
+	}
+
+	if(in_array('4', $inputs['checkbox_value'])){
+		$table18 = DB::table('private_practitionerst_meeting')
+					->join('users', 'private_practitionerst_meeting.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(number_meeting) as column1'))
+					->whereBetween('private_practitionerst_meeting.created_at', [$from_date, $to_date])
+					->orWhereDate('private_practitionerst_meeting.created_at', $from_date)
+					->orWhereDate('private_practitionerst_meeting.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+		$table19 = DB::table('pvt_ima_iap_meeting')
+					->join('users', 'pvt_ima_iap_meeting.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(number_meeting) as column1'))
+					->whereBetween('pvt_ima_iap_meeting.created_at', [$from_date, $to_date])
+					->orWhereDate('pvt_ima_iap_meeting.created_at', $from_date)
+					->orWhereDate('pvt_ima_iap_meeting.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+		$table20 = DB::table('pvt_merchant_associations_meeting')
+					->join('users', 'pvt_merchant_associations_meeting.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(number_meeting) as column1'))
+					->whereBetween('pvt_merchant_associations_meeting.created_at', [$from_date, $to_date])
+					->orWhereDate('pvt_merchant_associations_meeting.created_at', $from_date)
+					->orWhereDate('pvt_merchant_associations_meeting.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+		$table21 = 	DB::table('pvt_others_meeting')
+					->join('users', 'pvt_others_meeting.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(number_meeting) as column1'))
+					->whereBetween('pvt_others_meeting.created_at', [$from_date, $to_date])
+					->orWhereDate('pvt_others_meeting.created_at', $from_date)
+					->orWhereDate('pvt_others_meeting.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+		$table22 = 	DB::table('pvt_pharmacists_associations_meeting')
+					->join('users', 'pvt_pharmacists_associations_meeting.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(number_meeting) as column1'))
+					->whereBetween('pvt_pharmacists_associations_meeting.created_at', [$from_date, $to_date])
+					->orWhereDate('pvt_pharmacists_associations_meeting.created_at', $from_date)
+					->orWhereDate('pvt_pharmacists_associations_meeting.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+
+		foreach ($userStates as $loopkey => $value) {
+				$key = array_search($value->districts,array_column($table18,'districts'));
+				$data['PvtSumDistricts'][$value->districts] = ($key != '' ? $table18[$key]->column1 : 0);
+
+				$key = array_search($value->districts,array_column($table19,'districts'));
+				$data['PvtSumDistricts'][$value->districts] += ($key != '' ? $table19[$key]->column1 : 0);
+
+				$key = array_search($value->districts,array_column($table20,'districts'));
+				$data['PvtSumDistricts'][$value->districts] += ($key != '' ? $table20[$key]->column1 : 0);
+
+				$key = array_search($value->districts,array_column($table21,'districts'));
+				$data['PvtSumDistricts'][$value->districts] += ($key != '' ? $table21[$key]->column1 : 0);
+
+				$key = array_search($value->districts,array_column($table22,'districts'));
+				$data['PvtSumDistricts'][$value->districts] += ($key != '' ? $table22[$key]->column1 : 0);
+			}
+	}
+
+	if(in_array('5', $inputs['checkbox_value'])){
+		$table23 = 	DB::table('coordination_line_dept_meeting')
+					->join('users', 'coordination_line_dept_meeting.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(panchayti_rural_development)+SUM(icds)+SUM(education)+SUM(srlm)+SUM(tribal_area)+SUM(dmwo) as column1'))
+					->whereBetween('coordination_line_dept_meeting.created_at', [$from_date, $to_date])
+					->orWhereDate('coordination_line_dept_meeting.created_at', $from_date)
+					->orWhereDate('coordination_line_dept_meeting.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+		foreach ($userStates as $loopkey => $value) {
+				$key = array_search($value->districts,array_column($table23,'districts'));
+				$data['CoordinationSumDistricts'][$value->districts] = ($key != '' ? $table23[$key]->column1 : 0);
+			}
+	}
+
+	if(in_array('6', $inputs['checkbox_value'])){	
+		$table24 = 	DB::table('mass_media_mid_media')
+					->join('users', 'mass_media_mid_media.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(rally_covid_vaccination)+SUM(nukad_natak)+SUM(flok_program)+SUM(local_community)+SUM(cable_tv)+SUM(flash_mob)+SUM(others) as column1'))
+					->whereBetween('mass_media_mid_media.created_at', [$from_date, $to_date])
+					->orWhereDate('mass_media_mid_media.created_at', $from_date)
+					->orWhereDate('mass_media_mid_media.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+		foreach ($userStates as $loopkey => $value) {
+				$key = array_search($value->districts,array_column($table24,'districts'));
+				$data['MassMediaSumDistricts'][$value->districts] = ($key != '' ? $table24[$key]->column1 : 0);
+			}
+	}
+
+
+	if(in_array('7', $inputs['checkbox_value'])){	
+		$table25 = 	DB::table('ground_level_health')
+					->join('users', 'ground_level_health.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(number_orientation) as column1'))
+					->whereBetween('ground_level_health.created_at', [$from_date, $to_date])
+					->orWhereDate('ground_level_health.created_at', $from_date)
+					->orWhereDate('ground_level_health.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+		foreach ($userStates as $loopkey => $value) {
+				$key = array_search($value->districts,array_column($table25,'districts'));
+				$data['GroundHealthSumDistricts'][$value->districts] = ($key != '' ? $table25[$key]->column1 : 0);
+			}
+	}
+
+	if(in_array('8', $inputs['checkbox_value'])){	
+		$table26 = 	DB::table('vulnerable_groups_tracking')
+					->join('users', 'vulnerable_groups_tracking.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(no_nomadic_locations)+SUM(no_construction_labour_sites)+SUM(no_bricklin_labour_sites)+SUM(no_mine_labour_sites)+SUM(no_excluded_groups_sites)+SUM(no_pastrol_community)+SUM(no_slum_dwellers)+SUM(no_sex_workers)+SUM(hrg_tracked) as column1'))
+					->whereBetween('vulnerable_groups_tracking.created_at', [$from_date, $to_date])
+					->orWhereDate('vulnerable_groups_tracking.created_at', $from_date)
+					->orWhereDate('vulnerable_groups_tracking.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+		foreach ($userStates as $loopkey => $value) {
+				$key = array_search($value->districts,array_column($table26,'districts'));
+				$data['GroundTrackingSumDistricts'][$value->districts] = ($key != '' ? $table26[$key]->column1 : 0);
+			}
+	}
+	$data['AllDistrict'] = $userStates;
+		echo json_encode($data);
+	}
+	public function monthwise_sum(Request $request){
+		$inputs = $request->all();
+		$current_year = date('Y');
+
+		foreach($inputs['months_value'] as $key => $value){
+			$SmSum1 = SmExcludedGroups::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$SmSum2 = SmMeetingCommunity::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$SmSum3 = SmMeetingInfluencer::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$SmSum4 = SmMeetingInstitutionsReligious::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_Female) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$SmSum5 = SmMeetingIpc::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$SmSum6 = SmMeetingMother::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$SmSum7 = SmMeetingShg::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$SmSum8 = SmMeetingVulrenable::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$SmSum9 = SmVolunteerMeeting::select(DB::raw('SUM(nyks_participants_male)+SUM(nyks_participants_female)+SUM(nss_participants_male)+SUM(nss_participants_female)+SUM(bsg_participants_male)+SUM(bsg_participants_female) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			
+			$sumdata['SmSumArray'][$key] = $SmSum1->total + $SmSum2->total+ $SmSum3->total+ $SmSum4->total+ $SmSum5->total+ $SmSum6->total+ $SmSum7->total+ $SmSum8->total+ $SmSum9->total;
+
+
+			$MmSum= MassMedia::select(DB::raw('SUM(rally_covid_reach_male)+SUM(rally_covid_reach_female)+SUM(nukad_natak_reach_male)+SUM(nukad_natak_reach_female)+SUM(flok_program_reach_male)+SUM(flok_program_reach_female)+SUM(local_community_reach_male)+SUM(local_community_reach_female)+SUM(cable_tv_reach_male)+SUM(cable_tv_reach_female)+SUM(flash_mob_reach_male)+SUM(flash_mob_reach_female)+SUM(others_reach_male)+SUM(others_reach_female)  as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();
+			
+			$sumdata['MassSumArray'][$key] = $MmSum->total;
+
+			$PvtSum1 = MeetingIMA::select(DB::raw('SUM(number_participants) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$PvtSum2 = MeetingPractitioners::select(DB::raw('SUM(number_participants) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$PvtSum3 = MerchantAssociation::select(DB::raw('SUM(number_participants) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$PvtSum4 = Others::select(DB::raw('SUM(number_participants) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+			$PvtSum5 = PharmacistsAssociations::select(DB::raw('SUM(number_participants) as total'))->whereMonth('created_at', $value)->whereYear('created_at', $current_year)->first();	
+
+			$sumdata['PvtSumArray'][$key] = $PvtSum1->total + $PvtSum2->total + $PvtSum3->total + $PvtSum4->total + $PvtSum5->total;
+		}
+			$data['SmSum'] = array_sum($sumdata['SmSumArray']);
+			$data['MassMediaSum'] = array_sum($sumdata['MassSumArray']);
+			$data['PvtSum'] = array_sum($sumdata['PvtSumArray']);
+			echo json_encode($data);
+	}
 }
 
