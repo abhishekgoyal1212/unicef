@@ -38,6 +38,7 @@ class DashboardController extends Controller
 {
 	public function index()
 	{
+		$data['current_Month'] =(int) date('m');
 		$SmSum1 = SmExcludedGroups::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->first();	
 		$SmSum2 = SmMeetingCommunity::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->first();	
 		$SmSum3 = SmMeetingInfluencer::select(DB::raw('SUM(number_participants_male)+SUM(number_participants_female) as total'))->first();	
@@ -737,6 +738,7 @@ class DashboardController extends Controller
 	$data['MassMediaSumDistricts']  = array();	
 	$data['GroundHealthSumDistricts']  = array();
 	$data['GroundTrackingSumDistricts']  = array();	
+	$data['IecSumDistricts']  = array();	
 
 	if(in_array('1', $inputs['checkbox_value'])){
 		$table1 = DB::table('dhs_meeting')
@@ -1055,6 +1057,43 @@ class DashboardController extends Controller
 		foreach ($userStates as $loopkey => $value) {
 				$key = array_search($value->districts,array_column($table26,'districts'));
 				$data['GroundTrackingSumDistricts'][$value->districts] = ($key != '' ? $table26[$key]->column1 : 0);
+			}
+	}
+
+	if(in_array('9', $inputs['checkbox_value'])){	
+		$table27 = 	DB::table('iec_iec_material')
+					->join('users', 'iec_iec_material.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(posters)+SUM(banners)+SUM(ffl)+SUM(leaflet) as column1'))
+					->whereBetween('iec_iec_material.created_at', [$from_date, $to_date])
+					->orWhereDate('iec_iec_material.created_at', $from_date)
+					->orWhereDate('iec_iec_material.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+		$table28 = 	DB::table('iec_local_iec')
+					->join('users', 'iec_local_iec.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(posters)+SUM(banners)+SUM(audio_clip)+SUM(video_clip)+SUM(jingles) as column1'))
+					->whereBetween('iec_local_iec.created_at', [$from_date, $to_date])
+					->orWhereDate('iec_local_iec.created_at', $from_date)
+					->orWhereDate('iec_local_iec.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+		$table29 = 	DB::table('iec_special_iec')
+					->join('users', 'iec_special_iec.user_id', '=', 'users.id')
+					->select('users.districts', DB::raw('SUM(posters)+SUM(banners)+SUM(leaflet)+SUM(others) as column1'))
+					->whereBetween('iec_special_iec.created_at', [$from_date, $to_date])
+					->orWhereDate('iec_special_iec.created_at', $from_date)
+					->orWhereDate('iec_special_iec.created_at', $to_date)
+					->groupBy('users.districts')->get()->toArray();	
+
+		foreach ($userStates as $loopkey => $value) {
+				$key = array_search($value->districts,array_column($table27,'districts'));
+				$data['IecSumDistricts'][$value->districts] = ($key != '' ? $table27[$key]->column1 : 0);
+
+				$key = array_search($value->districts,array_column($table28,'districts'));
+				$data['IecSumDistricts'][$value->districts] += ($key != '' ? $table28[$key]->column1 : 0);
+
+				$key = array_search($value->districts,array_column($table29,'districts'));
+				$data['IecSumDistricts'][$value->districts] += ($key != '' ? $table29[$key]->column1 : 0);
 			}
 	}
 	$data['AllDistrict'] = $userStates;

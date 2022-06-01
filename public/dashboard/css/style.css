@@ -510,43 +510,43 @@ h4{
    background: #d8d0ff;
 }
 .bar-graph .graph-head li:nth-child(2)::before {
-    background:#ff1a1a;
+    background:#ff6666;
 }
 .bar-graph .graph-head li:nth-child(3)::before {
     background: #ffe6c9;
 }
 .bar-graph .graph-head li:nth-child(4)::before {
-    background: #0000ff;
+    background: #944dff;
 }
 .bar-graph .graph-head li:nth-child(5)::before {
     background: #fff7d0;
 }
 .bar-graph .graph-head li:nth-child(6)::before {
-    background:#006600;
+    background:#66ff66;
 }
 .bar-graph .graph-head li:nth-child(7)::before {
     background: #ffe7db;
 }
 .bar-graph .graph-head li:nth-child(8)::before {
-    background:#cc00ff;
+    background:#db4dff;
 }
 .bar-graph .graph-head li:nth-child(10)::before {
-    background:#000;
+    background:#808080;
 }
 .bar-graph .graph-head li:nth-child(12)::before {
-    background:#008080;
+    background:#00ffff;
 }
 
 .bar-graph .graph-head li:nth-child(14)::before {
-    background:#333300;
+    background:#ffbf00;
 }
 
 .bar-graph .graph-head li:nth-child(16)::before {
-    background:#ff6600;
+    background:#ff751a;
 }
 
 .bar-graph .graph-head li:nth-child(18)::before {
-    background:#ff6600;
+    background:#4d79ff;
 }
 
 

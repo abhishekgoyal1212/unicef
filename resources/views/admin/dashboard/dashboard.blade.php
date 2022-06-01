@@ -228,67 +228,63 @@ ul.multiselect-container.dropdown-menu.month-section li{
                   <dd>
                     <div class="mutliSelect">
                       <ul id="picker">
-                        <li>
-                          <input type="checkbox" value="1" />January</li>
-                          <li>
-                            <input type="checkbox" value="2" />February</li>
-                            <li>
-                              <input type="checkbox" value="3"/>March</li>
-                              <li>
-                                <input type="checkbox" value="4" />April</li>
-                                <li>
-                                  <input type="checkbox" value="5" />May</li>
-                                  <li>
-                                    <input type="checkbox" value="6" />June</li>
-                                      <li>
-                                    <input type="checkbox" value="7" />July</li>
-                                      <li>
-                                    <input type="checkbox" value="8" />August</li>
-                                      <li>
-                                    <input type="checkbox" value="9" />September</li>
-                                      <li>
-                                    <input type="checkbox" value="10" />October</li>
-                                    <li>
-                                    <input type="checkbox" value="11" />November</li>
-                                    <li>
-                                    <input type="checkbox" value="12" />December</li>
-                                  </ul>
-                                </div>
-                              </dd>
-                            </dl>
- <!--                <div class="report-box deshboard-select bg-white">
-                  <select name="" id="mySelect" class="" multiple="multiple">
-                    <option value="">January</option>
-                    <option value="">February</option>
-                    <option value="">March</option>
-                    <option value="">April</option>
-                    <option value="">May</option>
-                    <option value="">June</option>
-                    <option value="">July</option>
-                    <option value="">August</option>
-                    <option value="">September</option>
-                    <option value="">October</option>
-                    <option value="">November</option>
-                    <option value="">December</option>
-                  </select>
-                </div> -->
+                        @if($current_Month >=1)
+                        <li><input type="checkbox" class="sum_checkbox_value" class="sum_checkbox_value" value="1"/>January</li>
+                        @endif
+                        @if($current_Month >= 2)
+                        <li><input type="checkbox" class="sum_checkbox_value" value="2" />February</li> 
+                        @endif
+                        @if($current_Month >= 3)
+                        <li><input type="checkbox" class="sum_checkbox_value" value="3"/>March</li> 
+                        @endif
+                        @if($current_Month >= 4)
+                        <li><input type="checkbox" class="sum_checkbox_value" value="4" />April</li> 
+                        @endif
+                        @if($current_Month >= 5)
+                        <li><input type="checkbox" class="sum_checkbox_value" value="5" />May</li> 
+                        @endif
+                        @if($current_Month >= 6)
+                        <li><input type="checkbox" class="sum_checkbox_value" value="6" />June</li> 
+                        @endif
+                        @if($current_Month >= 7)
+                        <li><input type="checkbox" class="sum_checkbox_value" value="7" />July</li> 
+                        @endif
+                        @if($current_Month >= 8)
+                        <li><input type="checkbox" class="sum_checkbox_value" value="8" />August</li> 
+                        @endif
+                        @if($current_Month >= 9)
+                        <li><input type="checkbox" class="sum_checkbox_value" value="9" />September</li> 
+                        @endif
+                        @if($current_Month >= 10)
+                        <li><input type="checkbox" class="sum_checkbox_value" value="10" />October</li> 
+                        @endif
+                        @if($current_Month >= 11)
+                        <li><input type="checkbox" class="sum_checkbox_value" value="11" />November</li> 
+                        @endif
+                        @if($current_Month >= 12)
+                        <li><input type="checkbox" class="sum_checkbox_value" value="12" />December</li> 
+                        @endif
+                       </ul>
+                     </div>
+                    </dd>
+                </dl>
               </div>
               <div class="col-xl-3 col-lg-6 my-lg-2">
                 <div class="report-box report-number bg-white text-center">
-                  <p class="mb-0">SoCial Mobilization</p>
-                  <a href="{{route('admin.smchart')}}"><h4 class="mb-0">{{$SmSum}}</h4></a>
+                  <p class="mb-0">Social Mobilization</p>
+                  <a href="{{route('admin.smchart')}}"><h4 class="mb-0" id="SmSum">{{$SmSum}}</h4></a>
                 </div>
               </div>
               <div class="col-xl-3 col-lg-6 my-lg-2">
                 <div class="report-box report-number bg-white text-center">
                   <p class="mb-0">Mass Media Activity</p>
-                  <a href="{{route('admin.masschart')}}"><h4 class="mb-0">{{$MassMediaSum}}</h4></a>
+                  <a href="{{route('admin.masschart')}}"><h4 class="mb-0" id="MassMediaSum">{{$MassMediaSum}}</h4></a>
                 </div>
               </div>
               <div class="col-xl-3 col-lg-6 my-lg-2">
                 <div class="report-box report-number bg-white text-center">
                   <p class="mb-0">Pvt Bodies Activity</p>
-                  <a href="{{route('admin.pvtchart')}}"><h4 class="mb-0">{{$PvtSum}}</h4></a>
+                  <a href="{{route('admin.pvtchart')}}"><h4 class="mb-0" id="PvtSum">{{$PvtSum}}</h4></a>
                 </div>
               </div>
             </div>
@@ -1615,6 +1611,8 @@ group_tracking_graph(group_select_value);
 
         var Group_Traking = Object.keys(performance_graph_data.GroundTrackingSumDistricts).map(function (key) { return performance_graph_data.GroundTrackingSumDistricts[key]; });
 
+        var Iec = Object.keys(performance_graph_data.IecSumDistricts).map(function (key) { return performance_graph_data.IecSumDistricts[key]; });
+
 
         var xValues = TotalDistricts;
 
@@ -1624,35 +1622,39 @@ group_tracking_graph(group_select_value);
             labels: xValues,
             datasets: [{
               data: PlanningPlatform,
-              borderColor: "#ff1a1a",
+              borderColor: "#ff6666",
               fill: false
             }, {
               data: SocailMobilization,
-              borderColor: "#0000ff",
+              borderColor: "#944dff",
               fill: false
             }, {
               data: Orientation,
-              borderColor: "#006600",
+              borderColor: "#66ff66",
               fill: false
             }, {
               data: Pvt_Bodies,
-              borderColor: "#cc00ff",
+              borderColor: "#db4dff",
               fill: false
             }, {
               data: Coordination_line,
-              borderColor: "#000000",
+              borderColor: "#808080",
               fill: false
             }, {
               data: Mass_Media,
-              borderColor: "#008080",
+              borderColor: "#00ffff",
               fill: false
             }, {
               data: Goround_Level_Health,
-              borderColor: "#333300",
+              borderColor: "#ffbf00",
               fill: false
             }, {
               data: Group_Traking,
-              borderColor: "#ff6600",
+              borderColor: "#ff751a",
+              fill: false
+            }, {
+              data: Iec,
+              borderColor: "#4d79ff",
               fill: false
             }]
           },
@@ -1694,6 +1696,33 @@ group_tracking_graph(group_select_value);
   }        
 });
 </script>
+<script>
+  $(".sum_checkbox_value").on('click', function(){
+    var month_value = [];
+    var csrf_token = '{{csrf_token()}}';
+    $(':checkbox:checked').each(function(i){
+      month_value[i] = $(this).val();
+    });
+       $.ajax({
+      url : "{{route('monthwise_sum')}}",
+      type: 'POST',
+      data: {
+        months_value : month_value,
+        _token : csrf_token,
+      },
+      success:function(data){
+        var sum_data = JSON.parse(data);
+        $("#SmSum").empty();
+        $("#SmSum").append(sum_data.SmSum);
+        $("#MassMediaSum").empty();
+        $("#MassMediaSum").append(sum_data.MassMediaSum);
+        $("#PvtSum").empty();
+        $("#PvtSum").append(sum_data.PvtSum);
+      }
+    });
+  });
 
+</script>
 
 @stop
+
