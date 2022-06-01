@@ -63,6 +63,8 @@ Route::get('/', function () {
 			Route::post('planning-districts', 'planning_districts')->name('planning_districts');
 			Route::post('performance-graph', 'performance_graph')->name('performance_graph');
 			Route::post('monthwise-sum', 'monthwise_sum')->name('monthwise_sum');
+			Route::post('iec-graph', 'iec_graph')->name('iec_graph');
+
 		});
 
 			Route::controller(PlaningPlatform::class)->group(function(){
@@ -142,10 +144,3 @@ Route::get('/', function () {
 			Route::get('mass-chart','mass_chart')->name('admin.masschart');
 		});
 	});
-
-
-
-
-
-
-

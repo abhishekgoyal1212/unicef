@@ -1134,5 +1134,84 @@ class DashboardController extends Controller
 			$data['PvtSum'] = array_sum($sumdata['PvtSumArray']);
 			echo json_encode($data);
 	}
+
+	public function iec_graph(Request $request){
+		$inputs = $request->input();
+		$from_date = date($inputs['start_date']);
+		$to_date = date($inputs['end_date']);
+		$iec_district_id = $inputs['iec_district_id'];
+		$iec_table_value = $inputs['iec_table_name'];
+
+		if($iec_table_value == 1){
+			$data = DB::table('iec_iec_material')
+			->select(DB::raw('SUM(posters) as posters'), DB::raw('SUM(banners) as banners'), DB::raw('SUM(ffl) as ffl'), DB::raw('SUM(leaflet) as leaflet'))
+			->where('user_id', $iec_district_id)
+			->Where(function($query) use ($from_date, $to_date){
+                $query->whereBetween('created_at', [$from_date, $to_date])
+               			->orWhereDate('created_at', $from_date)
+						->orWhereDate('created_at', $to_date);
+            })
+			->get();
+			foreach($data as $key => $value){
+				$data = (array) $value;
+				$data = array_chunk($data, 1, true);
+			}
+			$array = array();
+			foreach($data as $key => $value){
+				$array[$key]['value'] = array_values($value);
+				$array[$key]['value'] = (int) implode(" ",$array[$key]['value']);
+				$array[$key]['category'] = array_keys($value);
+				$array[$key]['category'] = implode(" ",$array[$key]['category']);
+			}	
+		}
+
+		if($iec_table_value == 2){
+			$data = DB::table('iec_local_iec')
+			->select(DB::raw('SUM(posters) as posters'), DB::raw('SUM(banners) as banners'), DB::raw('SUM(audio_clip) as audio_clip'), DB::raw('SUM(video_clip) as video_clip'), DB::raw('SUM(jingles) as jingles'))
+			->where('user_id', $iec_district_id)
+			->Where(function($query) use ($from_date, $to_date){
+                $query->whereBetween('created_at', [$from_date, $to_date])
+               			->orWhereDate('created_at', $from_date)
+						->orWhereDate('created_at', $to_date);
+            })
+			->get();
+			foreach($data as $key => $value){
+				$data = (array) $value;
+				$data = array_chunk($data, 1, true);
+			}
+			$array = array();
+			foreach($data as $key => $value){
+				$array[$key]['value'] = array_values($value);
+				$array[$key]['value'] = (int) implode(" ",$array[$key]['value']);
+				$array[$key]['category'] = array_keys($value);
+				$array[$key]['category'] = implode(" ",$array[$key]['category']);
+			}
+		}
+
+		if($iec_table_value == 3){
+			$data = DB::table('iec_special_iec')
+			->select(DB::raw('SUM(posters) as posters'), DB::raw('SUM(banners) as banners'), DB::raw('SUM(leaflet) as leaflet'), DB::raw('SUM(others) as others'))
+			->where('user_id', $iec_district_id)
+			->Where(function($query) use ($from_date, $to_date){
+                $query->whereBetween('created_at', [$from_date, $to_date])
+               			->orWhereDate('created_at', $from_date)
+						->orWhereDate('created_at', $to_date);
+            })
+			->get();
+			foreach($data as $key => $value){
+				$data = (array) $value;
+				$data = array_chunk($data, 1, true);
+			}
+			$array = array();
+			foreach($data as $key => $value){
+				$array[$key]['value'] = array_values($value);
+				$array[$key]['value'] = (int) implode(" ",$array[$key]['value']);
+				$array[$key]['category'] = array_keys($value);
+				$array[$key]['category'] = implode(" ",$array[$key]['category']);
+			}
+		}
+
+		echo json_encode($array);
+	}
 }
 
