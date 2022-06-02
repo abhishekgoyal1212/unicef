@@ -98,7 +98,7 @@
           </div>
           <div class="col-md-4 pl-3 pl-xl-5">
             <div class="deshboard-img-sec" >
-              <a href="#"> <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100" id="showmenu"></a>
+              <a href="javascript:void(0)"> <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100" id="showmenu"></a>
             </div>
             <div class="deshboard-conteant-sec"  style="display: none;">
               <div class="arrow"></div>
@@ -226,8 +226,6 @@
          <option value="8" class="select">2nd Fortnighly Report sent by District</option>
        </select>
      </div>
-
-
    </div> 
    <div class="col-md-3 my-2">
     <div class="select-sec-box topic">
@@ -239,53 +237,36 @@
      </select>
    </div>
  </div>
-
-
-
-
  <div class="col-md-8 pl-lg-6">
-
    <div id="append_chartdiv" style="background-color:white;"></div>
-   
    {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}"  width="100%" alt="">--}}
  </div>
  <div class="col-md-4 pl-lg-6">
    <div class="col-md-12 pp_append_div" style="background-color:transparent;">
     <div class="select-sec-box District-List" id="yes_no_div_show" style="display: none;">
       <h6 class="mb-4">District List</h6>
-<!--               <select class="select_value" id="yes_no_in_district">
-                 <option value="1">Yes</option>
-                 <option value="0">No</option>
-               </select> -->
                <table class="table table-hover table-bordered table-striped el-table">
                 <tr>
                   <th>Yes</th>
                   <th>No</th>
                 </tr>
                 <tbody id="yes_no_table_district">
-
                 </tbody>
               </table>
               <style>
                 .list-group {
                   display: flex;
                 }
-
               </style>
-
               <ul class="list-group" id="list_group">
                 <li>
-
                 </li>
               </ul>
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
-
     <div class="row  dashboard-right-section">
       <div class="col-lg-12">
        <h4 class="mb-4">Coordination Meeting Line</h4>
@@ -314,33 +295,24 @@
       <br>
       <div id="append_coordination_chard_div" style="background-color:white;"></div>
     </div>
-
-
     <div class="col-md-4 pl-lg-4">
       <br>
       <h6 class="mb-4">District List</h6>
-<!--               <select class="select_value" id="yes_no_in_district">
-                 <option value="1">Yes</option>
-                 <option value="0">No</option>
-               </select> -->
                <table class="table table-hover table-bordered table-striped el-table">
                 <tr>
                   <th>Yes</th>
                   <th>No</th>
                 </tr>
                 <tbody id="yes_no_table_district_coordination">
-
                 </tbody>
               </table>
               <style>
                 .list-group {
                   display: flex;
                 }
-
               </style>
             </div>
           </div>
-
           <div class="row mt-4  dashboard-right-section">
             <div class="col-lg-12">
              <h4 class="mb-4">Pvt Bodies</h4>
@@ -363,7 +335,6 @@
               <option value="pvt_others_meeting">Others</option>
             </select>
           </div>
-
           <div class="col-md-6 pr-lg-4 ">
            <div class="bg-white p-4" id="append_pvt_bodies_graph"> </div>
          </div>
@@ -371,9 +342,6 @@
            <div class="bg-white p-4" id="append_pvt_bodies_graph2"> </div>
          </div>
        </div>
-
-
-
        <div class="row  dashboard-right-section">
         <div class="col-lg-12">
           <h4 class="my-4 ">Mass Media</h4>
@@ -396,42 +364,10 @@
               </select>
             </div>
           </div>
-
-          
           <div id="appendamchart2">
           </div>
-
-          
-
-        <!-- <div class="col-lg-3" >
-            <lable class="lable">From Date</lable>
-            <input type="text" name="group_tracking_from_date" class="start_date" value="2022-04-01">
-        </div>
-        <div class="col-lg-3">
-            <lable class="lable">To Date</lable>
-          <input type="text" name="group_tracking_to_date" class="start_date" value="2022-04-15">
-        </div>
-              <div class="select-sec-box col-md-6">
-                <h5>Select District</h5>
-                  <select class="select_value" id="group_select_value">
-                    @foreach($districts as $value)
-                    <option value="{{$value->id}}">{{$value->districts}}</option>
-                    @endforeach
-                  </select>
-              </div>
-               <div class="col-md-12">
-        
-          <div id="appendamchart2">
-          </div>
-          {{--<img src="{{ asset('public/dashboard/img/bar-graph.jpg') }}" width="100%" alt="">--}}
-        </div> 
-      </div> -->
-
-
-
     </div>
   </div>
-
   <div class="row mt-0 dashboard-right-section">
     <div class="col-md-12 ">
       <h4 class="my-4">Group Tracking</h4>
@@ -454,7 +390,6 @@
         </div>
       </div>
       <div id="append_group_chart">
-
       </div>
     </div> 
   </div>
@@ -498,10 +433,8 @@
 </div>
 </div>
 </div>
-
 </div>
 </section>
-
 <div class="row bar-graph">
   <div class="col-lg-3"></div>
   <div class="col-lg-9 px-0">
@@ -517,19 +450,10 @@
         <input type="text" name="performance_to_date" class="start_date" value="2022-04-15">
       </div>
     </div>
-
-
-
-
     <section class="col-lg-12 connectedSortable ui-sortable">
       <div class="row deshoard-gaap">
-        <!-- Custom tabs (Charts with tabs)-->
         <div class="card mt-5">
           <div class="card-header ui-sortable-handle" style="cursor: move; background: transparent;">
-              <!-- <h3 class="card-title">
-                <i class="far fa-chart-bar"></i>
-                Line Chart
-              </h3> -->
               <ul class="pl-0 mb-0 graph-head list-unstyled d-flex align-items-center flex-row flex-wrap">
                 <input type="checkbox" name="pg_checkbox[]" value="1" class="pg_checkbox_class"><li class="d-inline-block mx-4">Planing Platform</li>
                 <input type="checkbox" name="pg_checkbox[]" value="2" class="pg_checkbox_class"><li class="d-inline-block mx-4">Social Mobilization</li>
@@ -550,6 +474,6 @@
       </section>
     </div>
   </div>
-<x-jsfile></x-jsfile>
+<x-JsFile></x-JsFile>
 @stop
 

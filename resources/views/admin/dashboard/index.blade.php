@@ -11,7 +11,7 @@ $first_segments_sidebar = Request::route()->action['as'];
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('title')</title>
-   <link rel="icon"   type="image/x-icon" href="{{asset('public/images/favicon.icon')}}">
+  <link rel="icon"   type="image/x-icon" href="{{asset('public/images/favicon.icon')}}">
   <link rel="stylesheet" href="{{asset('public/user-assets/css/style.css')}}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <!-- Dashboard css -->
@@ -21,27 +21,27 @@ $first_segments_sidebar = Request::route()->action['as'];
   <!-- toastr css-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
 
-    <!-- datepicker css-->
+  <!-- datepicker css-->
   <link href="{{asset('public/template/plugins/datepicker/jquery-ui.css')}}" rel="stylesheet"/>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
-   <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
 
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-circular-gauge.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-circular-gauge.min.js"></script>
 
 
-    <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
-    <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
 
-    <!-- npm Charts -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-    <script src="{{ asset('public/admin-assets/js/chart.js/Chart.min.js') }}"></script>
+  <!-- npm Charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <script src="{{ asset('public/admin-assets/js/chart.js/Chart.min.js') }}"></script>
 
 
   <!-- toastr JS-->
@@ -50,13 +50,13 @@ $first_segments_sidebar = Request::route()->action['as'];
 
 
   
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
 
-<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
 </head>
 <style>
@@ -65,7 +65,6 @@ $first_segments_sidebar = Request::route()->action['as'];
   }
 </style>
 
-
 <body style="background-image: url({{asset('public/user-assets/img/background.jpg')}}); background-repeat: no-repeat; background-size: cover;background-position: center;">
   @if(session('flash-error'))
   <script> toastr["error"] ("{{session()->get('flash-error')}}") </script>
@@ -73,12 +72,11 @@ $first_segments_sidebar = Request::route()->action['as'];
   @if ( session('flash-success'))
   <script> toastr["success"]("{{session()->get('flash-success')}}") </script>
   @endif
-
- <div class="row">
-
-      <div class="col-sm-3">
-        <div class="sidebar">
-          <div class="userimg">
+  
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="sidebar">
+        <div class="userimg">
           <img class="rounded-circle" src="{{asset('public/users-image/'. auth()->user()->profile)}}" alt="" width="100" height="100"></div>
           <ul class="nav nav-tabs tabs-left d-flex flex-column" role="tablist">
 
@@ -109,7 +107,7 @@ $first_segments_sidebar = Request::route()->action['as'];
             <li class="d-block" role="presentation">
               <img src="{{asset('public/user-assets/img/logo4.png')}}" alt="">
               <a href="Orientation" aria-controls="orientation"
-               class="{{$first_segments_sidebar == 'admin.Orientation' ? 'active' : '' }}">orientation</a>
+              class="{{$first_segments_sidebar == 'admin.Orientation' ? 'active' : '' }}">orientation</a>
             </li>
 
             <li class="d-block" role="presentation">
@@ -138,14 +136,14 @@ $first_segments_sidebar = Request::route()->action['as'];
             </li>
           </ul>
         </div>
-        </div>
-        @yield('content')
-          </div>
-        </div>
       </div>
+      @yield('content')
     </div>
+  </div>
+</div>
+</div>
 <script type="text/javascript" src="{{ asset('public\user-assets\js\custom.js') }}"></script>
-    
+
 <script src="{{ asset('public/dashboard/js/amCharts.js') }}" ></script>
 
 
@@ -211,7 +209,13 @@ crossorigin="anonymous"></script>
     $calendar = container.data('plugin_simpleCalendar')
   });
 </script>
+<script>
+  $(document).ready(function() {
+    $('#showmenu').click(function() {
+      $('.deshboard-conteant-sec').slideToggle("");
+    });
+  });
+</script>
 
-
-  </body>
-  </html>
+</body>
+</html>

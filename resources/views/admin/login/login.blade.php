@@ -1,32 +1,7 @@
 
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="{{asset('public/user-assets/css/style.css')}}">
-  <!-- toastr css-->
-  <link href="{{asset('public/user-assets/css/toastr.css')}}" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-  <!-- toastr css-->
-  <link href="{{asset('public/user-assets/css/toastr.css')}}" rel="stylesheet"/>
-  <!-- toastr JS-->
-  <script src="{{asset('public/user-assets/js/jquery-1.9.1.min.js')}}"></script>
-  <script src="{{asset('public/user-assets/js/toastr.js')}}"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body class="page-section" style="background: url({{asset('public/user-assets/img/background.jpg')}}); background-repeat: no-repeat; background-size: cover; padding: 50px 0px 40px 0px; ">
-  @if(session('flash-error'))
-  <script> toastr["error"] ("{{session()->get('flash-error')}}") </script>
-  @endif
-<!--   @if ( session('flash-success'))
-  <script> toastr["success"]("{{session()->get('flash-success')}}") </script>
-  @endif -->
+@extends('admin.login.index')
+@section('title','Unicef Login')
+@section('content')
   <section class="login">
     <div class="container">
       <div class="row justify-content-between align-items-center">
@@ -38,9 +13,9 @@
             <div class="form-group col-md-12">
               <label for="Email">Email address</label>
               <input type="email" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover" class="form-control bg-transparent for-error" id="Email" name="email" placeholder="Email address">
-<!--               @error('email')
+              @error('email')
               <div class="form-valid-error">{{ $message }}</div>
-              @enderror -->
+              @enderror 
             </div>
             <div class="form-group my-2 col-md-12">
               <label for="Password">Password</label>
@@ -54,7 +29,7 @@
               <label class="form-check-label" for="exampleCheck1">Keep me logged in</label>
             </div>
             <div class="col-md-5 mt-2 ml-auto">
-              <a href="" class="forget">Forget Your Password?</a>
+              <a href="{{route('forgot-password')}}" class="forget">Forget Your Password?</a>
             </div>
             <div class="col-md-12 text-center mb-2 mt-3">
               <button type="submit" class="login-btn">LOGIN</button>
@@ -63,7 +38,8 @@
               <p class="mb-0 text-center">or Login with google</p>
             </div>
             <div class="col-md-12 mb-2">
-              <div class="lg-google bg-white text-dark text-center shadow-sm"><img src="https://img.icons8.com/color/24/000000/google-logo.png"/> &nbsp; Login with Google</div>
+              <div class="lg-google bg-white text-dark text-center shadow-sm" id="mySignin" onclick="login()"><img src="https://img.icons8.com/color/24/000000/google-logo.png"/> &nbsp; Login with Google</div>
+              <!-- <div "><img src="google_image_here.png" alt="google" style="cursor:pointer;height: 60px;width: 309px;"/></div> -->
             </div>
             <div class="col-md-12 text-center">
               <p class="mb-0">Don't have an account? <a href="">Sign Up</a></p>
@@ -77,10 +53,4 @@
       </div>
     </div>
   </section>
-</body>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $(".for-error").attr("data-content", "this is new")
-  })
-</script>
-</html>
+@stop
